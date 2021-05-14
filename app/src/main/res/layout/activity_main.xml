@@ -6,11 +6,10 @@
     android:layout_height="match_parent"
     android:background="#f0f0f0"
     android:paddingTop="10dp"
-    tools:context=".MainActivity">
-
+    tools:context=".view.activity.main.MainActivity">
     <fragment
         android:id="@+id/action_bar"
-        android:name="com.example.companymanagement.ui.actionbar.ActionBar"
+        android:name="com.example.companymanagement.view.fragment.actionbar.ActionBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -18,25 +17,27 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_action_bar" />
 
-    <FrameLayout
-        android:id="@+id/container"
+    <fragment
+        android:id="@+id/activity_container"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        app:layout_constraintBottom_toTopOf="@id/tab_page"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/action_bar" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/action_bar"
+        app:navGraph="@navigation/nav_page" />
 
     <fragment
-        android:id="@+id/tab_page"
-        android:name="com.example.companymanagement.ui.tabpage.TabPage"
+        android:id="@+id/navigation"
+        android:name="com.example.companymanagement.view.fragment.navigation.Navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout="@layout/fragment_tabpage" />
-
-
+        tools:layout="@layout/fragment_navigation" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment.mainhome.MainHome">
+
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp">
+
+        <GridLayout
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rowCount="2"
+            android:useDefaultMargins="true" >
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@color/black"
+                android:text="1"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="15pt"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@color/common_google_signin_btn_text_light_focused"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="15pt"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="#8c0520"
+                android:text="3"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="15pt"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="#efcd21"
+                android:text="4"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="15pt"
+                android:textStyle="bold" />
+
+        </GridLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

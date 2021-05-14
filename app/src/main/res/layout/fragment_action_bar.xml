@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     app:cardElevation="5dp"
     app:contentPadding="5dp"
-    tools:context=".ui.actionbar.ActionBar">
+    tools:context=".view.fragment.actionbar.ActionBar">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/circleImageView"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@drawable/bg_launcher_background" />
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -48,7 +48,7 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_gravity="center_vertical"
-                    app:srcCompat="@drawable/ic_icon_down" />
+                    app:srcCompat="@drawable/ic_down" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <TextView

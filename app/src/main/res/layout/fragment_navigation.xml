@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="100dp"
+    app:contentPadding="10dp"
+    tools:context=".view.fragment.navigation.Navigation">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        app:itemIconTint="@color/design_default_color_primary_dark"
+        app:itemTextColor="@color/design_default_color_primary_dark"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/main_menu" />
+
+    <!--    <com.google.android.material.tabs.TabLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:tabGravity="center"-->
+    <!--        app:tabMode="scrollable">-->
+
+    <!--        <com.google.android.material.tabs.TabItem-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:text="@string/navigation_tab_item_1" />-->
+
+    <!--        <com.google.android.material.tabs.TabItem-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+
+    <!--            android:text="@string/navigation_tab_item_2" />-->
+
+    <!--        <com.google.android.material.tabs.TabItem-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:text="@string/navigation_tab_item_3" />-->
+
+    <!--        <com.google.android.material.tabs.TabItem-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:text="@string/navigation_tab_item_4" />-->
+    <!--    </com.google.android.material.tabs.TabLayout>-->
+
+
+    <!--    app:tabGravity="center"-->
+    <!--    app:tabMode="scrollable"-->
+</androidx.cardview.widget.CardView>
