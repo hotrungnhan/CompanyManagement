@@ -19,35 +19,4 @@
         app:labelVisibilityMode="labeled"
         app:menu="@menu/main_menu" />
 
-    <!--    <com.google.android.material.tabs.TabLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        app:tabGravity="center"-->
-    <!--        app:tabMode="scrollable">-->
-
-    <!--        <com.google.android.material.tabs.TabItem-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:text="@string/navigation_tab_item_1" />-->
-
-    <!--        <com.google.android.material.tabs.TabItem-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-
-    <!--            android:text="@string/navigation_tab_item_2" />-->
-
-    <!--        <com.google.android.material.tabs.TabItem-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:text="@string/navigation_tab_item_3" />-->
-
-    <!--        <com.google.android.material.tabs.TabItem-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:text="@string/navigation_tab_item_4" />-->
-    <!--    </com.google.android.material.tabs.TabLayout>-->
-
-
-    <!--    app:tabGravity="center"-->
-    <!--    app:tabMode="scrollable"-->
 </androidx.cardview.widget.CardView>

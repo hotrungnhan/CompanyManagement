@@ -24,10 +24,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //debug
-        finish()
-        val loginintent = Intent(this, MainActivity::class.java)
-        startActivity(loginintent)
-
+        if (resources.getBoolean(R.bool.disable_login) == true) {
+            finish()
+            val loginintent = Intent(this, MainActivity::class.java)
+            startActivity(loginintent)
+        }
         setContentView(R.layout.activity_login)
 
         val username = findViewById<EditText>(R.id.username)

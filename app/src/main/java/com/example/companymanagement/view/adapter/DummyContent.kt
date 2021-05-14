@@ -1,4 +1,4 @@
-package com.example.companymanagement.dummy
+package com.example.companymanagement.view.adapter
 
 import java.util.ArrayList
 import java.util.HashMap

@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.companymanagement.R
-import com.example.companymanagement.dummy.DummyContent
+import com.example.companymanagement.view.adapter.DummyContent
 
 /**
  * A fragment representing a list of Items.

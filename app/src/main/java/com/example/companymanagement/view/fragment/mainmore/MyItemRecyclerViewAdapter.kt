@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.companymanagement.R
 
-import com.example.companymanagement.dummy.DummyContent.DummyItem
+import com.example.companymanagement.view.adapter.DummyContent.DummyItem
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem].
