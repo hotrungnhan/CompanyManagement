@@ -1,1 +1,0 @@
-Binding viewmodel với data model.

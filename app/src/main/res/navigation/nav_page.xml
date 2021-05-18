@@ -7,23 +7,23 @@
 
     <fragment
         android:id="@+id/main_home"
-        android:name="com.example.companymanagement.view.fragment.mainhome.MainHome"
+        android:name="com.example.companymanagement.viewcontroller.fragment.mainhome.MainHome"
         android:label="fragment_home"
         tools:layout="@layout/fragment_main_home" />
 
     <fragment
         android:id="@+id/main_workspace"
-        android:name="com.example.companymanagement.view.fragment.mainworkspace.MainWorkspace"
+        android:name="com.example.companymanagement.viewcontroller.fragment.mainworkspace.MainWorkspace"
         android:label="fragment_main_workspace"
         tools:layout="@layout/fragment_main_workspace" />
     <fragment
         android:id="@+id/main_project"
-        android:name="com.example.companymanagement.view.fragment.mainproject.MainProject"
+        android:name="com.example.companymanagement.viewcontroller.fragment.mainproject.MainProject"
         android:label="fragment_main_project"
         tools:layout="@layout/fragment_main_project" />
     <fragment
         android:id="@+id/main_more"
-        android:name="com.example.companymanagement.view.fragment.mainmore.MainMore"
+        android:name="com.example.companymanagement.viewcontroller.fragment.mainmore.MainMore"
         android:label="fragment_main_more_list"
         tools:layout="@layout/fragment_main_more_list" />
 </navigation>

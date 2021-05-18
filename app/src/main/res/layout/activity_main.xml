@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     android:background="#f0f0f0"
     android:paddingTop="10dp"
-    tools:context=".view.activity.main.MainActivity">
+    tools:context=".viewcontroller.activity.main.MainActivity">
     <fragment
         android:id="@+id/action_bar"
-        android:name="com.example.companymanagement.view.fragment.actionbar.ActionBar"
+        android:name="com.example.companymanagement.viewcontroller.fragment.actionbar.ActionBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/navigation"
-        android:name="com.example.companymanagement.view.fragment.navigation.Navigation"
+        android:name="com.example.companymanagement.viewcontroller.fragment.navigation.Navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
