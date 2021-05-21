@@ -26,4 +26,9 @@
         android:name="com.example.companymanagement.viewcontroller.fragment.mainmore.MainMore"
         android:label="fragment_main_more_list"
         tools:layout="@layout/fragment_main_more_list" />
+    <fragment
+        android:id="@+id/employee_manager"
+        android:name="com.example.companymanagement.viewcontroller.fragment.manager.EmployeManager"
+        android:label="fragment_employe_manager"
+        tools:layout="@layout/fragment_main_more_list" />
 </navigation>

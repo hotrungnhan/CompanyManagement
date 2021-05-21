@@ -19,6 +19,7 @@
     <string name="navigation_tab_item_2">Dự án</string>
     <string name="navigation_tab_item_3">Workplace</string>
     <string name="navigation_tab_item_4">Thêm</string>
-
-
+    <string name="hone_manager">Quản trị viên</string>
+    <string name="hone_typing">Nhập liệu</string>
+    <string name="hone_workspace">Workspace</string>
 </resources>

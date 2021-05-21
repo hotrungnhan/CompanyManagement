@@ -14,7 +14,7 @@ import com.example.companymanagement.viewcontroller.adapter.DummyContent.DummyIt
  * TODO: Replace the implementation with code for your data type.
  */
 class MyItemRecyclerViewAdapter(
-    private val values: List<DummyItem>
+    private val values: List<DummyItem>,
 ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,8 +33,8 @@ class MyItemRecyclerViewAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val idView: TextView = view.findViewById(R.id.item_number)
-        val contentView: TextView = view.findViewById(R.id.content)
 
+        val contentView: TextView = view.findViewById(R.id.content)
         override fun toString(): String {
             return super.toString() + " '" + contentView.text + "'"
         }
