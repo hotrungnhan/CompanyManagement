@@ -1,10 +1,10 @@
-package com.example.companymanagement.viewcontroller.fragment.mainmore
+package com.example.companymanagement.viewcontroller.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Button
 import com.example.companymanagement.R
 
 import com.example.companymanagement.viewcontroller.adapter.DummyContent.DummyItem
@@ -13,30 +13,25 @@ import com.example.companymanagement.viewcontroller.adapter.DummyContent.DummyIt
  * [RecyclerView.Adapter] that can display a [DummyItem].
  * TODO: Replace the implementation with code for your data type.
  */
-class MyItemRecyclerViewAdapter(
+class MoreSettingRecyclerViewAdapter(
     private val values: List<DummyItem>,
-) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MoreSettingRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_main_more, parent, false)
+            .inflate(R.layout.item_more_setting, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+
     }
 
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView = view.findViewById(R.id.item_number)
+        val button: Button = view.findViewById(R.id.item_more_btn)
 
-        val contentView: TextView = view.findViewById(R.id.content)
-        override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
-        }
+
     }
 }

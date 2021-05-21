@@ -7,20 +7,26 @@
     android:orientation="vertical"
     tools:context=".viewcontroller.fragment.mainworkspace.MainWorkspace">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/page_title"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="20dp"
-        android:text="@string/navigation_tab_item_3"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat style="@style/layout_page_title">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/text_page_title_heading"
+            android:text="@string/navigation_tab_item_3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/text_page_title_sub_heading"
+            android:text="something" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/workspace_tweet_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:nestedScrollingEnabled="true" />
+        android:nestedScrollingEnabled="true"
+        android:padding="10dp"
+
+        tools:listitem="@layout/item_tweet" />
 
 </LinearLayout>
