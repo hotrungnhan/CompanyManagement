@@ -7,6 +7,7 @@
     android:background="#f0f0f0"
     android:paddingTop="10dp"
     tools:context=".viewcontroller.activity.main.MainActivity">
+
     <fragment
         android:id="@+id/action_bar"
         android:name="com.example.companymanagement.viewcontroller.fragment.actionbar.ActionBar"

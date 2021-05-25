@@ -1,13 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".viewcontroller.fragment.mainproject.MainProject">
 
-    <TextView
+    <androidx.appcompat.widget.LinearLayoutCompat style="@style/layout_page_title">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/text_page_title_heading"
+            android:text="@string/navigation_tab_item_2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/text_page_title_sub_heading"
+            android:text="something"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="project" />
+        android:padding="10dp">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                style="@style/cardview_styles"
+
+                app:cardCornerRadius="10dp">
+
+                <CalendarView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></CalendarView>
+            </androidx.cardview.widget.CardView>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></ListView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
