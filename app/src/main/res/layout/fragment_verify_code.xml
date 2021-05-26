@@ -125,6 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
+            android:enabled="false"
             android:background="@color/purple_500"
             android:text="@string/send"
             android:textColor="@color/white"
