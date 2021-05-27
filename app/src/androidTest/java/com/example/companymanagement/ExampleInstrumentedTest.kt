@@ -1,10 +1,5 @@
 package com.example.companymanagement
 
-import androidx.core.os.bundleOf
-import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.test.core.app.ActivityScenario
-import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.companymanagement.viewcontroller.activity.main.MainActivity
 import com.example.companymanagement.viewcontroller.fragment.forgotpassword.VerifyCode
@@ -12,8 +7,12 @@ import com.example.companymanagement.viewcontroller.fragment.mainhome.MainHome
 import com.example.companymanagement.viewcontroller.fragment.mainworkspace.MainWorkspace
 import org.junit.Assert.*
 import org.junit.Rule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+
 import org.junit.Test
 import org.junit.runner.RunWith
+
+import org.junit.Assert.*
 
 /**
  * Instrumented test, which will execute on an Android device.
