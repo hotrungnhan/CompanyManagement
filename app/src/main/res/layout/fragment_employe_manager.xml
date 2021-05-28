@@ -3,20 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f0f0f0"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".viewcontroller.fragment.manager.EmployeManager">
+    tools:context=".viewcontroller.fragment.employeemanage.EmployeManager">
 
-    <!-- TODO: Update blank fragment layout -->
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabTextColor="@color/gray"
-        app:tabSelectedTextColor="@color/purple_500"
-        app:tabIndicatorColor="@color/black"/>
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:paddingTop="10dp">
+        <fragment
+            android:id="@+id/navigation_fm_employe_mn"
+            android:name="com.example.companymanagement.viewcontroller.fragment.navigation.Navigation_employe_mn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_navigation_employe_mn" />
+
+        <fragment
+            android:id="@+id/activity_container_employe_mn"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/navigation_fm_employe_mn"
+            app:navGraph="@navigation/nav_employe_mn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
