@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".viewcontroller.fragment.mainworkspace.MainWorkspace">
 
-    <TextView
+
+    <androidx.appcompat.widget.LinearLayoutCompat style="@style/layout_page_title">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/text_page_title_heading"
+            android:text="@string/navigation_tab_item_3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/text_page_title_sub_heading"
+            android:text="something" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/workspace_tweet_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="workdspace" />
+        android:nestedScrollingEnabled="true"
+        android:padding="10dp"
 
-</FrameLayout>
+        tools:listitem="@layout/item_tweet" />
+
+</LinearLayout>
