@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.companymanagement.R
 import com.example.companymanagement.viewcontroller.adapter.DummyContent
+import com.example.companymanagement.viewcontroller.adapter.MoreSettingRecyclerViewAdapter
 
 /**
  * A fragment representing a list of Items.
@@ -28,18 +29,18 @@ class MainMore : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_main_more_list, container, false)
-
+        val view = inflater.inflate(R.layout.fragment_main_more, container, false)
+        val recycle = view.findViewById<RecyclerView>(R.id.list)
         // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
+        if (recycle is RecyclerView) {
+            with(recycle) {
                 layoutManager = when {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyItemRecyclerViewAdapter(DummyContent.ITEMS)
+                adapter = MoreSettingRecyclerViewAdapter(DummyContent.ITEMS)
             }
         }
         return view
@@ -49,7 +50,6 @@ class MainMore : Fragment() {
 
         // TODO: Customize parameter argument names
         const val ARG_COLUMN_COUNT = "column-count"
-
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =

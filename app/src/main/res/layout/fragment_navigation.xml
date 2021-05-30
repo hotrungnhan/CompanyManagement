@@ -14,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        app:itemIconTint="@color/design_default_color_primary_dark"
-        app:itemTextColor="@color/design_default_color_primary_dark"
+        android:state_checked="true"
+        app:itemIconTint="@drawable/navigation_statecolor"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/main_menu" />
 
