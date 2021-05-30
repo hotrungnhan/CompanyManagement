@@ -35,6 +35,8 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:clickable="true"
+            android:focusable="true"
             app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/item_more_setting" />
     </androidx.appcompat.widget.LinearLayoutCompat>
