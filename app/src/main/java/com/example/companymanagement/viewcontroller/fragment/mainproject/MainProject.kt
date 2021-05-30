@@ -18,15 +18,9 @@ class MainProject : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
+        viewModelMain = ViewModelProvider(this).get(MainProjectViewModel::class.java)
         return inflater.inflate(R.layout.fragment_main_project, container, false)
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModelMain = ViewModelProvider(this).get(MainProjectViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }
