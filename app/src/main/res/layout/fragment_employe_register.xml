@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".viewcontroller.fragment.manager.EmployeRegister">
+    tools:context=".viewcontroller.fragment.employeemanage.EmployeRegister">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -13,28 +14,21 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="@string/name_employee_register"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="60dp"
-            android:gravity="center"
+            android:layout_marginEnd="50dp"
+            android:gravity="left"
             android:text="@string/detail_employee_register"
             android:textColor="@color/gray"
             android:textSize="18sp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -51,6 +45,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="50dp"
+                android:gravity="center"
                 android:background="@drawable/shape_conner_round"
                 android:hint="@string/hint_account"
                 android:inputType="textEmailAddress"
@@ -78,6 +73,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="50dp"
+                android:gravity="center"
                 android:background="@drawable/shape_conner_round"
                 android:hint="@string/hint_mail"
                 android:inputType="textEmailAddress"
@@ -106,6 +102,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="50dp"
+                android:gravity="center"
                 android:background="@drawable/shape_conner_round"
                 android:hint="@string/hint_position"
                 android:inputType="text"
@@ -134,6 +131,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="50dp"
+                android:gravity="center"
                 android:background="@drawable/shape_conner_round"
                 android:drawableRight="@drawable/ic_password_eye"
                 android:hint="@string/hint_password"
@@ -162,6 +160,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="50dp"
+                android:gravity="center"
                 android:background="@drawable/shape_conner_round"
                 android:drawableRight="@drawable/ic_password_eye"
                 android:hint="@string/hint_password_confirm"

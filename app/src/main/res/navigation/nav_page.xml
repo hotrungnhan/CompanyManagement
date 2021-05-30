@@ -28,7 +28,7 @@
         tools:layout="@layout/item_more_setting" />
     <fragment
         android:id="@+id/employee_manager"
-        android:name="com.example.companymanagement.viewcontroller.fragment.manager.EmployeManager"
+        android:name="com.example.companymanagement.viewcontroller.fragment.employeemanage.EmployeManager"
         android:label="fragment_employe_manager"
         tools:layout="@layout/item_more_setting" />
 </navigation>

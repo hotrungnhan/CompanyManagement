@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //debug
-        if (resources.getBoolean(R.bool.disable_login) == true) {
+        if (resources.getBoolean(R.bool.disable_login) == false) {
             finish()
             val loginintent = Intent(this, MainActivity::class.java)
             startActivity(loginintent)

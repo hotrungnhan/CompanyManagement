@@ -22,7 +22,9 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <!--    Employee Management -->
-    <string name="name_employee_register">Employee Register</string>
+    <string name="navigation_employe_mn_overall">Danh sách</string>
+    <string name="navigation_employe_mn_register">Đăng ký</string>
+    <string name="name_employee_register"></string>
     <string name="detail_employee_register">Create a new account</string>
     <string name="hint_account">Enter account name</string>
     <string name="hint_mail">Enter account mail</string>
