@@ -22,11 +22,6 @@ class MoreSettingRecyclerViewAdapter(
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val button: Button = view.findViewById(R.id.item_more_btn)
-
-
-    }
 
     override fun onBindViewHolder(holder: SettingItemHolder, position: Int) {
         if (values[position].ClickListener != null) {

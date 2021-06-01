@@ -6,13 +6,13 @@
     app:startDestination="@+id/employe_mn_overall">
     <fragment
         android:id="@+id/employe_mn_overall"
-        android:name="com.example.companymanagement.viewcontroller.fragment.employeemanage.EmployeOverall"
+        android:name="com.example.companymanagement.viewcontroller.fragment.employe.EmployeOverall"
         android:label="fragment_employe_mn_overall"
         tools:layout="@layout/fragment_employe_overall" />
 
     <fragment
         android:id="@+id/employe_mn_register"
-        android:name="com.example.companymanagement.viewcontroller.fragment.employeemanage.EmployeRegister"
+        android:name="com.example.companymanagement.viewcontroller.fragment.employe.EmployeRegister"
         android:label="fragment_employe_mn_register"
         tools:layout="@layout/fragment_employe_register" />
 </navigation>
