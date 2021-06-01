@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp">
 
-    <Button
-        android:id="@+id/cardview_item"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/cardview_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/bg_launcher_background" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/cardview_text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        android:drawableTop="@drawable/bg_launcher_background"
-        android:padding="10dp"
-        android:scrollHorizontally="true"
-        android:text="Button"
-        android:textColor="@color/black"></Button>
-
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="button"
+        android:textColor="@color/black" />/
 </LinearLayout>

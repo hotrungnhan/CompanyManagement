@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".viewcontroller.fragment.checkin.QRScanner">
+    tools:context=".viewcontroller.fragment.qrscanner.QRScanner">
 
     <!-- TODO: Update blank fragment layout -->
 
