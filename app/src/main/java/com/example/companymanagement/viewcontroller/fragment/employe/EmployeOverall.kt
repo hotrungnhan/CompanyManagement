@@ -1,4 +1,4 @@
-package com.example.companymanagement.viewcontroller.fragment.manager
+package com.example.companymanagement.viewcontroller.fragment.employe
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.companymanagement.R
 
-class EmployeManager : Fragment() {
+
+class EmployeOverall : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tablayout_pagerviewer, container, false)
+        return inflater.inflate(R.layout.fragment_employe_overall, container, false)
     }
 }

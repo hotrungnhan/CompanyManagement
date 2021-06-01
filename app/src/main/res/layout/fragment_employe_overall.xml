@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".viewcontroller.fragment.employeemanage.EmployeOverall">
+    android:orientation="vertical"
+    tools:context=".viewcontroller.fragment.employe.EmployeOverall">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -14,16 +14,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_magnifier"
-                android:tint="@color/gray"/>
+                android:tint="@color/gray" />
+
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,8 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/item_cardview_employe">
-        </androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/item_cardview_employe"></androidx.recyclerview.widget.RecyclerView>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </FrameLayout>
