@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".viewcontroller.fragment.signleave.SignLeave"
+    >
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="244dp"
+        android:layout_height="wrap_content"
+        android:text="Loại đơn"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/txt_loai_don"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/text1"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/shape_conner_round"
+        android:text="TextView"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:gravity="start|center"/>
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_loai_don"
+        android:text="thời gian áp dung đơn"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/txt_time"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/text2"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/shape_conner_round"
+        android:text="TextView"
+        android:gravity="start|center"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="15sp"/>
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_time"
+        android:text="Lí do"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <EditText
+        android:id="@+id/editLido"
+        android:layout_width="351dp"
+        android:layout_height="268dp"
+        android:layout_below="@id/text3"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5sp"
+        android:background="@drawable/shape_conner_round"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="311dp"
+        android:layout_height="65dp"
+        android:layout_below="@id/editLido"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="126dp"
+        android:layout_marginEnd="50dp"
+        android:background="@color/purple_500"
+        android:enabled="false"
+        android:text="Nộp đơn"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        />
+
+</RelativeLayout>

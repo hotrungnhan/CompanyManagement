@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_leave"
+    app:startDestination="@id/signLeave">
+
+    <fragment
+        android:id="@+id/signLeave"
+        android:name="com.example.companymanagement.viewcontroller.fragment.signleave.SignLeave"
+        android:label="fragment_sign_leave"
+        tools:layout="@layout/fragment_sign_leave" />
+    <fragment
+        android:id="@+id/history"
+        android:name="com.example.companymanagement.viewcontroller.fragment.signleave.History"
+        android:label="fragment_history_list"
+        tools:layout="@layout/fragment_history_list" />
+</navigation>
