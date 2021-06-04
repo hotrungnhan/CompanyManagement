@@ -7,6 +7,9 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+    apply plugin: 'com.android.application'
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'
 
     defaultConfig {
         applicationId "com.example.companymanagement"
@@ -56,4 +59,11 @@ dependencies {
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //any chart library
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+    //AA chart model library
+    implementation 'com.github.AAChartModel:AAChartCore-Kotlin:-SNAPSHOT'
+    //MP chart library
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

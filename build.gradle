@@ -19,6 +19,13 @@ allprojects {
     repositories {
         google()
         jcenter()
+
+        //library for any chart
+        maven { url 'https://jitpack.io' }
+        //library for AAChartmodel
+        maven { url 'https://www.jitpack.io' }
+        //MP chart library
+        maven { url 'https://jitpack.io' }
     }
 }
 
