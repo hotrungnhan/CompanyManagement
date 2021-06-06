@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.companymanagement.R
 import com.example.companymanagement.viewcontroller.activity.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
-
     var auth: FirebaseAuth = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

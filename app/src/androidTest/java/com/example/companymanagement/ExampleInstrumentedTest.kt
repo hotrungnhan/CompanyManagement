@@ -9,14 +9,10 @@ import org.junit.Assert.*
 import org.junit.Rule
 import androidx.core.os.bundleOf
 import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.test.core.app.ActivityScenario
-import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.example.companymanagement.viewcontroller.activity.main.MainActivity
-import com.example.companymanagement.viewcontroller.fragment.mainworkspace.MainWorkspace
-import org.junit.Assert.*
-import org.junit.Rule
+import com.example.companymanagement.viewcontroller.fragment.mainhome.MainHome
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -28,12 +24,13 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
 
-//    @get:Rule
+    //    @get:Rule
 //    var activityTestRule = ActivityScenarioRule(MainActivity::class.java)
     @get:Rule
     var activityTestRule = ActivityScenarioRule(MainActivity::class.java)
 
-    @Test
+
+     @Test
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext

@@ -1,8 +1,6 @@
 package com.example.companymanagement.viewcontroller.fragment.actionbar
 
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +16,6 @@ import com.squareup.picasso.Picasso
 
 class ActionBar : Fragment() {
     var auth = FirebaseAuth.getInstance();
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -34,7 +31,8 @@ class ActionBar : Fragment() {
         email.setText(auth.currentUser?.email)
         //
         userlayout.setOnClickListener({ e ->
-            UserManagerBottomSheet().show(this.childFragmentManager, "userInfo");
+            var bts = UserManagerBottomSheet()
+                .show(this.childFragmentManager, "userInfo");
         })
         return root;
     }
