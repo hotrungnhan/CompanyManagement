@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".viewcontroller.fragment.task.TaskOverall">
+
+    <TextView
+        android:id="@+id/textview_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:text="Thống kê phân công công việc tháng"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_item_taskoverall"
+        android:layout_width="345dp"
+        android:layout_height="92dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="48dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_title">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="23dp">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="180dp"
+                    android:layout_height="27dp"
+                    android:layout_weight="1"
+                    android:text="0/0"
+                    android:textAlignment="center"
+                    android:textColor="#8CE857"
+                    android:textSize="20dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:layout_width="180dp"
+                    android:layout_height="27dp"
+                    android:layout_weight="1"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="#E3E857"
+                    android:textSize="20dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:layout_width="91dp"
+                    android:layout_height="27dp"
+                    android:layout_weight="1"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="#E86657"
+                    android:textSize="20dp"
+                    android:textStyle="bold"></TextView>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="27dp"
+                    android:layout_weight="1"
+                    android:text="@string/taskoverall_item1"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="27dp"
+                    android:layout_weight="1"
+                    android:text="@string/taskoverall_item2"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="27dp"
+                    android:layout_weight="1"
+                    android:text="@string/taskoverall_item3"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:textStyle="bold"></TextView>
+            </TableRow>
+        </TableLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/taskoverall_today"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.182"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardview_item_taskoverall" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="345dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_taskoverall"
+        android:name="com.example.companymanagement.EmployeManager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="LinearLayoutManager"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        tools:layout_editor_absoluteX="16dp"
+        tools:listitem="@layout/item_cardview_task"></androidx.recyclerview.widget.RecyclerView>
+</androidx.constraintlayout.widget.ConstraintLayout>

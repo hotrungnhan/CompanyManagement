@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_task_mn"
+    app:startDestination="@+id/task_mn_overall">
+
+    <fragment
+        android:id="@+id/task_mn_overall"
+        android:name="com.example.companymanagement.viewcontroller.fragment.task.TaskOverall"
+        android:label="fragment_task_mn_overall"
+        tools:layout="@layout/fragment_task_overall" />
+
+    <fragment
+        android:id="@+id/task_mn_list"
+        android:name="com.example.companymanagement.viewcontroller.fragment.task.TaskList"
+        android:label="fragment_task_mn_list"
+        tools:layout="@layout/fragment_task_list" />
+
+    <fragment
+        android:id="@+id/task_mn_create"
+        android:name="com.example.companymanagement.viewcontroller.fragment.task.TaskCreate"
+        android:label="fragment_task_mn_create"
+        tools:layout="@layout/fragment_task_create" />
+</navigation>

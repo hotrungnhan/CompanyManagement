@@ -1,82 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_employe"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="10dp"
-    app:cardElevation="5dp"
-    app:contentPadding="5dp">
+    android:orientation="horizontal">
 
-    <!-- TODO: Update blank fragment layout -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/employe_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/circleImageView"
+        app:srcCompat="@drawable/ic_user" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/action_bar_avatar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintCircleRadius="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/circleImageView"
-            app:srcCompat="@drawable/ic_user" />
-
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/user_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:layout_marginStart="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/employe_avatar"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/user_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginVertical="5dp"
-            android:layout_marginLeft="5dp"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            app:layout_constraintStart_toEndOf="@+id/action_bar_avatar">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hồ Trung Nhân ! "
-                    android:textStyle="bold" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_gravity="center_vertical"
-                    app:srcCompat="@drawable/ic_down" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="hotrungnhan@gmail.com" />
+                android:text="User Display Name"
+                android:textStyle="bold" />
         </androidx.appcompat.widget.LinearLayoutCompat>
-        <androidx.appcompat.widget.LinearLayoutCompat
+
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_marginStart="50dp"
-            app:layout_constraintStart_toEndOf="@+id/user_layout">
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switchButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/ic_delete"
-                android:layout_marginStart="10dp"/>
+            android:layout_height="wrap_content"
+            android:text="abcxzy@gmail.com" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-</androidx.cardview.widget.CardView>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/ic_delete" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

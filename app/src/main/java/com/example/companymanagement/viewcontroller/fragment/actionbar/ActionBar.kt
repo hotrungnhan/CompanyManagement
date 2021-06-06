@@ -1,60 +1,41 @@
 package com.example.companymanagement.viewcontroller.fragment.actionbar
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.companymanagement.R
+import com.example.companymanagement.viewcontroller.fragment.user.UserManagerBottomSheet
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Picasso
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ActionBar.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ActionBar : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    var auth = FirebaseAuth.getInstance();
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_action_bar, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ActionBar.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ActionBar().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        var root = inflater.inflate(R.layout.fragment_action_bar, container, false)
+        var avatar = root.findViewById<ShapeableImageView>(R.id.action_bar_avatar)
+        var displayname = root.findViewById<TextView>(R.id.action_bar_display_name)
+        var email = root.findViewById<TextView>(R.id.action_bar_email_address)
+        var userlayout = root.findViewById<ConstraintLayout>(R.id.action_bar_user_layout)
+        Picasso.get().load(auth.currentUser?.photoUrl).resize(32, 32).into(avatar);
+        displayname.setText(auth.currentUser?.displayName)
+        email.setText(auth.currentUser?.email)
+        //
+        userlayout.setOnClickListener({ e ->
+            UserManagerBottomSheet().show(this.childFragmentManager, "userInfo");
+        })
+        return root;
     }
 }

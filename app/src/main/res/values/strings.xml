@@ -24,17 +24,45 @@
     <!--    Employee Management -->
     <string name="navigation_employe_mn_overall">Danh sách</string>
     <string name="navigation_employe_mn_register">Đăng ký</string>
-    <string name="name_employee_register"></string>
-    <string name="detail_employee_register">Create a new account</string>
-    <string name="hint_account">Enter account name</string>
-    <string name="hint_mail">Enter account mail</string>
-    <string name="hint_position">Enter account position</string>
-    <string name="hint_password">Enter account password</string>
-    <string name="hint_password_confirm">Confirm account password</string>
-    <string name="reload"><u>Reload page ?</u></string>
+    <string name="detail_employee_register">Tạo tài khoản mới</string>
+    <string name="hint_account">Tên tài khoản</string>
+    <string name="hint_mail">Email</string>
+    <string name="hint_position">Vị trí</string>
+    <string name="hint_password">Mật khẩu</string>
+    <string name="hint_password_confirm">Xác nhận lại mật khẩu</string>
+    <string name="reload"><u>Làm mới ?</u></string>
     <string name="name_employee_manage">Employee Management</string>
     <string name="search_employee_manage">Search employee</string>
     <string name="done">Done</string>
+    <!--    Task Management -->
+    <string name="detail_task_create">Tạo task mới</string>
+    <string name="detail_task_name">Tên task</string>
+    <string name="hint_task_name">Task</string>
+    <string name="detail_task_receiver">Người nhận</string>
+    <string name="hint_task_search">Tìm kiếm nhân viên</string>
+    <string name="hint_task_category">Category</string>
+    <string-array name="receiver_category">
+        <item>Tất cả</item>
+        <item>Nhân viên</item>
+        <item>Quản lý</item>
+        <item>Nhập Liệu</item>
+    </string-array>
+    <string name="detail_task_timeline">Thời gian</string>
+    <string name="task_creat_datestart">Ngày gửi</string>
+    <string name="task_create_deadline">Hạn deadline</string>
+    <string name="detail_task_descripton">Mô tả</string>
+    <string name="hint_task_description">Mô tả nội dung</string>
+    <string name="detail_task_sender">Người gửi</string>
+    <string name="search_tasklist">Tìm kiếm task</string>
+    <string name="taskoverall_item1">Hoàn thành</string>
+    <string name="taskoverall_item2">Đang tiến hành</string>
+    <string name="taskoverall_item3">Trễ hạn</string>
+    <string name="taskoverall_today">Today task</string>
+    <string-array name="task_manager_tab_name">
+        <item>Tổng quát</item>
+        <item>Danh sách task</item>
+        <item>Thêm task mới</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--    TODO:Tab -->
@@ -42,8 +70,19 @@
     <string name="navigation_tab_item_2">Dự án</string>
     <string name="navigation_tab_item_3">Workplace</string>
     <string name="navigation_tab_item_4">Thêm</string>
+    <string name="navigation_manager_item_1">Quản lý nhân viên</string>
+    <string name="navigation_manager_item_2">Quản lý tác vụ</string>
     <string name="hone_manager">Quản trị viên</string>
     <string name="hone_typing">Nhập liệu</string>
     <string name="hone_workspace">Workspace</string>
     <string name="more_setting">Cài Đặt</string>
+    <string-array name="employee_manager_tab_name">
+        <item>Thêm Nhân Viên</item>
+        <item>Danh Sách Nhân Viên</item>
+    </string-array>
+    <string-array name="user_manager_tab_name">
+        <item>Checkin</item>
+        <item>Dự án</item>
+        <item>Thông Tin</item>
+    </string-array>
 </resources>

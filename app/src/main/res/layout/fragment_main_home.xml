@@ -54,13 +54,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
-                        android:nestedScrollingEnabled="false"
                         tools:itemCount="5"
+
                         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         tools:listitem="@layout/item_cardview_button"
                         tools:orientation="vertical"
                         tools:scrollbars="vertical"
-                        tools:spanCount="3"></androidx.recyclerview.widget.RecyclerView>
+                        tools:spanCount="3" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
