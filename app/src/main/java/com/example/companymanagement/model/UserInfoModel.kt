@@ -7,8 +7,13 @@ import com.google.firebase.firestore.ServerTimestamp
 import java.util.*
 
 @Keep
-data class UserInfo(
-
+data class UserInfoModel(
+    @get: PropertyName("user_name")
+    @set: PropertyName("user_name")
+    var Name: String? = null,
+    @get: PropertyName("contact_email")
+    @set: PropertyName("contact_email")
+    var Email: String? = null,
     @get: PropertyName("phone_number")
     @set: PropertyName("phone_number")
     var PhoneNumber: String? = null,
@@ -36,17 +41,24 @@ data class UserInfo(
     @get: PropertyName("idcard_create_location")
     @set: PropertyName("idcard_create_location")
     var IDCardCreateLocation: String? = null,
+) {
+    @DocumentId
+    val uid: String? = null
+
+    //document id shall auto parse from doc by to object function . it should be unsetable
 
     @ServerTimestamp
     @get: PropertyName("create_time")
     @set: PropertyName("create_time")
-    var CreateTime: Date? = null,
+    var CreateTime: Date? = null
 
     @ServerTimestamp
     @get: PropertyName("update_time")
     @set: PropertyName("update_time")
-    var UpdateTime: Date? = null,
-) {
-    @DocumentId
-    val uid: String? = null
+    var UpdateTime: Date? = null
+
+    init {
+        CreateTime = Date();
+        UpdateTime = Date();
+    }
 }
