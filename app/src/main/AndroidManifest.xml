@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CompanyManagement">
-        <activity android:name=".viewcontroller.activity.salary.SalaryActivity"></activity>
         <activity
             android:name=".viewcontroller.activity.login.LoginActivity"
             android:label="@string/title_activity_login" />
@@ -21,5 +20,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

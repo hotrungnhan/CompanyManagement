@@ -14,7 +14,6 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
-import kotlinx.android.synthetic.main.fragment_salary.*
 
 class SalaryFragment : Fragment() {
 
@@ -53,7 +52,7 @@ class SalaryFragment : Fragment() {
         //the label is used to describe the meaning of the bar column
         val barDataSet = BarDataSet(barSalary, "salary (dollar unit)")
         barData = BarData(barDataSet)
-        salary_chart.data = barData
+        salaryChart.data = barData
 
         //set some attributes for each bar
         barDataSet.setColors(R.color.purple_200) //set the color of bars
