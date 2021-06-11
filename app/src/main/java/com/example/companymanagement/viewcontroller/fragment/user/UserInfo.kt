@@ -89,6 +89,7 @@ class UserInfo : Fragment() {
         return root;
 
     }
+
     fun toastEditSussced() {
         Toast.makeText(context, "Update Susceed", Toast.LENGTH_SHORT).show()
     }

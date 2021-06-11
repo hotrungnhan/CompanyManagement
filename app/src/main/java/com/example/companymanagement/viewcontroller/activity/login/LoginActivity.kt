@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //debug
 
-        if (resources.getBoolean(R.bool.disable_login) == false) {
+        if (resources.getBoolean(R.bool.disable_login) == false || auth.currentUser != null) {
             finish()
             val loginintent = Intent(this, MainActivity::class.java)
             startActivity(loginintent)

@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso
 
 class ActionBar : Fragment() {
     var auth = FirebaseAuth.getInstance();
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -30,9 +31,10 @@ class ActionBar : Fragment() {
         displayname.setText(auth.currentUser?.displayName)
         email.setText(auth.currentUser?.email)
         //
+
         userlayout.setOnClickListener({ e ->
-            var bts = UserManagerBottomSheet()
-                .show(this.childFragmentManager, "userInfo");
+            var bts = UserManagerBottomSheet.Instance();
+            bts.show(this.childFragmentManager, "userInfo");
         })
         return root;
     }
