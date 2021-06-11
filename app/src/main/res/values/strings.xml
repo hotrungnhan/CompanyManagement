@@ -63,6 +63,7 @@
         <item>Danh sách task</item>
         <item>Thêm task mới</item>
     </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--    TODO:Tab -->
@@ -72,6 +73,7 @@
     <string name="navigation_tab_item_4">Thêm</string>
     <string name="navigation_manager_item_1">Quản lý nhân viên</string>
     <string name="navigation_manager_item_2">Quản lý tác vụ</string>
+    <string name="navigation_manager_item_3">Thông báo</string>
     <string name="hone_manager">Quản trị viên</string>
     <string name="hone_typing">Nhập liệu</string>
     <string name="hone_workspace">Workspace</string>
@@ -85,4 +87,13 @@
         <item>Dự án</item>
         <item>Thông Tin</item>
     </string-array>
+    <string name="title_activity_forgot_verify_email">Forgot_VerifyEmail</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

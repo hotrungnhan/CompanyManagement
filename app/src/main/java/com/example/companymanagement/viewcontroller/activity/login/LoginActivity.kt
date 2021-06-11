@@ -3,16 +3,14 @@ package com.example.companymanagement.viewcontroller.activity.login
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.companymanagement.R
 import com.example.companymanagement.viewcontroller.activity.main.MainActivity
+import com.example.companymanagement.viewcontroller.fragment.forgotpassword.ForgotPass
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.UserProfileChangeRequest
 
 class LoginActivity : AppCompatActivity() {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -30,6 +28,8 @@ class LoginActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
+        val forgot = findViewById<TextView>(R.id.forgot_password)
+        val pw_layout = findViewById<TextInputLayout>(R.id.password_layout)
         login.setOnClickListener {
 
             var username = username.text.toString()
@@ -54,6 +54,15 @@ class LoginActivity : AppCompatActivity() {
                 toastBadFormat();
             }
         }
+        forgot.setOnClickListener{
+            username.visibility = View.GONE
+            login.visibility = View.GONE
+            loading.visibility = View.GONE
+            pw_layout.visibility = View.GONE
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.login_container, ForgotPass()).commit()
+        }
+
     }
 
     private fun loginCondition(username: String, password: String): Boolean {

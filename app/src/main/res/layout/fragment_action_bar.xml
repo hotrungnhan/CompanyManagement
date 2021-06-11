@@ -64,6 +64,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/b_action_bar_noti"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="center|right"

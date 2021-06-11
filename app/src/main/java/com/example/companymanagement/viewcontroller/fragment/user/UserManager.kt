@@ -13,7 +13,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class UserManagerBottomSheet : BottomSheetDialogFragment() {
 
-
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
@@ -27,4 +26,4 @@ class UserManagerBottomSheet : BottomSheetDialogFragment() {
             TabLayoutMediator(tablayout, pager) { tab, pos -> tab.text = tabtext[pos] }.attach()
             return root;
         }
-    }
+}

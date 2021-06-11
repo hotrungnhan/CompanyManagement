@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <androidx.appcompat.widget.LinearLayoutCompat style="@style/layout_page_title">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/text_page_title_heading"
+            android:text="@string/navigation_manager_item_3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/text_page_title_sub_heading"
+            android:text="something"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/noti_manager_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

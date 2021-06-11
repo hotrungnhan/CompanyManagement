@@ -135,8 +135,11 @@
                 android:background="@drawable/shape_conner_round"
                 android:drawableRight="@drawable/ic_password_eye"
                 android:gravity="center"
-                android:hint="@string/hint_password"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionDone"
                 android:inputType="textPassword"
+                android:selectAllOnFocus="true"
+                android:hint="@string/hint_password"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />
