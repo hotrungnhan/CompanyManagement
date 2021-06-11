@@ -15,7 +15,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/text_page_title_sub_heading"
-            android:text="something"/>
+            android:text="Today Task " />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.core.widget.NestedScrollView
