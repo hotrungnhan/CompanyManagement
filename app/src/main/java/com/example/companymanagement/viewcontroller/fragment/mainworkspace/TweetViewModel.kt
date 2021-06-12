@@ -29,7 +29,6 @@ class TweetViewModel : ViewModel() {
             val newdata = repo.addNewTweet(tweet);
             if (newdata != null)
                 TweetList.value?.add(0, newdata)
-
         }
 
     }
