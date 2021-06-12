@@ -36,4 +36,10 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">#FF4081</item>
+        <item name="android:textColorPrimary">#FF4081</item>
+    </style>
+
 </resources>
