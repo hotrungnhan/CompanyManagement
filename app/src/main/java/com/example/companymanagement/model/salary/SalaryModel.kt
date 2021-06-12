@@ -40,7 +40,7 @@ data class SalaryModel (
     var TotalSalary: Long = 0,){
 
     @DocumentId
-    val uid: String? = null
+    var uid: String? = null
 
 
     fun setBasicSalary(position : String) : VietnamDong {
