@@ -18,7 +18,6 @@ import java.time.format.DateTimeFormatter
 @RequiresApi(Build.VERSION_CODES.O)
 class SalaryListViewModel : ViewModel() {
     var detailSalary = MutableLiveData<ArrayList<SalaryModel>>()
-    var totalSalary = MutableLiveData<ArrayList<BarEntry>>()
     var ref = FirebaseFirestore.getInstance().collection("salary")
     var repo = SalaryRepository(ref)
 
@@ -32,13 +31,6 @@ class SalaryListViewModel : ViewModel() {
             }
             detailSalary.postValue(list)
         }
-        //toEntry()
     }
-    fun toEntry(){
-        var list = arrayListOf<BarEntry>()
-        for(i in 0 until 12){
-            list.add(BarEntryConverter.convert(i, detailSalary.value?.get(i)?.TotalSalary.toString()))
-        }
-        totalSalary.postValue(list)
-    }
+
 }
