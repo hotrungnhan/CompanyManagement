@@ -7,25 +7,20 @@ import com.google.firebase.firestore.CollectionReference
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.*
-
+@RequiresApi(Build.VERSION_CODES.O)
 class SalaryRepository (var col: CollectionReference) {
 
-
-    suspend fun addStaffDoc(uuid: String) {
-        col.add(uuid).await();
-    }
-
-
-    suspend fun findUserDoc(uuid: String): SalaryModel? {
-        ///stil editing
-        return col.document(uuid).get().await().toObject(SalaryModel::class.java)
-    }
-
     suspend fun getSalaryDoc(uuid: String, year : String, month: String): SalaryModel? {
-        return col.document(uuid)
+        val ref = col.document(uuid)
             .collection("yearlist").document(year)
             .collection("monthlist").document(month)
-            .get().await().toObject(SalaryModel::class.java)
+        if(ref.get().await().exists())
+            return ref.get().await().toObject(SalaryModel::class.java)
+        else{
+            var dummy = SalaryModel(0, 0, 0, 0, 0, 0, 0, 0 )
+            dummy.uid = month
+            return dummy
+        }
     }
 
     suspend fun updateDoc(uuid : String, year : String, month : String, salary: SalaryModel) {
@@ -35,6 +30,7 @@ class SalaryRepository (var col: CollectionReference) {
             .collection("monthlist").document(month)
             .set(salary).await()
     }
+
 
     suspend fun deleteDoc(uuid: String, salary: SalaryModel) {
        // col.document(uuid).collection("monthlist").document(salary.MonthId!!).delete().await()
