@@ -28,17 +28,7 @@ class UserManagerBottomSheet : BottomSheetDialogFragment() {
                 bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
             parentLayout?.let { it ->
                 val behaviour = BottomSheetBehavior.from(it)
-                behaviour.addBottomSheetCallback(object :
-                    BottomSheetBehavior.BottomSheetCallback() {
-                    override fun onStateChanged(bottomSheet: View, newState: Int) {
-                        if (newState == BottomSheetBehavior.STATE_DRAGGING) {
-                            behaviour.state = BottomSheetBehavior.STATE_HIDDEN
-                        }
-                    }
-
-                    override fun onSlide(bottomSheet: View, slideOffset: Float) {}
-                })
-                setupFullHeight(it)
+                behaviour.skipCollapsed = true;
                 behaviour.state = BottomSheetBehavior.STATE_EXPANDED
             }
         }

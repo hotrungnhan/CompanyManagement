@@ -12,7 +12,7 @@ data class CommentModel(
 
     @get: PropertyName("Poster_uuid")
     @set: PropertyName("Poster_uuid")
-    var OwnerUUID: String,
+    var OwnerUUID: String = "",
 ) {
     @DocumentId
     val cmtuid: String? = null

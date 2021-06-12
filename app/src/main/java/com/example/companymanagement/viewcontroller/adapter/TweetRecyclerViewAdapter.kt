@@ -11,8 +11,13 @@ import com.example.companymanagement.R
 import com.example.companymanagement.model.tweet.TweetModel
 import com.google.android.material.imageview.ShapeableImageView
 
+interface OnCommentClickListener {
+    fun onClick(tweetid: String);
+}
+
 class TweetRecyclerViewAdapter() :
     RecyclerView.Adapter<TweetRecyclerViewAdapter.TweetHolder>() {
+    private var cmtclicklisener: OnCommentClickListener? = null;
     var list: MutableList<TweetModel>? = null
 
     class TweetHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -23,9 +28,12 @@ class TweetRecyclerViewAdapter() :
         val date: TextView = itemView.findViewById(R.id.tweet_item_owner_create_date)
         fun bind(tweet: TweetModel) {
             content.text = tweet.Content;
-            date.text = DateUtils.getRelativeTimeSpanString(tweet.CreateTime?.time!!,);
-            likebtn.text = tweet.LikeCount.toString();
+            date.text = DateUtils.getRelativeTimeSpanString(tweet.CreateTime?.time!!);
+            likebtn.text = tweet.LikeCount.toString()
+
         }
+
+
     };
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -44,5 +52,13 @@ class TweetRecyclerViewAdapter() :
     override fun getItemCount(): Int = list?.size ?: 0;
     override fun onBindViewHolder(holder: TweetHolder, position: Int) {
         holder.bind(list!![position])
+        holder.cmtbtn.setOnClickListener {
+            cmtclicklisener?.onClick(list!![position].postuid!!)
+        };
+
+    }
+
+    fun setOnCommentClick(e: OnCommentClickListener) {
+        cmtclicklisener = e;
     }
 }
