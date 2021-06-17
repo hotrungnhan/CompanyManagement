@@ -7,23 +7,22 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.companymanagement.R
 import com.example.companymanagement.utils.DateParser
 import com.example.companymanagement.utils.DateParser.Companion.toHumanReadDate
+import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.auth.FirebaseAuth
 
 class UserInfo : Fragment() {
     var isEdit: Boolean = false;
-    var auth = FirebaseAuth.getInstance()
-    var infomodel: UserInfoViewModel = UserInfoViewModel();
+    lateinit var infomodel: UserInfoViewModel;
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-
-        infomodel.retriveUserInfo(auth.currentUser?.uid!!)
+        infomodel = ViewModelProvider(this.requireActivity()).get(UserInfoViewModel::class.java)
 
         var root = inflater.inflate(R.layout.fragment_user_info, container, false)
         // declare id

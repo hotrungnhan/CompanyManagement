@@ -8,9 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
 import com.example.companymanagement.model.tweet.CommentModel
+import com.example.companymanagement.utils.customize.OnBindAvatarListener
 import com.google.android.material.imageview.ShapeableImageView
 
 class TweetCommentAdapter : RecyclerView.Adapter<CommentHolder>() {
+    private var avatarbindinglisener: OnBindAvatarListener? = null;
     var list: MutableList<CommentModel> = mutableListOf()
     fun setData(list: MutableList<CommentModel>) {
         this.list = list;
@@ -25,9 +27,14 @@ class TweetCommentAdapter : RecyclerView.Adapter<CommentHolder>() {
 
     override fun onBindViewHolder(holder: CommentHolder, position: Int) {
         holder.bind(list[position])
+        avatarbindinglisener?.onBind(list[position].OwnerUUID, holder.avatar)
     }
 
     override fun getItemCount(): Int = list.size;
+
+    fun setOnBindAvatar(e: OnBindAvatarListener) {
+        avatarbindinglisener = e;
+    }
 }
 
 class CommentHolder(val itemview: View) : RecyclerView.ViewHolder(itemview) {

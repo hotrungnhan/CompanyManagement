@@ -1,6 +1,7 @@
 package com.example.companymanagement.viewcontroller.fragment.mainworkspace
 
 import android.app.Dialog
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
@@ -18,18 +21,23 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Picasso
 
 
 class Comment : BottomSheetDialogFragment() {
 
     lateinit var commentViewModel: CommentViewModel;
+    lateinit var UserListViewModel: ListUserParticipantViewModel;
     val cuser = FirebaseAuth.getInstance().currentUser
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(null)
+
         val bundle = this.arguments
         val idtweet = bundle?.getString("tweet_id");
         Log.d("tweet", idtweet.toString())
         commentViewModel = CommentViewModel(idtweet!!);
+        UserListViewModel =
+            ViewModelProvider(this.requireActivity()).get(ListUserParticipantViewModel::class.java)
     }
 
 
@@ -55,17 +63,45 @@ class Comment : BottomSheetDialogFragment() {
         recycleview.layoutManager = layoutManager;
         commentViewModel.commentList.observe(this.viewLifecycleOwner) {
             adapter.setData(it);
-            recycleview.scrollToPosition(0);
         }
         // newcmt
         val cmtbtn: Button = view.findViewById(R.id.comment_post_btn)
         val content: TextInputEditText = view.findViewById(R.id.comment_newcontent)
         cmtbtn.setOnClickListener {
             commentViewModel.addComment(CommentModel(content.text.toString(), cuser?.uid!!))
-            content.text?.clear()
-            adapter.notifyItemInserted(0)
-            recycleview.scrollToPosition(0);
+                .observe(viewLifecycleOwner) {
+                    if (it) {
+                        content.text?.clear()
+                        adapter.notifyItemInserted(0)
+                        recycleview.scrollToPosition(0);
+                    }
+                }
         }
+        adapter.setOnBindAvatar() { uuid, avatar ->
+            var url: String?;
+            if (UserListViewModel.UserList.value?.containsKey(uuid) == true) {
+                url = UserListViewModel.UserList.value?.get(uuid)?.AvatarURL
+                Picasso.get().load(url).resize(32, 32).into(avatar);
+            } else {
+                UserListViewModel.appendUser(uuid).observe(viewLifecycleOwner) {
+                    url = it?.AvatarURL
+                    Picasso.get().load(url).resize(32, 32).into(avatar);
+                }
+            }
+        }
+        var loadmore = view.findViewById<TextView>(R.id.tweet_comment_loadmore)
+        loadmore.setOnClickListener { view ->
+            commentViewModel.loadOldComment()
+        }
+        commentViewModel.lastestQuerySize.observe(viewLifecycleOwner) {
+            adapter.notifyItemRangeInserted(adapter.list.lastIndex, it)
+            recycleview.scrollToPosition(adapter.list.lastIndex);
+            if (it < 10) {
+                loadmore.setTextColor(Color.GRAY)
+                loadmore.isClickable = false;
+            }
+        }
+
     }
 
     //settup bottom sheet
