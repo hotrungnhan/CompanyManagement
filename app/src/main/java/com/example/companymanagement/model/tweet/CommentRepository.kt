@@ -14,13 +14,14 @@ class CommentRepository(val col: CollectionReference) {
         return col.orderBy("create_time", Query.Direction.DESCENDING).limit(count).get()
             .await()
             .toObjects(CommentModel::class.java)
+
     }
 
     suspend fun getListComment(
         count: Long = 10,
         startafter: CommentModel,
     ): MutableList<CommentModel>? {
-        return col.orderBy("create_time", Query.Direction.ASCENDING).limit(count)
+        return col.orderBy("create_time", Query.Direction.DESCENDING).limit(count)
             .startAfter(startafter.CreateTime)
             .get().await().toObjects(CommentModel::class.java)
     }

@@ -1,4 +1,4 @@
-package com.example.companymanagement.viewcontroller.fragment.user
+package com.example.companymanagement.viewcontroller.fragment.shareviewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
