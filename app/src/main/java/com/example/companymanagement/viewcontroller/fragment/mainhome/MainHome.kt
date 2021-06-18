@@ -11,7 +11,10 @@ import com.example.companymanagement.R
 import com.example.companymanagement.viewcontroller.adapter.HomeGridViewApdapter
 
 class MainHome : Fragment() {
+
     val listview: MutableList<HomeGridViewViewModel> = mutableListOf()
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
