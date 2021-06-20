@@ -25,7 +25,7 @@
     <string name="navigation_employe_mn_overall">Danh sách</string>
     <string name="navigation_employe_mn_register">Đăng ký</string>
     <string name="detail_employee_register">Tạo tài khoản mới</string>
-    <string name="hint_account">Tên tài khoản</string>
+    <string name="hint_account">Họ tên</string>
     <string name="hint_mail">Email</string>
     <string name="hint_position">Vị trí</string>
     <string name="hint_password">Mật khẩu</string>

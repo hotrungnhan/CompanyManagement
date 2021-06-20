@@ -23,13 +23,8 @@ class ForgotPass : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_forgot_password, container, false)
-        val backtoLogin = root.findViewById<ImageView>(R.id.vfmail_back)
         val sendmail = root.findViewById<Button>(R.id.b_send_mail)
         val mail = root.findViewById<EditText>(R.id.ed_mail)
-        backtoLogin.setOnClickListener {
-            val backtologinIntent = Intent(context, LoginActivity::class.java)
-            startActivity(backtologinIntent)
-        }
         mAuth = FirebaseAuth.getInstance()
         sendmail.setOnClickListener{
             val email = mail.text.toString().trim()

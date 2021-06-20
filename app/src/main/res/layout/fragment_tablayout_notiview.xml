@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    tools:context=".viewcontroller.fragment.announcement.AnnouncementManager">
     <androidx.appcompat.widget.LinearLayoutCompat style="@style/layout_page_title">
 
         <androidx.appcompat.widget.AppCompatTextView

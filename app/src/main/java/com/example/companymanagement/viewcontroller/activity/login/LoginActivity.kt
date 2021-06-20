@@ -5,9 +5,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.companymanagement.R
 import com.example.companymanagement.viewcontroller.activity.main.MainActivity
 import com.example.companymanagement.viewcontroller.fragment.forgotpassword.ForgotPass
+import com.example.companymanagement.viewcontroller.fragment.forgotpassword.ForgotPassManager
+import com.example.companymanagement.viewcontroller.fragment.user.UserManagerBottomSheet
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -55,12 +59,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         forgot.setOnClickListener{
-            username.visibility = View.GONE
-            login.visibility = View.GONE
-            loading.visibility = View.GONE
-            pw_layout.visibility = View.GONE
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.login_container, ForgotPass()).commit()
+            ForgotPassManager().show(supportFragmentManager,"forgotpassInfo")
         }
 
     }
