@@ -22,7 +22,7 @@ class UserTaskAdapter(private val taskList: ArrayList<UserTaskModel>)
 
         val task: UserTaskModel = taskList[position]
         holder.Content.text = task.Content
-        holder.Deadline.text = task.Deadline?.toDate().toString()
+        holder.Deadline.text = task.Deadline
         holder.Title.text = task.Title
         holder.Sender.text = task.Sender
         holder.SentDate.text = task.SentDate?.toDate().toString()

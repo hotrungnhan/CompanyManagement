@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -22,7 +23,8 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/action_bar_avatar"
+                    android:id="@+id/tweet_item_owner_avatar"
+
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     app:shapeAppearanceOverlay="@style/circleImageView"
@@ -36,6 +38,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tweet_item_owner_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLength="20"
@@ -44,6 +47,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tweet_item_owner_create_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2h ago" />
@@ -57,6 +61,7 @@
 
 
             <TextView
+                android:id="@+id/tweet_item_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
@@ -69,15 +74,20 @@
                 android:padding="5dp"
                 android:weightSum="2">
 
+
                 <Button
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tweet_item_like_btn"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:text="Like" />
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tweet_item_comment_btn"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:text="Comment" />
             </androidx.appcompat.widget.LinearLayoutCompat>

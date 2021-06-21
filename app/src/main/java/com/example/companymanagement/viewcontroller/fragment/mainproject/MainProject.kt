@@ -60,19 +60,20 @@ class MainProject : Fragment() {
         this.taskLayoutManager.orientation = RecyclerView.VERTICAL
 
         projectCalendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val message = "" + dayOfMonth +""+ month +"" +year
-
+            val message = "Selected date is: " + dayOfMonth +"/" + (month+1) +"/" + year
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }
 
         //EventChangeListener()
     }
 
+    //find out more about this function and fix the bug
     //this function is used to load data and catch data changes
-    private fun EventChangeListener(date: Timestamp) {
+    private fun EventChangeListener() {
         db = FirebaseFirestore.getInstance()
         db.collection("task")
             .orderBy("SentDate", Query.Direction.ASCENDING)
-            .whereArrayContains("Deadline",date)
+            //.whereArrayContains("Deadline",date)
             .addSnapshotListener(object : EventListener<QuerySnapshot>{
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if (error != null){

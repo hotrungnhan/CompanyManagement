@@ -9,8 +9,8 @@ data class UserTaskModel(
     var Content: String? = null,
 
     @get: PropertyName("deadline")
-    @set: PropertyName("dealine")
-    var Deadline: com.google.firebase.Timestamp? = null,
+    @set: PropertyName("deadline")
+    var Deadline: String? = null,
 
     @get: PropertyName("sender")
     @set: PropertyName("sender")
