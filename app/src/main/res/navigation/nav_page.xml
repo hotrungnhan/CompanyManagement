@@ -32,4 +32,9 @@
         android:name="com.example.companymanagement.viewcontroller.fragment.employe.EmployeManager"
         android:label="fragment_employe_manager"
         tools:layout="@layout/fragment_tablayout_pagerviewer" />
+    <fragment
+        android:id="@+id/user_salary"
+        android:name="com.example.companymanagement.viewcontroller.fragment.salary.SalaryFragment"
+        android:label="fragment_user_salary"
+        tools:layout="@layout/fragment_salary" />
 </navigation>
