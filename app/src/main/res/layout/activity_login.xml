@@ -38,7 +38,6 @@
         android:layout_marginEnd="24dp"
         app:boxBackgroundMode="none"
         app:counterEnabled="false"
-        app:endIconDrawable="@drawable/ic_password_eye"
         app:expandedHintEnabled="true"
         app:hintAnimationEnabled="false"
         app:hintEnabled="false"

@@ -1,15 +1,26 @@
 package com.example.companymanagement.viewcontroller.adapter
 
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
+import com.example.companymanagement.model.tweet.TweetModel
+import com.example.companymanagement.utils.customize.OnBindAvatarListener
+import com.example.companymanagement.utils.customize.OnButtonClickListener
+import com.google.android.material.imageview.ShapeableImageView
 
-class TweetRecyclerViewAdapter(var list: List<String>) :
-    RecyclerView.Adapter<TweetRecyclerViewAdapter.TweetHolder>() {
 
-    class TweetHolder(itemView: View) : RecyclerView.ViewHolder(itemView);
+class TweetRecyclerViewAdapter() :
+    RecyclerView.Adapter<TweetHolder>() {
+    private var cmtclicklisener: OnButtonClickListener? = null;
+    private var likeclicklisener: OnButtonClickListener? = null;
+    private var avatarbindinglisener: OnBindAvatarListener? = null;
+    var list: MutableList<TweetModel>? = null
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -19,8 +30,48 @@ class TweetRecyclerViewAdapter(var list: List<String>) :
         return TweetHolder(view)
     }
 
+    fun setData(data: MutableList<TweetModel>) {
+        this.list = data;
+        this.notifyDataSetChanged()
+    }
 
-    override fun getItemCount(): Int = list.size;
+    override fun getItemCount(): Int = list?.size ?: 0;
     override fun onBindViewHolder(holder: TweetHolder, position: Int) {
+        holder.bind(list!![position])
+        holder.cmtbtn.setOnClickListener {
+            cmtclicklisener?.onClick(list!![position].postuid!!)
+        };
+        holder.likebtn.setOnClickListener {
+            likeclicklisener?.onClick(list!![position].postuid!!)
+            list!![position].LikeCount++;
+            this.notifyItemChanged(position)
+        }
+        avatarbindinglisener?.onBind(list!![position].OwnerUUID!!, holder.avatar)
+
+    }
+
+    fun setOnCommentClick(e: OnButtonClickListener) {
+        cmtclicklisener = e;
+    }
+
+    fun setOnBindAvatar(e: OnBindAvatarListener) {
+        avatarbindinglisener = e;
+    }
+
+    fun setOnLikeClick(e: OnButtonClickListener) {
+        likeclicklisener = e;
     }
 }
+
+class TweetHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    val likebtn: Button = itemView.findViewById(R.id.tweet_item_like_btn)
+    val cmtbtn: Button = itemView.findViewById(R.id.tweet_item_comment_btn)
+    val content: TextView = itemView.findViewById(R.id.tweet_item_content)
+    val avatar: ShapeableImageView = itemView.findViewById(R.id.tweet_item_owner_avatar)
+    val date: TextView = itemView.findViewById(R.id.tweet_item_owner_create_date)
+    fun bind(tweet: TweetModel) {
+        content.text = tweet.Content;
+        date.text = DateUtils.getRelativeTimeSpanString(tweet.CreateTime?.time!!);
+        likebtn.text = tweet.LikeCount.toString()
+    }
+};
