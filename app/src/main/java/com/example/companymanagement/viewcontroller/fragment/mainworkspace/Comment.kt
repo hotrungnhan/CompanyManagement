@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
 import com.example.companymanagement.model.tweet.CommentModel
+import com.example.companymanagement.utils.UtilsFuntion
 import com.example.companymanagement.viewcontroller.adapter.TweetCommentAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -81,11 +82,13 @@ class Comment : BottomSheetDialogFragment() {
             var url: String?;
             if (UserListViewModel.UserList.value?.containsKey(uuid) == true) {
                 url = UserListViewModel.UserList.value?.get(uuid)?.AvatarURL
-                Picasso.get().load(url).resize(32, 32).into(avatar);
+                val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
+                Picasso.get().load(url).resize(dp, dp).into(avatar);
             } else {
                 UserListViewModel.appendUser(uuid).observe(viewLifecycleOwner) {
                     url = it?.AvatarURL
-                    Picasso.get().load(url).resize(32, 32).into(avatar);
+                    val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
+                    Picasso.get().load(url).resize(dp, dp).into(avatar);
                 }
             }
         }
