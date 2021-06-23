@@ -9,7 +9,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
 class UserInfoViewModel : ViewModel() {
-    var info: MutableLiveData<UserInfoModel> = MutableLiveData();
+    var info: MutableLiveData<UserInfoModel> = MutableLiveData()
+
     var repo = UserInfoRepository(FirebaseFirestore.getInstance().collection("userinfo"))
 
     fun retriveUserInfo(uuid: String) {

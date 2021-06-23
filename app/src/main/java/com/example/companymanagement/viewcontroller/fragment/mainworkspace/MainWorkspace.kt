@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
 import com.example.companymanagement.model.tweet.TweetModel
+import com.example.companymanagement.utils.UtilsFuntion
 import com.example.companymanagement.utils.customize.EndlessScrollRecyclListener
 import com.example.companymanagement.viewcontroller.adapter.TweetRecyclerViewAdapter
 import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
@@ -60,11 +61,13 @@ class MainWorkspace : Fragment() {
             var url: String?;
             if (userlistppviewmodel.UserList.value?.containsKey(uuid) == true) {
                 url = userlistppviewmodel.UserList.value?.get(uuid)?.AvatarURL
-                Picasso.get().load(url).resize(32, 32).into(avatar);
+                val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
+                Picasso.get().load(url).resize(dp, dp).into(avatar);
             } else {
                 userlistppviewmodel.appendUser(uuid).observe(viewLifecycleOwner) {
                     url = it?.AvatarURL
-                    Picasso.get().load(url).resize(32, 32).into(avatar);
+                    val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
+                    Picasso.get().load(url).resize(dp, dp).into(avatar);
                 }
             }
         }
