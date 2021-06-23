@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
         val refreshCpnWork = PeriodicWorkRequest.Builder(CoroutineUploadWorker::class.java,
             30, TimeUnit.DAYS)
-            //.setInitialDelay(dayDiff, TimeUnit.MINUTES)
+            .setInitialDelay(dayDiff, TimeUnit.MINUTES)
             .setInputData(
                 DataConverted.convertPerformanceModelToData(
                     auth.currentUser?.uid!!.toString(), 2021F, 7F, generateDummy2()))
