@@ -53,18 +53,12 @@ class MainHome : Fragment() {
     fun createdata() {
         adminlist = mutableListOf(HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.employee_manager,
-            "Employee Manager"),
-            HomeGridViewViewModel(R.drawable.bg_launcher_background,
-                R.id.task_manager,
-                "Task Manager"))
-        userlist = mutableListOf(
-            HomeGridViewViewModel(R.drawable.bg_launcher_background,
-                R.id.checkin_qrscanner,
-                "Check in"),
-            HomeGridViewViewModel(R.drawable.bg_launcher_background,
-                R.id.user_salary,
-                "Salary"),
-
-        )
+            "Employee Manager"))
+        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
+            R.id.user_salary,
+            "Salary"))
+        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
+            R.id.leaderboard,
+            "Leaderboard"))
     }
 }
