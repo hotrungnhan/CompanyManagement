@@ -18,10 +18,9 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/cardview_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:singleLine="true"
         android:text="button"
         android:textColor="@color/black" />/
 </LinearLayout>
