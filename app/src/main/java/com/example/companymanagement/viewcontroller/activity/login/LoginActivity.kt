@@ -20,13 +20,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //debug
 
-        if (resources.getBoolean(R.bool.disable_login) == false || auth.currentUser != null) {
-            finish()
-            val loginintent = Intent(this, MainActivity::class.java)
-            startActivity(loginintent)
-
-        }
-
         setContentView(R.layout.activity_login)
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)

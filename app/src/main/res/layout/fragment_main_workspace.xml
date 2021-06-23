@@ -43,6 +43,7 @@
                     android:layout_gravity="top"
                     android:layout_margin="10dp"
                     android:layout_weight="0"
+                    app:shapeAppearanceOverlay="@style/circleImageView"
                     app:srcCompat="@drawable/bg_launcher_background" />
 
                 <com.google.android.material.textfield.TextInputEditText
