@@ -2,10 +2,9 @@ package com.example.companymanagement.viewcontroller.fragment.performance
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import java.time.YearMonth
+import androidx.lifecycle.ViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
-
-class Performance (){
+class PerformanceViewModel : ViewModel() {
 
 }

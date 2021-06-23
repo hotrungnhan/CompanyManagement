@@ -6,9 +6,11 @@ import java.math.BigDecimal
 import java.time.YearMonth
 
 import androidx.annotation.Keep
+import com.example.companymanagement.utils.VNeseDateConverter
 import com.example.companymanagement.utils.VietnamDong
 import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.PropertyName
+import java.time.format.DateTimeFormatter
 
 @Keep
 @RequiresApi(Build.VERSION_CODES.O)
@@ -22,10 +24,10 @@ data class SalaryModel (
     var OverTimeBonus: Long = 0,
     @get: PropertyName("rank_bonus")
     @set: PropertyName("rank_bonus")
-    var PerformBonus: Long = 0,
-    @get: PropertyName("perform_bonus")
-    @set: PropertyName("perform_bonus")
     var RankBonus: Long = 0,
+    @get: PropertyName("checkin_fault_charge")
+    @set: PropertyName("checkin_fault_charge")
+    var CheckinFaultCharge: Long = 0,
     @get: PropertyName("task_bonus")
     @set: PropertyName("task_bonus")
     var TaskBonus: Long = 0,
@@ -53,8 +55,19 @@ data class SalaryModel (
     fun compute(month : YearMonth)
     {
         TaxDeduction = BasicSalary * month.lengthOfMonth() / 20
-        TotalBonus = PerformBonus + OverTimeBonus + RankBonus - TaxDeduction
+        TotalBonus = - CheckinFaultCharge + OverTimeBonus + RankBonus - TaxDeduction
 
         TotalSalary = BasicSalary * month.lengthOfMonth() + TotalBonus
     }
+
+    fun compute(year : String, month : String)
+    {
+        val datetime = VNeseDateConverter.convertStringToYearMonth(year, month)
+
+        TaxDeduction = BasicSalary * datetime.lengthOfMonth() / 20
+        TotalBonus = - CheckinFaultCharge + OverTimeBonus + RankBonus - TaxDeduction
+
+        TotalSalary = BasicSalary * datetime.lengthOfMonth() + TotalBonus
+    }
+
 }

@@ -3,6 +3,7 @@ package com.example.companymanagement.utils
 import android.os.Build
 import androidx.annotation.RequiresApi
 import java.time.LocalDate
+import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -31,6 +32,28 @@ class VNeseDateConverter {
             }
             return output
         }
+        fun convertStringToYearMonth(year : String, MONTH: String) : YearMonth {
+            var x: String = ""
+            when (MONTH) {
+                "JANUARY" -> x = "01"
+                "FEBRUARY" -> x = "02"
+                "MARCH" -> x = "03"
+                "APRIL" -> x = "04"
+                "MAY" -> x = "05"
+                "JUNE" -> x = "06"
+                "JULY" -> x = "07"
+                "AUGUST" -> x = "08"
+                "SEPTEMBER" -> x = "09"
+                "OCTOBER" -> x = "10"
+                "NOVEMBER" -> x = "11"
+                "DECEMBER" -> x = "12"
+
+                else -> { // Note the block
+                    print("Invalid input")
+                }
+            }
+            return YearMonth.parse(year + "-" + x)
+        }
         fun vnConvertMonth(month: String): String {
             var x: Int = 1
             when (month) {
@@ -54,5 +77,14 @@ class VNeseDateConverter {
             input = LocalDate.of(1, x, 1)
             return input.format(formatter)
         }
+        fun getDayDiff(before: Calendar, after: Calendar): Long {
+            val millisBefore = before.timeInMillis
+            val millisAfter = after.timeInMillis
+
+            val millisDiff = millisAfter - millisBefore
+
+            return millisDiff / (24 * 60 * 60 * 1000)
+        }
+
     }
 }

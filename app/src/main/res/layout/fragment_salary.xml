@@ -152,32 +152,8 @@
                             android:layout_marginRight="20dp"
                             android:gravity="end"
                             android:textSize="18sp"
-                            android:textStyle="normal" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Thưởng/Phạt công: "
-                            android:textSize="18sp"
-                            tools:ignore="HardcodedText" />
-
-                        <TextView
-                            android:id="@+id/salary_performance_bonus"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:gravity="end"
-                            android:textSize="18sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            app:autoSizeTextType="uniform" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -202,7 +178,8 @@
                             android:layout_marginRight="20dp"
                             android:gravity="end"
                             android:textSize="18sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            app:autoSizeTextType="uniform" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -227,7 +204,8 @@
                             android:layout_marginRight="20dp"
                             android:gravity="end"
                             android:textSize="18sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            app:autoSizeTextType="uniform" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -252,7 +230,34 @@
                             android:layout_marginRight="20dp"
                             android:gravity="end"
                             android:textSize="18sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            app:autoSizeTextType="uniform" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="Phạt điểm danh:"
+                            android:textSize="18sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/salary_checkin_fault"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:gravity="end"
+                            android:textSize="18sp"
+                            android:textStyle="normal"
+                            app:autoSizeTextType="uniform" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -277,7 +282,8 @@
                             android:layout_marginRight="20dp"
                             android:gravity="end"
                             android:textSize="18sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            app:autoSizeTextType="uniform" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -302,7 +308,8 @@
                             android:layout_marginRight="20dp"
                             android:gravity="end"
                             android:textSize="18sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            app:autoSizeTextType="uniform" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -313,7 +320,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="150dp"
+                            android:layout_marginStart="100dp"
+                            android:gravity="end"
                             android:text="Tổng: "
                             android:textSize="20sp"
                             android:textStyle="bold"
@@ -327,10 +335,14 @@
                             android:layout_marginRight="20dp"
                             android:gravity="end"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            app:autoSizeTextType="uniform" />
+
+
                     </LinearLayout>
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </FrameLayout>
