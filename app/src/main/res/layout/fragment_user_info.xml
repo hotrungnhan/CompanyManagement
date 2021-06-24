@@ -40,7 +40,8 @@
                 android:scaleType="center"
                 android:src="@drawable/ic_edit"
                 app:backgroundTint="#7C37FA"
-                app:fabSize="normal">
+                app:fabSize="normal"
+                app:tint="@color/white">
 
             </com.google.android.material.floatingactionbutton.FloatingActionButton>
         </RelativeLayout>
@@ -79,8 +80,13 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
+
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:id="@+id/layoutPhone"
@@ -110,6 +116,11 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
             <LinearLayout
                 android:id="@+id/layoutMail"
                 android:layout_width="match_parent"
@@ -137,6 +148,11 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:id="@+id/layoutLocation"
@@ -213,6 +229,11 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
             <LinearLayout
                 android:id="@+id/layoutGender"
                 android:layout_width="match_parent"
@@ -241,6 +262,11 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
             <LinearLayout
                 android:id="@+id/layoutCMND"
                 android:layout_width="match_parent"
@@ -268,6 +294,11 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:id="@+id/layoutNgaycap"
@@ -298,6 +329,10 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:id="@+id/layoutNoicap"
