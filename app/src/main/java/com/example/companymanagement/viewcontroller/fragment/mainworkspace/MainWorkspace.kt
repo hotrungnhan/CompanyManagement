@@ -12,9 +12,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
+import com.example.companymanagement.model.UserInfoModel
 import com.example.companymanagement.model.tweet.TweetModel
 import com.example.companymanagement.utils.UtilsFuntion
 import com.example.companymanagement.utils.customize.EndlessScrollRecyclListener
+import com.example.companymanagement.viewcontroller.adapter.TweetHolder
 import com.example.companymanagement.viewcontroller.adapter.TweetRecyclerViewAdapter
 import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
 import com.google.android.material.imageview.ShapeableImageView
@@ -57,17 +59,19 @@ class MainWorkspace : Fragment() {
         adapter.setOnLikeClick {
             tweetviewmodel.CountLikeUp(it);
         }
-        adapter.setOnBindAvatar { uuid, avatar ->
-            var url: String?;
-            if (userlistppviewmodel.UserList.value?.containsKey(uuid) == true) {
-                url = userlistppviewmodel.UserList.value?.get(uuid)?.AvatarURL
-                val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
-                Picasso.get().load(url).resize(dp, dp).into(avatar);
-            } else {
-                userlistppviewmodel.appendUser(uuid).observe(viewLifecycleOwner) {
-                    url = it?.AvatarURL
+        adapter.setOnBindOwner { uuid, vh: RecyclerView.ViewHolder ->
+            if (vh is TweetHolder) {
+                fun bind(user: UserInfoModel?, vh: TweetHolder) {
                     val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
-                    Picasso.get().load(url).resize(dp, dp).into(avatar);
+                    Picasso.get().load(user?.AvatarURL).resize(dp, dp).into(vh.avatar);
+                    vh.name.text = user?.Name
+                }
+                if (userlistppviewmodel.UserList.value?.containsKey(uuid) == true) {
+                    bind(userlistppviewmodel.UserList.value?.get(uuid), vh);
+                } else {
+                    userlistppviewmodel.appendUser(uuid).observe(viewLifecycleOwner) {
+                        bind(it, vh);
+                    }
                 }
             }
         }
