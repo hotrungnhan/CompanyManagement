@@ -39,8 +39,8 @@ class TweetCommentAdapter : RecyclerView.Adapter<CommentHolder>() {
 
 class CommentHolder(val itemview: View) : RecyclerView.ViewHolder(itemview) {
     val avatar: ShapeableImageView = itemview.findViewById(R.id.comment_item_owner_avatar)
-    var name: TextView = itemview.findViewById(R.id.comment_item_content)
-    val date: TextView = itemview.findViewById(R.id.comment_item_owner_create_date)
+    var name: TextView = itemview.findViewById(R.id.comment_item_comment_owner_name)
+    val date: TextView = itemview.findViewById(R.id.comment_item_create_date)
     val content: TextView = itemview.findViewById(R.id.comment_item_content)
     fun bind(data: CommentModel) {
         content.text = data.Content

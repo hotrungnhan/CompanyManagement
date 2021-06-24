@@ -42,7 +42,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLength="20"
-                        android:text="Hồ Trung Nhân"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
@@ -50,7 +50,7 @@
                         android:id="@+id/tweet_item_owner_create_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2h ago" />
+                        android:text="" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <TextView
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
-                android:text="Còn 5 ngày nữa đuổi ae ra khỏi công ty nhé làm việc cẩn thận !" />
+                android:text="" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"

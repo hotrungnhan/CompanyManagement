@@ -24,7 +24,6 @@ class ActionBar : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         infomodel = ViewModelProvider(this.requireActivity()).get(UserInfoViewModel::class.java)
-        infomodel.retriveUserInfo(auth.currentUser?.uid!!)
     }
 
     override fun onCreateView(
@@ -44,10 +43,12 @@ class ActionBar : Fragment() {
         var email = view.findViewById<TextView>(R.id.action_bar_email_address)
         var userlayout = view.findViewById<ConstraintLayout>(R.id.action_bar_user_layout)
         infomodel.info.observe(viewLifecycleOwner) {
-            val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
-            Picasso.get().load(it.AvatarURL).resize(dp, dp).into(avatar);
-            displayname.setText(it.Name)
-            email.setText(it.Email)
+            if (it != null) {
+                val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
+                Picasso.get().load(it.AvatarURL).resize(dp, dp).into(avatar);
+                displayname.setText(it.Name)
+                email.setText(it.Email)
+            }
         }
         userlayout.setOnClickListener { e ->
             if (bts.isAdded == false) {
