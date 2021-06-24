@@ -50,7 +50,8 @@ class MainWorkspace : Fragment() {
         val adapter = TweetRecyclerViewAdapter()
         //
         userinfoviewmodel.info.observe(viewLifecycleOwner) {
-            Picasso.get().load(it.AvatarURL).resize(32, 32).into(postavatar);
+            if (it != null)
+                Picasso.get().load(it.AvatarURL).resize(32, 32).into(postavatar);
         }
 
         adapter.setOnCommentClick {
