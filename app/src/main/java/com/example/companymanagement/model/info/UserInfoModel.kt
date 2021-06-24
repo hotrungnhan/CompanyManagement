@@ -1,4 +1,4 @@
-package com.example.companymanagement.model
+package com.example.companymanagement.model.info
 
 import androidx.annotation.Keep
 import com.google.firebase.firestore.DocumentId

@@ -5,6 +5,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.companymanagement.viewcontroller.fragment.user.UserInfo
 import com.example.companymanagement.viewcontroller.fragment.user.UserProject
 import com.example.companymanagement.viewcontroller.fragment.user.UserStatictis
+import com.example.companymanagement.viewcontroller.fragment.usertask.UserTask
 
 
 class UserViewPagerAdapter(frag: Fragment) :
@@ -15,7 +16,7 @@ class UserViewPagerAdapter(frag: Fragment) :
     override fun createFragment(pos: Int): Fragment {
         return when (pos) {
             0 -> UserStatictis()
-            1 -> UserProject()
+            1 -> UserTask()
             else -> UserInfo()
         }
     }
