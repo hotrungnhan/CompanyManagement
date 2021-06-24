@@ -13,6 +13,8 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.bumptech.glide.Glide
 import com.example.companymanagement.R
 import com.example.companymanagement.model.UserInfoModel
 import com.example.companymanagement.model.tweet.CommentModel
@@ -24,8 +26,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import com.squareup.picasso.Picasso
-
 
 class Comment : BottomSheetDialogFragment() {
 
@@ -84,7 +84,12 @@ class Comment : BottomSheetDialogFragment() {
             if (vh is CommentHolder) {
                 fun bind(user: UserInfoModel?, vh: CommentHolder) {
                     val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
-                    Picasso.get().load(user?.AvatarURL).resize(dp, dp).into(vh.avatar);
+                    Glide.with(this).load(user?.AvatarURL)
+                        .placeholder(CircularProgressDrawable(requireContext()).apply { start() })
+                        .override(dp, dp)
+                        .centerCrop()
+                        .error(R.drawable.ic_default_avatar)
+                        .into(vh.avatar)
                     vh.name.text = user?.Name
                 }
                 if (userlistppviewmodel.UserList.value?.containsKey(uuid) == true) {

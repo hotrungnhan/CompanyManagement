@@ -16,6 +16,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.bumptech.glide.Glide
 import com.example.companymanagement.R
 import com.example.companymanagement.utils.DateParser
 import com.example.companymanagement.utils.DateParser.Companion.toHumanReadDate
@@ -26,7 +28,6 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
-import com.squareup.picasso.Picasso
 import java.util.*
 
 class UserInfo : Fragment() {
@@ -95,7 +96,12 @@ class UserInfo : Fragment() {
         applyEdit(false)
         imagepicked.observe(this.viewLifecycleOwner) {
             val dp = UtilsFuntion.convertDPToPX(150.0F, resources.displayMetrics).toInt()
-            Picasso.get().load(imagepicked.value).resize(dp, dp).into(uploadavatar)
+            Glide.with(this).load(imagepicked.value)
+                .override(dp, dp)
+                .centerCrop()
+                .placeholder(CircularProgressDrawable(requireContext()).apply { start() })
+                .error(R.drawable.ic_default_avatar)
+                .into(uploadavatar)
         }
         infomodel.info.observe(viewLifecycleOwner) {
             if (it != null) {
@@ -156,12 +162,11 @@ class UserInfo : Fragment() {
             val ref = cloudstore.reference.child("public/avatar/${user?.uid}/av_$uuid")
             ref.putFile(imagepicked.value!!).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    toast("update Image Success")
                     it.result?.storage?.downloadUrl?.addOnCompleteListener { uri ->
                         infomodel.info.value = infomodel.info.value?.apply {
                             this.AvatarURL = uri.result.toString()
                         }
-
+                        toast("update Image Success")
                     }
                 }
             }

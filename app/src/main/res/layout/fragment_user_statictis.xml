@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F2F2F2">
@@ -201,7 +200,7 @@
         android:layout_below="@id/textview_calendartitle"
         android:fontFamily="sans-serif-light">
     </TextView>
-    
+
     <CalendarView
         android:layout_width="319dp"
         android:layout_height="225dp"

@@ -43,11 +43,11 @@ class TweetRecyclerViewAdapter() :
         };
         holder.likebtn.setOnClickListener {
             likeclicklisener?.onClick(list!![position].postuid!!)
-            list!![position].LikeCount++;
-            this.notifyItemChanged(position)
+            holder.countLikeUp(list!![position].apply {
+                this.LikeCount++;
+            })
         }
         ownerbindinglisener?.onBind(list!![position].OwnerUUID!!, holder)
-
     }
 
     fun setOnCommentClick(e: OnButtonClickListener) {
@@ -73,6 +73,10 @@ class TweetHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(tweet: TweetModel) {
         content.text = tweet.Content;
         date.text = DateUtils.getRelativeTimeSpanString(tweet.CreateTime?.time!!);
-        likebtn.text = tweet.LikeCount.toString()
+        likebtn.text = tweet.LikeCount.toString() + " Like"
+    }
+
+    fun countLikeUp(tweet: TweetModel) {
+        likebtn.text = tweet.LikeCount.toString() + " Like"
     }
 };

@@ -8,17 +8,16 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.bumptech.glide.Glide
 import com.example.companymanagement.R
 import com.example.companymanagement.utils.UtilsFuntion
 import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
 import com.example.companymanagement.viewcontroller.fragment.user.UserManagerBottomSheet
 import com.google.android.material.imageview.ShapeableImageView
-import com.google.firebase.auth.FirebaseAuth
-import com.squareup.picasso.Picasso
 
 
 class ActionBar : Fragment() {
-    val auth = FirebaseAuth.getInstance();
     lateinit var infomodel: UserInfoViewModel;
     var bts = UserManagerBottomSheet.Instance();
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +44,13 @@ class ActionBar : Fragment() {
         infomodel.info.observe(viewLifecycleOwner) {
             if (it != null) {
                 val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
-                Picasso.get().load(it.AvatarURL).resize(dp, dp).into(avatar);
+                Glide.with(this)
+                    .load(it.AvatarURL)
+                    .override(dp, dp)
+                    .centerCrop()
+                    .placeholder(CircularProgressDrawable(requireContext()).apply { start() })
+                    .error(R.drawable.ic_default_avatar)
+                    .into(avatar)
                 displayname.setText(it.Name)
                 email.setText(it.Email)
             }
