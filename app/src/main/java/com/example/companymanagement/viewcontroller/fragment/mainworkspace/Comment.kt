@@ -14,8 +14,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
+import com.example.companymanagement.model.UserInfoModel
 import com.example.companymanagement.model.tweet.CommentModel
 import com.example.companymanagement.utils.UtilsFuntion
+import com.example.companymanagement.viewcontroller.adapter.CommentHolder
 import com.example.companymanagement.viewcontroller.adapter.TweetCommentAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -27,8 +29,8 @@ import com.squareup.picasso.Picasso
 
 class Comment : BottomSheetDialogFragment() {
 
-    lateinit var commentViewModel: CommentViewModel;
-    lateinit var UserListViewModel: ListUserParticipantViewModel;
+    lateinit var commentviewmodel: CommentViewModel;
+    lateinit var userlistppviewmodel: ListUserParticipantViewModel;
     val cuser = FirebaseAuth.getInstance().currentUser
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(null)
@@ -36,8 +38,8 @@ class Comment : BottomSheetDialogFragment() {
         val bundle = this.arguments
         val idtweet = bundle?.getString("tweet_id");
         Log.d("tweet", idtweet.toString())
-        commentViewModel = CommentViewModel(idtweet!!);
-        UserListViewModel =
+        commentviewmodel = CommentViewModel(idtweet!!);
+        userlistppviewmodel =
             ViewModelProvider(this.requireActivity()).get(ListUserParticipantViewModel::class.java)
     }
 
@@ -62,14 +64,14 @@ class Comment : BottomSheetDialogFragment() {
         layoutManager.stackFromEnd = true;
         recycleview.adapter = adapter;
         recycleview.layoutManager = layoutManager;
-        commentViewModel.commentList.observe(this.viewLifecycleOwner) {
+        commentviewmodel.commentList.observe(this.viewLifecycleOwner) {
             adapter.setData(it);
         }
         // newcmt
         val cmtbtn: Button = view.findViewById(R.id.comment_post_btn)
         val content: TextInputEditText = view.findViewById(R.id.comment_newcontent)
         cmtbtn.setOnClickListener {
-            commentViewModel.addComment(CommentModel(content.text.toString(), cuser?.uid!!))
+            commentviewmodel.addComment(CommentModel(content.text.toString(), cuser?.uid!!))
                 .observe(viewLifecycleOwner) {
                     if (it) {
                         content.text?.clear()
@@ -78,25 +80,27 @@ class Comment : BottomSheetDialogFragment() {
                     }
                 }
         }
-        adapter.setOnBindAvatar() { uuid, avatar ->
-            var url: String?;
-            if (UserListViewModel.UserList.value?.containsKey(uuid) == true) {
-                url = UserListViewModel.UserList.value?.get(uuid)?.AvatarURL
-                val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
-                Picasso.get().load(url).resize(dp, dp).into(avatar);
-            } else {
-                UserListViewModel.appendUser(uuid).observe(viewLifecycleOwner) {
-                    url = it?.AvatarURL
+        adapter.setOnBindOwner { uuid, vh: RecyclerView.ViewHolder ->
+            if (vh is CommentHolder) {
+                fun bind(user: UserInfoModel?, vh: CommentHolder) {
                     val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
-                    Picasso.get().load(url).resize(dp, dp).into(avatar);
+                    Picasso.get().load(user?.AvatarURL).resize(dp, dp).into(vh.avatar);
+                    vh.name.text = user?.Name
+                }
+                if (userlistppviewmodel.UserList.value?.containsKey(uuid) == true) {
+                    bind(userlistppviewmodel.UserList.value?.get(uuid), vh);
+                } else {
+                    userlistppviewmodel.appendUser(uuid).observe(viewLifecycleOwner) {
+                        bind(it, vh);
+                    }
                 }
             }
         }
         var loadmore = view.findViewById<TextView>(R.id.tweet_comment_loadmore)
         loadmore.setOnClickListener { view ->
-            commentViewModel.loadOldComment()
+            commentviewmodel.loadOldComment()
         }
-        commentViewModel.lastestQuerySize.observe(viewLifecycleOwner) {
+        commentviewmodel.lastestQuerySize.observe(viewLifecycleOwner) {
             adapter.notifyItemRangeInserted(adapter.list.lastIndex, it)
             recycleview.scrollToPosition(adapter.list.lastIndex);
             if (it < 10) {
