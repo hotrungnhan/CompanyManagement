@@ -48,8 +48,6 @@ class MainActivity : AppCompatActivity() {
                 infomodel.retriveUseInfo(it.currentUser!!.uid)
                 rolemodel.getRole(it.currentUser!!.uid)
             }
-            else
-                refreshPeriodicWork(this)
         }
     }
 
@@ -97,8 +95,6 @@ class MainActivity : AppCompatActivity() {
         dummy.AbsenceNA = 1
         dummy.Late = 2
         dummy.TaskDone = 5
-        dummy.MonthOverTime = 50
-        dummy.computeBasicPoint()
         return dummy
     }
 }
