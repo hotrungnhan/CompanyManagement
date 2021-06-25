@@ -41,7 +41,7 @@ class CoroutineUploadWorker(
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO){
         return@withContext try {
-            val user_uuid = inputData.getString(USER_UUID)
+            /*val user_uuid = inputData.getString(USER_UUID)
             val perform_year = inputData.getFloat(PERFORM_YEAR, 0F)
             val perform_month = inputData.getFloat(PERFORM_MONTH, 1f)
             val basic_point = inputData.getLong(BASIC_POINT, 0)
@@ -52,7 +52,7 @@ class CoroutineUploadWorker(
             val task_done = inputData.getLong(TASK_DONE, 0)
 
             val performanceModel = PerformanceModel(basic_point, absence_a, absence_na, late_fault, month_over_time, task_done)
-            compileAndUpload(user_uuid!!, perform_year, perform_month, performanceModel)
+            compileAndUpload(user_uuid!!, perform_year, perform_month, performanceModel)*/
 
             Result.success()
         } catch (error: Throwable) {
@@ -66,8 +66,8 @@ class CoroutineUploadWorker(
         Log.e("Upload", LocalTime.now().toString())
         var salarymodel = SalaryViewModel()
         val refinedMonth = YearMonth.of(year.toInt(), month.toInt())
-        salarymodel.updatePerformance(uuid, refinedMonth, performanceModel)
-        salarymodel.updateSalaryFromPerformance(uuid, refinedMonth.year.toString(), VNeseDateConverter.convertMonthFloatToString(month))
+        //salarymodel.updatePerformance(uuid, refinedMonth, performanceModel)
+        //salarymodel.updateSalaryFromPerformance(uuid, refinedMonth.year.toString(), VNeseDateConverter.convertMonthFloatToString(month))
 
         val rankermodel = RankerViewModel()
         rankermodel.retrieveLeaderBoardIn(YearMonth.of(year.toInt(), month.toInt()))

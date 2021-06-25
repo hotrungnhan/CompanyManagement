@@ -10,18 +10,20 @@ import com.example.companymanagement.utils.VNeseDateConverter
 import com.example.companymanagement.utils.VietnamDong
 import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.PropertyName
+import com.google.firebase.firestore.ServerTimestamp
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 @Keep
 @RequiresApi(Build.VERSION_CODES.O)
 
 data class SalaryModel (
+    @get: PropertyName("owner_uuid")
+    @set: PropertyName("owner_uuid")
+    var OwnerUUID: String = "",
     @get: PropertyName("basic_salary")
     @set: PropertyName("basic_salary")
     var BasicSalary: Long = 0,
-    @get: PropertyName("over_time_bonus")
-    @set: PropertyName("over_time_bonus")
-    var OverTimeBonus: Long = 0,
     @get: PropertyName("rank_bonus")
     @set: PropertyName("rank_bonus")
     var RankBonus: Long = 0,
@@ -44,6 +46,14 @@ data class SalaryModel (
     @DocumentId
     var uid: String? = null
 
+    @ServerTimestamp
+    @get: PropertyName("create_time")
+    @set: PropertyName("create_time")
+    var CreateTime: Date? = null
+
+    init {
+        CreateTime = Date()
+    }
 
     fun setBasicSalary(position : String) : VietnamDong {
         return if(position == "Manager")
@@ -55,7 +65,7 @@ data class SalaryModel (
     fun compute(month : YearMonth)
     {
         TaxDeduction = BasicSalary * month.lengthOfMonth() / 20
-        TotalBonus = - CheckinFaultCharge + OverTimeBonus + RankBonus - TaxDeduction
+        TotalBonus = - CheckinFaultCharge + RankBonus - TaxDeduction
 
         TotalSalary = BasicSalary * month.lengthOfMonth() + TotalBonus
     }
@@ -65,7 +75,7 @@ data class SalaryModel (
         val datetime = VNeseDateConverter.convertStringToYearMonth(year, month)
 
         TaxDeduction = BasicSalary * datetime.lengthOfMonth() / 20
-        TotalBonus = - CheckinFaultCharge + OverTimeBonus + RankBonus - TaxDeduction
+        TotalBonus = - CheckinFaultCharge + RankBonus - TaxDeduction
 
         TotalSalary = BasicSalary * datetime.lengthOfMonth() + TotalBonus
     }

@@ -9,8 +9,6 @@ import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 class VNeseDateConverter {
-
-
     companion object {
         var input = LocalDate.now()
         var formatter = DateTimeFormatter.ofPattern("MMMM", Locale("vi", "VN"))
@@ -85,6 +83,19 @@ class VNeseDateConverter {
 
             return millisDiff / (24 * 60 * 60 * 1000)
         }
+        fun getDayDiff(before: Date, after: Date): Long {
+            val millisBefore = before.time
+            val millisAfter = after.time
 
+            val millisDiff = millisAfter - millisBefore
+
+            return millisDiff / (24 * 60 * 60 * 1000)
+        }
+
+        fun fromDateToYearMonth(date : Date) : YearMonth{
+            val cal = Calendar.getInstance()
+            cal.time = date
+            return YearMonth.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH))
+        }
     }
 }

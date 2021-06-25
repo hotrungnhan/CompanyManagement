@@ -19,11 +19,9 @@ class DataConverted {
                 "USER_UUID" to uuid,
                 "PERFORM_YEAR" to year,
                 "PERFORM_MONTH" to month,
-                "BASIC_POINT" to performanceModel.BasicPoint,
                 "ABSENCE_A" to performanceModel.AbsenceA,
                 "ABSENCE_NA" to performanceModel.AbsenceNA,
                 "LATE_FAULT" to performanceModel.Late,
-                "MONTH_OVER_TIME" to performanceModel.MonthOverTime,
                 "TASK_DONE" to performanceModel.TaskDone
             )
             return result

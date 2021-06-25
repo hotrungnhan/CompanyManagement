@@ -38,8 +38,6 @@ class MainActivity : AppCompatActivity() {
                 val usernull = Intent(this, LoginActivity::class.java)
                 startActivity(usernull)
             }
-            else
-                refreshPeriodicWork(this)
         }
     }
 
@@ -87,8 +85,6 @@ class MainActivity : AppCompatActivity() {
         dummy.AbsenceNA = 1
         dummy.Late = 2
         dummy.TaskDone = 5
-        dummy.MonthOverTime = 50
-        dummy.computeBasicPoint()
         return dummy
     }
 }
