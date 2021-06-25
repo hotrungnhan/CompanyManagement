@@ -18,9 +18,13 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/cardview_text"
-        android:layout_width="match_parent"
+        android:layout_width="75dp"
         android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:ellipsize="marquee"
         android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
         android:text="button"
         android:textColor="@color/black" />/
 </LinearLayout>

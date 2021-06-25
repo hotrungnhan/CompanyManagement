@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
 import com.example.companymanagement.model.tweet.TweetModel
-import com.example.companymanagement.utils.customize.OnBindAvatarListener
+import com.example.companymanagement.utils.customize.OnBindOwnerLisener
 import com.example.companymanagement.utils.customize.OnButtonClickListener
 import com.google.android.material.imageview.ShapeableImageView
 
@@ -18,7 +18,7 @@ class TweetRecyclerViewAdapter() :
     RecyclerView.Adapter<TweetHolder>() {
     private var cmtclicklisener: OnButtonClickListener? = null;
     private var likeclicklisener: OnButtonClickListener? = null;
-    private var avatarbindinglisener: OnBindAvatarListener? = null;
+    private var ownerbindinglisener: OnBindOwnerLisener? = null;
     var list: MutableList<TweetModel>? = null
 
     override fun onCreateViewHolder(
@@ -43,19 +43,19 @@ class TweetRecyclerViewAdapter() :
         };
         holder.likebtn.setOnClickListener {
             likeclicklisener?.onClick(list!![position].postuid!!)
-            list!![position].LikeCount++;
-            this.notifyItemChanged(position)
+            holder.countLikeUp(list!![position].apply {
+                this.LikeCount++;
+            })
         }
-        avatarbindinglisener?.onBind(list!![position].OwnerUUID!!, holder.avatar)
-
+        ownerbindinglisener?.onBind(list!![position].OwnerUUID!!, holder)
     }
 
     fun setOnCommentClick(e: OnButtonClickListener) {
         cmtclicklisener = e;
     }
 
-    fun setOnBindAvatar(e: OnBindAvatarListener) {
-        avatarbindinglisener = e;
+    fun setOnBindOwner(e: OnBindOwnerLisener) {
+        ownerbindinglisener = e;
     }
 
     fun setOnLikeClick(e: OnButtonClickListener) {
@@ -69,9 +69,14 @@ class TweetHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val content: TextView = itemView.findViewById(R.id.tweet_item_content)
     val avatar: ShapeableImageView = itemView.findViewById(R.id.tweet_item_owner_avatar)
     val date: TextView = itemView.findViewById(R.id.tweet_item_owner_create_date)
+    val name: TextView = itemView.findViewById(R.id.tweet_item_owner_name)
     fun bind(tweet: TweetModel) {
         content.text = tweet.Content;
         date.text = DateUtils.getRelativeTimeSpanString(tweet.CreateTime?.time!!);
-        likebtn.text = tweet.LikeCount.toString()
+        likebtn.text = tweet.LikeCount.toString() + " Like"
+    }
+
+    fun countLikeUp(tweet: TweetModel) {
+        likebtn.text = tweet.LikeCount.toString() + " Like"
     }
 };

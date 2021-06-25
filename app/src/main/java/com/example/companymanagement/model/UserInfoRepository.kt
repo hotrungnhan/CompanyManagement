@@ -11,8 +11,13 @@ class UserInfoRepository(var col: CollectionReference) {
         col.add(uuid).await();
     }
 
-    suspend fun findDoc(uuid: String): UserInfoModel? {
-        return col.document(uuid).get().await().toObject(UserInfoModel::class.java)
+    suspend fun findDoc(uuid: String): UserInfoModel {
+        var doc = col.document(uuid).get().await().toObject(UserInfoModel::class.java)
+        if (doc == null) {
+            col.document(uuid).set(UserInfoModel()).await()
+            doc = col.document(uuid).get().await().toObject(UserInfoModel::class.java)!!
+        }
+        return doc
     }
 
     suspend fun updateDoc(info: UserInfoModel) {

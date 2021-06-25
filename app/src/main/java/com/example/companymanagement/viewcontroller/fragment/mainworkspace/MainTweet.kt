@@ -11,16 +11,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.bumptech.glide.Glide
 import com.example.companymanagement.R
+import com.example.companymanagement.model.UserInfoModel
 import com.example.companymanagement.model.tweet.TweetModel
+import com.example.companymanagement.utils.UtilsFuntion
 import com.example.companymanagement.utils.customize.EndlessScrollRecyclListener
+import com.example.companymanagement.viewcontroller.adapter.TweetHolder
 import com.example.companymanagement.viewcontroller.adapter.TweetRecyclerViewAdapter
 import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textfield.TextInputEditText
-import com.squareup.picasso.Picasso
 
-class MainWorkspace : Fragment() {
+class MainTweet : Fragment() {
 
     private var tweetviewmodel: TweetViewModel = TweetViewModel();
     private lateinit var userlistppviewmodel: ListUserParticipantViewModel;
@@ -34,7 +38,7 @@ class MainWorkspace : Fragment() {
             ViewModelProvider(this.requireActivity()).get(ListUserParticipantViewModel::class.java)
         userinfoviewmodel =
             ViewModelProvider(this.requireActivity()).get(UserInfoViewModel::class.java)
-        return inflater.inflate(R.layout.fragment_main_workspace, container, false)
+        return inflater.inflate(R.layout.fragment_main_tweet, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +51,15 @@ class MainWorkspace : Fragment() {
         val adapter = TweetRecyclerViewAdapter()
         //
         userinfoviewmodel.info.observe(viewLifecycleOwner) {
-            Picasso.get().load(it.AvatarURL).resize(32, 32).into(postavatar);
+            if (it != null) {
+                val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
+                Glide.with(this).load(it.AvatarURL)
+                    .placeholder(CircularProgressDrawable(requireContext()).apply { start() })
+                    .override(dp, dp)
+                    .centerCrop()
+                    .error(R.drawable.ic_default_avatar)
+                    .into(postavatar)
+            }
         }
 
         adapter.setOnCommentClick {
@@ -56,15 +68,24 @@ class MainWorkspace : Fragment() {
         adapter.setOnLikeClick {
             tweetviewmodel.CountLikeUp(it);
         }
-        adapter.setOnBindAvatar { uuid, avatar ->
-            var url: String?;
-            if (userlistppviewmodel.UserList.value?.containsKey(uuid) == true) {
-                url = userlistppviewmodel.UserList.value?.get(uuid)?.AvatarURL
-                Picasso.get().load(url).resize(32, 32).into(avatar);
-            } else {
-                userlistppviewmodel.appendUser(uuid).observe(viewLifecycleOwner) {
-                    url = it?.AvatarURL
-                    Picasso.get().load(url).resize(32, 32).into(avatar);
+        adapter.setOnBindOwner { uuid, vh: RecyclerView.ViewHolder ->
+            if (vh is TweetHolder) {
+                fun bind(user: UserInfoModel?, vh: TweetHolder) {
+                    val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
+                    Glide.with(this).load(user?.AvatarURL)
+                        .placeholder(CircularProgressDrawable(requireContext()).apply { start() })
+                        .override(dp, dp)
+                        .centerCrop()
+                        .error(R.drawable.ic_default_avatar)
+                        .into(vh.avatar)
+                    vh.name.text = user?.Name
+                }
+                if (userlistppviewmodel.UserList.value?.containsKey(uuid) == true) {
+                    bind(userlistppviewmodel.UserList.value?.get(uuid), vh);
+                } else {
+                    userlistppviewmodel.appendUser(uuid).observe(viewLifecycleOwner) {
+                        bind(it, vh);
+                    }
                 }
             }
         }

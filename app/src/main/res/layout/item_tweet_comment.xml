@@ -14,8 +14,8 @@
         android:layout_height="40dp"
         android:layout_gravity="top|center_horizontal"
 
-        app:srcCompat="@drawable/bg_launcher_background"
-        app:shapeAppearanceOverlay="@style/circleImageView"/>
+        app:shapeAppearanceOverlay="@style/circleImageView"
+        app:srcCompat="@drawable/bg_launcher_background" />
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -25,19 +25,19 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tweet_item_comment_owner_name"
+            android:id="@+id/comment_item_comment_owner_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLength="20"
-            android:text="Hồ Trung Nhân"
+            android:text=""
             android:textColor="@color/black"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/comment_item_owner_create_date"
+            android:id="@+id/comment_item_create_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2h ago" />
+            android:text="" />
 
         <TextView
             android:id="@+id/comment_item_content"
