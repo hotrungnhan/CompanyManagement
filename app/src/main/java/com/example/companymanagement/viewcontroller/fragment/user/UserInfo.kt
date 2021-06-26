@@ -110,7 +110,7 @@ class UserInfo : Fragment() {
                 phone.text = it.PhoneNumber
                 pos.text = it.Position
                 birthday.text = it.BirthDate?.toHumanReadDate()
-                gender.text = if (it.Gender == true) "Nam" else "Nu"
+                gender.text = it.Gender
                 cardid.text = it.IDCardNumber
                 cardidprovidedate.text = it.IDCardCreateDate?.toHumanReadDate()
                 cardidprovideplace.text = it.IDCardCreateLocation
@@ -140,7 +140,7 @@ class UserInfo : Fragment() {
                             Email = cemail.text.toString()
                             Position = pos.text.toString()
                             BirthDate = DateParser.parser(birthday.text.toString())
-                            Gender = gender.text.toString() == "Nam"
+                            Gender = gender.text.toString()
                             IDCardNumber = cardid.text.toString()
                             IDCardCreateDate =
                                 DateParser.parser(cardidprovidedate.text.toString())
