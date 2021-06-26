@@ -100,7 +100,7 @@ class UserInfo : Fragment() {
             phone.text = it.PhoneNumber
             pos.text = it.Position
             birthday.text = it.BirthDate?.toHumanReadDate()
-            gender.text = if (it.Gender == true) "Nam" else "Nu"
+            gender.text = it.Gender
             cardid.text = it.IDCardNumber
             cardidprovidedate.text = it.IDCardCreateDate?.toHumanReadDate()
             cardidprovideplace.text = it.IDCardCreateLocation
@@ -130,7 +130,7 @@ class UserInfo : Fragment() {
                         infomodel.info.value?.BirthDate =
                             DateParser.parser(birthday.text.toString())
 
-                        infomodel.info.value?.Gender = gender.text.toString() == "Nam"
+                        infomodel.info.value?.Gender = gender.text.toString()
                         infomodel.info.value?.IDCardNumber = cardid.text.toString()
                         infomodel.info.value?.IDCardCreateDate =
                             DateParser.parser(cardidprovidedate.text.toString())

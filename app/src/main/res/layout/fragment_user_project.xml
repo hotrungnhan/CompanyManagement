@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="#F2F2F2"
     tools:context=".viewcontroller.fragment.mainworkspace.MainWorkspace">
@@ -14,10 +14,8 @@
         android:orientation="vertical"
         android:background="#F2F2F2">
         <TextView
-            android:layout_width="295dp"
-            android:layout_height="27dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="19dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
@@ -32,7 +30,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/user_task_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:nestedScrollingEnabled="true"
             android:padding="0dp"
             tools:listitem="@layout/item_task"

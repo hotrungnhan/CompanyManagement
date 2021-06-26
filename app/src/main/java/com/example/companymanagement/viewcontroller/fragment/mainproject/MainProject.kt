@@ -8,25 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
-import com.example.companymanagement.model.task.UserTaskModel
 import com.example.companymanagement.viewcontroller.adapter.UserTaskAdapter
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.*
-import com.google.firebase.firestore.EventListener
-import kotlin.collections.ArrayList
+import com.example.companymanagement.viewcontroller.fragment.user.UserTaskViewModel
 
 
 class MainProject : Fragment() {
 
-    private lateinit var viewModelMain: MainProjectViewModel
-    private lateinit var userTaskAdapter: UserTaskAdapter
-    private lateinit var taskList: ArrayList<UserTaskModel>
-    private lateinit var taskRecyclerView: RecyclerView
-    private lateinit var db: FirebaseFirestore
+    private var taskModel: UserTaskViewModel = UserTaskViewModel()
+    private var userTaskAdapter: UserTaskAdapter = UserTaskAdapter()
     private val taskLayoutManager = LinearLayoutManager(context)
     private lateinit var projectCalendar: CalendarView
 
@@ -36,59 +28,29 @@ class MainProject : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        viewModelMain = ViewModelProvider(this).get(MainProjectViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_main_project, container, false)
-
-        return root
+        taskModel = ViewModelProvider(this).get(UserTaskViewModel::class.java)
+        return inflater.inflate(R.layout.fragment_user_project, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        projectCalendar = view.findViewById(R.id.project_calendar)
-        taskRecyclerView = view.findViewById(R.id.task_recyclerView)
-        taskRecyclerView.layoutManager = taskLayoutManager
-        //taskRecyclerView.setHasFixedSize(true)
+//        projectCalendar = view.findViewById(R.id.project_calendar)
+//        val taskRecyclerView: RecyclerView = view.findViewById(R.id.task_recyclerView)
+//        taskRecyclerView.layoutManager = taskLayoutManager
+//        //taskRecyclerView.setHasFixedSize(true)
+//
+//        taskRecyclerView.adapter = userTaskAdapter
+//
+//        this.taskLayoutManager.orientation = RecyclerView.VERTICAL
 
-        taskList = arrayListOf()
+//        projectCalendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
+//            val message = "Selected date is: " + dayOfMonth +"/" + (month+1) +"/" + year
+//            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+//        }
 
-        userTaskAdapter = UserTaskAdapter(taskList)
-        taskRecyclerView.adapter = userTaskAdapter
-
-        this.taskLayoutManager.orientation = RecyclerView.VERTICAL
-
-        projectCalendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val message = "Selected date is: " + dayOfMonth +"/" + (month+1) +"/" + year
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        taskModel.TaskList.observe(viewLifecycleOwner) {
+            userTaskAdapter.setData(it)
         }
-
-        EventChangeListener()
-    }
-
-    //find out more about this function and fix the bug
-    //this function is used to load data and catch data changes
-    private fun EventChangeListener() {
-        db = FirebaseFirestore.getInstance()
-        val id = FirebaseAuth.getInstance().currentUser?.uid!!
-        //db.collection("task").whereArrayContains("IDReceiver",id)
-        db.collection("task").whereArrayContains("IDReceiver","$id")
-            .orderBy("SentDate", Query.Direction.DESCENDING)
-            .addSnapshotListener(object : EventListener<QuerySnapshot>{
-                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                    if (error != null){
-                        Log.e("Firestore error", error.message.toString())
-                        return
-                    }
-
-                    for (dc: DocumentChange in value?.documentChanges!!){
-                        if (dc.type == DocumentChange.Type.ADDED){
-                            taskList.add(dc.document.toObject(UserTaskModel::class.java))
-                        }
-                    }
-
-                    userTaskAdapter.notifyDataSetChanged()
-                }
-
-            })
     }
 }
