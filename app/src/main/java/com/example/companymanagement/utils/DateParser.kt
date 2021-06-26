@@ -5,9 +5,19 @@ import java.util.*
 
 class DateParser {
     companion object {
-        var simpleDateParser = SimpleDateFormat("dd/MM/yyyy")
+        val simpleDateParser = SimpleDateFormat("dd/MM/yyyy")
+        val simpleTimeParser = SimpleDateFormat("hh:mm:ss a")
+        val simpleDateAndTimeParser = SimpleDateFormat("dd/MM/yyyy | hh:mm:ss a")
         fun Date.toHumanReadDate(): String {
             return simpleDateParser.format(this) // this here is date
+        }
+
+        fun Date.toHumanReadTime(): String {
+            return simpleTimeParser.format(this) //
+        }
+
+        fun Date.toHumanDateAndTime(): String {
+            return simpleDateAndTimeParser.format(this) //
         }
 
         fun parser(date: String): Date {
