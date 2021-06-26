@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
+import com.example.companymanagement.utils.RecycleViewCalculate
 import com.example.companymanagement.viewcontroller.adapter.HomeGridViewApdapter
 
 class MainHome : Fragment() {
@@ -22,9 +23,13 @@ class MainHome : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val calculator = RecycleViewCalculate(requireContext(),
+            R.layout.item_cardview_button)
+        //
         val recyclerView = view.findViewById<RecyclerView>(R.id.grid_view_container_manager)
         recyclerView.adapter = HomeGridViewApdapter(requireActivity(), listview)
-        recyclerView.layoutManager = GridLayoutManager(context, 1);
+        recyclerView.layoutManager = GridLayoutManager(context, calculator.calculateNoOfColumns());
+        recyclerView.addItemDecoration(RecycleViewCalculate.SpacingDecoration(calculator.calculateSpacing()))
     }
 
     fun createdata() {
@@ -34,5 +39,9 @@ class MainHome : Fragment() {
         listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.user_salary,
             "Salary"))
+        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
+            R.id.checkin_qrscanner,
+            "Check in"))
+
     }
 }
