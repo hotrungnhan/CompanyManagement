@@ -8,7 +8,7 @@
         android:id="@+id/employe_mn_overall"
         android:name="com.example.companymanagement.viewcontroller.fragment.employe.EmployeOverall"
         android:label="fragment_employe_mn_overall"
-        tools:layout="@layout/fragment_employe_overall" />
+        tools:layout="@layout/fragment_employe_list" />
 
     <fragment
         android:id="@+id/employe_mn_register"
