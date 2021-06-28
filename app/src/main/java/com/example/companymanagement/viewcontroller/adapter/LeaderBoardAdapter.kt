@@ -41,9 +41,9 @@ class LeaderBoardAdapter() : RecyclerView.Adapter<LeaderBoardAdapter.RankerViewH
 
     inner class RankerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val rank: TextView = itemView.findViewById(R.id.leaderboard_user_rank)
-        val name: TextView = itemView.findViewById(R.id.leaderboard_user_name)
-        val position: TextView = itemView.findViewById(R.id.leaderboard_user_position)
-        val point: TextView = itemView.findViewById(R.id.leaderboard_user_score)
+        val name: TextView = itemView.findViewById(R.id.mn_salary_user_name)
+        val position: TextView = itemView.findViewById(R.id.mn_salary_uuid)
+        val point: TextView = itemView.findViewById(R.id.mn_salary_amount)
         val avatar : ShapeableImageView = itemView.findViewById(R.id.leaderboard_user_avatar)
 
     }

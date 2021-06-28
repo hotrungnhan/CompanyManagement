@@ -23,9 +23,10 @@ class SalaryRepository (private var col: CollectionReference) {
         Log.e("end", end.toString())*/
         val ref = col.whereEqualTo("owner_uuid", uuid)
             .whereGreaterThanOrEqualTo("create_time", start)
-            .whereLessThan("create_time", end).get().await()
+        //    .whereLessThan("create_time", end).get().await()
+        val ref2 = ref.whereLessThan("create_time", end).get().await()
 
-        if(ref.size() == 0)
+        if(ref2.size() == 0)
         {
             val dummy = SalaryModel(uuid, 0, 0, 0, 0, 0, 0, 0 )
             dummy.CreateTime = start
@@ -33,8 +34,8 @@ class SalaryRepository (private var col: CollectionReference) {
             return dummy
         }
         else {
-            Log.e("docid", ref.documents[0].id)
-            return ref.documents[0].toObject(SalaryModel::class.java)
+            Log.e("docid", ref2.documents[0].id)
+            return ref2.documents[0].toObject(SalaryModel::class.java)
         }
     }
     suspend fun getListSalary(uuid : String, year : Int){
