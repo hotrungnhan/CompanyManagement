@@ -3,6 +3,8 @@ package com.example.companymanagement.viewcontroller.fragment.salary
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -74,38 +76,40 @@ class SalaryFragment : Fragment() {
         val yearBackButton = view.findViewById<ImageButton>(R.id.salary_button_year_back)
         val yearDisplay = view.findViewById<TextView>(R.id.salary_display_year)
 
-        yearDisplay.text = Year.now().toString()
+
 
         yearNextButton.setOnClickListener {
             val temp = yearDisplay.text.toString().toInt()
             if(temp < Year.now().toString().toInt()) {
                 yearDisplay.text = (temp + 1).toString()
-                salaryViewModel.retrieveSalary(uuid, yearDisplay.text.toString(), YearMonth.now().month.toString())
+                salaryViewModel.retrieveSalary(uuid, yearDisplay.text.toString().toInt(), YearMonth.now().monthValue)
                 listsalarymodel.retrieveMonthlyDetailSalaryInAYear(uuid, yearDisplay.text.toString())
             }
         }
         yearBackButton.setOnClickListener {
             val temp = yearDisplay.text.toString().toInt()
             yearDisplay.text = (temp - 1).toString()
-            salaryViewModel.retrieveSalary(uuid, yearDisplay.text.toString(), YearMonth.now().month.toString())
+            salaryViewModel.retrieveSalary(uuid, yearDisplay.text.toString().toInt(), YearMonth.now().monthValue)
             listsalarymodel.retrieveMonthlyDetailSalaryInAYear(uuid, yearDisplay.text.toString())
         }
 
 
         ///// test area
         //salaryViewModel.updateSalary(uuid, generateDummy(uuid))
+        /*val nowCal = Calendar.getInstance()
+        nowCal.set(2021, 10, 1, 0, 0, 0)
+        val now = nowCal.time*/
+        /*salaryViewModel.updateSalary(uuid, generateDummy(uuid))
+        salaryViewModel.updateSalary(uuid, generateDummy(uuid, 700, 0, 0, 2021, 7))
+        salaryViewModel.updateSalary(uuid, generateDummy(uuid, 700, 0, 0, 2021, 8))
+        salaryViewModel.updateSalary(uuid, generateDummy(uuid, 200, 90, 20, 2021, 9))
+        salaryViewModel.updateSalary(uuid, generateDummy(uuid, 1000, 0, 20, 2021, 10))
+        salaryViewModel.updateSalary(uuid, generateDummy(uuid, 100, 50, 50, 2021, 11))
+        salaryViewModel.updateSalary(uuid, generateDummy(uuid, 500, 0, 10, 2021, 12))*/
 
+        //salaryViewModel.retieveMonthlySalaryInAYear(uuid, 2021)
         //test with performance
-        performanceViewModel.updatePerformance(uuid, generateDummy3(uuid))
-
-
-        //update this month salary from this month performance
-/*        salarymodel.updateSalaryFromPerformance(uuid)
-        salarymodel.updateSalaryFromPerformance(uuid, "2021", "JULY")
-        salarymodel.updateSalaryFromPerformance(uuid, "2021", "AUGUST")
-        salarymodel.updateSalaryFromPerformance("emp001", "2021", "JULY")
-        salarymodel.updateSalaryFromPerformance("emp002", "2021", "JULY")*/
-
+        //performanceViewModel.updatePerformance(uuid, generateDummy3(uuid))
 
 
         val salaryTime = view.findViewById<TextView>(R.id.salary_time)
@@ -118,13 +122,16 @@ class SalaryFragment : Fragment() {
         val totalSalary = view.findViewById<TextView>(R.id.salary_total)
 
         //Show detail salary of a chosen month -- start with current month
-        salaryViewModel.retrieveSalary(uuid,
+/*        salaryViewModel.retrieveSalary(uuid,
             YearMonth.now().year.toString(),
-            YearMonth.now().month.toString())
+            YearMonth.now().month.toString())*/
+        //ToDo : enable this
+        //salaryViewModel.retrieveSalary(uuid, YearMonth.now().year, YearMonth.now().monthValue)
+
 
 
         salaryViewModel.salary.observe(viewLifecycleOwner, Observer {
-            salaryTime.text = VNeseDateConverter.vnConvertMonth(it.uid.toString())
+            salaryTime.text = VNeseDateConverter.vnConvertMonth(it.CreateTime!!)
 
             basicSalary.text = VietnamDong(BigDecimal(it.BasicSalary)).toString()
             checkinFaultCharge.text = VietnamDong(BigDecimal(it.CheckinFaultCharge)).toString()
@@ -136,8 +143,19 @@ class SalaryFragment : Fragment() {
         })
 
         //Show Salary Chart of a chosen Year
+        yearDisplay.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                listsalarymodel.retrieveMonthlyDetailSalaryInAYear(uuid, YearMonth.now().year.toString())
+            }
 
-        listsalarymodel.retrieveMonthlyDetailSalaryInAYear(uuid, YearMonth.now().year.toString())
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+        yearDisplay.text = Year.now().toString()
+
         listsalarymodel.detailSalary.observe(viewLifecycleOwner, Observer {
             val list = arrayListOf<BarEntry>()
             for(i in 0 until 12){
@@ -148,9 +166,10 @@ class SalaryFragment : Fragment() {
                 color = ContextCompat.getColor(requireContext(), R.color.purple_200)
                 //valueTextSize = 10f
                 barBorderWidth = 0.5f
-                setDrawValues(false)
 
+                setDrawValues(false)
             }
+
 
             salaryChart.data = BarData(nowBarData)
             //set some attributes for the chart
@@ -179,8 +198,8 @@ class SalaryFragment : Fragment() {
             override fun onValueSelected(e: Entry?, h: Highlight?) {
                 if (e != null) {
                     salaryViewModel.retrieveSalary(uuid,
-                        YearMonth.now().year.toString(),
-                        VNeseDateConverter.convertMonthFloatToString(e.x + 1f))
+                        yearDisplay.text.toString().toInt(),
+                        (e.x + 1).toInt())
                 }
                 salaryChart.highlightValue(h)
             }
@@ -194,6 +213,22 @@ class SalaryFragment : Fragment() {
         dummy.RankBonus = 50
         dummy.TaskBonus = 10
         dummy.compute(YearMonth.now())
+        return dummy
+    }
+    fun generateDummy(user : String, basic : Long, rank : Long, task : Long, year : Int, month : Int) : SalaryModel {
+        var dummy = SalaryModel()
+        dummy.OwnerUUID = user
+        dummy.BasicSalary = basic
+        dummy.RankBonus = rank
+        dummy.TaskBonus = task
+        dummy.compute(YearMonth.now())
+
+        val start = Calendar.getInstance()
+        start.set(year, month - 1, 1, 0, 0, 0)
+        dummy.CreateTime = start.time
+        val end = Calendar.getInstance()
+        end.set(year, month, 1, 0, 0, 0)
+        dummy.EndTime = end.time
         return dummy
     }
     fun generateDummy2(user : String) : PerformanceModel{

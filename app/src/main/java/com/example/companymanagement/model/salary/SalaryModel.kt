@@ -51,8 +51,18 @@ data class SalaryModel (
     @set: PropertyName("create_time")
     var CreateTime: Date? = null
 
+    @ServerTimestamp
+    @get: PropertyName("end_time")
+    @set: PropertyName("end_time")
+    var EndTime: Date? = null
+
     init {
         CreateTime = Date()
+        EndTime = Date()
+        val temp = VNeseDateConverter.fromDateToYearMonth(CreateTime!!)
+        val cal = Calendar.getInstance()
+        cal.set(temp.year, temp.month.value, temp.lengthOfMonth(), 0 ,0,0)
+        EndTime!!.time = cal.timeInMillis
     }
 
     fun setBasicSalary(position : String) : VietnamDong {

@@ -11,7 +11,7 @@ import java.util.*
 class VNeseDateConverter {
     companion object {
         var input = LocalDate.now()
-        var formatter = DateTimeFormatter.ofPattern("MMMM", Locale("vi", "VN"))
+        var formatterVN = DateTimeFormatter.ofPattern("MMMM", Locale("vi", "VN"))
         fun convertMonthFloatToString(input : Float) : String {
             var output = ""
             when (input) {
@@ -73,8 +73,13 @@ class VNeseDateConverter {
                 }
             }
             input = LocalDate.of(1, x, 1)
-            return input.format(formatter)
+            return input.format(formatterVN)
         }
+        fun vnConvertMonth(month: Date): String {
+            input = LocalDate.of(1, fromDateToMonth(month), 1)
+            return input.format(formatterVN)
+        }
+
         fun getDayDiff(before: Calendar, after: Calendar): Long {
             val millisBefore = before.timeInMillis
             val millisAfter = after.timeInMillis
@@ -96,6 +101,11 @@ class VNeseDateConverter {
             val cal = Calendar.getInstance()
             cal.time = date
             return YearMonth.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH))
+        }
+        fun fromDateToMonth(date : Date) : Int {
+            val cal = Calendar.getInstance()
+            cal.time = date
+            return cal.get(Calendar.MONTH) + 1
         }
     }
 }
