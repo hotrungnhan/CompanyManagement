@@ -36,19 +36,15 @@ class SalaryViewModel : ViewModel() {
             salary.postValue(salaryRepo.getSalaryDoc(uuid, year, month))
         }
     }
-    fun retrieveMonthlyDetailSalaryInAYear(uuid: String, year: Int) {
-        val list = arrayListOf<SalaryModel>()
+
+    fun retieveMonthlySalaryInAYear(uuid: String, year: Int){
+        var list = arrayListOf<SalaryModel>()
         viewModelScope.launch {
             for(month in 1 until 13) {
                 salaryRepo.getSalaryDoc(uuid, year, month)
                     ?.let { list.add(it) }
             }
             salaryList.postValue(list)
-        }
-    }
-    fun retieveMonthlySalaryInAYear(uuid: String, year: Int){
-        viewModelScope.launch {
-            salaryRepo.getListSalary(uuid, 2021)
         }
     }
 
@@ -68,6 +64,11 @@ class SalaryViewModel : ViewModel() {
             else{
                 salaryRepo.setDoc(new)
             }
+        }
+    }
+    fun forceUpdateSalary(uuid: String, new : SalaryModel){
+        viewModelScope.launch {
+            salaryRepo.setDoc(new)
         }
     }
 

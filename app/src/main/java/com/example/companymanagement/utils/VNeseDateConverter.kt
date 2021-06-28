@@ -1,6 +1,7 @@
 package com.example.companymanagement.utils
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import java.time.LocalDate
 import java.time.YearMonth
@@ -100,12 +101,18 @@ class VNeseDateConverter {
         fun fromDateToYearMonth(date : Date) : YearMonth{
             val cal = Calendar.getInstance()
             cal.time = date
-            return YearMonth.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH))
+            //Log.e(date.toString(), cal.get(Calendar.MONTH).toString())
+            return YearMonth.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1)
         }
         fun fromDateToMonth(date : Date) : Int {
             val cal = Calendar.getInstance()
             cal.time = date
             return cal.get(Calendar.MONTH) + 1
+        }
+        fun fromDateToYear(date : Date) : Int {
+            val cal = Calendar.getInstance()
+            cal.time = date
+            return cal.get(Calendar.YEAR)
         }
     }
 }

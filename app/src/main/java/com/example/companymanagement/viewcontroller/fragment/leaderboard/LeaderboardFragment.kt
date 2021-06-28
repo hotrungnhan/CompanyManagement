@@ -15,7 +15,6 @@ import com.example.companymanagement.R
 import com.example.companymanagement.databinding.FragmentLeaderboardBinding
 import com.example.companymanagement.model.ranking.RankerModel
 import com.example.companymanagement.viewcontroller.adapter.LeaderBoardAdapter
-import com.example.companymanagement.viewcontroller.fragment.salary.SalaryViewModel
 import java.time.YearMonth
 @RequiresApi(Build.VERSION_CODES.O)
 class LeaderboardFragment : Fragment() {
@@ -65,10 +64,6 @@ class LeaderboardFragment : Fragment() {
             }
 
         })
-
-
-
-
 
     }
 

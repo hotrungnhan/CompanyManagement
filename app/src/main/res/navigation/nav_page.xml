@@ -42,4 +42,9 @@
         android:name="com.example.companymanagement.viewcontroller.fragment.leaderboard.LeaderboardFragment"
         android:label="fragment_leaderboard"
         tools:layout="@layout/fragment_leaderboard" />
+    <fragment
+        android:id="@+id/manager_salary"
+        android:name="com.example.companymanagement.viewcontroller.fragment.manager.salary.SalaryManager"
+        android:label="fragment_mn_salary"
+        tools:layout="@layout/fragment_manager_salary" />
 </navigation>

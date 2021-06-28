@@ -51,8 +51,6 @@ class SalaryFragment : Fragment() {
     lateinit var performanceViewModel: PerformanceViewModel
     lateinit var salaryViewModel : SalaryViewModel
 
-    //thing needed for the chart
-    lateinit var listsalarymodel : SalaryListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,7 +59,7 @@ class SalaryFragment : Fragment() {
     ): View? {
         salaryViewModel = ViewModelProvider(requireActivity()).get(SalaryViewModel::class.java)
         performanceViewModel = ViewModelProvider(requireActivity()).get(PerformanceViewModel::class.java)
-        listsalarymodel = ViewModelProvider(requireActivity()).get(SalaryListViewModel::class.java)
+
 
         return inflater.inflate(R.layout.fragment_salary, container, false)
     }
@@ -76,21 +74,15 @@ class SalaryFragment : Fragment() {
         val yearBackButton = view.findViewById<ImageButton>(R.id.salary_button_year_back)
         val yearDisplay = view.findViewById<TextView>(R.id.salary_display_year)
 
-
-
         yearNextButton.setOnClickListener {
             val temp = yearDisplay.text.toString().toInt()
             if(temp < Year.now().toString().toInt()) {
                 yearDisplay.text = (temp + 1).toString()
-                salaryViewModel.retrieveSalary(uuid, yearDisplay.text.toString().toInt(), YearMonth.now().monthValue)
-                listsalarymodel.retrieveMonthlyDetailSalaryInAYear(uuid, yearDisplay.text.toString())
             }
         }
         yearBackButton.setOnClickListener {
             val temp = yearDisplay.text.toString().toInt()
             yearDisplay.text = (temp - 1).toString()
-            salaryViewModel.retrieveSalary(uuid, yearDisplay.text.toString().toInt(), YearMonth.now().monthValue)
-            listsalarymodel.retrieveMonthlyDetailSalaryInAYear(uuid, yearDisplay.text.toString())
         }
 
 
@@ -129,7 +121,6 @@ class SalaryFragment : Fragment() {
         //salaryViewModel.retrieveSalary(uuid, YearMonth.now().year, YearMonth.now().monthValue)
 
 
-
         salaryViewModel.salary.observe(viewLifecycleOwner, Observer {
             salaryTime.text = VNeseDateConverter.vnConvertMonth(it.CreateTime!!)
 
@@ -145,7 +136,8 @@ class SalaryFragment : Fragment() {
         //Show Salary Chart of a chosen Year
         yearDisplay.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                listsalarymodel.retrieveMonthlyDetailSalaryInAYear(uuid, YearMonth.now().year.toString())
+                salaryViewModel.retrieveSalary(uuid, yearDisplay.text.toString().toInt(), YearMonth.now().monthValue)
+                salaryViewModel.retieveMonthlySalaryInAYear(uuid, yearDisplay.text.toString().toInt())
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -156,7 +148,7 @@ class SalaryFragment : Fragment() {
         })
         yearDisplay.text = Year.now().toString()
 
-        listsalarymodel.detailSalary.observe(viewLifecycleOwner, Observer {
+        salaryViewModel.salaryList.observe(viewLifecycleOwner, Observer {
             val list = arrayListOf<BarEntry>()
             for(i in 0 until 12){
                 list.add(BarEntryConverter.convert(i, (it[i].TotalSalary / 1000).toString()))

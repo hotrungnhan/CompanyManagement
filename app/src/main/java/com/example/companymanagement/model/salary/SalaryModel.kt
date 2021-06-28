@@ -61,7 +61,7 @@ data class SalaryModel (
         EndTime = Date()
         val temp = VNeseDateConverter.fromDateToYearMonth(CreateTime!!)
         val cal = Calendar.getInstance()
-        cal.set(temp.year, temp.month.value, temp.lengthOfMonth(), 0 ,0,0)
+        cal.set(temp.year, temp.month.value, 1, 0 ,0,0)
         EndTime!!.time = cal.timeInMillis
     }
 
