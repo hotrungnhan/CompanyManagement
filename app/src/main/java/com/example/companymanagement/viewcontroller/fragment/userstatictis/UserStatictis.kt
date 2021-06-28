@@ -1,22 +1,45 @@
 package com.example.companymanagement.viewcontroller.fragment.userstatictis
 
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.companymanagement.R
-import com.kizitonwose.calendarview.model.CalendarDay
-import com.kizitonwose.calendarview.ui.DayBinder
-import com.kizitonwose.calendarview.ui.ViewContainer
+import com.example.companymanagement.utils.DateParser.Companion.toHumanReadDate
+import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
+import com.example.companymanagement.viewcontroller.fragment.user.PerformanceViewModel
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
 
 class UserStatictis : Fragment() {
 
-    var calendarView = view?.findViewById<CalendarView>(R.id.calendarView)
+    val c = Calendar.getInstance().time
+
+    val month = SimpleDateFormat("MM", Locale.getDefault())
+    val year = SimpleDateFormat("yyyy", Locale.getDefault())
+
+    val dayofwork = 25
+    val daycanabsent = 20
+
+    val user = FirebaseAuth.getInstance().currentUser
+    lateinit var performancemodel: PerformanceViewModel
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        performancemodel = ViewModelProvider(this.requireActivity()).get(PerformanceViewModel::class.java)
+        performancemodel.retrivePerformance(user?.uid!!,month.format(c),year.format(c))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,33 +52,20 @@ class UserStatictis : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val title = view.findViewById<TextView>(R.id.textview_title)
-        val c = Calendar.getInstance().time
+        val work = view.findViewById<TextView>(R.id.datework)
+        val late = view.findViewById<TextView>(R.id.datelate)
+        val absent = view.findViewById<TextView>(R.id.dateabsent)
+        val canabsent = view.findViewById<TextView>(R.id.datecanabsent)
 
-        val df = SimpleDateFormat("MM-yyyy", Locale.getDefault())
-        val formattedDate = df.format(c)
-        title.text = "Thống kê Checkin tháng " + formattedDate.toString()
-    }
-    class DayViewContainer(view: View) : ViewContainer(view) {
-        val textView = view.findViewById<TextView>(R.id.calendarDayText)
-        // Will be set when this container is bound
-        lateinit var day: CalendarDay
+        title.text = "Thống kê Checkin tháng " + month.format(c).toString() + " / " + year.format(c).toString()
 
-        init {
-            view.setOnClickListener {
-                // Use the CalendarDay associated with this container.
-            }
+        performancemodel.per.observe(viewLifecycleOwner) {
+            work.text = (dayofwork - (it.Late + it.AbsenceA + it.AbsenceNA)).toString() + "/" + dayofwork.toString()
+            absent.text = (it.AbsenceA + it.AbsenceNA).toString()
+            late.text = it.Late.toString()
+            canabsent.text = (daycanabsent - (it.AbsenceA + it.AbsenceNA)).toString()
         }
     }
-//    calendarView.dayBinder = object: DayBinder<DayViewContainer> {
-//        override fun create(view: View) = DayViewContainer(view)
-//        override fun bind(container: DayViewContainer, day: CalendarDay) {
-//            // Set the calendar day for this container.
-//            container.day = day
-//            // Set the date text
-//            container.textView.text = day.date.dayOfMonth.toString()
-//            // Other binding logic
-//        }
-//    }
 }
 
 
