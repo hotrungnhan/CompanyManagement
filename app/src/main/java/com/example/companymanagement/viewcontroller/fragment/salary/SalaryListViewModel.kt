@@ -22,7 +22,7 @@ class SalaryListViewModel : ViewModel() {
         var list = arrayListOf<SalaryModel>()
         viewModelScope.launch {
             for(month in 1 until 13) {
-                repo.getSalaryDoc(uuid, year, VNeseDateConverter.convertMonthFloatToString(month.toFloat()))
+                repo.getSalaryDoc(uuid, year.toInt(), month)
                     ?.let { list.add(it) }
             }
             detailSalary.postValue(list)
