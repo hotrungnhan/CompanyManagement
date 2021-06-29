@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/main_workspace"
-        android:name="com.example.companymanagement.viewcontroller.fragment.mainworkspace.MainWorkspace"
+        android:name="com.example.companymanagement.viewcontroller.fragment.mainworkspace.MainTweet"
         android:label="fragment_main_workspace"
-        tools:layout="@layout/fragment_main_workspace" />
+        tools:layout="@layout/fragment_main_tweet" />
     <fragment
         android:id="@+id/main_project"
         android:name="com.example.companymanagement.viewcontroller.fragment.mainproject.MainProject"
@@ -37,4 +37,9 @@
         android:name="com.example.companymanagement.viewcontroller.fragment.salary.SalaryFragment"
         android:label="fragment_user_salary"
         tools:layout="@layout/fragment_salary" />
+    <fragment
+        android:id="@+id/checkin_qrscanner"
+        android:name="com.example.companymanagement.viewcontroller.fragment.qrscanner.QRScanner"
+        android:label="fragment_user_salary"
+        tools:layout="@layout/fragment_checkin_qrscanner" />
 </navigation>

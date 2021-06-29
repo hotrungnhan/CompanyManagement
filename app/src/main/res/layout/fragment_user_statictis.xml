@@ -189,6 +189,10 @@
             android:fontFamily="sans-serif-light">
         </TextView>
 
-
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:mcv_showOtherDates="other_months" />
     </LinearLayout>
 </ScrollView>

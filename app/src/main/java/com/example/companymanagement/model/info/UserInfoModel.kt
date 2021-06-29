@@ -32,7 +32,8 @@ data class UserInfoModel(
 
     @get: PropertyName("gender")
     @set: PropertyName("gender")
-    var Gender: String? = null,//true for male false for woman
+    var Gender: String? = null,
+
 
     @get: PropertyName("id_card_number")
     @set: PropertyName("id_card_number")

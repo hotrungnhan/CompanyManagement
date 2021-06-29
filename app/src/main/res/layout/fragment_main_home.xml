@@ -54,8 +54,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
+                        android:padding="10dp"
                         tools:itemCount="5"
-
                         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         tools:listitem="@layout/item_cardview_button"
                         tools:orientation="vertical"
@@ -89,6 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:nestedScrollingEnabled="false"
+                        android:padding="10dp"
                         tools:itemCount="5"
                         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         tools:listitem="@layout/item_cardview_button"

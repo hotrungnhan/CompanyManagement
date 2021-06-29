@@ -20,8 +20,10 @@ class ListUserParticipantViewModel : ViewModel() {
         var User = MutableLiveData<UserInfoModel>()
         viewModelScope.launch(Dispatchers.Main) {
             var user = repo.findDoc(uuid)
-            UserList.value?.put(uuid, user!!);
-            User.postValue(user!!);
+            if (user != null) {
+                UserList.value?.put(uuid, user!!);
+                User.postValue(user!!);
+            }
         }
         return User
     }

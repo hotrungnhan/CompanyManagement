@@ -1,11 +1,12 @@
 package com.example.companymanagement.utils.customize
 
-import com.google.android.material.imageview.ShapeableImageView
+import androidx.recyclerview.widget.RecyclerView
 
 fun interface OnButtonClickListener {
     fun onClick(tweetid: String);
 }
 
-fun interface OnBindAvatarListener {
-    fun onBind(ownerid: String, avatar: ShapeableImageView);
+fun interface OnBindOwnerLisener {
+    fun onBind(ownerid: String, vh: RecyclerView.ViewHolder);
 }
+

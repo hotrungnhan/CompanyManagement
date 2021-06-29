@@ -16,6 +16,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.bumptech.glide.Glide
 import com.example.companymanagement.R
 import com.example.companymanagement.utils.DateParser
 import com.example.companymanagement.utils.DateParser.Companion.toHumanReadDate
@@ -26,24 +28,28 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
-import com.squareup.picasso.Picasso
 import java.util.*
 
 class UserInfo : Fragment() {
-    var isEdit: Boolean = false;
-    val user = FirebaseAuth.getInstance().currentUser
-    val cloudstore = FirebaseStorage.getInstance()
-    lateinit var infomodel: UserInfoViewModel
-    val imagepicked: MutableLiveData<Uri> = MutableLiveData(null);
-    lateinit var register: ActivityResultLauncher<Intent>;
+    private var isEdit: Boolean = false
+    private val user = FirebaseAuth.getInstance().currentUser
+    private val cloudstore = FirebaseStorage.getInstance()
+    private lateinit var infomodel: UserInfoViewModel
+    private val imagepicked: MutableLiveData<Uri> = MutableLiveData(null)
+    private lateinit var register: ActivityResultLauncher<Intent>
+    private var isNewAvatar: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         infomodel = ViewModelProvider(this.requireActivity()).get(UserInfoViewModel::class.java)
         // register Image getter Activity
 
         register = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.data?.data is Uri)
+
+            if (it.data?.data is Uri) {
                 imagepicked.postValue(it.data?.data)
+                isNewAvatar = true
+            }
         }
     }
 
@@ -54,7 +60,6 @@ class UserInfo : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user_info, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,11 +76,11 @@ class UserInfo : Fragment() {
         val uploadavatar = view.findViewById<ShapeableImageView>(R.id.avatar_change)
         val password = view.findViewById<TextInputEditText>(R.id.password_new)
         val passwordretype = view.findViewById<TextInputEditText>(R.id.password_new_retry)
-
-        imagepicked.postValue(Uri.parse(infomodel.info.value?.AvatarURL))
+        if (infomodel.info.value?.AvatarURL != null)
+            imagepicked.postValue(Uri.parse(infomodel.info.value?.AvatarURL))
         uploadavatar.setOnClickListener {
             val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            register.launch(i);
+            register.launch(i)
         }
         //two way binding
         fun applyEdit(isEdit: Boolean) {
@@ -84,26 +89,33 @@ class UserInfo : Fragment() {
             phone.isEnabled = isEdit
             pos.isEnabled = isEdit
             birthday.isEnabled = isEdit
-            gender.isEnabled = isEdit;
-            cardid.isEnabled = isEdit;
-            cardidprovidedate.isEnabled = isEdit;
-            cardidprovideplace.isEnabled = isEdit;
+            gender.isEnabled = isEdit
+            cardid.isEnabled = isEdit
+            cardidprovidedate.isEnabled = isEdit
+            cardidprovideplace.isEnabled = isEdit
         }
         applyEdit(false)
         imagepicked.observe(this.viewLifecycleOwner) {
             val dp = UtilsFuntion.convertDPToPX(150.0F, resources.displayMetrics).toInt()
-            Picasso.get().load(imagepicked.value).resize(dp, dp).into(uploadavatar);
+            Glide.with(this).load(imagepicked.value)
+                .override(dp, dp)
+                .centerCrop()
+                .placeholder(CircularProgressDrawable(requireContext()).apply { start() })
+                .error(R.drawable.ic_default_avatar)
+                .into(uploadavatar)
         }
         infomodel.info.observe(viewLifecycleOwner) {
-            name.text = it.Name
-            cemail.text = it.Email
-            phone.text = it.PhoneNumber
-            pos.text = it.Position
-            birthday.text = it.BirthDate?.toHumanReadDate()
-            gender.text = it.Gender
-            cardid.text = it.IDCardNumber
-            cardidprovidedate.text = it.IDCardCreateDate?.toHumanReadDate()
-            cardidprovideplace.text = it.IDCardCreateLocation
+            if (it != null) {
+                name.text = it.Name
+                cemail.text = it.Email
+                phone.text = it.PhoneNumber
+                pos.text = it.Position
+                birthday.text = it.BirthDate?.toHumanReadDate()
+                gender.text = it.Gender
+                cardid.text = it.IDCardNumber
+                cardidprovidedate.text = it.IDCardCreateDate?.toHumanReadDate()
+                cardidprovideplace.text = it.IDCardCreateLocation
+            }
         }
         view.findViewById<Button>(R.id.avatar_accept).setOnClickListener {
             uploadImage()
@@ -119,23 +131,22 @@ class UserInfo : Fragment() {
         }
         view.findViewById<FloatingActionButton>(R.id.infouser_btn_update)
             .setOnClickListener {
-                isEdit = !isEdit;
+                isEdit = !isEdit
                 applyEdit(isEdit)
-                if (isEdit == false) {
+                if (!isEdit) {
                     try {
-                        infomodel.info.value?.Name = name.text.toString()
-                        infomodel.info.value?.PhoneNumber = phone.text.toString()
-                        infomodel.info.value?.Email = cemail.text.toString()
-                        infomodel.info.value?.Position = pos.text.toString()
-                        infomodel.info.value?.BirthDate =
-                            DateParser.parser(birthday.text.toString())
-
-                        infomodel.info.value?.Gender = gender.text.toString()
-                        infomodel.info.value?.IDCardNumber = cardid.text.toString()
-                        infomodel.info.value?.IDCardCreateDate =
-                            DateParser.parser(cardidprovidedate.text.toString())
-                        infomodel.info.value?.IDCardCreateLocation = cardid.text.toString()
-                        infomodel.updateUserInfo();
+                        infomodel.info.value = infomodel.info.value?.apply {
+                            Name = name.text.toString()
+                            PhoneNumber = phone.text.toString()
+                            Email = cemail.text.toString()
+                            Position = pos.text.toString()
+                            BirthDate = DateParser.parser(birthday.text.toString())
+                            Gender = gender.text.toString()
+                            IDCardNumber = cardid.text.toString()
+                            IDCardCreateDate =
+                                DateParser.parser(cardidprovidedate.text.toString())
+                            IDCardCreateLocation = cardid.text.toString()
+                        }
                         toast("Chỉnh sữa thông tin thành công!!!")
                     } catch (ex: Exception) {
                         toast(ex.message!!)
@@ -144,22 +155,32 @@ class UserInfo : Fragment() {
             }
     }
 
-    fun uploadImage() {
+    private fun uploadImage() {
         Log.d("Avatar", imagepicked.value.toString() + "\n" + infomodel.info.value?.AvatarURL)
-//        if (imagepicked.value?.userInfo?.equals(Uri.parse(infomodel.info.value?.AvatarURL)) == false) {
-
-        val uuid = UUID.randomUUID();
-        val ref = cloudstore.reference.child("public/avatar/av_$uuid")
-        ref.putFile(imagepicked.value!!).addOnSuccessListener {
-            it.storage.downloadUrl.addOnSuccessListener { uri ->
-                infomodel.info.value?.AvatarURL = uri.toString()
-                infomodel.updateUserInfo()
+        val avatarURL = infomodel.info.value?.AvatarURL
+        if (isNewAvatar) {
+            val uuid = UUID.randomUUID()
+            val ref = cloudstore.reference.child("public/avatar/${user?.uid}/av_$uuid")
+            ref.putFile(imagepicked.value!!).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    it.result?.storage?.downloadUrl?.addOnCompleteListener { uri ->
+                        infomodel.info.value = infomodel.info.value?.apply {
+                            this.AvatarURL = uri.result.toString()
+                        }
+                        toast("update Image Success")
+                    }
+                }
             }
+            if (avatarURL?.isNullOrBlank() == true)
+                cloudstore.getReferenceFromUrl(avatarURL)
+                    .delete() // delete old image
+                    .addOnCompleteListener {
+                        toast("old image" + it.exception?.message!!)
+                    }
         }
-
     }
 
-    fun updateNewPassword(newpassword: String) {
+    private fun updateNewPassword(newpassword: String) {
         user?.updatePassword(newpassword)?.addOnCompleteListener {
             if (it.isSuccessful)
                 toast("Password Change Success")
