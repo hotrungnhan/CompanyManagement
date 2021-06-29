@@ -66,8 +66,4 @@ class EmployeeRecyclerViewAdapter() : RecyclerView.Adapter<EmployeeRecyclerViewA
         this.list = data
         this.notifyDataSetChanged()
     }
-//    fun setNewData(data: EmployeeModel) {
-//        this.list?.add(data)
-//        this.notifyItemInserted(list!!.lastIndex)
-//    }
 }

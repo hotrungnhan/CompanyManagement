@@ -36,7 +36,7 @@ class EmployeViewModel: ViewModel() {
         viewModelScope.launch {
             val newdata = repo.getNewEmployee(uid)
             if (newdata != null) {
-                EmployeeList.value?.add(newdata)
+                EmployeeList.value?.add(0,newdata)
                 EmployeeList.postValue(EmployeeList.value)
 //                EmployeeList.value?.add(0,newdata)
             }

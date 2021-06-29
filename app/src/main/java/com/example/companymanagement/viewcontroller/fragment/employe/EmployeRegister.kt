@@ -10,10 +10,13 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.example.companymanagement.R
 import com.example.companymanagement.model.UserInfoModel
 import com.example.companymanagement.viewcontroller.adapter.EmployeeRecyclerViewAdapter
 import com.google.android.gms.tasks.OnFailureListener
+import com.google.firebase.FirebaseApp
+import com.google.firebase.FirebaseOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
@@ -22,15 +25,20 @@ import kotlin.collections.HashMap
 
 class EmployeRegister : Fragment() {
 
+//    public var mAuth2: FirebaseAuth? = null
     private lateinit var employeViewModel: EmployeViewModel
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val mAuth2 : FirebaseAuth = FirebaseAuth.getInstance(FirebaseApp.getInstance("AnyAppName"))
     private  val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private  var selectedpos: String ? = null
     private  var EmployeeList : MutableLiveData<MutableList<UserInfoModel>> = MutableLiveData()
     private var adapter: EmployeeRecyclerViewAdapter = EmployeeRecyclerViewAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         employeViewModel =  ViewModelProvider(this.requireActivity()).get(EmployeViewModel::class.java)
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,11 +74,11 @@ class EmployeRegister : Fragment() {
             var pass = edPass.text.toString().trim()
 
             if (email.isNullOrEmpty() == false && pass.isNullOrEmpty() == false && edName.text != null && selectedpos != null) {
-                auth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener{ Task ->
+                mAuth2.createUserWithEmailAndPassword(email,pass).addOnCompleteListener{ Task ->
                     if(Task.isSuccessful()) {
                         Toast.makeText(activity, "Tạo tài khoản thành công", Toast.LENGTH_SHORT)
                             .show()
-                        val userID = auth.currentUser!!.uid
+                        val userID = mAuth2.currentUser!!.uid
                         val documentReference = db.collection("userinfo").document(userID)
                         val user: MutableMap<String, Any> = HashMap()
                         user["birth_date"] = Calendar.getInstance().time
@@ -78,8 +86,8 @@ class EmployeRegister : Fragment() {
                         user["create_time"] = Calendar.getInstance().time
                         user["gender"] = "none"
                         user["id_card_number"] = "none"
-                        user["id_card_create_date"] = Calendar.getInstance().time
-                        user["id_card_create_location"] = "none"
+                        user["idcard_create_date"] = Calendar.getInstance().time
+                        user["idcard_create_location"] = "none"
                         user["phone_number"] = "none"
                         user["position"] = selectedpos.toString()
                         user["update_time"] = Calendar.getInstance().time
@@ -97,9 +105,7 @@ class EmployeRegister : Fragment() {
                             .addOnFailureListener(OnFailureListener { e ->
                                 Log.w(TAG, "Error adding document", e)
                             })
-
-
-
+                        mAuth2.signOut()
 
                     }else {
                         Toast.makeText(activity, "Tạo tài khoản thất bại, vui lòng kiểm tra lại thông tin", Toast.LENGTH_SHORT)
