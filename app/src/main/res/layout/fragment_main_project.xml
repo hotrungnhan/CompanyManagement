@@ -15,7 +15,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/text_page_title_sub_heading"
-            android:text="Today Task " />
+            android:text="something"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.core.widget.NestedScrollView
@@ -34,13 +34,21 @@
                 app:cardCornerRadius="10dp">
 
                 <CalendarView
+                    android:id="@+id/project_calendar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></CalendarView>
+                    android:layout_height="wrap_content"
+                    android:selectedWeekBackgroundColor="@color/page_title"
+                    android:weekSeparatorLineColor="@color/purple_500">
+                </CalendarView>
             </androidx.cardview.widget.CardView>
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/task_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ListView>
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                tools:listitem="@layout/item_task"
+                android:layout_marginBottom="20dp"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -1,4 +1,4 @@
-package com.example.companymanagement.model
+package com.example.companymanagement.model.info
 
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.tasks.await

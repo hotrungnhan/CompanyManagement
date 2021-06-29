@@ -12,7 +12,7 @@ import com.example.companymanagement.utils.RecycleViewCalculate
 import com.example.companymanagement.viewcontroller.adapter.HomeGridViewApdapter
 
 class MainHome : Fragment() {
-    val listview: MutableList<HomeGridViewViewModel> = mutableListOf()
+    var listview: MutableList<HomeGridViewViewModel> = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -33,18 +33,17 @@ class MainHome : Fragment() {
     }
 
     fun createdata() {
-        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
+        listview = mutableListOf(HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.employee_manager,
-            "Employee Manager"))
-        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
+            "Employee Manager"),
+        HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.user_salary,
-            "Salary"))
-        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
+            "Salary"),
+        HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.checkin_qrscanner,
-            "Check in"))
-        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
+            "Check in"),
+        HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.task_manager,
             "Task Manager"))
-
     }
 }

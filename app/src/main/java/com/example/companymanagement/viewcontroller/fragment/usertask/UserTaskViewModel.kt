@@ -1,16 +1,19 @@
-package com.example.companymanagement.viewcontroller.fragment.mainproject
+package com.example.companymanagement.viewcontroller.fragment.user
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.companymanagement.model.task.UserTaskModel
 import com.example.companymanagement.model.task.UserTaskRepository
+import com.example.companymanagement.model.task.UserTaskModel
+import com.example.companymanagement.model.tweet.TweetModel
+import com.example.companymanagement.model.tweet.TweetRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
-class MainProjectViewModel : ViewModel() {
+class UserTaskViewModel : ViewModel() {
+
     val id = FirebaseAuth.getInstance().currentUser?.uid!!
     var TaskList: MutableLiveData<MutableList<UserTaskModel>> = MutableLiveData();
 

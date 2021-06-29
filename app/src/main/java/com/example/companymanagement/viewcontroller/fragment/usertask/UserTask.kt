@@ -1,13 +1,11 @@
-package com.example.companymanagement.viewcontroller.fragment.mainproject
-
-import androidx.lifecycle.ViewModelProvider
+package com.example.companymanagement.viewcontroller.fragment.usertask
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
@@ -15,12 +13,11 @@ import com.example.companymanagement.viewcontroller.adapter.UserTaskAdapter
 import com.example.companymanagement.viewcontroller.fragment.user.UserTaskViewModel
 
 
-class MainProject : Fragment() {
+class UserTask : Fragment(){
 
     private var taskModel: UserTaskViewModel = UserTaskViewModel()
     private var userTaskAdapter: UserTaskAdapter = UserTaskAdapter()
     private val taskLayoutManager = LinearLayoutManager(context)
-    private lateinit var projectCalendar: CalendarView
 
 
 
@@ -30,26 +27,21 @@ class MainProject : Fragment() {
     ): View? {
         taskModel = ViewModelProvider(this).get(UserTaskViewModel::class.java)
         return inflater.inflate(R.layout.fragment_user_project, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        projectCalendar = view.findViewById(R.id.project_calendar)
-//        val taskRecyclerView: RecyclerView = view.findViewById(R.id.task_recyclerView)
-//        taskRecyclerView.layoutManager = taskLayoutManager
-//        //taskRecyclerView.setHasFixedSize(true)
-//
-//        taskRecyclerView.adapter = userTaskAdapter
-//
-//        this.taskLayoutManager.orientation = RecyclerView.VERTICAL
+        val taskRecyclerView: RecyclerView = view.findViewById(R.id.user_task_container)
+        taskRecyclerView.layoutManager = taskLayoutManager
+        taskRecyclerView.setHasFixedSize(true)
 
-//        projectCalendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
-//            val message = "Selected date is: " + dayOfMonth +"/" + (month+1) +"/" + year
-//            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-//        }
+        taskRecyclerView.adapter = userTaskAdapter
 
-        taskModel.TaskList.observe(viewLifecycleOwner) {
+        this.taskLayoutManager.orientation = RecyclerView.VERTICAL
+
+        taskModel.TaskList.observe(this.viewLifecycleOwner) {
             userTaskAdapter.setData(it)
         }
     }
