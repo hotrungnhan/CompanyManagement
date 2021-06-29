@@ -3,13 +3,11 @@ package com.example.companymanagement.viewcontroller.activity.login
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.companymanagement.R
 import com.example.companymanagement.viewcontroller.activity.main.MainActivity
+import com.example.companymanagement.viewcontroller.fragment.forgotpassword.ForgotPassManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -24,7 +22,7 @@ class LoginActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
-
+        val forgot = findViewById<TextView>(R.id.forgot_password)
         login.setOnClickListener {
             var username = username.text.toString()
             var password = password.text.toString()
@@ -48,6 +46,9 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 toastBadFormat();
             }
+        }
+        forgot.setOnClickListener{
+            ForgotPassManager().show(supportFragmentManager,"forgotpassInfo")
         }
     }
 
