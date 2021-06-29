@@ -3,16 +3,16 @@ package com.example.companymanagement.viewcontroller.fragment.employe
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.companymanagement.model.UserInfoModel
+import com.example.companymanagement.model.info.UserInfoModel
 import com.example.companymanagement.model.employeemanage.EmployeeRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
-class EmployeViewModel: ViewModel() {
+class EmployeViewModel : ViewModel() {
 
     var EmployeeList: MutableLiveData<MutableList<UserInfoModel>> = MutableLiveData()
     var repo = EmployeeRepository(FirebaseFirestore.getInstance().collection("userinfo"))
-    val newEmployee : MutableLiveData<UserInfoModel> = MutableLiveData()
+    val newEmployee: MutableLiveData<UserInfoModel> = MutableLiveData()
 
     init {
         viewModelScope.launch {
@@ -20,11 +20,12 @@ class EmployeViewModel: ViewModel() {
         }
     }
 
-    fun search(string: String){
+    fun search(string: String) {
         viewModelScope.launch {
             EmployeeList.postValue(repo.getsearch(string))
         }
     }
+
     //    fun addEmployee(employee: EmployeeModel) {
 //        viewModelScope.launch {
 //            val newdata = repo.addNewEmployee(employee)
@@ -32,7 +33,7 @@ class EmployeViewModel: ViewModel() {
 //                EmployeeList.value?.add(0,newdata)
 //        }
 //    }
-    fun appendEmployee(uid : String) {
+    fun appendEmployee(uid: String) {
         viewModelScope.launch {
             val newdata = repo.getNewEmployee(uid)
             if (newdata != null) {
