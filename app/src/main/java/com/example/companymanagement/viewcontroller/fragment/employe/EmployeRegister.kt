@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.example.companymanagement.R
-import com.example.companymanagement.model.UserInfoModel
+import com.example.companymanagement.model.info.UserInfoModel
 import com.example.companymanagement.viewcontroller.adapter.EmployeeRecyclerViewAdapter
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
@@ -24,14 +24,16 @@ class EmployeRegister : Fragment() {
 
     private lateinit var employeViewModel: EmployeViewModel
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private  val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private  var selectedpos: String ? = null
-    private  var EmployeeList : MutableLiveData<MutableList<UserInfoModel>> = MutableLiveData()
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private var selectedpos: String? = null
+    private var EmployeeList: MutableLiveData<MutableList<UserInfoModel>> = MutableLiveData()
     private var adapter: EmployeeRecyclerViewAdapter = EmployeeRecyclerViewAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        employeViewModel =  ViewModelProvider(this.requireActivity()).get(EmployeViewModel::class.java)
+        employeViewModel =
+            ViewModelProvider(this.requireActivity()).get(EmployeViewModel::class.java)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -46,7 +48,8 @@ class EmployeRegister : Fragment() {
         // position spinner
         val category = resources.getStringArray(R.array.position_category)
         val spinnerPosition = root.findViewById<Spinner>(R.id.spinner_employee_regist)
-        val spinneradapter = ArrayAdapter(root.context,android.R.layout.simple_spinner_dropdown_item,category)
+        val spinneradapter =
+            ArrayAdapter(root.context, android.R.layout.simple_spinner_dropdown_item, category)
 
         spinnerPosition.adapter = spinneradapter
         spinnerPosition.onItemSelectedListener = object :
@@ -55,19 +58,20 @@ class EmployeRegister : Fragment() {
                 selectedpos = category[pos]
                 //Toast.makeText(root.context,  "Đã chọn: " + category[pos], Toast.LENGTH_SHORT).show()
             }
+
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // Another interface callback
             }
         }
 
         //regist account
-        bRegister.setOnClickListener{
+        bRegister.setOnClickListener {
             var email = edEmail.text.toString().trim()
             var pass = edPass.text.toString().trim()
 
             if (email.isNullOrEmpty() == false && pass.isNullOrEmpty() == false && edName.text != null && selectedpos != null) {
-                auth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener{ Task ->
-                    if(Task.isSuccessful()) {
+                auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener { Task ->
+                    if (Task.isSuccessful()) {
                         Toast.makeText(activity, "Tạo tài khoản thành công", Toast.LENGTH_SHORT)
                             .show()
                         val userID = auth.currentUser!!.uid
@@ -85,7 +89,7 @@ class EmployeRegister : Fragment() {
                         user["update_time"] = Calendar.getInstance().time
                         user["user_name"] = edName.text.toString()
 
-                        documentReference.set(user).addOnSuccessListener{
+                        documentReference.set(user).addOnSuccessListener {
                             employeViewModel.appendEmployee(userID)
                             Log.d(TAG,
                                 "DocumentSnapshot added with ID: " + documentReference.id)
@@ -99,15 +103,16 @@ class EmployeRegister : Fragment() {
                             })
 
 
-
-
-                    }else {
-                        Toast.makeText(activity, "Tạo tài khoản thất bại, vui lòng kiểm tra lại thông tin", Toast.LENGTH_SHORT)
+                    } else {
+                        Toast.makeText(activity,
+                            "Tạo tài khoản thất bại, vui lòng kiểm tra lại thông tin",
+                            Toast.LENGTH_SHORT)
                             .show()
                     }
                 }
             } else {
-                Toast.makeText(root.context,  "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show()
+                Toast.makeText(root.context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT)
+                    .show()
             }
 
         }

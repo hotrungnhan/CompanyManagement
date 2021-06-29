@@ -14,7 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.companymanagement.R
-import com.example.companymanagement.model.UserInfoModel
+import com.example.companymanagement.model.info.UserInfoModel
 import com.example.companymanagement.utils.DateParser
 import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
 import java.io.FileDescriptor
@@ -29,6 +29,7 @@ class Employee_ItemShow(userInfoModel: UserInfoModel) : DialogFragment() {
         super.onCreate(savedInstanceState)
         infomodel = ViewModelProvider(this.requireActivity()).get(UserInfoViewModel::class.java)
     }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = LayoutInflater.from(context)
             .inflate(R.layout.item_dialog_employee, LinearLayout(activity), false)
