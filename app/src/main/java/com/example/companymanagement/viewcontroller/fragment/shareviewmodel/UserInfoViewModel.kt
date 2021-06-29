@@ -10,6 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
 class UserInfoViewModel : ViewModel() {
+
     var info: MutableLiveData<UserInfoModel> = MutableLiveData()
     val auth = FirebaseAuth.getInstance().currentUser;
     var repo = UserInfoRepository(FirebaseFirestore.getInstance().collection("userinfo"))
@@ -24,4 +25,10 @@ class UserInfoViewModel : ViewModel() {
             }
         }
     }
+    fun updateInfo(userInfoModel: UserInfoModel){
+        viewModelScope.launch {
+            repo.updateDoc(userInfoModel);
+        }
+    }
+
 }
