@@ -3,6 +3,8 @@ package com.example.companymanagement.model.salary
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.core.graphics.createBitmap
+import com.example.companymanagement.utils.VNeseDateConverter
 import kotlinx.coroutines.tasks.await
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
@@ -38,6 +40,36 @@ class SalaryRepository (private var col: CollectionReference) {
             return ref2.documents[0].toObject(SalaryModel::class.java)
         }
     }
+    suspend fun getYearSalaryDocList(uuid: String, year: Int): List<SalaryModel?>{
+        val startCal = Calendar.getInstance()
+        startCal.set(year, 0, 1, 0, 0, 0)
+        val start = startCal.time
+        val endCal = Calendar.getInstance()
+        endCal.set(year + 1, 0, 1, 0, 0, 0)
+        val end = endCal.time
+
+        val list = col.whereEqualTo("owner_uuid", uuid)
+            .whereGreaterThanOrEqualTo("create_time", start)
+            .whereLessThan("create_time", end)
+            .get().await()
+            .documents.map {
+                it.toObject(SalaryModel::class.java)
+            }
+        var result = arrayListOf<SalaryModel>()
+        val dummy = SalaryModel(uuid, "dummy" ,0, 0, 0, 0, 0, 0, 0 )
+        for(index in 0 until 12){
+            result.add(dummy)
+            for(item in list){
+                if (item != null) {
+                    if(VNeseDateConverter.fromDateToMonth(item.CreateTime!!) == index + 1){
+                        result[index] = item
+                    }
+                }
+            }
+        }
+        return result
+    }
+
     suspend fun getAllSalary(): List<SalaryModel?> {
         return col
             .orderBy("owner_name", Query.Direction.ASCENDING)

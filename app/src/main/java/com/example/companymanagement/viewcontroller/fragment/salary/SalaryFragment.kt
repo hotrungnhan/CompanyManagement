@@ -137,7 +137,8 @@ class SalaryFragment : Fragment() {
         yearDisplay.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 salaryViewModel.retrieveSalary(uuid, yearDisplay.text.toString().toInt(), YearMonth.now().monthValue)
-                salaryViewModel.retrieveMonthlySalaryInAYear(uuid, yearDisplay.text.toString().toInt())
+                //salaryViewModel.retrieveMonthlySalaryInAYear(uuid, yearDisplay.text.toString().toInt())
+                salaryViewModel.retrieveYearlySalary(uuid, yearDisplay.text.toString().toInt())
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -148,10 +149,11 @@ class SalaryFragment : Fragment() {
         })
         yearDisplay.text = Year.now().toString()
 
-        salaryViewModel.salaryList.observe(viewLifecycleOwner, Observer {
+        salaryViewModel.salaryList
+            .observe(viewLifecycleOwner, Observer {
             val list = arrayListOf<BarEntry>()
             for(i in 0 until 12){
-                list.add(BarEntryConverter.convert(i, (it[i].TotalSalary / 1000).toString()))
+                list.add(BarEntryConverter.convert(i, (it[i]!!.TotalSalary / 1000).toString()))
             }
             val nowBarData = BarDataSet(list, "Salary (K VND").apply {
                 //valueTextColor = Color.BLACK
