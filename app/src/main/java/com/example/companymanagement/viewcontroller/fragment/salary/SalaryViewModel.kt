@@ -17,7 +17,7 @@ import java.util.*
 @RequiresApi(Build.VERSION_CODES.O)
 class SalaryViewModel : ViewModel() {
     var salary = MutableLiveData<SalaryModel>()
-    var salaryList = MutableLiveData<ArrayList<SalaryModel>>()
+    var salaryList = MutableLiveData<List<SalaryModel?>>()
 
     var salaryRef = FirebaseFirestore.getInstance().collection("salary")
     var salaryRepo = SalaryRepository(salaryRef)
@@ -33,7 +33,7 @@ class SalaryViewModel : ViewModel() {
         }
     }
 
-    fun retrieveMonthlySalaryInAYear(uuid: String, year: Int){
+/*    fun retrieveMonthlySalaryInAYear(uuid: String, year: Int){
         var list = arrayListOf<SalaryModel>()
         viewModelScope.launch {
             for(month in 1 until 13) {
@@ -42,14 +42,30 @@ class SalaryViewModel : ViewModel() {
             }
             salaryList.postValue(list)
         }
-    }
+    }*/
 
     fun retrieveAllSalary() : MutableLiveData<List<SalaryModel?>> {
         var result = MutableLiveData<List<SalaryModel?>>()
         viewModelScope.launch {
             result.value = salaryRepo.getAllSalary()
         }
+
         return result
+    }
+
+/*    fun retrieveYearlySalary(uuid: String, year: Int) : MutableLiveData<List<SalaryModel?>>{
+        var result = MutableLiveData<List<SalaryModel?>>()
+        viewModelScope.launch {
+            result.value = salaryRepo.getYearSalaryDocList(uuid, year)
+            salaryList.postValue(salaryRepo.getYearSalaryDocList(uuid, year))
+        }
+        return result
+    }*/
+
+    fun retrieveYearlySalary(uuid: String, year: Int) {
+        viewModelScope.launch {
+            salaryList.postValue(salaryRepo.getYearSalaryDocList(uuid, year))
+        }
     }
 
     //only use for testing
