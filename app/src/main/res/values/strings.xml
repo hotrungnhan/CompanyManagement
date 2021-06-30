@@ -107,6 +107,11 @@ er text -->
     <string name="find_by_name">Nhập tên nhân viên</string>
     <string name="find_by_time">Nhập thời gian</string>
     <string name="clear_all">Đặt lại</string>
+    <string name="back">Trước</string>
+    <string name="next">Sau</string>
+    <string name="top1">NHẤT</string>
+    <string name="top2">NHÌ</string>
+    <string name="top3">BA</string>
     <string-array name="employee_manager_tab_name">
         <item>Thêm Nhân Viên</item>
         <item>Danh Sách Nhân Viên</item>

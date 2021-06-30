@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +14,7 @@ import com.example.companymanagement.R
 import com.example.companymanagement.databinding.FragmentLeaderboardBinding
 import com.example.companymanagement.model.ranking.RankerModel
 import com.example.companymanagement.viewcontroller.adapter.LeaderBoardAdapter
-import java.time.YearMonth
+
 @RequiresApi(Build.VERSION_CODES.O)
 class LeaderboardFragment : Fragment() {
     private var _binding: FragmentLeaderboardBinding? = null
@@ -37,9 +36,7 @@ class LeaderboardFragment : Fragment() {
 
         _binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
 
-        val root: View = binding.root
-
-        return root
+        return binding.root
     }
 
 
@@ -53,7 +50,7 @@ class LeaderboardFragment : Fragment() {
 
         rankerViewModel.retrieveLeaderBoardIn(2021, 6)
 
-        rankerViewModel.rankList.observe(viewLifecycleOwner, Observer {
+        rankerViewModel.rankList.observe(viewLifecycleOwner, {
             leaderboardAdapter.addRankers(it as List<RankerModel>)
 
             usersList.apply {
@@ -65,13 +62,13 @@ class LeaderboardFragment : Fragment() {
 
     }
 
-    private fun genDum(i : Int) : MutableList<RankerModel>{
+/*    private fun genDum(i : Int) : MutableList<RankerModel>{
         var list = mutableListOf<RankerModel>()
         for(t in 0 until i){
             var temp = RankerModel("AAA", "aaa", "employee", 0)
             list.add(temp)
         }
         return list
-    }
+    }*/
 
 }

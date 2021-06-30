@@ -5,7 +5,6 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +13,8 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.companymanagement.R
-import com.example.companymanagement.model.performance.PerformanceModel
-import com.example.companymanagement.model.salary.SalaryModel
 import com.example.companymanagement.utils.BarEntryConverter
 import com.example.companymanagement.utils.VNeseDateConverter
 import com.example.companymanagement.utils.VietnamDong
@@ -37,7 +33,6 @@ import com.google.firebase.auth.FirebaseAuth
 import java.math.BigDecimal
 import java.time.Year
 import java.time.YearMonth
-import java.util.*
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -70,9 +65,9 @@ class SalaryFragment : Fragment() {
         val salaryChart = view.findViewById<BarChart>(R.id.salary_chart)
 
 
-        val yearNextButton = view.findViewById<ImageButton>(R.id.salary_button_year_next)
-        val yearBackButton = view.findViewById<ImageButton>(R.id.salary_button_year_back)
-        val yearDisplay = view.findViewById<TextView>(R.id.salary_display_year)
+        val yearNextButton = view.findViewById<ImageButton>(R.id.leaderboard_button_year_next)
+        val yearBackButton = view.findViewById<ImageButton>(R.id.leaderboard_button_year_back)
+        val yearDisplay = view.findViewById<TextView>(R.id.leaderboard_display_time)
 
         yearNextButton.setOnClickListener {
             val temp = yearDisplay.text.toString().toInt()
@@ -99,7 +94,7 @@ class SalaryFragment : Fragment() {
         salaryViewModel.updateSalary(uuid, generateDummy(uuid, 100, 50, 50, 2021, 11))
         salaryViewModel.updateSalary(uuid, generateDummy(uuid, 500, 0, 10, 2021, 12))*/
 
-        //salaryViewModel.retieveMonthlySalaryInAYear(uuid, 2021)
+        //salaryViewModel.retrieveMonthlySalaryInAYear(uuid, 2021)
         //test with performance
         //performanceViewModel.updatePerformance(uuid, generateDummy3(uuid))
 
@@ -121,7 +116,7 @@ class SalaryFragment : Fragment() {
         //salaryViewModel.retrieveSalary(uuid, YearMonth.now().year, YearMonth.now().monthValue)
 
 
-        salaryViewModel.salary.observe(viewLifecycleOwner, Observer {
+        salaryViewModel.salary.observe(viewLifecycleOwner, {
             salaryTime.text = VNeseDateConverter.vnConvertMonth(it.CreateTime!!)
 
             basicSalary.text = VietnamDong(BigDecimal(it.BasicSalary)).toString()
@@ -150,7 +145,7 @@ class SalaryFragment : Fragment() {
         yearDisplay.text = Year.now().toString()
 
         salaryViewModel.salaryList
-            .observe(viewLifecycleOwner, Observer {
+            .observe(viewLifecycleOwner, {
             val list = arrayListOf<BarEntry>()
             for(i in 0 until 12){
                 list.add(BarEntryConverter.convert(i, (it[i]!!.TotalSalary / 1000).toString()))
@@ -200,7 +195,7 @@ class SalaryFragment : Fragment() {
         })
     }
     //Dummy for test
-    fun generateDummy(user : String) : SalaryModel{
+    /*fun generateDummy(user : String) : SalaryModel{
         var dummy = SalaryModel()
         dummy.OwnerUUID = user
         dummy.BasicSalary = 100
@@ -251,7 +246,7 @@ class SalaryFragment : Fragment() {
         dummy.Late = 4
         dummy.TaskDone = 15
         return dummy
-    }
+    }*/
 
     //This class is used to reformat the xAxis label from float to string
     class AxisFormater : ValueFormatter() {
