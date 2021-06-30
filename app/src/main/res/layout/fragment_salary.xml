@@ -50,14 +50,14 @@
                         android:weightSum="6">
 
                         <ImageButton
-                            android:id="@+id/salary_button_year_back"
+                            android:id="@+id/leaderboard_button_year_back"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:src="@drawable/ic_baseline_arrow_back_ios_24" />
 
                         <TextView
-                            android:id="@+id/salary_display_year"
+                            android:id="@+id/leaderboard_display_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -68,7 +68,7 @@
                             tools:ignore="HardcodedText" />
 
                         <ImageButton
-                            android:id="@+id/salary_button_year_next"
+                            android:id="@+id/leaderboard_button_year_next"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

@@ -33,16 +33,6 @@ class SalaryViewModel : ViewModel() {
         }
     }
 
-/*    fun retrieveMonthlySalaryInAYear(uuid: String, year: Int){
-        var list = arrayListOf<SalaryModel>()
-        viewModelScope.launch {
-            for(month in 1 until 13) {
-                salaryRepo.getSalaryDoc(uuid, year, month)
-                    ?.let { list.add(it) }
-            }
-            salaryList.postValue(list)
-        }
-    }*/
 
     fun retrieveAllSalary() : MutableLiveData<List<SalaryModel?>> {
         var result = MutableLiveData<List<SalaryModel?>>()
@@ -52,15 +42,6 @@ class SalaryViewModel : ViewModel() {
 
         return result
     }
-
-/*    fun retrieveYearlySalary(uuid: String, year: Int) : MutableLiveData<List<SalaryModel?>>{
-        var result = MutableLiveData<List<SalaryModel?>>()
-        viewModelScope.launch {
-            result.value = salaryRepo.getYearSalaryDocList(uuid, year)
-            salaryList.postValue(salaryRepo.getYearSalaryDocList(uuid, year))
-        }
-        return result
-    }*/
 
     fun retrieveYearlySalary(uuid: String, year: Int) {
         viewModelScope.launch {
