@@ -28,7 +28,7 @@ class SalaryRepository (private var col: CollectionReference) {
 
         if(ref2.size() == 0)
         {
-            val dummy = SalaryModel(uuid, 0, 0, 0, 0, 0, 0, 0 )
+            val dummy = SalaryModel(uuid, "dummy" ,0, 0, 0, 0, 0, 0, 0 )
             dummy.CreateTime = start
             dummy.EndTime = end
             return dummy
@@ -38,22 +38,14 @@ class SalaryRepository (private var col: CollectionReference) {
             return ref2.documents[0].toObject(SalaryModel::class.java)
         }
     }
-    suspend fun getListSalary(uuid : String, year : Int){
-        val startCal = Calendar.getInstance()
-        startCal.set(year, 0, 1, 0, 0, 0)
-        val start = startCal.time
-        val endCal = Calendar.getInstance()
-        endCal.set(year + 1, 0, 1, 0, 0, 0)
-        val end = endCal.time
-
-        val list = col.whereEqualTo("owner_uuid", uuid)
-            .whereGreaterThanOrEqualTo("create_time", start)
-            .whereLessThan("create_time", end).get().await()
-            .documents.map{
+    suspend fun getAllSalary(): List<SalaryModel?> {
+        return col
+            .orderBy("owner_name", Query.Direction.ASCENDING)
+            .orderBy("create_time", Query.Direction.ASCENDING)
+            .limit(12).get().await()
+            .documents.map {
                 it.toObject(SalaryModel::class.java)
-
-        }
-
+            }
     }
 
     suspend fun getLastDoc(uuid : String) : SalaryModel? {

@@ -137,7 +137,7 @@ class SalaryFragment : Fragment() {
         yearDisplay.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 salaryViewModel.retrieveSalary(uuid, yearDisplay.text.toString().toInt(), YearMonth.now().monthValue)
-                salaryViewModel.retieveMonthlySalaryInAYear(uuid, yearDisplay.text.toString().toInt())
+                salaryViewModel.retrieveMonthlySalaryInAYear(uuid, yearDisplay.text.toString().toInt())
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

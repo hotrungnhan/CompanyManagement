@@ -25,9 +25,9 @@ class LeaderBoardAdapter() : RecyclerView.Adapter<LeaderBoardAdapter.RankerViewH
         val ranker = rankers[position]
 
         holder.rank.text = (position + 1).toString()
-        holder.name.text = ranker.name
-        holder.position.text = ranker.position
-        holder.point.text = ranker.point.toString()
+        holder.name.text = ranker.OwnerName
+        holder.position.text = ranker.OwnerPosition
+        holder.point.text = ranker.TotalPoint.toString()
         //ToDo bind avatar : holder.avatar
     }
 

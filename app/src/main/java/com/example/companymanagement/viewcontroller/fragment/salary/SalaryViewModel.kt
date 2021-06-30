@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.companymanagement.model.UserInfoRepository
 import com.example.companymanagement.model.salary.SalaryModel
 import com.example.companymanagement.model.salary.SalaryRepository
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,22 +23,17 @@ class SalaryViewModel : ViewModel() {
     var salaryRepo = SalaryRepository(salaryRef)
 
 
-
     fun addDummy(dummy : SalaryModel){
         salary.value = dummy
     }
 
-
-    fun showChosenSalary(index : Int){
-        salary.postValue(salaryList.value?.get(index))
-    }
     fun retrieveSalary(uuid: String, year: Int, month: Int){
         viewModelScope.launch {
             salary.postValue(salaryRepo.getSalaryDoc(uuid, year, month))
         }
     }
 
-    fun retieveMonthlySalaryInAYear(uuid: String, year: Int){
+    fun retrieveMonthlySalaryInAYear(uuid: String, year: Int){
         var list = arrayListOf<SalaryModel>()
         viewModelScope.launch {
             for(month in 1 until 13) {
@@ -48,6 +44,13 @@ class SalaryViewModel : ViewModel() {
         }
     }
 
+    fun retrieveAllSalary() : MutableLiveData<List<SalaryModel?>> {
+        var result = MutableLiveData<List<SalaryModel?>>()
+        viewModelScope.launch {
+            result.value = salaryRepo.getAllSalary()
+        }
+        return result
+    }
 
     //only use for testing
     fun updateSalary(uuid: String, new : SalaryModel) {

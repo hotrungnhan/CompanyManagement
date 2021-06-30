@@ -6,8 +6,10 @@ import java.math.BigDecimal
 import java.time.YearMonth
 
 import androidx.annotation.Keep
+import androidx.lifecycle.LifecycleOwner
 import com.example.companymanagement.utils.VNeseDateConverter
 import com.example.companymanagement.utils.VietnamDong
+import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
 import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.PropertyName
 import com.google.firebase.firestore.ServerTimestamp
@@ -21,6 +23,9 @@ data class SalaryModel (
     @get: PropertyName("owner_uuid")
     @set: PropertyName("owner_uuid")
     var OwnerUUID: String = "",
+    @get: PropertyName("owner_name")
+    @set: PropertyName("owner_name")
+    var OwnerName: String = "",
     @get: PropertyName("basic_salary")
     @set: PropertyName("basic_salary")
     var BasicSalary: Long = 0,
@@ -55,6 +60,7 @@ data class SalaryModel (
     @get: PropertyName("end_time")
     @set: PropertyName("end_time")
     var EndTime: Date? = null
+
 
     init {
         CreateTime = Date()

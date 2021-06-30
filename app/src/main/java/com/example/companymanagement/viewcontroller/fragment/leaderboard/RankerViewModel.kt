@@ -26,31 +26,10 @@ class RankerViewModel : ViewModel() {
     var salaryRef = FirebaseFirestore.getInstance().collection("salary")
     var salaryRepo = SalaryRepository(salaryRef)
 
-    fun retrieveLeaderBoardIn(month: YearMonth) {
+    fun retrieveLeaderBoardIn(year : Int, month: Int) {
         viewModelScope.launch {
-            rankList.postValue(repo.loadLeaderBoardIn(month))
+            rankList.postValue(repo.loadLeaderBoardIn(year, month))
             champlist.postValue(rankList.value?.take(3))
-
-            for(i in 0 until 3){
-                rankList.value?.get(i)?.let {
-                    it.uid?.let { it1 ->
-                        salaryRepo.updateRankBonus(
-                            it1,
-                            month.year.toString(),
-                            VNeseDateConverter.convertMonthFloatToString(month.monthValue.toFloat()),
-                            getRankBonusOf(i + 1))
-                    }
-                }
-            }
-        }
-    }
-
-    fun getRankBonusOf(champ : Int) : Long {
-        when(champ){
-            1 -> return 1000000
-            2 -> return 500000
-            3 -> return 200000
-            else -> return 0
         }
     }
 
