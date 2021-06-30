@@ -51,9 +51,7 @@ class LeaderboardFragment : Fragment() {
 
         leaderboardAdapter = LeaderBoardAdapter()
 
-        rankerViewModel.retrieveLeaderBoardIn(YearMonth.of(2021, 7))
-
-        leaderboardAdapter.addRankers(genDum(3))
+        rankerViewModel.retrieveLeaderBoardIn(2021, 6)
 
         rankerViewModel.rankList.observe(viewLifecycleOwner, Observer {
             leaderboardAdapter.addRankers(it as List<RankerModel>)
@@ -70,7 +68,7 @@ class LeaderboardFragment : Fragment() {
     private fun genDum(i : Int) : MutableList<RankerModel>{
         var list = mutableListOf<RankerModel>()
         for(t in 0 until i){
-            var temp = RankerModel("AAA", "aaa", 120L - i)
+            var temp = RankerModel("AAA", "aaa", "employee", 0)
             list.add(temp)
         }
         return list

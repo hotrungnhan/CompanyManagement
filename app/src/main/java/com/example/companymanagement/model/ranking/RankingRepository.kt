@@ -13,19 +13,24 @@ import kotlinx.coroutines.tasks.await
 
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 class RankingRepository (var col: CollectionReference) {
 
     private val formatter = DateTimeFormatter.ofPattern("yyyy-MMMM")
 
-    suspend fun loadLeaderBoardIn(month : YearMonth) : List<RankerModel?> {
-        val db = FirebaseFirestore.getInstance()
-        val fomatter = DateTimeFormatter.ofPattern("yyyy-MMMM")
+    suspend fun loadLeaderBoardIn(year : Int, month : Int) : List<RankerModel?> {
+        val startCal = Calendar.getInstance()
+        startCal.set(year, month - 1, 1, 0, 0, 0)
+        val start = startCal.time
+        val endCal = Calendar.getInstance()
+        endCal.set(year, month, 1, 0, 0, 0)
+        val end = endCal.time
 
-        val snapshots = db.collectionGroup("ranking_" + month.format(fomatter))
-            .orderBy("ranker_point",  Query.Direction.DESCENDING)
-            .get().await()
+        val snapshots = col.whereGreaterThanOrEqualTo("create_time", start)
+            .whereLessThan("create_time", end).orderBy("create_time")
+            .orderBy("total_point", Query.Direction.DESCENDING).get().await()
 
         var list = listOf<RankerModel?>()
 
@@ -33,9 +38,6 @@ class RankingRepository (var col: CollectionReference) {
             list = snapshots.documents.map{
                 it.toObject(RankerModel::class.java)
             }
-        }
-        for(i in 0 until 3) {
-            list[i]?.uid = snapshots.documents[i].reference.parent.parent?.id
         }
         return list
     }
@@ -49,7 +51,7 @@ class RankingRepository (var col: CollectionReference) {
         if(ref.get().await().exists())
             return ref.get().await().toObject(RankerModel::class.java)
         else{
-            var dummy = RankerModel("N/A", "N/A", 0 )
+            var dummy = RankerModel("dummy", "dummy", "Employee", 0 )
 
             return dummy
         }

@@ -28,16 +28,21 @@
             app:menu="@menu/mn_salary_search_filter_upper_menu"
             app:title="Chọn lọc" />
 
+        <AutoCompleteTextView
+            android:id="@+id/testName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AutoCompleteTextView" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:weightSum="5"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingRight="10dp"
-            >
+            android:weightSum="5">
 
             <TextView
                 android:id="@+id/textView3"
@@ -168,8 +173,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="5"
-            android:paddingTop="20dp">
+            android:paddingTop="20dp"
+            android:weightSum="5">
 
             <Button
                 android:id="@+id/done_button"

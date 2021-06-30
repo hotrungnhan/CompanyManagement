@@ -56,7 +56,7 @@ class MainHome : Fragment() {
             "Employee Manager"))
         listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.user_salary,
-            "Salary"))
+            "My Salary"))
         listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.manager_salary,
             "Employees' Salary"))
