@@ -2,13 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id ="@+id/leaderboardFragment"
+    android:id="@+id/leaderboardFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="?attr/actionBarSize"
     android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-    tools:context=".viewcontroller.fragment.leaderboard.LeaderboardFragment"
-    >
+    tools:context=".viewcontroller.fragment.leaderboard.LeaderboardFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,49 +26,13 @@
             app:title="LEADERBOARD" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="6">
-
-            <ImageButton
-                android:id="@+id/leaderboard_button_year_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_baseline_arrow_back_ios_24"
-                android:contentDescription="@string/back"/>
-
-            <TextView
-                android:id="@+id/leaderboard_display_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="4"
-                android:text="2021-6"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                tools:ignore="HardcodedText" />
-
-            <ImageButton
-                android:id="@+id/leaderboard_button_year_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                android:contentDescription="@string/next"/>
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/layout_champion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:baselineAligned="false"
             android:minHeight="150dp"
             android:orientation="horizontal"
-            android:weightSum="3"
-            android:baselineAligned="false">
+            android:weightSum="3">
 
             <RelativeLayout
                 android:layout_width="0dp"
@@ -150,7 +113,91 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
+
             </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_conner_round"
+            android:backgroundTint="#314977"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/leaderboard_button_month_back"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/shape_conner_round"
+                android:backgroundTint="@color/button"
+                android:contentDescription="@string/back"
+                android:foregroundGravity="center"
+                android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+                android:textAlignment="gravity" />
+
+            <EditText
+                android:id="@+id/leaderboard_display_month"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_conner_round"
+                android:inputType="number"
+                android:text="6"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
+
+            <ImageButton
+                android:id="@+id/leaderboard_button_month_next"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_conner_round"
+                android:backgroundTint="@color/button"
+                android:contentDescription="@string/next"
+                android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/leaderboard_button_year_back"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/shape_conner_round"
+                android:backgroundTint="@color/button"
+                android:contentDescription="@string/back"
+                android:src="@drawable/ic_baseline_keyboard_arrow_left_24" />
+
+            <EditText
+                android:id="@+id/leaderboard_display_year"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_conner_round"
+                android:inputType="number"
+                android:text="2021"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
+
+            <ImageButton
+                android:id="@+id/leaderboard_button_year_next"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_conner_round"
+                android:backgroundTint="@color/button"
+                android:contentDescription="@string/next"
+                android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
 
         </LinearLayout>
 
@@ -158,11 +205,13 @@
             android:id="@+id/rankers_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             tools:listitem="@layout/item_cardview_leaderboard_employee" />
 
 
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

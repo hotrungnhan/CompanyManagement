@@ -2,40 +2,36 @@ package com.example.companymanagement.viewcontroller.fragment.manager.salary
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.AdapterView
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import android.widget.TextView
+import android.widget.*
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.companymanagement.R
 import com.example.companymanagement.databinding.DialogFragmentMnSalarySearchFilterBinding
+import com.example.companymanagement.model.ranking.RankerModel
 import com.example.companymanagement.viewcontroller.adapter.NameFilterAdapter
 import com.example.companymanagement.viewcontroller.adapter.NameListAdapter
 import com.example.companymanagement.viewcontroller.fragment.salary.SalaryViewModel
 import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
+import java.time.YearMonth
 
-
-class SearchAndFilterDialog : DialogFragment(), SearchView.OnCloseListener, AdapterView.OnItemClickListener {
+@RequiresApi(Build.VERSION_CODES.O)
+class SearchAndFilterDialog : DialogFragment(){
     private var _binding: DialogFragmentMnSalarySearchFilterBinding? = null
     private val binding get() = _binding!!
-    private var nameList = arrayListOf<String>()
 
-    private lateinit var nameSearch : SearchView
-    private lateinit var testName : AutoCompleteTextView
-    private lateinit var resultView : TextView
-    private lateinit var autoComplete : SearchView.SearchAutoComplete
-    private lateinit var nameAdapter : NameListAdapter
-
-    lateinit var salaryViewModel : SalaryViewModel
-    lateinit var userInfoViewModel : UserInfoViewModel
+    lateinit var salaryViewModel : SalaryManagerViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,10 +39,10 @@ class SearchAndFilterDialog : DialogFragment(), SearchView.OnCloseListener, Adap
         savedInstanceState: Bundle?,
     ): View? {
 
-        salaryViewModel = ViewModelProvider(requireActivity()).get(SalaryViewModel::class.java)
-        userInfoViewModel = ViewModelProvider(requireActivity()).get(UserInfoViewModel::class.java)
+        salaryViewModel = ViewModelProvider(requireActivity()).get(SalaryManagerViewModel::class.java)
 
         _binding = DialogFragmentMnSalarySearchFilterBinding.inflate(inflater, container, false)
+        dialog!!.window?.setBackgroundDrawableResource(R.drawable.shape_conner_round)
 
         val root: View = binding.root
 
@@ -55,19 +51,89 @@ class SearchAndFilterDialog : DialogFragment(), SearchView.OnCloseListener, Adap
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupClickListeners(view)
-        nameSearch = view.findViewById(R.id.name_enter)
-        resultView = view.findViewById(R.id.test_result_view)
-        testName = view.findViewById(R.id.testName)
 
-        setSearchAutoComplete()
-        nameSearch.setOnCloseListener(this)
+        val nameInput = view.findViewById<EditText>(R.id.name_enter)
+        nameInput.setText("")
+        val monthInput = view.findViewById<EditText>(R.id.month_enter)
+        monthInput.setText(YearMonth.now().monthValue.toString())
+        val yearInput = view.findViewById<EditText>(R.id.year_enter)
+        yearInput.setText(YearMonth.now().year.toString())
 
-        userInfoViewModel.getName().observe(viewLifecycleOwner, Observer {
-            nameAdapter = activity?.let { it1 -> NameListAdapter(it1, nameList) }!!
+        val yearBack = view.findViewById<ImageButton>(R.id.mn_salary_filter_year_back)
+        val yearNext = view.findViewById<ImageButton>(R.id.mn_salary_filter_year_next)
+        val monthBack = view.findViewById<ImageButton>(R.id.mn_salary_filter_month_back)
+        val monthNext = view.findViewById<ImageButton>(R.id.mn_salary_filter_month_next)
 
-            autoComplete.setAdapter(nameAdapter)
-        })
+        val timeOrder = view.findViewById<ToggleButton>(R.id.time_order)
+        timeOrder.isChecked = true
+        val nameOrder = view.findViewById<ToggleButton>(R.id.name_order)
+        nameOrder.isChecked = true
+
+        yearBack.setOnClickListener{
+            if(yearInput.text.toString().toInt() > YearMonth.now().year ){
+                yearInput.setText(YearMonth.now().year.toString())
+            }
+            if(yearInput.text.toString().toInt() > 2000 ){
+                yearInput.setText((yearInput.text.toString().toInt() - 1).toString())
+            }
+        }
+        yearNext.setOnClickListener{
+            if(yearInput.text.toString().toInt() < YearMonth.now().year ){
+                yearInput.setText((yearInput.text.toString().toInt() + 1).toString())
+            }
+        }
+        monthBack.setOnClickListener{
+            if(monthInput.text.toString().toInt() > 12){
+                monthInput.setText(12.toString())
+            }
+            if(monthInput.text.toString().toInt() > 1 ){
+                monthInput.setText((monthInput.text.toString().toInt() - 1).toString())
+            }
+        }
+        monthNext.setOnClickListener{
+            if(monthInput.text.toString().toInt() < 12 ){
+                monthInput.setText((monthInput.text.toString().toInt() + 1).toString())
+            }
+        }
+
+        val doneButton = view.findViewById<Button>(R.id.done_button)
+        val cancelButton = view.findViewById<Button>(R.id.cancel_button)
+
+        doneButton.setOnClickListener {
+
+            if(monthInput.text.isNotBlank() && yearInput.text.isBlank()){
+                val builder = activity?.let { AlertDialog.Builder(it) }
+                if (builder != null) {
+                    builder.setTitle("Thời gian không rõ ràng ")
+                    builder.setMessage("Hãy nhập năm chứa tháng")
+                    builder.show()
+                }
+            }
+            else{
+                if(nameInput.text.isBlank() && yearInput.text.isBlank() && monthInput.text.isBlank()){
+                    salaryViewModel.getFullList(nameOrder.isChecked, timeOrder.isChecked)
+                }
+                if(nameInput.text.isNotBlank() && yearInput.text.isBlank() && monthInput.text.isBlank()){
+                    salaryViewModel.searchSalary(nameInput.text.toString(), timeOrder.isChecked)
+                }
+                if(nameInput.text.isNotBlank() && yearInput.text.isNotBlank() && monthInput.text.isBlank()) {
+                    salaryViewModel.searchSalary(nameInput.text.toString(), yearInput.text.toString().toInt(), timeOrder.isChecked)
+                }
+                if(nameInput.text.isNotBlank() && yearInput.text.isNotBlank() && monthInput.text.isNotBlank()){
+                    salaryViewModel.searchSalary(nameInput.text.toString(), yearInput.text.toString().toInt(), monthInput.text.toString().toInt())
+                }
+                if(nameInput.text.isBlank() && yearInput.text.isNotBlank() && monthInput.text.isNotBlank()){
+                    salaryViewModel.searchSalary(monthInput.text.toString().toInt(), yearInput.text.toString().toInt(), nameOrder.isChecked)
+                }
+                if(nameInput.text.isBlank() && yearInput.text.isNotBlank() && monthInput.text.isBlank()){
+                    salaryViewModel.searchSalary(yearInput.text.toString().toInt(), nameOrder.isChecked, timeOrder.isChecked)
+                }
+                dismiss()
+            }
+        }
+        cancelButton.setOnClickListener {
+            dismiss()
+        }
 
     }
 
@@ -79,47 +145,7 @@ class SearchAndFilterDialog : DialogFragment(), SearchView.OnCloseListener, Adap
         )
     }
 
-    private fun setupClickListeners(view: View) {
-        val doneButton = view.findViewById<Button>(R.id.done_button)
-        val cancelButton = view.findViewById<Button>(R.id.cancel_button)
-        doneButton.setOnClickListener {
-            // TODO: Do some task here
-            dismiss()
-        }
-        cancelButton.setOnClickListener {
-            dismiss()
-        }
-    }
 
-    @SuppressLint("RestrictedApi")
-    private fun setSearchAutoComplete(){
-        autoComplete = nameSearch.findViewById(androidx.appcompat.R.id.search_src_text)
-        autoComplete.setDropDownBackgroundResource(R.color.white)
-        autoComplete.threshold = 1
-        autoComplete.onItemClickListener = this
-    }
-
-
-
-    override fun onClose(): Boolean {
-        TODO("Not yet implemented")
-        resultView.text = ""
-        return false
-    }
-
-    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        TODO("Not yet implemented")
-        val selected = parent?.getItemAtPosition(position).toString()
-        autoComplete.setText(selected)
-        userInfoViewModel.findIdByName(selected).observe(viewLifecycleOwner, Observer {
-            var text : String
-            for(item in it){
-                text += item + " "
-            }
-            resultView.text = text
-        })
-
-    }
 
 
 }

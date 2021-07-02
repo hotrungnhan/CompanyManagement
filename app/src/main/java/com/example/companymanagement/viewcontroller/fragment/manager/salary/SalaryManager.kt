@@ -28,7 +28,7 @@ class SalaryManager : Fragment()  {
     private var salaryListLayoutManager = LinearLayoutManager(activity)
     private lateinit var salaryListAdapter : ManagerSalaryAdapter
 
-    private lateinit var viewModel: SalaryViewModel
+    private lateinit var viewModel: SalaryManagerViewModel
 
     private var _binding: FragmentManagerSalaryBinding? = null
     private val binding get() = _binding!!
@@ -39,7 +39,7 @@ class SalaryManager : Fragment()  {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel = ViewModelProvider(requireActivity()).get(SalaryViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(SalaryManagerViewModel::class.java)
         _binding = FragmentManagerSalaryBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
@@ -56,8 +56,10 @@ class SalaryManager : Fragment()  {
 
         var salaryListAdapter = ManagerSalaryAdapter()
 
+        var newDialog = SearchAndFilterDialog()
 
-        viewModel.retrieveAllSalary().observe(viewLifecycleOwner, Observer {
+        viewModel.getFullList(true, true)
+        viewModel.searchResult.observe(viewLifecycleOwner, {
             salaryListAdapter.addSalaries(it as List<SalaryModel>)
 
             salaryListRecycleView.apply {
@@ -66,7 +68,6 @@ class SalaryManager : Fragment()  {
             }
         })
 
-        var newDialog = SearchAndFilterDialog()
         topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.search -> {

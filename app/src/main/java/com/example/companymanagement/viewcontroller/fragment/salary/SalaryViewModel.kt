@@ -33,16 +33,9 @@ class SalaryViewModel : ViewModel() {
         }
     }
 
-
-    fun retrieveAllSalary() : MutableLiveData<List<SalaryModel?>> {
-        var result = MutableLiveData<List<SalaryModel?>>()
-        viewModelScope.launch {
-            result.value = salaryRepo.getAllSalary()
-        }
-
-        return result
+    fun showChosenMonthSalary(chosen : Int){
+        salary.postValue(salaryList.value?.get(chosen))
     }
-
     fun retrieveYearlySalary(uuid: String, year: Int) {
         viewModelScope.launch {
             salaryList.postValue(salaryRepo.getYearSalaryDocList(uuid, year))

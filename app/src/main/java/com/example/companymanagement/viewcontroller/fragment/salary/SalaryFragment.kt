@@ -79,24 +79,21 @@ class SalaryFragment : Fragment() {
             val temp = yearDisplay.text.toString().toInt()
             yearDisplay.text = (temp - 1).toString()
         }
+        //Show Salary Chart of a chosen Year
+        yearDisplay.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                salaryViewModel.retrieveSalary(uuid, yearDisplay.text.toString().toInt(), YearMonth.now().monthValue)
+                salaryViewModel.retrieveYearlySalary(uuid, yearDisplay.text.toString().toInt())
+            }
 
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
 
-        ///// test area
-        //salaryViewModel.updateSalary(uuid, generateDummy(uuid))
-        /*val nowCal = Calendar.getInstance()
-        nowCal.set(2021, 10, 1, 0, 0, 0)
-        val now = nowCal.time*/
-        /*salaryViewModel.updateSalary(uuid, generateDummy(uuid))
-        salaryViewModel.updateSalary(uuid, generateDummy(uuid, 700, 0, 0, 2021, 7))
-        salaryViewModel.updateSalary(uuid, generateDummy(uuid, 700, 0, 0, 2021, 8))
-        salaryViewModel.updateSalary(uuid, generateDummy(uuid, 200, 90, 20, 2021, 9))
-        salaryViewModel.updateSalary(uuid, generateDummy(uuid, 1000, 0, 20, 2021, 10))
-        salaryViewModel.updateSalary(uuid, generateDummy(uuid, 100, 50, 50, 2021, 11))
-        salaryViewModel.updateSalary(uuid, generateDummy(uuid, 500, 0, 10, 2021, 12))*/
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
 
-        //salaryViewModel.retrieveMonthlySalaryInAYear(uuid, 2021)
-        //test with performance
-        //performanceViewModel.updatePerformance(uuid, generateDummy3(uuid))
+        yearDisplay.text = Year.now().toString()
 
 
         val salaryTime = view.findViewById<TextView>(R.id.salary_time)
@@ -107,14 +104,6 @@ class SalaryFragment : Fragment() {
         val taxDeduction = view.findViewById<TextView>(R.id.salary_tax_deduction)
         val totalBonus = view.findViewById<TextView>(R.id.salary_total_bonus)
         val totalSalary = view.findViewById<TextView>(R.id.salary_total)
-
-        //Show detail salary of a chosen month -- start with current month
-/*        salaryViewModel.retrieveSalary(uuid,
-            YearMonth.now().year.toString(),
-            YearMonth.now().month.toString())*/
-        //ToDo : enable this
-        //salaryViewModel.retrieveSalary(uuid, YearMonth.now().year, YearMonth.now().monthValue)
-
 
         salaryViewModel.salary.observe(viewLifecycleOwner, {
             salaryTime.text = VNeseDateConverter.vnConvertMonth(it.CreateTime!!)
@@ -127,22 +116,6 @@ class SalaryFragment : Fragment() {
             totalBonus.text = VietnamDong(BigDecimal(it.TotalBonus)).toString()
             totalSalary.text = VietnamDong(BigDecimal(it.TotalSalary)).toString()
         })
-
-        //Show Salary Chart of a chosen Year
-        yearDisplay.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                salaryViewModel.retrieveSalary(uuid, yearDisplay.text.toString().toInt(), YearMonth.now().monthValue)
-                //salaryViewModel.retrieveMonthlySalaryInAYear(uuid, yearDisplay.text.toString().toInt())
-                salaryViewModel.retrieveYearlySalary(uuid, yearDisplay.text.toString().toInt())
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-        })
-        yearDisplay.text = Year.now().toString()
 
         salaryViewModel.salaryList
             .observe(viewLifecycleOwner, {
@@ -186,15 +159,25 @@ class SalaryFragment : Fragment() {
             //tap on a bar to show detail of that month's salary
             override fun onValueSelected(e: Entry?, h: Highlight?) {
                 if (e != null) {
-                    salaryViewModel.retrieveSalary(uuid,
-                        yearDisplay.text.toString().toInt(),
-                        (e.x + 1).toInt())
+                    salaryViewModel.showChosenMonthSalary(e.x.toInt())
                 }
                 salaryChart.highlightValue(h)
             }
         })
     }
-    //Dummy for test
+
+
+    //This class is used to reformat the xAxis label from float to string
+    class AxisFormater : ValueFormatter() {
+        private val months = arrayOf("Jan", "Feb", "Mar",
+            "Apr", "May", "June", "July", "Aug",
+            "Sep", "Oct", "Nov", "Dec")
+        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+            return months.getOrNull(value.toInt()) ?: value.toString()
+        }
+    }
+
+//Dummy for test
     /*fun generateDummy(user : String) : SalaryModel{
         var dummy = SalaryModel()
         dummy.OwnerUUID = user
@@ -247,18 +230,6 @@ class SalaryFragment : Fragment() {
         dummy.TaskDone = 15
         return dummy
     }*/
-
-    //This class is used to reformat the xAxis label from float to string
-    class AxisFormater : ValueFormatter() {
-        private val months = arrayOf("Jan", "Feb", "Mar",
-            "Apr", "May", "June", "July", "Aug",
-            "Sep", "Oct", "Nov", "Dec")
-        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-            return months.getOrNull(value.toInt()) ?: value.toString()
-        }
-    }
-
-
 
 
 }
