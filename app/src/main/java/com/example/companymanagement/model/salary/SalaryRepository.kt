@@ -25,10 +25,9 @@ class SalaryRepository (private var col: CollectionReference) {
         Log.e("end", end.toString())*/
         val ref = col.whereEqualTo("owner_uuid", uuid)
             .whereGreaterThanOrEqualTo("create_time", start)
-        //    .whereLessThan("create_time", end).get().await()
-        val ref2 = ref.whereLessThan("create_time", end).get().await()
+            .whereLessThan("create_time", end).get().await()
 
-        if(ref2.size() == 0)
+        if(ref.size() == 0)
         {
             val dummy = SalaryModel(uuid, "dummy" ,0, 0, 0, 0, 0, 0, 0 )
             dummy.CreateTime = start
@@ -36,8 +35,8 @@ class SalaryRepository (private var col: CollectionReference) {
             return dummy
         }
         else {
-            Log.e("docid", ref2.documents[0].id)
-            return ref2.documents[0].toObject(SalaryModel::class.java)
+            Log.e("docid", ref.documents[0].id)
+            return ref.documents[0].toObject(SalaryModel::class.java)
         }
     }
     suspend fun getYearSalaryDocList(uuid: String, year: Int): List<SalaryModel?>{
@@ -56,8 +55,8 @@ class SalaryRepository (private var col: CollectionReference) {
                 it.toObject(SalaryModel::class.java)
             }
         var result = arrayListOf<SalaryModel>()
-        val dummy = SalaryModel(uuid, "dummy" ,0, 0, 0, 0, 0, 0, 0 )
         for(index in 0 until 12){
+            val dummy = generateDummy(year, index + 1)
             result.add(dummy)
             for(item in list){
                 if (item != null) {
@@ -70,16 +69,204 @@ class SalaryRepository (private var col: CollectionReference) {
         return result
     }
 
-    suspend fun getAllSalary(): List<SalaryModel?> {
-        return col
-            .orderBy("owner_name", Query.Direction.ASCENDING)
-            .orderBy("create_time", Query.Direction.ASCENDING)
-            .limit(12).get().await()
-            .documents.map {
-                it.toObject(SalaryModel::class.java)
+    suspend fun getAllSalary(nameOrder : Boolean, timeOrder: Boolean): List<SalaryModel?> {
+        if(nameOrder && timeOrder)
+            return col
+                .orderBy("owner_name", Query.Direction.ASCENDING)
+                .orderBy("create_time", Query.Direction.ASCENDING)
+                .get().await()
+                .documents.map {
+                    it.toObject(SalaryModel::class.java)
+                }
+        else {
+            if (nameOrder && !timeOrder)
+                return col
+                    .orderBy("owner_name", Query.Direction.ASCENDING)
+                    .orderBy("create_time", Query.Direction.DESCENDING)
+                    .limit(12).get().await()
+                    .documents.map {
+                        it.toObject(SalaryModel::class.java)
+                    }
+            else {
+                if (!nameOrder && timeOrder)
+                    return col
+                        .orderBy("owner_name", Query.Direction.DESCENDING)
+                        .orderBy("create_time", Query.Direction.ASCENDING)
+                        .limit(12).get().await()
+                        .documents.map {
+                            it.toObject(SalaryModel::class.java)
+                        }
+                else
+                    return col
+                        .orderBy("owner_name", Query.Direction.DESCENDING)
+                        .orderBy("create_time", Query.Direction.DESCENDING)
+                        .limit(12).get().await()
+                        .documents.map {
+                            it.toObject(SalaryModel::class.java)
+                        }
             }
+        }
     }
 
+    suspend fun getAllSalaryByName(name : String, timeOrder : Boolean): List<SalaryModel?>{
+        if(timeOrder)
+            return col.whereEqualTo("owner_name", name)
+                .orderBy("create_time", Query.Direction.ASCENDING)
+                .get().await()
+                .documents.map{
+                    it.toObject(SalaryModel::class.java)
+                }
+        else
+            return col.whereEqualTo("owner_name", name)
+                .orderBy("create_time", Query.Direction.DESCENDING)
+                .get().await()
+                .documents.map{
+                    it.toObject(SalaryModel::class.java)
+                }
+    }
+
+    suspend fun getAllSalaryByNameAndYear(name : String, year: Int, timeOrder: Boolean) : List<SalaryModel?>{
+        val startCal = Calendar.getInstance()
+        startCal.set(year, 0, 1, 0, 0, 0)
+        val start = startCal.time
+        val endCal = Calendar.getInstance()
+        endCal.set(year + 1, 0, 1, 0, 0, 0)
+        val end = endCal.time
+        if(timeOrder)
+            return col.whereEqualTo("owner_name", name)
+                .whereGreaterThanOrEqualTo("create_time", start)
+                .whereLessThan("create_time", end)
+                .orderBy("create_time", Query.Direction.ASCENDING)
+                .get().await()
+                .documents.map {
+                    it.toObject(SalaryModel::class.java)
+                }
+        else
+            return col.whereEqualTo("owner_name", name)
+                .whereGreaterThanOrEqualTo("create_time", start)
+                .whereLessThan("create_time", end)
+                .orderBy("create_time", Query.Direction.DESCENDING)
+                .get().await()
+                .documents.map {
+                    it.toObject(SalaryModel::class.java)
+                }
+    }
+
+    suspend fun getAllSalaryByMonth(month : Int, year : Int, nameOrder: Boolean): List<SalaryModel?>{
+        val startCal = Calendar.getInstance()
+        startCal.set(year, month - 1, 1, 0, 0, 0)
+        val start = startCal.time
+        val endCal = Calendar.getInstance()
+        endCal.set(year, month, 1, 0, 0, 0)
+        val end = endCal.time
+        if(nameOrder)
+            return col.whereGreaterThanOrEqualTo("create_time", start)
+                .whereLessThan("create_time", end)
+                .orderBy("create_time")
+                .orderBy("owner_name", Query.Direction.ASCENDING).get().await()
+                .documents.map{
+                    it.toObject(SalaryModel::class.java)
+                }
+        else
+            return col.whereGreaterThanOrEqualTo("create_time", start)
+                .whereLessThan("create_time", end)
+                .orderBy("create_time")
+                .orderBy("owner_name", Query.Direction.DESCENDING).get().await()
+                .documents.map{
+                    it.toObject(SalaryModel::class.java)
+                }
+    }
+
+
+
+    suspend fun getAllSalaryByYear(year: Int, nameOrder: Boolean, timeOrder: Boolean) : List<SalaryModel?>{
+        val startCal = Calendar.getInstance()
+        startCal.set(year, 0, 1, 0, 0, 0)
+        val start = startCal.time
+        val endCal = Calendar.getInstance()
+        endCal.set(year + 1, 0, 1, 0, 0, 0)
+        val end = endCal.time
+
+        if(nameOrder && timeOrder){
+            return col
+                .whereGreaterThanOrEqualTo("create_time", start)
+                .whereLessThan("create_time", end)
+                .orderBy("create_time", Query.Direction.ASCENDING)
+                .orderBy("owner_name", Query.Direction.ASCENDING)
+                .get().await()
+                .documents.map {
+                    it.toObject(SalaryModel::class.java)
+                }
+        }
+        else{
+            if(nameOrder && !timeOrder){
+                return col
+                    .whereGreaterThanOrEqualTo("create_time", start)
+                    .whereLessThan("create_time", end)
+                    .orderBy("create_time", Query.Direction.DESCENDING)
+                    .orderBy("owner_name", Query.Direction.ASCENDING)
+                    .get().await()
+                    .documents.map {
+                        it.toObject(SalaryModel::class.java)
+                    }
+            }
+            else{
+                if(!nameOrder && timeOrder){
+                    return col
+                        .whereGreaterThanOrEqualTo("create_time", start)
+                        .whereLessThan("create_time", end)
+                        .orderBy("create_time", Query.Direction.ASCENDING)
+                        .orderBy("owner_name", Query.Direction.DESCENDING)
+                        .get().await()
+                        .documents.map {
+                            it.toObject(SalaryModel::class.java)
+                        }
+                }
+                else
+                    return col
+                        .whereGreaterThanOrEqualTo("create_time", start)
+                        .whereLessThan("create_time", end)
+                        .orderBy("create_time", Query.Direction.DESCENDING)
+                        .orderBy("owner_name", Query.Direction.DESCENDING)
+                        .get().await()
+                        .documents.map {
+                            it.toObject(SalaryModel::class.java)
+                        }
+
+            }
+        }
+    }
+
+    suspend fun getAllSalaryByNameAndMonth(name: String, year: Int, month: Int): List<SalaryModel?>{
+        val startCal = Calendar.getInstance()
+        startCal.set(year, month - 1, 1, 0, 0, 0)
+        val start = startCal.time
+        val endCal = Calendar.getInstance()
+        endCal.set(year, month, 1, 0, 0, 0)
+        val end = endCal.time
+
+        return col.whereEqualTo("owner_name", name)
+            .whereGreaterThanOrEqualTo("create_time", start)
+            .whereLessThan("create_time", end)
+            .get().await()
+            .documents.map{
+                    it.toObject(SalaryModel::class.java)
+            }
+    }
+    //
+    private fun generateDummy(year : Int, month : Int) : SalaryModel {
+        var dummy = SalaryModel()
+
+        val start = Calendar.getInstance()
+        start.set(year, month - 1, 1, 0, 0, 0)
+        dummy.CreateTime = start.time
+        val end = Calendar.getInstance()
+        end.set(year, month, 1, 0, 0, 0)
+        dummy.EndTime = end.time
+        return dummy
+    }
+
+    //use for testing
     suspend fun getLastDoc(uuid : String) : SalaryModel? {
         val snapshots =
             col.orderBy("create_time", Query.Direction.DESCENDING)
@@ -102,15 +289,6 @@ class SalaryRepository (private var col: CollectionReference) {
 
         )
         col.document(docid).set(new, SetOptions.merge()).await()
-    }
-
-    // no use for now
-    suspend fun updateRankBonus(uuid : String, year: String, month : String, rankBonus : Long){
-        val data = hashMapOf("rank_bonus" to rankBonus)
-        col.document(uuid)
-            .collection("yearlist").document(year)
-            .collection("monthlist").document(month)
-            .set(data, SetOptions.merge()).await()
     }
 
 }
