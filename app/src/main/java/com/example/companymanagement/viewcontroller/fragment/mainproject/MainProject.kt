@@ -1,95 +1,100 @@
 package com.example.companymanagement.viewcontroller.fragment.mainproject
 
+import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
 import com.example.companymanagement.model.UserTaskModel
 import com.example.companymanagement.viewcontroller.adapter.UserTaskAdapter
-import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
-import java.time.Month
-import java.util.*
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.Date
 import kotlin.collections.ArrayList
 
 
+@Suppress("DEPRECATION")
 class MainProject : Fragment() {
 
-    private lateinit var viewModelMain: MainProjectViewModel
-    private lateinit var userTaskAdapter: UserTaskAdapter
-    private lateinit var taskList: ArrayList<UserTaskModel>
-    private lateinit var taskRecyclerView: RecyclerView
-    private lateinit var db: FirebaseFirestore
-    private val taskLayoutManager = LinearLayoutManager(context)
-    private lateinit var projectCalendar: CalendarView
+    private lateinit var viewModelMainProject: MainProjectViewModel
 
+    val user = FirebaseAuth.getInstance().currentUser
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        viewModelMain = ViewModelProvider(this).get(MainProjectViewModel::class.java)
+        viewModelMainProject = ViewModelProvider(this).get(MainProjectViewModel::class.java)
+        Log.d("User id", user?.uid.toString())
         val root = inflater.inflate(R.layout.fragment_main_project, container, false)
-
         return root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.task_recyclerView)
+        val userTaskAdapter: UserTaskAdapter = UserTaskAdapter()
+        val taskLayoutManager:LinearLayoutManager = LinearLayoutManager(context)
 
-        projectCalendar = view.findViewById(R.id.project_calendar)
-        taskRecyclerView = view.findViewById(R.id.task_recyclerView)
-        taskRecyclerView.layoutManager = taskLayoutManager
-        taskRecyclerView.setHasFixedSize(true)
+        val calendarView = view.findViewById<CalendarView>(R.id.task_calendar)
+        val Linearview = view.findViewById<LinearLayout>(R.id.task_notification)
 
-        taskList = arrayListOf()
+        val now = LocalDate.now()
+        val currentDate = Date.from(now?.atStartOfDay(ZoneId.systemDefault())?.toInstant())
 
-        userTaskAdapter = UserTaskAdapter(taskList)
-        taskRecyclerView.adapter = userTaskAdapter
+        //Load data at current date
+//        viewModelMainProject.retrieveUserTask(user?.uid!!, currentDate)
+//        viewModelMainProject.taskList.value?.clear()
+//        viewModelMainProject.taskList.observe(viewLifecycleOwner){
+//            if(it == null){
+//                Linearview.visibility= View.VISIBLE
+//            }
+//            else {
+//                Linearview.visibility = View.GONE
+//                userTaskAdapter.setData(it)
+//            }
+//        }
 
-        this.taskLayoutManager.orientation = RecyclerView.VERTICAL
+        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+            var selectedDate : java.util.Date = Date((year-1900), month, dayOfMonth)
 
-        projectCalendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val message = "Selected date is: " + dayOfMonth +"/" + (month+1) +"/" + year
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            //clear old data before loading a new one
+            viewModelMainProject.taskList.value?.clear()
+
+            //viewModelMainProject.retrieveUserTask(user?.uid!!, selectedDate)
+            viewModelMainProject.retrieveUserTask(user?.uid!!, selectedDate, year, month, dayOfMonth)
+
+            viewModelMainProject.taskList.observe(viewLifecycleOwner){
+                if(it == null || it.size==0){
+                    Linearview.visibility= View.VISIBLE
+                }
+                else {
+                    Linearview.visibility = View.GONE
+                    userTaskAdapter.setData(it)
+                }
+            }
         }
 
-        //EventChangeListener()
+        taskLayoutManager.orientation = RecyclerView.VERTICAL
+        recyclerView.adapter = userTaskAdapter
+        recyclerView.layoutManager = taskLayoutManager
     }
 
-    //find out more about this function and fix the bug
-    //this function is used to load data and catch data changes
-    private fun EventChangeListener() {
-        db = FirebaseFirestore.getInstance()
-        db.collection("task")
-            .orderBy("SentDate", Query.Direction.ASCENDING)
-            //.whereArrayContains("Deadline",date)
-            .addSnapshotListener(object : EventListener<QuerySnapshot>{
-                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                    if (error != null){
-                        Log.e("Firestore error", error.message.toString())
-                        return
-                    }
-
-                    for (dc: DocumentChange in value?.documentChanges!!){
-                        if (dc.type == DocumentChange.Type.ADDED){
-                            taskList.add(dc.document.toObject(UserTaskModel::class.java))
-                        }
-                    }
-
-                    userTaskAdapter.notifyDataSetChanged()
-                }
-
-            })
-    }
 }
+

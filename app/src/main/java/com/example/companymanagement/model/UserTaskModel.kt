@@ -1,7 +1,9 @@
 package com.example.companymanagement.model
 
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.PropertyName
+import java.util.*
 
 data class UserTaskModel(
     @get: PropertyName("content")
@@ -10,7 +12,7 @@ data class UserTaskModel(
 
     @get: PropertyName("deadline")
     @set: PropertyName("deadline")
-    var Deadline: String? = null,
+    var Deadline: Date? = null,
 
     @get: PropertyName("sender")
     @set: PropertyName("sender")
@@ -18,7 +20,7 @@ data class UserTaskModel(
 
     @get: PropertyName("sentDate")
     @set: PropertyName("sentDate")
-    var SentDate: com.google.firebase.Timestamp? = null,
+    var SentDate: Date? = null,
 
     @get: PropertyName("status")
     @set: PropertyName("status")

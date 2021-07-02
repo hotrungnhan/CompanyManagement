@@ -1,5 +1,6 @@
 package com.example.companymanagement.viewcontroller.fragment.mainproject
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,23 +12,24 @@ import java.util.*
 
 class MainProjectViewModel : ViewModel() {
     //implement a mutable list data
-    var tasks:MutableLiveData<UserTaskModel> = MutableLiveData()
+    //var taskList: MutableLiveData<MutableList<UserTaskModel>> = MutableLiveData()
+    var taskList: MutableLiveData<MutableList<UserTaskModel>> = MutableLiveData()
 
     //implement the repository of the task
-    var repository = UserTaskRepository(
-        FirebaseFirestore.getInstance().collection("task"))
+    //var repository = UserTaskRepository(FirebaseFirestore.getInstance().collection("task"))
+    var repository = UserTaskRepository(FirebaseFirestore.getInstance().collection("task"))
 
     //update data with the function
-    fun retrieveUserTask(uuid: String){
+    //call this function in main project.kt to load data
+    fun retrieveUserTask(
+        uuid: String,
+        selectedDate: Date,
+        year: Int, month: Int, dayOfMonth: Int
+    ){
         viewModelScope.launch {
-            tasks.postValue(repository.findDoc(uuid))
+            taskList.postValue(repository.getTask(uuid, selectedDate, year, month, dayOfMonth))
+            Log.d("Task List", taskList.value.toString())
         }
     }
 
-    fun updateUserTask() {
-        //kích hoạt routine
-        viewModelScope.launch {
-            repository.updateDoc(tasks.value!! as UserTaskModel)
-        }
-    }
 }

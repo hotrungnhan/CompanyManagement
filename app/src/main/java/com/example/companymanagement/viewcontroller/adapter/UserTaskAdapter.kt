@@ -4,12 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
 import com.example.companymanagement.model.UserTaskModel
+import com.example.companymanagement.utils.DateParser.Companion.toHumanReadDate
 
-class UserTaskAdapter(private val taskList: ArrayList<UserTaskModel>)
-    : RecyclerView.Adapter<UserTaskAdapter.TaskHoler>() {
+class UserTaskAdapter() : RecyclerView.Adapter<UserTaskAdapter.TaskHoler>() {
+
+    var taskList: MutableList<UserTaskModel>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserTaskAdapter.TaskHoler {
         val itemView = LayoutInflater.from(parent.context).
@@ -18,20 +21,24 @@ class UserTaskAdapter(private val taskList: ArrayList<UserTaskModel>)
         return TaskHoler(itemView)
     }
 
+    fun setData(data: MutableList<UserTaskModel>) {
+        this.taskList = data;
+
+        this.notifyDataSetChanged()
+    }
+
     override fun onBindViewHolder(holder: UserTaskAdapter.TaskHoler, position: Int) {
 
-        val task: UserTaskModel = taskList[position]
+        val task: UserTaskModel = taskList!![position]
         holder.Content.text = task.Content
-        holder.Deadline.text = task.Deadline
+        holder.Deadline.text = task.Deadline?.toHumanReadDate().toString()
         holder.Title.text = task.Title
         holder.Sender.text = task.Sender
-        holder.SentDate.text = task.SentDate?.toDate().toString()
+        holder.SentDate.text = task.SentDate?.toHumanReadDate().toString()
         holder.Status.text = task.Status
     }
 
-    override fun getItemCount(): Int {
-        return taskList.size
-    }
+    override fun getItemCount(): Int = taskList?.size ?: 0;
 
     class TaskHoler (itemView: View) : RecyclerView.ViewHolder(itemView){
         val Content: TextView = itemView.findViewById(R.id.task_content)
