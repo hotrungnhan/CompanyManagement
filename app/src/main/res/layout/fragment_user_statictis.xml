@@ -1,220 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F2F2F2">
 
-    <TextView
-        android:id="@+id/textview_title"
-        android:layout_width="300dp"
-        android:layout_height="27dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="45dp"
-        android:fontFamily="sans-serif-light"
-        android:gravity="left"
-        android:text="Thống kê Checkin tháng 8/2021"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:textStyle="bold"></TextView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp">
 
-    <TextView
-        android:id="@+id/textview_subtitle"
-        android:layout_width="137dp"
-        android:layout_height="15dp"
-        android:layout_below="@id/textview_title"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="208dp"
-        android:fontFamily="sans-serif-light"
-        android:gravity="left"
-        android:text="Lịch sử checkin trong tháng"
-        android:textSize="11dp"></TextView>
-
-    <androidx.cardview.widget.CardView
-        app:cardElevation="4dp"
-        app:cardCornerRadius="8dp"
-        android:id="@+id/cardview_item1"
-        android:layout_width="345dp"
-        android:layout_height="92dp"
-        android:layout_below="@id/textview_subtitle"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="15dp">
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="43dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="42dp"
-            android:layout_marginBottom="23dp">
-            <TableRow>
-                <TextView
-                    android:layout_width="137dp"
-                    android:layout_height="27dp"
-                    android:text="0/0"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    android:textColor="#8CE857"
-                    android:textSize="20dp"
-                    android:textStyle="bold">
-                </TextView>
-
-                <TextView
-                    android:layout_width="137dp"
-                    android:layout_height="27dp"
-                    android:layout_weight="1"
-                    android:text="0"
-                    android:textAlignment="center"
-                    android:textColor="#E3E857"
-                    android:textSize="20dp"
-                    android:textStyle="bold"></TextView>
-
-                <TextView
-                    android:layout_width="137dp"
-                    android:layout_height="27dp"
-                    android:text="0"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    android:textSize="20dp"
-                    android:textColor="#E86657"
-                    android:textStyle="bold">
-                </TextView>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:layout_width="137dp"
-                    android:layout_height="27dp"
-                    android:text="Ngày công"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="14dp"
-                    android:textStyle="bold">
-                </TextView>
-
-                <TextView
-                    android:layout_width="137dp"
-                    android:layout_height="27dp"
-                    android:layout_weight="1"
-                    android:text="Đi muộn"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="14dp"
-                    android:textStyle="bold"></TextView>
-
-                <TextView
-                    android:layout_width="137dp"
-                    android:layout_height="27dp"
-                    android:text="Nghỉ làm"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    android:textSize="14dp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold">
-                </TextView>
-            </TableRow>
-        </TableLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        app:cardElevation="4dp"
-        app:cardCornerRadius="8dp"
-        android:id="@+id/cardview_item2"
-        android:layout_width="345dp"
-        android:layout_height="39dp"
-        android:layout_below="@id/cardview_item1"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:elevation="6dp">
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/textview_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp">
-            <TextView
-                android:layout_width="207dp"
-                android:layout_height="19dp"
-                android:layout_marginStart="15dp"
-                android:text="Số ngày phép còn lại trong năm"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                >
-            </TextView>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="start"
+            android:text="Thống kê Checkin tháng 8/2021"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="137dp"
-                android:layout_height="19dp"
-                android:layout_marginEnd="22dp"
-                android:text="20"
-                android:textAlignment="textEnd"
-                android:textColor="@color/black"
-                android:textStyle="bold"></TextView>
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="start"
+            android:text="Lịch sử checkin trong tháng"
+            android:textSize="12sp" />
 
-    </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_item1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp">
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/datework"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="0/0"
+                        android:textAlignment="center"
+                        android:textColor="#8CE857"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/datelate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textColor="#E3E857"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/dateabsent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textColor="#E86657"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:text="Ngày công"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Đi muộn"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Nghỉ làm"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </TableRow>
+            </TableLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Số ngày phép còn lại trong năm"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/datecanabsent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="20"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
-    <TextView
-        android:id="@+id/textview_calendartitle"
-        android:layout_width="300dp"
-        android:layout_height="27dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="231dp"
-        android:gravity="left"
-        android:text="Lịch checkin"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_below="@id/cardview_item2"
-        android:fontFamily="sans-serif-light">
-    </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="start"
+            android:text="Lịch checkin"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textview_calendarsubtitle"
-        android:layout_width="137dp"
-        android:layout_height="15dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="200dp"
-        android:gravity="left"
-        android:text="Chọn ngày để xem "
-        android:textSize="11dp"
-        android:layout_below="@id/textview_calendartitle"
-        android:fontFamily="sans-serif-light">
-    </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="3dp"
+            android:fontFamily="sans-serif-light"
+            android:text="Chọn ngày để xem "
+            android:textSize="12sp" />
 
-    <CalendarView
-        android:layout_width="319dp"
-        android:layout_height="225dp"
-        android:layout_below="@id/textview_calendarsubtitle"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="73dp"
-        android:layout_marginEnd="28dp"
-        >
-
-    </CalendarView>
-
-
-</RelativeLayout>
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:mcv_showOtherDates="other_months" />
+    </LinearLayout>
+</ScrollView>
