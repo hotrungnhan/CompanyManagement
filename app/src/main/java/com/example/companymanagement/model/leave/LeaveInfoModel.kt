@@ -12,25 +12,25 @@ import java.util.*
 class LeaveInfoModel(
     @get: PropertyName("so_ngay_xin_nghi")
     @set: PropertyName("so_ngay_xin_nghi")
-    var day_leave: Int? = null,
+    var day_leave: Int = 0,
     @get :PropertyName("time")
     @set:PropertyName("time")
-    var time_start: String? = null,
+    var time_start: String = "",
     @get: PropertyName("Reason")
     @set: PropertyName("Reason")
-    var reason: String? = null,
+    var reason: String = "",
     @get: PropertyName("id_owner")
     @set: PropertyName("id_owner")
-    var Owneruid: String? = null,
+    var Owneruid: String = "",
     @get: PropertyName("user_name")
     @set: PropertyName("user_name")
-    var name: String? = null,
-    @get: PropertyName("ckeck")
-    @set: PropertyName("ckeck")
-    var check_Result: Boolean? = false
+    var name: String = "",
+    @get: PropertyName("state")
+    @set: PropertyName("state")
+    var check_Result: String = "undone",
 
 
-) {
+    ) {
     @DocumentId
     val luid: String? = null
 

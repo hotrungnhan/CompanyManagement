@@ -127,7 +127,7 @@
         <item>Lịch sử</item>
     </string-array>
     <string-array name="manager_leave_tab_name">
-        <item>Đăng kí</item>
-        <item>Xét duyệt</item>
+        <item>Đơn cần duyệt</item>
+        <item>Lịch sử</item>
     </string-array>
 </resources>

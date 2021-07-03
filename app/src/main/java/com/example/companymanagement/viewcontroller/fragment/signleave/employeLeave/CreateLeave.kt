@@ -10,24 +10,23 @@ import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import com.example.companymanagement.R
 import com.example.companymanagement.model.leave.LeaveInfoModel
-import com.example.companymanagement.viewcontroller.adapter.LeaveRecyclerViewAdapter
 import com.example.companymanagement.viewcontroller.fragment.mainworkspace.ListUserParticipantViewModel
 import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class SignLeave : Fragment() {
-    private var leaveviewmodel: LeaveViewModel = LeaveViewModel()
-    private var managerleaveviewmodel: ManagerLeaveViewModel = ManagerLeaveViewModel()
-    private lateinit var userlistppviewmodel: ListUserParticipantViewModel;
+class CreateLeave : Fragment() {
+    private lateinit var leaveviewmodel: LeaveViewModel;
     private lateinit var userinfoviewmodel: UserInfoViewModel;
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
+        leaveviewmodel =
+            ViewModelProvider(this.requireActivity()).get(LeaveViewModel::class.java)
         userinfoviewmodel =
             ViewModelProvider(this.requireActivity()).get(UserInfoViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_sign_leave, container, false)
@@ -63,16 +62,19 @@ class SignLeave : Fragment() {
         val day_leave: EditText = view.findViewById(R.id.txt_day_leave)
         val editTime = view.findViewById<TextView>(R.id.txt_time)
         val reason: EditText = view.findViewById(R.id.editLido)
-        val adapter = LeaveRecyclerViewAdapter()
         btn_nop.setOnClickListener {
             try {
-            leaveviewmodel?.addleave(LeaveInfoModel(day_leave.text.toString().toInt(),editTime.text.toString(),reason.text.toString(),userinfoviewmodel.info.value?.uid!!,userinfoviewmodel.info.value?.Name,false))
-            day_leave.text.clear()
-            reason.text.clear()
+                leaveviewmodel?.addleave(LeaveInfoModel(day_leave.text.toString().toInt(),
+                    editTime.text.toString(),
+                    reason.text.toString(),
+                    userinfoviewmodel.info.value?.uid!!,
+                    userinfoviewmodel.info.value?.Name.toString(),
+                    "undone"))
+                day_leave.text.clear()
+                reason.text.clear()
 
-            Toast.makeText(context, "da them thanh cong", Toast.LENGTH_SHORT).show()
-        }
-            catch (err: Exception) {
+                Toast.makeText(context, "da them thanh cong", Toast.LENGTH_SHORT).show()
+            } catch (err: Exception) {
                 toastEditfaild(err.message.toString())
             }
         }
