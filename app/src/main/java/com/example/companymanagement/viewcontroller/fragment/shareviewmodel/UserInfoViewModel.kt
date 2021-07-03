@@ -3,8 +3,8 @@ package com.example.companymanagement.viewcontroller.fragment.shareviewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.companymanagement.model.UserInfoModel
-import com.example.companymanagement.model.UserInfoRepository
+import com.example.companymanagement.model.info.UserInfoModel
+import com.example.companymanagement.model.info.UserInfoRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch

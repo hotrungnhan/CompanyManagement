@@ -97,6 +97,8 @@ er text -->
     <string name="hone_typing">Nhập liệu</string>
     <string name="hone_workspace">Workspace</string>
     <string name="more_setting">Cài Đặt</string>
+    <string name="salary_chart">Biểu đồ lương</string>
+    <string name="qrscaner_string">Quét QR để điểm danh</string>
     <string name="salary_chart">BIỂU ĐỒ LƯƠNG</string>
     <string name="content_description_favorite">Thích nè</string>
     <string name="content_description_search">Tìm kiếm</string>

@@ -9,9 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
-import android.widget.LinearLayout
-import androidx.annotation.RequiresApi
-
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
@@ -23,17 +21,16 @@ import java.time.LocalDate
 @Suppress("DEPRECATION")
 class MainProject : Fragment() {
     private lateinit var viewModelMainProject: MainProjectViewModel
-
+    private lateinit var taskModel:UserTaskViewModel
     val user = FirebaseAuth.getInstance().currentUser
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        taskModel = ViewModelProvider(this).get(UserTaskViewModel::class.java)
         viewModelMainProject = ViewModelProvider(this).get(MainProjectViewModel::class.java)
-        Log.d("User id", user?.uid.toString())
-        val root = inflater.inflate(R.layout.fragment_main_project, container, false)
-        return root
+        return inflater.inflate(R.layout.fragment_main_project, container, false)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -73,6 +70,23 @@ class MainProject : Fragment() {
 
             Log.d("selectedDate", year.toString()+" " + month.toString()+" " + dayOfMonth.toString())
 
+//        projectCalendar = view.findViewById(R.id.project_calendar)
+//        val taskRecyclerView: RecyclerView = view.findViewById(R.id.task_recyclerView)
+//        taskRecyclerView.layoutManager = taskLayoutManager
+//        //taskRecyclerView.setHasFixedSize(true)
+//
+//        taskRecyclerView.adapter = userTaskAdapter
+//
+//        this.taskLayoutManager.orientation = RecyclerView.VERTICAL
+//
+//        projectCalendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
+//            val message = "Selected date is: " + dayOfMonth +"/" + (month+1) +"/" + year
+//            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+////        }
+//
+//        taskModel.TaskList.observe(viewLifecycleOwner) {
+//            userTaskAdapter.setData(it)
+//        }
             viewModelMainProject.taskList.observe(viewLifecycleOwner){
                 if(it == null || it.size==0){
                     Linearview.visibility= View.VISIBLE

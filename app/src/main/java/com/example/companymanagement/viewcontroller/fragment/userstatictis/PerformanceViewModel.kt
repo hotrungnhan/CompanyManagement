@@ -26,10 +26,11 @@ class PerformanceViewModel : ViewModel() {
     var repo = PerformanceRepository(FirebaseFirestore.getInstance().collection("performance"))
 
     @RequiresApi(Build.VERSION_CODES.O)
+
     fun retrivePerformance(uuid: String, month: String, year: String) {
         viewModelScope.launch {
             per.postValue(repo.getDocByMonth(uuid,month,year));
-            Log.d("Performance", per.value.toString())
+            Log.d("Data", per.value.toString())
         }
     }
 }

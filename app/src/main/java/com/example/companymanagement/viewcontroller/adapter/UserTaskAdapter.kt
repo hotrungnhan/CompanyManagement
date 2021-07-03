@@ -9,24 +9,21 @@ import com.example.companymanagement.model.UserTaskModel
 import com.example.companymanagement.utils.DateParser.Companion.toHumanReadDate
 
 class UserTaskAdapter() : RecyclerView.Adapter<UserTaskAdapter.TaskHoler>() {
-
     var taskList: MutableList<UserTaskModel>? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserTaskAdapter.TaskHoler {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserTaskAdapter.TaskHolder {
         val itemView = LayoutInflater.from(parent.context).
         inflate(R.layout.item_task,parent,false)
 
-        return TaskHoler(itemView)
+        return TaskHolder(itemView)
     }
-
+    
     fun setData(data: MutableList<UserTaskModel>) {
         this.taskList = data;
-
         this.notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: UserTaskAdapter.TaskHoler, position: Int) {
-
         val task: UserTaskModel = taskList!![position]
         holder.Content.text = task.Content
         holder.Deadline.text = task.Deadline?.toHumanReadDate().toString()
@@ -35,9 +32,9 @@ class UserTaskAdapter() : RecyclerView.Adapter<UserTaskAdapter.TaskHoler>() {
         holder.SentDate.text = task.SentDate?.toHumanReadDate().toString()
         holder.Status.text = task.Status
     }
-
-    override fun getItemCount(): Int = taskList?.size ?: 0;
-    class TaskHoler (itemView: View) : RecyclerView.ViewHolder(itemView){
+    
+   override fun getItemCount(): Int = taskList?.size ?: 0;
+   class TaskHoler (itemView: View) : RecyclerView.ViewHolder(itemView){
         val Content: TextView = itemView.findViewById(R.id.task_content)
         val Deadline: TextView = itemView.findViewById(R.id.task_deadline)
         val Sender: TextView = itemView.findViewById(R.id.task_sender)

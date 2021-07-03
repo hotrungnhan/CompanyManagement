@@ -61,20 +61,24 @@ class PerformanceRepository (var col: CollectionReference){
     }
     suspend fun getDocByMonth(uuid: String, month: String,year : String) : PerformanceModel? {
 
-        val startCal = Calendar.getInstance()
-        startCal.set(year.toInt(), month.toInt() - 1, 1,0,0,0)
-        val start = startCal.time
-        val endCal = Calendar.getInstance()
-        endCal.set(year.toInt(), month.toInt(), 1,0,0,0)
-        val end = endCal.time
-//        Log.d("Performance",start.toString())
-//        Log.d("Performance",end.toString())
+        val Cal = Calendar.getInstance()
+
+        Cal.set(year.toInt(), month.toInt() - 1, 1,0,0,0)
+        val start = Cal.time
+
+        Cal.set(year.toInt(), month.toInt(), 1,0,0,0)
+        val end = Cal.time
+
+        Log.d("Performance",start.toString())
+        Log.d("Performance",end.toString())
+        Log.d("Performance",uuid)
+
         val ref = col.whereEqualTo("owner_uuid", uuid)
             .whereGreaterThanOrEqualTo("create_time", start)
-        //    .whereLessThan("create_time", end).get().await()
         val ref2 = ref.whereLessThan("create_time", end)
             .orderBy("create_time", Query.Direction.DESCENDING).get().await()
 
+        Log.d("Performance",ref2.size().toString())
         if(ref2.size() == 0)
         {
             val dummy = PerformanceModel(uuid, 0, 0, 0, 0)

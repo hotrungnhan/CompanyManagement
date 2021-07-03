@@ -66,11 +66,11 @@ class QRScanner : Fragment() {
                                         .document(currentuser?.uid!!).get().addOnSuccessListener {
                                             if (it.exists())
                                                 toast("Bạn đã checkin hôm nay rồi vào lúc ${
-                                                    it.toObject(CheckinModel::class.java)?.check_date?.toHumanReadTime()
+                                                    it.toObject(CheckinModel::class.java)?.checked_date?.toHumanReadTime()
                                                 }")
                                             else {
                                                 it.reference.set(check).addOnSuccessListener {
-                                                    toast("Checking thành công ${check.check_date.toHumanDateAndTime()}")
+                                                    toast("Checking thành công ${check.checked_date?.toHumanDateAndTime()}")
                                                     goback.postValue(true)
                                                 }
                                             }
