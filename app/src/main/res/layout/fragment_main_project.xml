@@ -39,7 +39,8 @@
                     android:layout_height="wrap_content"
                     android:focusedMonthDateColor="@color/purple_500"
                     android:selectedWeekBackgroundColor="@color/page_title"
-                    android:weekSeparatorLineColor="@color/purple_500">
+                    android:weekSeparatorLineColor="@color/purple_500"
+                    >
                 </CalendarView>
 
             </androidx.cardview.widget.CardView>
