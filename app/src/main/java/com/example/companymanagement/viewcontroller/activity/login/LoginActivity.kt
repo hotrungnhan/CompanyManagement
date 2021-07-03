@@ -17,12 +17,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //debug
-        if (resources.getBoolean(R.bool.disable_login) == false) {
-            finish()
-            val loginintent = Intent(this, MainActivity::class.java)
-            startActivity(loginintent)
-        }
-
         setContentView(R.layout.activity_login)
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)

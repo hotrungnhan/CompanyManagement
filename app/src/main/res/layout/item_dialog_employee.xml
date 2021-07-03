@@ -67,7 +67,8 @@
                 android:textSize="16sp"
                 android:layout_marginStart="30dp"
                 android:singleLine="true"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:imeOptions="actionDone"/>
         </LinearLayout>
 
         <LinearLayout
@@ -95,7 +96,8 @@
                 android:textSize="16sp"
                 android:layout_marginStart="30dp"
                 android:singleLine="true"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:imeOptions="actionDone"/>
         </LinearLayout>
 
         <LinearLayout
@@ -123,7 +125,8 @@
                 android:textSize="16sp"
                 android:layout_marginStart="30dp"
                 android:singleLine="true"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:imeOptions="actionDone"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -150,7 +153,8 @@
                 android:textSize="16sp"
                 android:layout_marginStart="30dp"
                 android:singleLine="true"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:imeOptions="actionDone"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -177,7 +181,8 @@
                 android:textSize="16sp"
                 android:layout_marginStart="30dp"
                 android:singleLine="true"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:imeOptions="actionDone"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -203,7 +208,8 @@
                 android:textSize="16sp"
                 android:layout_marginStart="30dp"
                 android:singleLine="true"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:imeOptions="actionDone"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -230,7 +236,8 @@
                 android:textSize="16sp"
                 android:layout_marginStart="30dp"
                 android:singleLine="true"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:imeOptions="actionDone"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -257,7 +264,8 @@
                 android:textSize="16sp"
                 android:layout_marginStart="30dp"
                 android:singleLine="true"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:imeOptions="actionDone"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -284,7 +292,8 @@
                 android:textSize="16sp"
                 android:layout_marginStart="30dp"
                 android:singleLine="true"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:imeOptions="actionDone"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -311,7 +320,8 @@
                 android:textSize="16sp"
                 android:layout_marginStart="30dp"
                 android:singleLine="true"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:imeOptions="actionDone"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -338,7 +348,8 @@
                 android:textSize="16sp"
                 android:layout_marginStart="30dp"
                 android:singleLine="true"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:imeOptions="actionDone"/>
         </LinearLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>

@@ -9,8 +9,4 @@
         <item name="android:orientation">vertical</item>
         <item name="android:paddingHorizontal">20dp</item>
     </style>
-    <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
-        <item name="android:textColor">#FF4081</item>
-        <item name="android:textColorPrimary">#FF4081</item>
-    </style>
 </resources>

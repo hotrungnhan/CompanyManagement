@@ -45,7 +45,7 @@ data class UserInfoModel(
     @get: PropertyName("idcard_create_location")
     @set: PropertyName("idcard_create_location")
     var IDCardCreateLocation: String? = null,
-) {
+)  {
     @DocumentId
     val uid: String? = null
 

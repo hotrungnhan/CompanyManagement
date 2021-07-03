@@ -1,8 +1,6 @@
 package com.example.companymanagement.model
 
-import android.util.Log
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.coroutines.tasks.await
 import java.util.*
 
@@ -29,38 +27,5 @@ class UserInfoRepository(var col: CollectionReference) {
 
     suspend fun deleteDoc(info: UserInfoModel) {
         col.document(info.uid!!).delete().await()
-    }
-
-    suspend fun getNameById(uuid : String) : String {
-        val foundUser = col.document(uuid).get().await().toObject(UserInfoModel::class.java)
-        return if(foundUser != null){
-            foundUser.Name!!
-        } else
-            "Invalid"
-    }
-    suspend fun getNameList() : ArrayList<String>{
-        var result = arrayListOf<String>()
-        val snapshots = col.get().await().documents.map{
-            it.toObject(UserInfoModel::class.java)
-        }
-        for(item in snapshots){
-            if (item != null) {
-                item.Name?.let { result.add(it) }
-            }
-        }
-        return result
-    }
-
-    suspend fun getIdByName(name : String) : MutableList<String> {
-        val result = mutableListOf<String>()
-        val snapshots = col.whereEqualTo("user_name", name).get().await().documents.map {
-            it.toObject(UserInfoModel::class.java)
-        }
-        for(item in snapshots){
-            if(item != null){
-                item.uid?.let{ result.add(it)}
-            }
-        }
-        return result
     }
 }
