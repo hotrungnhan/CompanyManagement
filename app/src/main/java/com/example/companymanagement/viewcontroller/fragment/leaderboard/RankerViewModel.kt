@@ -1,6 +1,7 @@
 package com.example.companymanagement.viewcontroller.fragment.leaderboard
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,18 +19,15 @@ import java.time.YearMonth
 @RequiresApi(Build.VERSION_CODES.O)
 class RankerViewModel : ViewModel() {
     var rankList = MutableLiveData<List<RankerModel?>>()
-    var champlist = MutableLiveData<List<RankerModel?>>()
 
     var ref = FirebaseFirestore.getInstance().collection("ranking")
     var repo = RankingRepository(ref)
 
-    var salaryRef = FirebaseFirestore.getInstance().collection("salary")
-    var salaryRepo = SalaryRepository(salaryRef)
 
     fun retrieveLeaderBoardIn(year : Int, month: Int) {
         viewModelScope.launch {
             rankList.postValue(repo.loadLeaderBoardIn(year, month))
-            champlist.postValue(rankList.value?.take(3))
+
         }
     }
 

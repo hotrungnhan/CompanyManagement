@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -20,6 +19,8 @@ import com.example.companymanagement.R
 import com.example.companymanagement.databinding.FragmentLeaderboardBinding
 import com.example.companymanagement.model.ranking.RankerModel
 import com.example.companymanagement.viewcontroller.adapter.LeaderBoardAdapter
+import com.google.android.material.imageview.ShapeableImageView
+import com.squareup.picasso.Picasso
 import java.time.YearMonth
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -51,6 +52,12 @@ class LeaderboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val usersList = view.findViewById<RecyclerView>(R.id.rankers_list)
+
+
+        val champ1 = view.findViewById<ShapeableImageView>(R.id.champ1_avatar)
+        val champ2 = view.findViewById<ShapeableImageView>(R.id.champ2_avatar)
+        val champ3 = view.findViewById<ShapeableImageView>(R.id.champ3_avatar)
+
 
         val monthDisplay = view.findViewById<EditText>(R.id.leaderboard_display_month)
         monthDisplay.setText(YearMonth.now().monthValue.toString())
@@ -150,7 +157,24 @@ class LeaderboardFragment : Fragment() {
                 adapter = leaderboardAdapter
             }
 
+            if(it.size >= 3){
+                Picasso.get().load(it[0].OwnerAvatar).resize(100, 100).into(champ1)
+                Picasso.get().load(it[1].OwnerAvatar).resize(90, 90).into(champ2)
+                Picasso.get().load(it[2].OwnerAvatar).resize(80, 80).into(champ3)
+            }
+            else{
+                if(it.size == 2){
+                    Picasso.get().load(it[0].OwnerAvatar).resize(100, 100).into(champ1)
+                    Picasso.get().load(it[1].OwnerAvatar).resize(90, 90).into(champ2)
+                }
+                if(it.size == 1){
+                    Picasso.get().load(it[0].OwnerAvatar).resize(100, 100).into(champ1)
+                }
+            }
+
+
         })
+
 
     }
     private fun alertInvalidInput(edit : EditText, message : String, resetInput : String){
@@ -165,4 +189,5 @@ class LeaderboardFragment : Fragment() {
         }
 
     }
+
 }
