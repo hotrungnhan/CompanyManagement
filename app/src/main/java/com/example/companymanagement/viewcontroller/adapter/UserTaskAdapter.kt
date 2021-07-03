@@ -32,7 +32,7 @@ class UserTaskAdapter() : RecyclerView.Adapter<UserTaskAdapter.TaskHoler>() {
         holder.Content.text = task.Content
         holder.Deadline.text = task.Deadline?.toHumanReadDate().toString()
         holder.Title.text = task.Title
-        holder.Sender.text = task.Sender
+        holder.SenderName.text = task.SenderName
         holder.SentDate.text = task.SentDate?.toHumanReadDate().toString()
         holder.Status.text = task.Status
     }
@@ -42,7 +42,7 @@ class UserTaskAdapter() : RecyclerView.Adapter<UserTaskAdapter.TaskHoler>() {
     class TaskHoler (itemView: View) : RecyclerView.ViewHolder(itemView){
         val Content: TextView = itemView.findViewById(R.id.task_content)
         val Deadline: TextView = itemView.findViewById(R.id.task_deadline)
-        val Sender: TextView = itemView.findViewById(R.id.task_sender)
+        val SenderName: TextView = itemView.findViewById(R.id.task_sender)
         val SentDate: TextView = itemView.findViewById(R.id.task_sentDate)
         val Status: TextView = itemView.findViewById(R.id.task_status)
         val Title: TextView = itemView.findViewById(R.id.task_title)
