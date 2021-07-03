@@ -15,7 +15,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/text_page_title_sub_heading"
-            android:text="something" />
+            android:text="Công cu quản lý" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -54,47 +54,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
+                        android:padding="10dp"
                         tools:itemCount="5"
-
                         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         tools:listitem="@layout/item_cardview_button"
                         tools:orientation="vertical"
                         tools:scrollbars="vertical"
                         tools:spanCount="3" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                style="@style/cardview_styles"
-                app:cardCornerRadius="10dp">
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:layout_marginVertical="10dp"
-                        android:gravity="center"
-                        android:text="@string/hone_typing"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/grid_view_container_typing"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:nestedScrollingEnabled="false"
-                        tools:itemCount="5"
-                        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                        tools:listitem="@layout/item_cardview_button"
-                        tools:orientation="vertical"
-                        tools:scrollbars="vertical"
-                        tools:spanCount="3"></androidx.recyclerview.widget.RecyclerView>
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
@@ -123,6 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:nestedScrollingEnabled="false"
+                        android:padding="10dp"
                         tools:itemCount="5"
                         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         tools:listitem="@layout/item_cardview_button"

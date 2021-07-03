@@ -1,5 +1,4 @@
 package com.example.companymanagement.viewcontroller.adapter
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +37,6 @@ class UserTaskAdapter() : RecyclerView.Adapter<UserTaskAdapter.TaskHoler>() {
     }
 
     override fun getItemCount(): Int = taskList?.size ?: 0;
-
     class TaskHoler (itemView: View) : RecyclerView.ViewHolder(itemView){
         val Content: TextView = itemView.findViewById(R.id.task_content)
         val Deadline: TextView = itemView.findViewById(R.id.task_deadline)

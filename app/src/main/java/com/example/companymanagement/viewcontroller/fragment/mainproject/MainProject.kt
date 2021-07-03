@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
@@ -18,9 +19,9 @@ import com.example.companymanagement.viewcontroller.adapter.UserTaskAdapter
 import com.google.firebase.auth.FirebaseAuth
 import java.time.LocalDate
 
+
 @Suppress("DEPRECATION")
 class MainProject : Fragment() {
-
     private lateinit var viewModelMainProject: MainProjectViewModel
 
     val user = FirebaseAuth.getInstance().currentUser

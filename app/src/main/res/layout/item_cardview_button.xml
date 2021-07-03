@@ -12,15 +12,19 @@
         android:id="@+id/cardview_img"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:adjustViewBounds="true"
         app:srcCompat="@drawable/bg_launcher_background" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/cardview_text"
-        android:layout_width="wrap_content"
+        android:layout_width="75dp"
         android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:ellipsize="marquee"
         android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
         android:singleLine="true"
         android:text="button"
         android:textColor="@color/black" />/

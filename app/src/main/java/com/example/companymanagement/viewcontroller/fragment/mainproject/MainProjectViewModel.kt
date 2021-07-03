@@ -29,5 +29,4 @@ class MainProjectViewModel : ViewModel() {
             Log.d("Task List", taskList.value.toString())
         }
     }
-
 }

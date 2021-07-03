@@ -18,6 +18,10 @@ data class UserInfoModel(
     @set: PropertyName("phone_number")
     var PhoneNumber: String? = null,
 
+    @get: PropertyName("avatar_url")
+    @set: PropertyName("avatar_url")
+    var AvatarURL: String? = null,
+
     @get: PropertyName("position")
     @set: PropertyName("position")
     var Position: String? = null,
@@ -28,7 +32,7 @@ data class UserInfoModel(
 
     @get: PropertyName("gender")
     @set: PropertyName("gender")
-    var Gender: Boolean? = null,//true for male false for woman
+    var Gender: String? = null,
 
     @get: PropertyName("id_card_number")
     @set: PropertyName("id_card_number")
@@ -61,4 +65,5 @@ data class UserInfoModel(
         CreateTime = Date();
         UpdateTime = Date();
     }
+
 }
