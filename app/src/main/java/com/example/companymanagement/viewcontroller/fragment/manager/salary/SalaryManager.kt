@@ -75,14 +75,7 @@ class SalaryManager : Fragment()  {
                     // Handle search icon press
                     true
                 }
-                R.id.detail -> {
-                    // Handle more item (inside overflow menu) press
-                    true
-                }
-                R.id.shortcut -> {
 
-                    true
-                }
                 else -> false
             }
         }
