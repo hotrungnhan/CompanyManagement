@@ -35,7 +35,7 @@ class MainHome : Fragment() {
     fun createdata() {
         listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.employee_manager,
-            "Employee Manager"))
+            "Employee ManagerContainer"))
         listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.user_salary,
             "Salary"))

@@ -8,28 +8,64 @@ import com.example.companymanagement.model.leave.LeaveInfoRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
-class ManagerLeaveViewModel: ViewModel() {
-    var LeaveList : MutableLiveData<MutableList<LeaveInfoModel>> = MutableLiveData()
+class ManagerLeaveViewModel : ViewModel() {
+    var LeaveList: MutableLiveData<MutableList<LeaveInfoModel>> = MutableLiveData()
     var rep = LeaveInfoRepository(FirebaseFirestore.getInstance().collection("leave"))
-    init{
+    private val lazyload: Long = 5
+    fun getLeaveResolve() {
         viewModelScope.launch {
-            LeaveList.postValue(rep.getLeave(10))
+            LeaveList.postValue(rep.getLeaveResolved(lazyload))
         }
     }
-    fun addleave(leave: LeaveInfoModel){
+
+    fun getLeaveUnresolve() {
         viewModelScope.launch {
-            val newdata1 = rep.addDoc(leave)
-            if (newdata1 != null)
-            {
-                LeaveList.value?.add(0,newdata1)
-                LeaveList.postValue(LeaveList.value)
+            LeaveList.postValue(rep.getLeaveUnresolve(lazyload))
+        }
+    }
+
+    fun lazyLoadUnresolve(): MutableLiveData<Int> {
+        val result = MutableLiveData<Int>()
+        viewModelScope.launch {
+            val newdata = rep.getLeaveUnresolve(lazyload, LeaveList.value?.last()!!);
+            if (newdata != null) {
+                LeaveList.value?.addAll(newdata)
+                result.postValue(newdata.size)
             }
+
+        }
+        return result;
+    }
+
+    fun lazyLoadResolve(): MutableLiveData<Int> {
+        val result = MutableLiveData<Int>()
+        viewModelScope.launch {
+            val newdata = rep.getLeaveResolved(lazyload, LeaveList.value?.last()!!);
+            if (newdata != null) {
+                LeaveList.value?.addAll(newdata)
+                result.postValue(newdata.size)
+            }
+
+        }
+        return result;
+    }
+
+    fun accept(data: LeaveInfoModel) {
+        viewModelScope.launch {
+            rep.updateDoc("accept", data)
+            LeaveList.value?.find { it.luid == data.luid }?.check_Result = "accept"
+            LeaveList.postValue(LeaveList.value)
+
         }
     }
-    fun update(data: LeaveInfoModel){
+
+    fun reject(data: LeaveInfoModel) {
         viewModelScope.launch {
-            rep.updateDoc(data)
+            rep.updateDoc("reject", data)
+            LeaveList.value?.find { it.luid == data.luid }?.check_Result = "reject"
             LeaveList.postValue(LeaveList.value)
         }
     }
+
+
 }
