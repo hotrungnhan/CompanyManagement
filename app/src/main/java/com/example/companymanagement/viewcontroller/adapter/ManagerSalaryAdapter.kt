@@ -3,6 +3,7 @@ package com.example.companymanagement.viewcontroller.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +28,7 @@ class ManagerSalaryAdapter : RecyclerView.Adapter<ManagerSalaryAdapter.SalaryVie
 
     override fun onBindViewHolder(holder: SalaryViewHolder, position: Int) {
         val salary = salaries[position]
-
+        var expanded = salary.expanded
 
         holder.name.text = salary.OwnerName
 
@@ -36,7 +37,25 @@ class ManagerSalaryAdapter : RecyclerView.Adapter<ManagerSalaryAdapter.SalaryVie
 
         holder.salary.text = VietnamDong(BigDecimal(salary.TotalSalary!!)).toString()
 
-        //ToDo bind avatar : holder.avatar
+        holder.basic.text = VietnamDong(BigDecimal(salary.BasicSalary!!)).toString()
+        holder.task.text = VietnamDong(BigDecimal(salary.TaskBonus!!)).toString()
+        holder.rank.text = VietnamDong(BigDecimal(salary.RankBonus!!)).toString()
+        holder.checkin.text = VietnamDong(BigDecimal(salary.CheckinFaultCharge!!)).toString()
+        holder.tax.text = VietnamDong(BigDecimal(salary.TaxDeduction!!)).toString()
+        holder.bonus.text = VietnamDong(BigDecimal(salary.TotalBonus!!)).toString()
+
+        holder.subItem.visibility = if (expanded){
+            View.VISIBLE
+        } else{
+            View.GONE
+        }
+
+        holder.itemView.setOnClickListener{
+            var currentExpanded = salary.expanded
+            salary.expanded = !currentExpanded
+            notifyItemChanged(position)
+        }
+
     }
 
     fun addSalaries(salaries: List<SalaryModel>) {
@@ -53,6 +72,14 @@ class ManagerSalaryAdapter : RecyclerView.Adapter<ManagerSalaryAdapter.SalaryVie
         val month: TextView = itemView.findViewById(R.id.mn_salary_month)
         val salary: TextView = itemView.findViewById(R.id.mn_salary_amount)
 
+        val basic: TextView = itemView.findViewById(R.id.mn_salary_basic)
+        val task: TextView = itemView.findViewById(R.id.mn_salary_task)
+        val rank: TextView = itemView.findViewById(R.id.mn_salary_rank)
+        val checkin: TextView = itemView.findViewById(R.id.mn_salary_checkin)
+        val tax: TextView = itemView.findViewById(R.id.mn_salary_tax)
+        val bonus: TextView = itemView.findViewById(R.id.mn_salary_bonus)
+        val subItem: LinearLayout = itemView.findViewById(R.id.sub_salary)
     }
+
 
 }

@@ -61,6 +61,7 @@ data class SalaryModel (
     @set: PropertyName("end_time")
     var EndTime: Date? = null
 
+    var expanded = false
 
     init {
         CreateTime = Date()
