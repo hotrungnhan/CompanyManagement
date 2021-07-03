@@ -14,9 +14,9 @@ class UserTaskRepository(var col: CollectionReference) {
     suspend fun addNewTask(task: UserTaskModel): UserTaskModel? {
         return col.add(task).await().get().await().toObject(UserTaskModel::class.java)
     }
-    suspend fun getTask(count: Long = 10,uuid: String): MutableList<UserTaskModel> {
+    suspend fun getTask(uuid: String): MutableList<UserTaskModel> {
         return col.whereArrayContains("IDReceiver","$uuid")
-            .limit(count).get().await()
+            .get().await()
             .toObjects(UserTaskModel::class.java)
     }
 }

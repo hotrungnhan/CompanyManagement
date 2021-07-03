@@ -18,7 +18,7 @@ class MainProjectViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            TaskList.value = repo.getTask(10,id)
+            TaskList.value = repo.getTask(id)
             Log.d("Data", TaskList.value.toString())
         }
     }

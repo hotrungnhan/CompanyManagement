@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.companymanagement.model.info.UserInfoModel
 import com.example.companymanagement.model.task.UserTaskRepository
 import com.example.companymanagement.model.task.UserTaskModel
 import com.google.firebase.auth.FirebaseAuth
@@ -19,7 +20,7 @@ class UserTaskViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            TaskList.value = repo.getTask(10,id)
+            TaskList.value = repo.getTask(id)
             Log.d("Data", TaskList.value.toString())
         }
     }
