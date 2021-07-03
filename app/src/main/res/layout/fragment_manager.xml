@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    >
+    tools:context=".viewcontroller.fragment.employe.EmployeManager">
 
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/leaveTab"
+        android:id="@+id/managerleaveTab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -17,7 +17,7 @@
         app:tabMode="scrollable" />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/leavepage"
+        android:id="@+id/managerleavepage"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
