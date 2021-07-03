@@ -13,13 +13,12 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class EmployeManager : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        val root = inflater.inflate(R.layout.fragment_tablayout_pagerviewer, container, false)
+        val root = inflater.inflate(R.layout.fragment_tablayout_employeview, container, false)
         val pager = root.findViewById<ViewPager2>(R.id.employee_manager_viewpager)
         val tablayout = root.findViewById<TabLayout>(R.id.employee_manager_tab_layout)
         pager.adapter = EmployeViewPagerApdapter(this);

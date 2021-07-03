@@ -19,7 +19,6 @@ class UserInfoRepository(var col: CollectionReference) {
             doc = col.document(uuid).get().await().toObject(UserInfoModel::class.java)!!
         }
         return doc
-        Log.d("Data", doc.BirthDate.toString())
     }
 
     suspend fun updateDoc(info: UserInfoModel) {

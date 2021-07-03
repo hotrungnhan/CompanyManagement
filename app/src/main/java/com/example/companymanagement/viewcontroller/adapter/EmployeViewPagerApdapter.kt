@@ -2,7 +2,7 @@ package com.example.companymanagement.viewcontroller.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.companymanagement.viewcontroller.fragment.employe.EmployeOverall
+import com.example.companymanagement.viewcontroller.fragment.employe.EmployeList
 import com.example.companymanagement.viewcontroller.fragment.employe.EmployeRegister
 
 class EmployeViewPagerApdapter(frag: Fragment) :
@@ -14,6 +14,6 @@ class EmployeViewPagerApdapter(frag: Fragment) :
         if (pos == 0) {
             return EmployeRegister();
         }
-        return EmployeOverall();
+        return EmployeList();
     }
 }
