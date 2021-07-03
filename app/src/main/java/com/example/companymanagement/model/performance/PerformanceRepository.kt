@@ -1,6 +1,8 @@
 package com.example.companymanagement.model.performance
 
 import android.os.Build
+import androidx.annotation.RequiresApi
+import com.example.companymanagement.model.ranking.RankerModel
 import android.util.Log
 import androidx.annotation.Keep
 import androidx.annotation.RequiresApi
@@ -57,7 +59,6 @@ class PerformanceRepository (var col: CollectionReference){
             return dummy
         }
     }
-
     suspend fun getDocByMonth(uuid: String, month: String,year : String) : PerformanceModel? {
 
         val startCal = Calendar.getInstance()

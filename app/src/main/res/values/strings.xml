@@ -97,8 +97,21 @@ er text -->
     <string name="hone_typing">Nhập liệu</string>
     <string name="hone_workspace">Workspace</string>
     <string name="more_setting">Cài Đặt</string>
-    <string name="salary_chart">Biểu đồ lương</string>
-    <string name="qrscaner_string">Quét QR để điểm danh</string>
+    <string name="salary_chart">BIỂU ĐỒ LƯƠNG</string>
+    <string name="content_description_favorite">Thích nè</string>
+    <string name="content_description_search">Tìm kiếm</string>
+    <string name="content_description_filter">Tìm kiếm</string>
+    <string name="content_description_more">Mở rộng</string>
+    <string name="show_shortcut_list">Danh sách gọn</string>
+    <string name="show_detailed_list">Danh sách chi tiết</string>
+    <string name="find_by_name">Nhập tên nhân viên</string>
+    <string name="find_by_time">Nhập thời gian</string>
+    <string name="clear_all">Đặt lại</string>
+    <string name="back">Trước</string>
+    <string name="next">Sau</string>
+    <string name="top1">NHẤT</string>
+    <string name="top2">NHÌ</string>
+    <string name="top3">BA</string>
     <string-array name="employee_manager_tab_name">
         <item>Thêm Nhân Viên</item>
         <item>Danh Sách Nhân Viên</item>
@@ -108,4 +121,5 @@ er text -->
         <item>Dự án</item>
         <item>Thông Tin</item>
     </string-array>
+
 </resources>
