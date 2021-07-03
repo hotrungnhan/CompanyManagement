@@ -42,6 +42,12 @@ class MainHome : Fragment() {
         listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.checkin_qrscanner,
             "Check in"))
+        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
+            R.id.leave_sign,
+            "nghi phep"))
+        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
+            R.id.leave_manager,
+            "xet duyet"))
 
     }
 }

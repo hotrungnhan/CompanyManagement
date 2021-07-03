@@ -42,4 +42,14 @@
         android:name="com.example.companymanagement.viewcontroller.fragment.qrscanner.QRScanner"
         android:label="fragment_user_salary"
         tools:layout="@layout/fragment_checkin_qrscanner" />
+    <fragment
+        android:id="@+id/leave_sign"
+        android:name="com.example.companymanagement.viewcontroller.fragment.signleave.employeLeave.Leave"
+        android:label="fragment_leave"
+        tools:layout="@layout/fragment_leave" />
+    <fragment
+        android:id="@+id/leave_manager"
+        android:name="com.example.companymanagement.viewcontroller.fragment.signleave.employeLeave.Manager"
+        android:label="Manager" />
+
 </navigation>
