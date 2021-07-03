@@ -2,13 +2,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chart_salary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".viewcontroller.fragment.salary.SalaryFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
         <!-- TODO: Update blank fragment layout -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -30,7 +32,6 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -43,38 +44,14 @@
                         android:textSize="30sp"
                         android:textStyle="bold" />
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:weightSum="6">
-
-                        <ImageButton
-                            android:id="@+id/leaderboard_button_year_back"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:src="@drawable/ic_baseline_arrow_back_ios_24" />
-
-                        <TextView
-                            android:id="@+id/leaderboard_display_time"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:layout_weight="4"
-                            android:text="2020"
-                            android:textAlignment="center"
-                            android:textSize="20sp"
-                            tools:ignore="HardcodedText" />
-
-                        <ImageButton
-                            android:id="@+id/leaderboard_button_year_next"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-
-                    </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="2020 - 2021"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        tools:ignore="HardcodedText" />
 
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/salary_chart"
@@ -111,23 +88,17 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Chi tiết lương "
+                            android:text="Chi tiết lương tháng"
                             android:textColor="@color/black"
                             android:textSize="22sp"
                             android:textStyle="bold"
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/salary_time"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="0dp"
-                            android:layout_marginRight="20dp"
-                            android:gravity="start"
-                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:textSize="22sp"
                             android:textStyle="bold" />
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -145,15 +116,10 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/salary_basic"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:gravity="end"
                             android:textSize="18sp"
-                            android:textStyle="normal"
-                            app:autoSizeTextType="uniform" />
+                            android:textStyle="normal" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -166,20 +132,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
-                            android:text="Thưởng dự án:"
+                            android:text="Đi trễ: "
                             android:textSize="18sp"
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/salary_task_bonus"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:gravity="end"
                             android:textSize="18sp"
-                            android:textStyle="normal"
-                            app:autoSizeTextType="uniform" />
+                            android:textStyle="normal" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -192,98 +153,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
-                            android:text="Thưởng thứ hạng:"
+                            android:text="Tổng: "
                             android:textSize="18sp"
                             tools:ignore="HardcodedText" />
-
-                        <TextView
-                            android:id="@+id/salary_rank_bonus"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:gravity="end"
-                            android:textSize="18sp"
-                            android:textStyle="normal"
-                            app:autoSizeTextType="uniform" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Phạt điểm danh:"
                             android:textSize="18sp"
-                            tools:ignore="HardcodedText" />
-
-                        <TextView
-                            android:id="@+id/salary_checkin_fault"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:gravity="end"
-                            android:textSize="18sp"
-                            android:textStyle="normal"
-                            app:autoSizeTextType="uniform" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Trừ thuế:"
-                            android:textSize="18sp"
-                            tools:ignore="HardcodedText" />
-
-                        <TextView
-                            android:id="@+id/salary_tax_deduction"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:gravity="end"
-                            android:textSize="18sp"
-                            android:textStyle="normal"
-                            app:autoSizeTextType="uniform" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Tổng hoa hồng:"
-                            android:textSize="18sp"
-                            tools:ignore="HardcodedText" />
-
-                        <TextView
-                            android:id="@+id/salary_total_bonus"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:gravity="end"
-                            android:textSize="18sp"
-                            android:textStyle="normal"
-                            app:autoSizeTextType="uniform" />
+                            android:textStyle="normal" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -294,29 +172,20 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="100dp"
-                            android:gravity="end"
+                            android:layout_marginStart="150dp"
                             android:text="Tổng: "
                             android:textSize="20sp"
                             android:textStyle="bold"
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/salary_total"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:gravity="end"
                             android:textSize="20sp"
-                            android:textStyle="bold"
-                            app:autoSizeTextType="uniform" />
-
-
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </FrameLayout>
