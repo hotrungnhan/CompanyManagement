@@ -24,6 +24,7 @@ import com.example.companymanagement.viewcontroller.adapter.NameFilterAdapter
 import com.example.companymanagement.viewcontroller.adapter.NameListAdapter
 import com.example.companymanagement.viewcontroller.fragment.salary.SalaryViewModel
 import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
+import com.google.android.material.appbar.MaterialToolbar
 import java.time.YearMonth
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -52,6 +53,8 @@ class SearchAndFilterDialog : DialogFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         val nameInput = view.findViewById<EditText>(R.id.name_enter)
         nameInput.setText("")
         val monthInput = view.findViewById<EditText>(R.id.month_enter)
@@ -59,39 +62,61 @@ class SearchAndFilterDialog : DialogFragment(){
         val yearInput = view.findViewById<EditText>(R.id.year_enter)
         yearInput.setText(YearMonth.now().year.toString())
 
-        val yearBack = view.findViewById<ImageButton>(R.id.mn_salary_filter_year_back)
-        val yearNext = view.findViewById<ImageButton>(R.id.mn_salary_filter_year_next)
-        val monthBack = view.findViewById<ImageButton>(R.id.mn_salary_filter_month_back)
-        val monthNext = view.findViewById<ImageButton>(R.id.mn_salary_filter_month_next)
-
         val timeOrder = view.findViewById<ToggleButton>(R.id.time_order)
         timeOrder.isChecked = true
         val nameOrder = view.findViewById<ToggleButton>(R.id.name_order)
         nameOrder.isChecked = true
 
-        yearBack.setOnClickListener{
-            if(yearInput.text.toString().toInt() > YearMonth.now().year ){
-                yearInput.setText(YearMonth.now().year.toString())
+        val topAppBar = view.findViewById<MaterialToolbar>(R.id.mnSalaryTopAppBar)
+        topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.clear -> {
+                    nameInput.setText("")
+                    monthInput.setText("")
+                    yearInput.setText("")
+
+                    timeOrder.isChecked = true
+                    nameOrder.isChecked = true
+                    true
+                }
+                else -> false
             }
-            if(yearInput.text.toString().toInt() > 2000 ){
-                yearInput.setText((yearInput.text.toString().toInt() - 1).toString())
+        }
+
+        val yearBack = view.findViewById<ImageButton>(R.id.mn_salary_filter_year_back)
+        val yearNext = view.findViewById<ImageButton>(R.id.mn_salary_filter_year_next)
+        val monthBack = view.findViewById<ImageButton>(R.id.mn_salary_filter_month_back)
+        val monthNext = view.findViewById<ImageButton>(R.id.mn_salary_filter_month_next)
+
+
+
+        yearBack.setOnClickListener{
+            if(yearInput.text.isNotBlank()){
+                if(yearInput.text.toString().toInt() > YearMonth.now().year ){
+                    yearInput.setText(YearMonth.now().year.toString())
+                }
+                if(yearInput.text.toString().toInt() > 2000 ){
+                    yearInput.setText((yearInput.text.toString().toInt() - 1).toString())
+                }
             }
         }
         yearNext.setOnClickListener{
-            if(yearInput.text.toString().toInt() < YearMonth.now().year ){
+            if(yearInput.text.isNotBlank() && yearInput.text.toString().toInt() < YearMonth.now().year ){
                 yearInput.setText((yearInput.text.toString().toInt() + 1).toString())
             }
         }
         monthBack.setOnClickListener{
-            if(monthInput.text.toString().toInt() > 12){
-                monthInput.setText(12.toString())
-            }
-            if(monthInput.text.toString().toInt() > 1 ){
-                monthInput.setText((monthInput.text.toString().toInt() - 1).toString())
+            if(monthInput.text.isNotBlank()){
+                if(monthInput.text.toString().toInt() > 12){
+                    monthInput.setText(12.toString())
+                }
+                if(monthInput.text.toString().toInt() > 1 ){
+                    monthInput.setText((monthInput.text.toString().toInt() - 1).toString())
+                }
             }
         }
         monthNext.setOnClickListener{
-            if(monthInput.text.toString().toInt() < 12 ){
+            if(monthInput.text.isNotBlank() && monthInput.text.toString().toInt() < 12 ){
                 monthInput.setText((monthInput.text.toString().toInt() + 1).toString())
             }
         }
