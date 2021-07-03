@@ -9,18 +9,18 @@ import com.example.companymanagement.R
 import com.example.companymanagement.model.task.UserTaskModel
 
 class UserTaskAdapter
-    : RecyclerView.Adapter<UserTaskAdapter.TaskHoler>() {
+    : RecyclerView.Adapter<UserTaskAdapter.TaskHolder>() {
 
     var list: MutableList<UserTaskModel>? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserTaskAdapter.TaskHoler {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserTaskAdapter.TaskHolder {
         val itemView = LayoutInflater.from(parent.context).
         inflate(R.layout.item_task,parent,false)
 
-        return TaskHoler(itemView)
+        return TaskHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: UserTaskAdapter.TaskHoler, position: Int) {
+    override fun onBindViewHolder(holder: UserTaskAdapter.TaskHolder, position: Int) {
 
         holder.Content.text = list?.get(position)!!.Content
         holder.Deadline.text = list?.get(position)!!.Deadline.toString()
@@ -34,7 +34,7 @@ class UserTaskAdapter
 
     override fun getItemCount(): Int = list?.size ?: 0;
 
-    class TaskHoler (itemView: View) : RecyclerView.ViewHolder(itemView){
+    class TaskHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
         val Content: TextView = itemView.findViewById(R.id.task_content)
         val Deadline: TextView = itemView.findViewById(R.id.task_deadline)
         val Sender: TextView = itemView.findViewById(R.id.task_sender)

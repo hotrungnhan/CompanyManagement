@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
@@ -29,7 +30,7 @@ class MainProject : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         taskModel = ViewModelProvider(this).get(UserTaskViewModel::class.java)
-        return inflater.inflate(R.layout.fragment_user_project, container, false)
+        return inflater.inflate(R.layout.fragment_main_project, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,14 +44,14 @@ class MainProject : Fragment() {
 //        taskRecyclerView.adapter = userTaskAdapter
 //
 //        this.taskLayoutManager.orientation = RecyclerView.VERTICAL
-
+//
 //        projectCalendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
 //            val message = "Selected date is: " + dayOfMonth +"/" + (month+1) +"/" + year
 //            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+////        }
+//
+//        taskModel.TaskList.observe(viewLifecycleOwner) {
+//            userTaskAdapter.setData(it)
 //        }
-
-        taskModel.TaskList.observe(viewLifecycleOwner) {
-            userTaskAdapter.setData(it)
-        }
     }
 }

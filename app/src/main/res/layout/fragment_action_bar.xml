@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp"
     app:cardElevation="5dp"
-    app:contentPadding="5dp"
+    app:contentPadding="10dp"
     tools:context=".viewcontroller.fragment.actionbar.ActionBar">
 
     <!-- TODO: Update blank fragment layout -->
@@ -31,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginVertical="5dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:gravity="center_vertical"
             android:orientation="vertical"
             app:layout_constraintStart_toEndOf="@+id/action_bar_avatar">
@@ -48,8 +47,8 @@
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     app:srcCompat="@drawable/ic_down" />
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -66,6 +65,6 @@
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_gravity="center|right"
+        android:layout_gravity="center|end"
         android:background="@drawable/ic_bell" />
 </androidx.cardview.widget.CardView>

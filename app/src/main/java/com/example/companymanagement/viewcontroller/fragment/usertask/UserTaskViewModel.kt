@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.companymanagement.model.task.UserTaskRepository
 import com.example.companymanagement.model.task.UserTaskModel
-import com.example.companymanagement.model.tweet.TweetModel
-import com.example.companymanagement.model.tweet.TweetRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch

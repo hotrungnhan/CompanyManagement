@@ -6,15 +6,14 @@
 
     android:orientation="vertical">
 
-    <com.google.android.material.button.MaterialButton
-
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/item_more_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:backgroundTint="#00FFFFFF"
-        android:drawableLeft="@drawable/ic_project"
-        android:drawableRight="@drawable/ic_arrow_right"
+        android:drawableStart="@drawable/ic_project"
+        android:drawableEnd="@drawable/ic_arrow_right"
         android:drawableBottom="@drawable/separator_more_btn"
         android:gravity="center_horizontal|bottom"
         android:padding="10dp"

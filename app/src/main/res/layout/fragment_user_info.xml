@@ -40,7 +40,8 @@
                 android:scaleType="center"
                 android:src="@drawable/ic_edit"
                 app:backgroundTint="#7C37FA"
-                app:fabSize="normal">
+                app:fabSize="normal"
+                app:tint="@color/white">
 
             </com.google.android.material.floatingactionbutton.FloatingActionButton>
         </RelativeLayout>
@@ -74,13 +75,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:text="Hồ Trung Nhân"
                     android:textAlignment="textEnd"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:id="@+id/layoutPhone"
@@ -103,12 +107,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:text="09594343232"
+                    android:text=""
                     android:textAlignment="textEnd"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:id="@+id/layoutMail"
@@ -131,12 +141,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:text="htn@gmail.com"
                     android:textAlignment="textEnd"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:id="@+id/layoutLocation"
@@ -157,7 +171,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:text="CEO"
                     android:textAlignment="textEnd"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -206,12 +219,16 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:inputType="date"
-                    android:text="1-1-2001"
                     android:textAlignment="textEnd"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:id="@+id/layoutGender"
@@ -234,12 +251,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:text="Nam"
                     android:textAlignment="textEnd"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:id="@+id/layoutCMND"
@@ -262,12 +283,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:text="28434983"
                     android:textAlignment="textEnd"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:id="@+id/layoutNgaycap"
@@ -291,13 +316,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:text="6/9/2019"
                     android:textAlignment="textEnd"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:id="@+id/layoutNoicap"
@@ -320,7 +348,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:text="Bến Tre"
                     android:textAlignment="textEnd"
                     android:textColor="@color/black"
                     android:textSize="16dp"

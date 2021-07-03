@@ -17,9 +17,6 @@ class TweetViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-//            repo.addNewTweet(
-//                TweetModel("Sếp sắp đuổi ae gòi", "SblXTUbvIlVumJdypWZuzHNC3iG3", 10)
-//            )
             TweetList.value = repo.getTweet(10)
         }
     }
@@ -33,9 +30,6 @@ class TweetViewModel : ViewModel() {
 
     fun addTweet(tweet: TweetModel) {
         viewModelScope.launch {
-//            repo.addNewTweet(
-//                TweetModel("Sếp sắp đuổi ae gòi", "SblXTUbvIlVumJdypWZuzHNC3iG3", 10)
-//            )
             val newdata = repo.addNewTweet(tweet);
             if (newdata != null)
                 TweetList.value?.add(0, newdata)
@@ -46,10 +40,6 @@ class TweetViewModel : ViewModel() {
     fun lazyLoadTweet(): LiveData<Int> {
         val result = MutableLiveData<Int>()
         viewModelScope.launch {
-
-//            repo.addNewTweet(
-//                TweetModel("Sếp sắp đuổi ae gòi", "SblXTUbvIlVumJdypWZuzHNC3iG3", 10)
-//            )
             val newdata = repo.getTweet(10, TweetList.value?.last()!!);
             if (newdata != null) {
                 TweetList.value?.addAll(newdata)
