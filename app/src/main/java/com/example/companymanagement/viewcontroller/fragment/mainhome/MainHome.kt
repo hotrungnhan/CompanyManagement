@@ -12,7 +12,8 @@ import com.example.companymanagement.utils.RecycleViewCalculate
 import com.example.companymanagement.viewcontroller.adapter.HomeGridViewApdapter
 
 class MainHome : Fragment() {
-    var listview: MutableList<HomeGridViewViewModel> = mutableListOf()
+    val listview: MutableList<HomeGridViewViewModel> = mutableListOf()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
