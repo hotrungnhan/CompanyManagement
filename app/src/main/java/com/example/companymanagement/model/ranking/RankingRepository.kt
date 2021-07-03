@@ -18,8 +18,6 @@ import java.util.*
 @RequiresApi(Build.VERSION_CODES.O)
 class RankingRepository (var col: CollectionReference) {
 
-    private val formatter = DateTimeFormatter.ofPattern("yyyy-MMMM")
-
     suspend fun loadLeaderBoardIn(year : Int, month : Int) : List<RankerModel?> {
         val startCal = Calendar.getInstance()
         startCal.set(year, month - 1, 1, 0, 0, 0)
@@ -42,20 +40,6 @@ class RankingRepository (var col: CollectionReference) {
         return list
     }
 
-    suspend fun getRankerDoc(uuid : String, month : YearMonth) : RankerModel?
-    {
-        val ref = col.document(uuid)
-            .collection("ranking_" + month.format(formatter))
-            .document("ranker_info")
-
-        if(ref.get().await().exists())
-            return ref.get().await().toObject(RankerModel::class.java)
-        else{
-            var dummy = RankerModel("dummy", "dummy", "Employee", 0 )
-
-            return dummy
-        }
-    }
 
 
 }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
 import com.example.companymanagement.model.ranking.RankerModel
 import com.google.android.material.imageview.ShapeableImageView
+import com.squareup.picasso.Picasso
 
 class LeaderBoardAdapter() : RecyclerView.Adapter<LeaderBoardAdapter.RankerViewHolder>() {
 
@@ -29,6 +30,7 @@ class LeaderBoardAdapter() : RecyclerView.Adapter<LeaderBoardAdapter.RankerViewH
         holder.position.text = ranker.OwnerPosition
         holder.point.text = ranker.TotalPoint.toString()
         //ToDo bind avatar : holder.avatar
+        Picasso.get().load(ranker.OwnerAvatar).resize(80, 80).into(holder.avatar)
     }
 
     fun addRankers(rankers: List<RankerModel>) {

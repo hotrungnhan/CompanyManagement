@@ -16,12 +16,16 @@ class RankerModel (
     @get: PropertyName("owner_name")
     @set: PropertyName("owner_name")
     var OwnerName: String = "",
+    @get: PropertyName("owner_avatar")
+    @set: PropertyName("owner_avatar")
+    var OwnerAvatar: String = "",
     @get: PropertyName("owner_position")
     @set: PropertyName("owner_position")
     var OwnerPosition: String = "",
     @get: PropertyName("total_point")
     @set: PropertyName("total_point")
-    var TotalPoint : Long = 0
+    var TotalPoint : Long = 0,
+
         ){
     @DocumentId
     var uid: String? = null
