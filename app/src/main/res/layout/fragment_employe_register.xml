@@ -1,191 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".viewcontroller.fragment.employe.EmployeRegister">
-
-    <LinearLayout
-        android:id="@+id/register_layout"
+    android:fillViewport="true">
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="50dp"
-            android:gravity="left"
-            android:text="@string/detail_employee_register"
-            android:textColor="@color/gray"
-            android:textSize="18sp" />
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".viewcontroller.fragment.employe.EmployeRegister">
 
         <LinearLayout
+            android:id="@+id/register_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="50dp"
-                android:src="@drawable/ic_user"
-                app:tint="@color/black" />
 
-            <EditText
-                android:id="@+id/ed_rg_account"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="50dp"
-                android:background="@drawable/shape_conner_round"
-                android:gravity="center"
-                android:hint="@string/hint_account"
-                android:inputType="textEmailAddress"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="left"
+                android:text="@string/detail_employee_register"
+                android:textColor="@color/gray"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="left"
+                android:text="@string/detail_employee_account"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="50dp"
+                    android:src="@drawable/ic_mail"
+                    app:tint="@color/black" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_rg_mail"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/shape_conner_round"
+                    android:gravity="center|left"
+                    android:hint="@string/hint_mail"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:padding="10dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="left"
+                android:text="@string/detail_employee_name"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="50dp"
+                    android:src="@drawable/ic_user"
+                    app:tint="@color/black" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_rg_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/shape_conner_round"
+                    android:gravity="center|left"
+                    android:hint="@string/hint_account"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:padding="10dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="left"
+                android:text="@string/detail_employee_position"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="50dp"
+                    android:src="@drawable/ic_position"
+                    app:tint="@color/black" />
+
+                <Spinner
+                    android:id="@+id/spinner_employee_regist"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/shape_conner_round"
+                    android:gravity="center|left"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:padding="10dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="left"
+                android:text="@string/detail_employee_password"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="50dp"
+                    android:src="@drawable/ic_key"
+                    app:tint="@color/black" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundMode="none"
+                    app:counterEnabled="false"
+                    app:endIconDrawable="@drawable/ic_password_eye"
+                    app:expandedHintEnabled="true"
+                    app:hintAnimationEnabled="false"
+                    app:hintEnabled="false"
+                    app:hintTextColor="#FFFFFF"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:id="@+id/ed_rg_pass"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/shape_conner_round"
+                        android:drawableRight="@drawable/ic_password_eye"
+                        android:hint="@string/hint_password"
+                        android:imeActionLabel="@string/action_sign_in_short"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:padding="10dp"
+                        android:selectAllOnFocus="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="50dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/b_rg_done"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="50dp"
+                android:background="@color/purple_500"
+                android:text="@string/done"
+                android:textColor="@color/white"
+                android:textSize="22sp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="50dp"
-                android:src="@drawable/ic_mail"
-                app:tint="@color/black" />
-
-            <EditText
-                android:id="@+id/ed_rg_mail"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="50dp"
-                android:background="@drawable/shape_conner_round"
-                android:gravity="center"
-                android:hint="@string/hint_mail"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="50dp"
-                android:src="@drawable/ic_position"
-                app:tint="@color/black" />
-
-            <EditText
-                android:id="@+id/ed_rg_position"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="50dp"
-                android:background="@drawable/shape_conner_round"
-                android:gravity="center"
-                android:hint="@string/hint_position"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="50dp"
-                android:src="@drawable/ic_key"
-                app:tint="@color/black" />
-
-            <EditText
-                android:id="@+id/ed_rg_pass"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="50dp"
-                android:background="@drawable/shape_conner_round"
-                android:drawableRight="@drawable/ic_password_eye"
-                android:gravity="center"
-                android:hint="@string/hint_password"
-                android:inputType="textPassword"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="50dp"
-                android:src="@drawable/ic_key"
-                app:tint="@color/black" />
-
-            <EditText
-                android:id="@+id/ed_rg_pass_confirm"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="50dp"
-                android:background="@drawable/shape_conner_round"
-                android:drawableRight="@drawable/ic_password_eye"
-                android:gravity="center"
-                android:hint="@string/hint_password_confirm"
-                android:inputType="textPassword"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/b_rg_done"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="50dp"
-            android:background="@color/purple_500"
-            android:enabled="false"
-            android:text="@string/done"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-
-</FrameLayout>
+    </FrameLayout>
+</androidx.core.widget.NestedScrollView>

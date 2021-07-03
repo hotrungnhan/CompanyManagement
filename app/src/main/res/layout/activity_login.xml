@@ -14,7 +14,7 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/username"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="96dp"
@@ -38,7 +38,6 @@
         android:layout_marginEnd="24dp"
         app:boxBackgroundMode="none"
         app:counterEnabled="false"
-        app:endIconDrawable="@drawable/ic_password_eye"
         app:expandedHintEnabled="true"
         app:hintAnimationEnabled="false"
         app:hintEnabled="false"
@@ -55,14 +54,9 @@
             android:layout_marginTop="20dp"
             android:padding="10dp"
             android:text="@string/action_forgot_password"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.901"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username"
-            app:passwordToggleEnabled="true" />
+            android:textStyle="italic" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,6 +68,7 @@
             android:inputType="textPassword"
             android:padding="10dp"
             android:selectAllOnFocus="true"
+            android:text=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/username" />

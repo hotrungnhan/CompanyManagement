@@ -15,7 +15,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/text_page_title_sub_heading"
-            android:text="something" />
+            android:text="Một số cài đặt" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -38,6 +38,7 @@
             android:clickable="true"
             android:focusable="true"
             app:layoutManager="LinearLayoutManager"
+            tools:itemCount="1"
             tools:listitem="@layout/item_more_setting" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.appcompat.widget.LinearLayoutCompat>

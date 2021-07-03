@@ -3,6 +3,9 @@ package com.example.companymanagement.model.performance
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.companymanagement.model.ranking.RankerModel
+import android.util.Log
+import androidx.annotation.Keep
+import androidx.annotation.RequiresApi
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -11,6 +14,7 @@ import kotlinx.coroutines.tasks.await
 import java.time.Year
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 class PerformanceRepository (var col: CollectionReference){
@@ -42,6 +46,7 @@ class PerformanceRepository (var col: CollectionReference){
     }
 
     //no use for now
+    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun getDoc(uuid: String, month : YearMonth): PerformanceModel? {
 
         val ref = col.document(uuid)
@@ -54,5 +59,31 @@ class PerformanceRepository (var col: CollectionReference){
             return dummy
         }
     }
+    suspend fun getDocByMonth(uuid: String, month: String,year : String) : PerformanceModel? {
 
+        val startCal = Calendar.getInstance()
+        startCal.set(year.toInt(), month.toInt() - 1, 1,0,0,0)
+        val start = startCal.time
+        val endCal = Calendar.getInstance()
+        endCal.set(year.toInt(), month.toInt(), 1,0,0,0)
+        val end = endCal.time
+//        Log.d("Performance",start.toString())
+//        Log.d("Performance",end.toString())
+        val ref = col.whereEqualTo("owner_uuid", uuid)
+            .whereGreaterThanOrEqualTo("create_time", start)
+        //    .whereLessThan("create_time", end).get().await()
+        val ref2 = ref.whereLessThan("create_time", end)
+            .orderBy("create_time", Query.Direction.DESCENDING).get().await()
+
+        if(ref2.size() == 0)
+        {
+            val dummy = PerformanceModel(uuid, 0, 0, 0, 0)
+            dummy.CreateTime = start
+            dummy.EndTime = end
+            return dummy
+        }
+        else {
+            return ref2.documents[0].toObject(PerformanceModel::class.java)
+        }
+    }
 }

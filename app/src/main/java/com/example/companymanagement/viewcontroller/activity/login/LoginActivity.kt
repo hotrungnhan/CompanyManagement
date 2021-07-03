@@ -3,16 +3,13 @@ package com.example.companymanagement.viewcontroller.activity.login
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.companymanagement.R
 import com.example.companymanagement.viewcontroller.activity.main.MainActivity
+import com.example.companymanagement.viewcontroller.fragment.forgotpassword.ForgotPassManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.UserProfileChangeRequest
 
 class LoginActivity : AppCompatActivity() {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -20,18 +17,13 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //debug
-        if (resources.getBoolean(R.bool.disable_login) == false) {
-            finish()
-            val loginintent = Intent(this, MainActivity::class.java)
-            startActivity(loginintent)
-        }
         setContentView(R.layout.activity_login)
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
+        val forgot = findViewById<TextView>(R.id.forgot_password)
         login.setOnClickListener {
-
             var username = username.text.toString()
             var password = password.text.toString()
             if (loginCondition(username, password)) {
@@ -45,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
                             toastUserSucess(user!!)
                             val loginintent = Intent(this, MainActivity::class.java)
                             startActivity(loginintent)
+
                         } else {
                             // If sign in fails, display a message to the user.
                             showLoginFailed(task.exception?.message)
@@ -53,6 +46,9 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 toastBadFormat();
             }
+        }
+        forgot.setOnClickListener{
+            ForgotPassManager().show(supportFragmentManager,"forgotpassInfo")
         }
     }
 

@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -22,7 +23,8 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/action_bar_avatar"
+                    android:id="@+id/tweet_item_owner_avatar"
+
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     app:shapeAppearanceOverlay="@style/circleImageView"
@@ -36,17 +38,19 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tweet_item_owner_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLength="20"
-                        android:text="Hồ Trung Nhân"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tweet_item_owner_create_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2h ago" />
+                        android:text="" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <TextView
@@ -57,10 +61,11 @@
 
 
             <TextView
+                android:id="@+id/tweet_item_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
-                android:text="Còn 5 ngày nữa đuổi ae ra khỏi công ty nhé làm việc cẩn thận !" />
+                android:text="" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -69,17 +74,35 @@
                 android:padding="5dp"
                 android:weightSum="2">
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Like" />
 
-                <Button
-                    android:layout_width="wrap_content"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/tweet_item_like_btn"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    android:text="Comment" />
+                    android:backgroundTint="@color/white"
+                    android:drawableStart="@drawable/ic_like"
+
+                    android:drawableTint="@color/black"
+                    android:text="Like"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textStyle="normal" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/tweet_item_comment_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/white"
+                    android:drawableStart="@drawable/ic_comment"
+                    android:drawableTint="@color/black"
+                    android:text="Comment"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textStyle="normal" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
