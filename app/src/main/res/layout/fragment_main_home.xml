@@ -31,7 +31,9 @@
             android:padding="10dp">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/admin_container"
                 style="@style/cardview_styles"
+                android:visibility="gone"
                 app:cardCornerRadius="10dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -50,7 +52,7 @@
                         android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/grid_view_container_manager"
+                        android:id="@+id/admin_rc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
@@ -84,7 +86,7 @@
                         android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/grid_view_container_workspace"
+                        android:id="@+id/user_rc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
