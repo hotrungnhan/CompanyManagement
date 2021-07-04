@@ -33,13 +33,24 @@ class MainHome : Fragment() {
     }
 
     fun createdata() {
-        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
+        listview = mutableListOf(HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.employee_manager,
             "Employee ManagerContainer"))
         listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
+            "Employee Manager"),
+        HomeGridViewViewModel(R.drawable.bg_launcher_background,
+                R.id.user_salary,
+                "Salary"),
+        HomeGridViewViewModel(R.drawable.bg_launcher_background,
+                R.id.checkin_qrscanner,
+                "Check in"),
+        HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.user_salary,
-            "Salary"))
-        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
+            "My Salary"),
+        HomeGridViewViewModel(R.drawable.bg_launcher_background,
+            R.id.leaderboard,
+            "Leaderboard"),
+        HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.checkin_qrscanner,
             "Check in"))
         listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
@@ -48,6 +59,8 @@ class MainHome : Fragment() {
         listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
             R.id.leave_manager,
             "xet duyet"))
-
+            "Check in"),
+        HomeGridViewViewModel(R.drawable.bg_launcher_background,
+            R.id.task_manager,
     }
 }

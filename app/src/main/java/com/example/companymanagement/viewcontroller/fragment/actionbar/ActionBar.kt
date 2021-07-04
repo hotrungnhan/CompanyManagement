@@ -23,6 +23,7 @@ class ActionBar : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         infomodel = ViewModelProvider(this.requireActivity()).get(UserInfoViewModel::class.java)
+        //infomodel.retriveUserInfo(auth.currentUser?.uid!!)
     }
 
     override fun onCreateView(

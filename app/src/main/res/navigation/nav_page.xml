@@ -51,5 +51,4 @@
         android:id="@+id/leave_manager"
         android:name="com.example.companymanagement.viewcontroller.fragment.signleave.employeLeave.ManagerContainer"
         android:label="Manager" />
-
 </navigation>

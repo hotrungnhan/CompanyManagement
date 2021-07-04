@@ -3,8 +3,8 @@ package com.example.companymanagement.viewcontroller.fragment.shareviewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.companymanagement.model.UserInfoModel
-import com.example.companymanagement.model.UserInfoRepository
+import com.example.companymanagement.model.info.UserInfoModel
+import com.example.companymanagement.model.info.UserInfoRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
@@ -24,7 +24,6 @@ class UserInfoViewModel : ViewModel() {
             }
         }
     }
-
     fun getInfo(uid: String?) {
          viewModelScope.launch {
              if (uid != null) {
@@ -33,4 +32,30 @@ class UserInfoViewModel : ViewModel() {
         }
     }
 
+    fun getInfobyId(uuid: String){
+        viewModelScope.launch {
+            info.postValue(repo.findDoc(uuid))
+        }
+
+    fun getName() : MutableLiveData<ArrayList<String>>{
+        var result = MutableLiveData<ArrayList<String>>()
+        viewModelScope.launch {
+            result.value =  repo.getNameList()
+        }
+        return result
+    }
+    fun findNameById(uuid: String) : MutableLiveData<String>{
+        var result = MutableLiveData<String>()
+        viewModelScope.launch {
+            result.value = repo.getNameById(uuid)
+        }
+        return result
+    }
+    fun findIdByName(name : String) : MutableLiveData<MutableList<String>>{
+        var result = MutableLiveData<MutableList<String>>()
+        viewModelScope.launch {
+            result.value = repo.getIdByName(name)
+        }
+        return result
+    }
 }

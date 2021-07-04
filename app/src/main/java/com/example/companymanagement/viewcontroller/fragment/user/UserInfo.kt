@@ -38,12 +38,14 @@ class UserInfo : Fragment() {
     private val imagepicked: MutableLiveData<Uri> = MutableLiveData(null)
     private lateinit var register: ActivityResultLauncher<Intent>
     private var isNewAvatar: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         infomodel = ViewModelProvider(this.requireActivity()).get(UserInfoViewModel::class.java)
         // register Image getter Activity
 
         register = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+
             if (it.data?.data is Uri) {
                 imagepicked.postValue(it.data?.data)
                 isNewAvatar = true
@@ -58,7 +60,6 @@ class UserInfo : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user_info, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
