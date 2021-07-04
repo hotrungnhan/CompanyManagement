@@ -4,7 +4,8 @@
     android:id="@+id/cv_employe"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingTop="10dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/employe_avatar"
@@ -62,12 +63,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="position"
-            android:paddingEnd="10dp"/>
+            android:paddingEnd="30dp"/>
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>
