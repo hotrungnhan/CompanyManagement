@@ -50,7 +50,8 @@
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/shape_conner_round"
                 android:hint="@string/hint_task_name"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:maxLines="1"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -69,23 +70,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_task_create_search"
-                    android:layout_width="200dp"
+                    android:id="@+id/ed_task_create_receiver"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/shape_conner_round"
-                    android:hint="@string/hint_task_search"
+                    android:hint="Contact Email"
                     android:padding="10dp" />
 
-                <Spinner
-                    android:id="@+id/spinner_task_create_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/shape_conner_round"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="20dp"/>
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_task_create_receiver"
@@ -126,15 +120,9 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:textColor="@color/black"
+                    android:text="Tự động cập nhật"
                     android:background="@drawable/shape_conner_round"
                     android:textSize="12sp" />
-                <ImageView
-                    android:id="@+id/img_task_create_calendar1"
-                    android:layout_width="20dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_calendar"/>
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
@@ -230,7 +218,9 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/shape_conner_round"
-                android:gravity="left"
+                android:gravity="center|left"
+                android:paddingStart="10dp"
+                android:text="Tự động cập nhật"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
