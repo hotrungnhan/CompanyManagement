@@ -75,11 +75,11 @@ class PerformanceRepository (var col: CollectionReference){
 
         val ref = col.whereEqualTo("owner_uuid", uuid)
             .whereGreaterThanOrEqualTo("create_time", start)
-        val ref2 = ref.whereLessThan("create_time", end)
+            .whereLessThan("create_time", end)
             .orderBy("create_time", Query.Direction.DESCENDING).get().await()
 
-        Log.d("Performance",ref2.size().toString())
-        if(ref2.size() == 0)
+        Log.d("Performance",ref.size().toString())
+        if(ref.size() == 0)
         {
             val dummy = PerformanceModel(uuid, 0, 0, 0, 0)
             dummy.CreateTime = start
@@ -87,7 +87,7 @@ class PerformanceRepository (var col: CollectionReference){
             return dummy
         }
         else {
-            return ref2.documents[0].toObject(PerformanceModel::class.java)
+            return ref.documents[0].toObject(PerformanceModel::class.java)
         }
     }
 }

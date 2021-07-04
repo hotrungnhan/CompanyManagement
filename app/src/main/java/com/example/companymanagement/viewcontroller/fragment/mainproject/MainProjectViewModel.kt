@@ -25,8 +25,8 @@ class MainProjectViewModel : ViewModel() {
         year: Int, month: Int, dayOfMonth: Int
     ){
         viewModelScope.launch {
-            taskList.postValue(repository.getTask(uuid, year, month, dayOfMonth))
-            Log.d("Task List", taskList.value.toString())
+            TaskList.value = repo.getTask(id)
+            Log.d("Data", TaskList.value.toString())
         }
     }
 }
