@@ -31,7 +31,7 @@ class MainHome : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val calculator = RecycleViewCalculate(requireContext(),
             R.layout.item_cardview_button)
-        val adminlayout = view.findViewById<CardVi  ew>(R.id.admin_container)
+        val adminlayout = view.findViewById<CardView>(R.id.admin_container)
         rolemodel.isAdmin.observe(this.viewLifecycleOwner) {
             if (it == true) adminlayout.visibility = View.VISIBLE else adminlayout.visibility =
                 View.GONE
