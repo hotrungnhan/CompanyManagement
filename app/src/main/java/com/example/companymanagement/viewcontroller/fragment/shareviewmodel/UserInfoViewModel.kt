@@ -24,6 +24,14 @@ class UserInfoViewModel : ViewModel() {
             }
         }
     }
+    fun getInfo(uid: String?) {
+         viewModelScope.launch {
+             if (uid != null) {
+                  repo.findDoc(uid)
+             }
+        }
+    }
+
     fun getInfobyId(uuid: String){
         viewModelScope.launch {
             info.postValue(repo.findDoc(uuid))

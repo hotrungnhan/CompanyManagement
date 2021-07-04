@@ -19,7 +19,7 @@ import com.google.android.material.imageview.ShapeableImageView
 
 class ActionBar : Fragment() {
     lateinit var infomodel: UserInfoViewModel;
-    var bts = UserManagerBottomSheet.Instance();
+        var bts = UserManagerBottomSheet.Instance();
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         infomodel = ViewModelProvider(this.requireActivity()).get(UserInfoViewModel::class.java)
