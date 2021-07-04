@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/ic_manager_user" />
+        app:srcCompat="@drawable/ic_user" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/user_layout"
