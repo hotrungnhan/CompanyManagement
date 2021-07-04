@@ -43,17 +43,17 @@
         <item>Nhân viên</item>
         <item>Quản lý</item>
     </string-array>
-    <string name ="dl_birthdate">Ngày sinh</string>
-    <string name ="dl_contactmail">Email liên hệ</string>
-    <string name ="dl_createtime">Ngày khởi tạo</string>
-    <string name ="dl_gender">Giới tính</string>
-    <string name ="dl_idcard_cd">Ngày cấp</string>
-    <string name ="dl_idcard_loc">Nơi cấp</string>
-    <string name ="dl_idcard_number">Số CMND/CCCD</string>
-    <string name ="dl_phone">Số điện thoại</string>
-    <string name ="dl_position">Vị trí</string>
-    <string name ="dl_updatetime">Ngày điều chỉnh</string>
-    <string name ="dl_username">Họ tên</string>
+    <string name="dl_birthdate">Ngày sinh</string>
+    <string name="dl_contactmail">Email liên hệ</string>
+    <string name="dl_createtime">Ngày khởi tạo</string>
+    <string name="dl_gender">Giới tính</string>
+    <string name="dl_idcard_cd">Ngày cấp</string>
+    <string name="dl_idcard_loc">Nơi cấp</string>
+    <string name="dl_idcard_number">Số CMND/CCCD</string>
+    <string name="dl_phone">Số điện thoại</string>
+    <string name="dl_position">Vị trí</string>
+    <string name="dl_updatetime">Ngày điều chỉnh</string>
+    <string name="dl_username">Họ tên</string>
     <!--    Task Management -->
     <string name="detail_task_create">Tạo task mới</string>
     <string name="detail_task_name">Tên task</string>
@@ -83,7 +83,7 @@
         <item>Danh sách task</item>
         <item>Thêm task mới</item>
     </string-array>
-er text -->
+    er text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--    TODO:Tab -->
     <string name="navigation_tab_item_1">Home</string>
@@ -99,7 +99,6 @@ er text -->
     <string name="more_setting">Cài Đặt</string>
     <string name="salary_chart">Biểu đồ lương</string>
     <string name="qrscaner_string">Quét QR để điểm danh</string>
-    <string name="salary_chart">BIỂU ĐỒ LƯƠNG</string>
     <string name="content_description_favorite">Thích nè</string>
     <string name="content_description_search">Tìm kiếm</string>
     <string name="content_description_filter">Tìm kiếm</string>

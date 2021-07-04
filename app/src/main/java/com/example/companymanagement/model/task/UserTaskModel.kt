@@ -36,7 +36,7 @@ data class UserTaskModel(
     @set: PropertyName("IDReceiver")
     var IDReceiver: List<String>? = null,
 
-){
+    ) {
     @DocumentId
     val taskid: String? = null
 

@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
-@RequiresApi(Build.VERSION_CODES.O)
 class CheckinViewModel : ViewModel() {
 
 
@@ -20,7 +19,6 @@ class CheckinViewModel : ViewModel() {
     var listWork: MutableLiveData<MutableList<CheckinModel>> = MutableLiveData();
     var listLate: MutableLiveData<MutableList<CheckinModel>> = MutableLiveData();
 
-    @RequiresApi(Build.VERSION_CODES.O)
     var repo = CheckinRepository(FirebaseFirestore.getInstance().collection("checkin"))
 
     init{

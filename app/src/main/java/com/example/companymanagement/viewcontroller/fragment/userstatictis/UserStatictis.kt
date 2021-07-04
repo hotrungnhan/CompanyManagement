@@ -1,6 +1,5 @@
 package com.example.companymanagement.viewcontroller.fragment.userstatictis
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -9,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -29,8 +27,6 @@ import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import com.kizitonwose.calendarview.ui.ViewContainer
 import com.kizitonwose.calendarview.utils.next
 import com.kizitonwose.calendarview.utils.previous
-import com.example.companymanagement.viewcontroller.fragment.user.PerformanceViewModel
-import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -57,11 +53,11 @@ class UserStatictis : Fragment() {
     val user = FirebaseAuth.getInstance().currentUser
     private lateinit var performancemodel: PerformanceViewModel
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        performancemodel = ViewModelProvider(this.requireActivity()).get(PerformanceViewModel::class.java)
-        performancemodel.retrivePerformance(user?.uid!!,month.format(c),year.format(c))
+        performancemodel =
+            ViewModelProvider(this.requireActivity()).get(PerformanceViewModel::class.java)
+        performancemodel.retrivePerformance(user?.uid!!, month.format(c), year.format(c))
     }
 
     override fun onCreateView(
@@ -71,7 +67,7 @@ class UserStatictis : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user_statictis, container, false)
     }
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -95,8 +91,8 @@ class UserStatictis : Fragment() {
         //-----------Calendar------------//
 
         var checkinmodel = CheckinViewModel()
-        lateinit var listLate : Map<String?,List<CheckinModel>>
-        lateinit var listWork : Map<String?,List<CheckinModel>>
+        lateinit var listLate: Map<String?, List<CheckinModel>>
+        lateinit var listWork: Map<String?, List<CheckinModel>>
         val lifeCycle = this.viewLifecycleOwner
 
         val calendarView = view.findViewById<CalendarView>(R.id.calendarView)
@@ -107,13 +103,16 @@ class UserStatictis : Fragment() {
 
         val currentMonth = YearMonth.now()
         val daysOfWeek = WeekFields.of(Locale.getDefault())
-        calendarView.setup(currentMonth.minusMonths(50), currentMonth.plusMonths(50), daysOfWeek.firstDayOfWeek)
+        calendarView.setup(currentMonth.minusMonths(50),
+            currentMonth.plusMonths(50),
+            daysOfWeek.firstDayOfWeek)
         calendarView.scrollToMonth(currentMonth)
 
         class DayViewContainer(view: View) : ViewContainer(view) {
             lateinit var day: CalendarDay
             var binding = CalendarDayBinding.bind(view)
-            init{
+
+            init {
                 view.setOnClickListener {
                     if (day.owner == DayOwner.THIS_MONTH) {
                         if (selectedDate != day.date) {
@@ -144,11 +143,11 @@ class UserStatictis : Fragment() {
                     var df = SimpleDateFormat("yyyy-MM-dd")
                     checkinmodel.listLate.observe(lifeCycle) { it ->
                         listLate = it.groupBy { df.format(it.checked_date?.time) }
-                        Log.d("DataIt",listLate.toString())
+                        Log.d("DataIt", listLate.toString())
 
                         val checkin = listLate[day.date.toString()]
                         if (checkin != null) {
-                             absentStatus.setBackgroundColor(resources.getColor(R.color.yellow))
+                            absentStatus.setBackgroundColor(resources.getColor(R.color.yellow))
                         }
                     }
                     checkinmodel.listWork.observe(lifeCycle) { it ->
@@ -157,7 +156,7 @@ class UserStatictis : Fragment() {
                         if (checkin != null) {
                             absentStatus.setBackgroundColor(resources.getColor(R.color.green))
                         }
-                   }
+                    }
                 } else {
                     textView.setTextColor(resources.getColor(R.color.text_grey_light))
                 }
@@ -174,12 +173,14 @@ class UserStatictis : Fragment() {
                 // Setup each header day text if we have not done that already.
                 if (container.legendLayout.tag == null) {
                     container.legendLayout.tag = month.yearMonth
-                    container.legendLayout.children.map { it as TextView }.forEachIndexed { index, tv ->
-                        tv.text = DayOfWeek.of(index + 1).getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
-                            .toUpperCase(Locale.ENGLISH)
-                        tv.setTextColor(resources.getColor(R.color.text_color))
-                        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
-                    }
+                    container.legendLayout.children.map { it as TextView }
+                        .forEachIndexed { index, tv ->
+                            tv.text = DayOfWeek.of(index + 1)
+                                .getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
+                                .toUpperCase(Locale.ENGLISH)
+                            tv.setTextColor(resources.getColor(R.color.text_color))
+                            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
+                        }
                     month.yearMonth
                 }
             }
@@ -207,9 +208,5 @@ class UserStatictis : Fragment() {
                 calendarView.smoothScrollToMonth(it.yearMonth.previous)
             }
         }
-        var widget: MaterialCalendarView = view.findViewById(R.id.calendarView) as MaterialCalendarView
-
-        val mydate = CalendarDay.from(2021, 6, 29) // year, month, date
-        widget.addDecorators(CurrentDayDecorator(activity, mydate))
     }
 }
