@@ -38,9 +38,9 @@ class UserTaskRepository(var col: CollectionReference) {
         // for example: Deadline ascending so the sentdate must be descending
         val snapshot = col
             .whereArrayContains("IDReceiver", uuid)
-            .whereGreaterThanOrEqualTo("Deadline", startDateTime)
-            .whereLessThanOrEqualTo("Deadline", endDateTime)
-            .orderBy("Deadline", Query.Direction.DESCENDING)
+            .whereGreaterThanOrEqualTo("deadline", startDateTime)
+            .whereLessThanOrEqualTo("deadline", endDateTime)
+            .orderBy("deadline", Query.Direction.DESCENDING)
             .get().await()
 
         return if (snapshot.size() != 0) {
