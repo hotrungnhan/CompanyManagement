@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +25,6 @@ import java.time.Month
 import java.util.*
 import kotlin.collections.ArrayList
 
-@Suppress("DEPRECATION")
 class MainProject : Fragment() {
 
     private lateinit var viewModelMainProject: MainProjectViewModel
@@ -44,12 +44,9 @@ class MainProject : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        projectCalendar = view.findViewById(R.id.project_calendar)
-        taskRecyclerView = view.findViewById(R.id.task_recyclerView)
-        taskRecyclerView.layoutManager = taskLayoutManager
-        taskRecyclerView.setHasFixedSize(true)
-
-        taskList = arrayListOf()
+        val calendarView = view.findViewById<CalendarView>(R.id.task_calendar)
+        val notask = view.findViewById<CardView>(R.id.notask_cardview)
+        val now = LocalDate.now()
 
         //Load data at current date
         viewModelMainProject.retrieveUserTask(user?.uid!!,
@@ -63,11 +60,12 @@ class MainProject : Fragment() {
         viewModelMainProject.taskList.value?.clear()
         viewModelMainProject.taskList.observe(viewLifecycleOwner) {
             if (it == null || it.size == 0) {
-                Linearview.visibility = View.VISIBLE
+                notask.visibility = View.VISIBLE
             } else {
-                Linearview.visibility = View.GONE
+                notask.visibility = View.GONE
                 userTaskAdapter.setData(it)
             }
+
         }
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
@@ -80,35 +78,7 @@ class MainProject : Fragment() {
             Log.d("selectedDate",
                 year.toString() + " " + month.toString() + " " + dayOfMonth.toString())
 
-            viewModelMainProject.taskList.observe(viewLifecycleOwner) {
-                if (it == null || it.size == 0) {
-                    Linearview.visibility = View.VISIBLE
-                } else {
-                    Linearview.visibility = View.GONE
-                    userTaskAdapter.setData(it)
-
-    //find out more about this function and fix the bug
-    //this function is used to load data and catch data changes
-    private fun EventChangeListener() {
-        db = FirebaseFirestore.getInstance()
-        db.collection("task")
-            .orderBy("SentDate", Query.Direction.ASCENDING)
-            //.whereArrayContains("Deadline",date)
-            .addSnapshotListener(object : EventListener<QuerySnapshot>{
-                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                    if (error != null){
-                        Log.e("Firestore error", error.message.toString())
-                        return
-                    }
-
-                    for (dc: DocumentChange in value?.documentChanges!!){
-                        if (dc.type == DocumentChange.Type.ADDED){
-                            taskList.add(dc.document.toObject(UserTaskModel::class.java))
-                        }
-                    }
-
-                    userTaskAdapter.notifyDataSetChanged()
-                }
+        }
 
             })
     }

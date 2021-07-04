@@ -15,8 +15,9 @@
     </style>
 
     <style name="layout_page_title">
+        <item name="android:paddingBottom">10dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/page_title</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">vertical</item>
@@ -37,23 +38,5 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
-        <item name="android:textColor">#FF4081</item>
-        <item name="android:textColorPrimary">#FF4081</item>
-    </style>
-
-    <style name="Divider">
-        <item name="android:background">?android:attr/listDivider</item> //you can give your color here. that will change all divider color in your app.
-    </style>
-
-    <style name="Divider.Horizontal" parent="Divider">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item> // You can change thickness here.
-
-    </style>
-
-    <style name="Divider.Vertical" parent="Divider">
-        <item name="android:layout_width">1dp</item>
-        <item name="android:layout_height">match_parent</item>
-    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 </resources>
