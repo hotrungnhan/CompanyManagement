@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +19,6 @@ import com.example.companymanagement.viewcontroller.adapter.UserTaskAdapter
 import com.google.firebase.auth.FirebaseAuth
 import java.time.LocalDate
 
-@Suppress("DEPRECATION")
 class MainProject : Fragment() {
 
     private lateinit var viewModelMainProject: MainProjectViewModel
@@ -35,7 +35,6 @@ class MainProject : Fragment() {
         return root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = view.findViewById<RecyclerView>(R.id.task_recyclerView)
@@ -43,8 +42,7 @@ class MainProject : Fragment() {
         val taskLayoutManager = LinearLayoutManager(context)
 
         val calendarView = view.findViewById<CalendarView>(R.id.task_calendar)
-        val Linearview = view.findViewById<LinearLayout>(R.id.task_notification)
-
+        val notask = view.findViewById<CardView>(R.id.notask_cardview)
         val now = LocalDate.now()
 
         //Load data at current date
@@ -59,11 +57,12 @@ class MainProject : Fragment() {
         viewModelMainProject.taskList.value?.clear()
         viewModelMainProject.taskList.observe(viewLifecycleOwner) {
             if (it == null || it.size == 0) {
-                Linearview.visibility = View.VISIBLE
+                notask.visibility = View.VISIBLE
             } else {
-                Linearview.visibility = View.GONE
+                notask.visibility = View.GONE
                 userTaskAdapter.setData(it)
             }
+
         }
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
@@ -76,15 +75,6 @@ class MainProject : Fragment() {
             Log.d("selectedDate",
                 year.toString() + " " + month.toString() + " " + dayOfMonth.toString())
 
-            viewModelMainProject.taskList.observe(viewLifecycleOwner) {
-                if (it == null || it.size == 0) {
-                    Linearview.visibility = View.VISIBLE
-                } else {
-                    Linearview.visibility = View.GONE
-                    userTaskAdapter.setData(it)
-
-                }
-            }
         }
 
         taskLayoutManager.orientation = RecyclerView.VERTICAL

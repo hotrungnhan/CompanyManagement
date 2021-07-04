@@ -41,8 +41,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="10dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
@@ -55,8 +55,9 @@
 
             <TextView
                 android:id="@+id/task_content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="Content is here"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -65,21 +66,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="SentDate: "
+
+
                 android:textColor="@color/page_title"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/task_sentDate"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="sentDate is here"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -88,7 +92,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -101,8 +105,9 @@
 
             <TextView
                 android:id="@+id/task_deadline"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="Deadline is here"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="15sp" />
@@ -111,7 +116,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -124,8 +129,9 @@
 
             <TextView
                 android:id="@+id/task_sender"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="sender is here"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -135,7 +141,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -148,8 +154,9 @@
 
             <TextView
                 android:id="@+id/task_status"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="status is here"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="14sp" />

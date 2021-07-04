@@ -10,6 +10,8 @@ import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import com.example.companymanagement.R
 import com.example.companymanagement.model.leave.LeaveInfoModel
+import com.example.companymanagement.utils.DateParser
+import com.example.companymanagement.utils.DateParser.Companion.toHumanReadDate
 import com.example.companymanagement.viewcontroller.fragment.mainworkspace.ListUserParticipantViewModel
 import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
 import java.text.SimpleDateFormat
@@ -32,14 +34,13 @@ class CreateLeave : Fragment() {
         val root = inflater.inflate(R.layout.fragment_sign_leave, container, false)
         val editTime = root.findViewById<TextView>(R.id.txt_time)
         val cal = Calendar.getInstance()
+        editTime!!.text = cal.getTime().toHumanReadDate()
         val dateSetListener =
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 cal.set(Calendar.YEAR, year)
                 cal.set(Calendar.MONTH, monthOfYear)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                val myFormat = "dd/MM/yyyy" // mention the format you need
-                val sdf = SimpleDateFormat(myFormat, Locale.US)
-                editTime!!.text = sdf.format(cal.getTime())
+                editTime!!.text = cal.getTime().toHumanReadDate()
             }
         editTime.setOnClickListener {
             context?.let { it1 ->

@@ -35,7 +35,6 @@ import java.time.Year
 import java.time.YearMonth
 
 
-@RequiresApi(Build.VERSION_CODES.O)
 
 class SalaryFragment : Fragment() {
 
@@ -59,7 +58,6 @@ class SalaryFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_salary, container, false)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val salaryChart = view.findViewById<BarChart>(R.id.salary_chart)
@@ -176,60 +174,5 @@ class SalaryFragment : Fragment() {
             return months.getOrNull(value.toInt()) ?: value.toString()
         }
     }
-
-//Dummy for test
-    /*fun generateDummy(user : String) : SalaryModel{
-        var dummy = SalaryModel()
-        dummy.OwnerUUID = user
-        dummy.BasicSalary = 100
-        dummy.RankBonus = 50
-        dummy.TaskBonus = 10
-        dummy.compute(YearMonth.now())
-        return dummy
-    }
-    fun generateDummy(user : String, basic : Long, rank : Long, task : Long, year : Int, month : Int) : SalaryModel {
-        var dummy = SalaryModel()
-        dummy.OwnerUUID = user
-        dummy.BasicSalary = basic
-        dummy.RankBonus = rank
-        dummy.TaskBonus = task
-        dummy.compute(YearMonth.now())
-
-        val start = Calendar.getInstance()
-        start.set(year, month - 1, 1, 0, 0, 0)
-        dummy.CreateTime = start.time
-        val end = Calendar.getInstance()
-        end.set(year, month, 1, 0, 0, 0)
-        dummy.EndTime = end.time
-        return dummy
-    }
-    fun generateDummy2(user : String) : PerformanceModel{
-        var dummy = PerformanceModel()
-        dummy.OwnerUUID = user
-        dummy.AbsenceA = 3
-        dummy.AbsenceNA = 1
-        dummy.Late = 2
-        dummy.TaskDone = 5
-        return dummy
-    }
-    fun generateDummy3(user : String) : PerformanceModel{
-        var dummy = PerformanceModel()
-        dummy.OwnerUUID = user
-        dummy.AbsenceA = 1
-        dummy.AbsenceNA = 0
-        dummy.Late = 0
-        dummy.TaskDone = 5
-        return dummy
-    }
-    fun generateDummy4(user : String) : PerformanceModel{
-        var dummy = PerformanceModel()
-        dummy.OwnerUUID = user
-        dummy.AbsenceA = 7
-        dummy.AbsenceNA = 0
-        dummy.Late = 4
-        dummy.TaskDone = 15
-        return dummy
-    }*/
-
 
 }
