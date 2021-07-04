@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.companymanagement.R
 import com.example.companymanagement.viewcontroller.adapter.UserViewPagerAdapter
@@ -22,9 +23,9 @@ class UserManagerBottomSheet : BottomSheetDialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = BottomSheetDialog(requireContext(), theme)
         dialog.setOnShowListener {
+            val bottomSheetDialog = it as BottomSheetDialog
             val parentLayout =
-                dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-
+                bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
             parentLayout?.let { it ->
                 val behaviour = BottomSheetBehavior.from(it)
                 behaviour.skipCollapsed = true;
@@ -34,6 +35,11 @@ class UserManagerBottomSheet : BottomSheetDialogFragment() {
         return dialog
     }
 
+    private fun setupFullHeight(bottomSheet: View) {
+        val layoutParams = bottomSheet.layoutParams
+        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
+        bottomSheet.layoutParams = layoutParams
+    }
 
     //viewcreate bottom sheet
     override fun onCreateView(

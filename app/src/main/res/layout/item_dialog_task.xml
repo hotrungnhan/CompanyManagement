@@ -50,15 +50,15 @@
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/dl_username"
+                    android:text="@string/detail_task_name"
                     android:fontFamily="sans-serif-light"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
                 <EditText
-                    android:text="Nguyen Ho Quynh Thu"
-                    android:id="@+id/dl_employee_username"
+                    android:text="Không có thông tin"
+                    android:id="@+id/dl_task_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center|left"
@@ -78,7 +78,7 @@
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/dl_birthdate"
+                    android:text="@string/task_creat_datestart"
                     android:fontFamily="sans-serif-light"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
@@ -86,8 +86,8 @@
                     android:textStyle="bold"/>
 
                 <EditText
-                    android:text="Nguyen Ho Quynh Thu"
-                    android:id="@+id/dl_employee_birthdate"
+                    android:text="Không có thông tin"
+                    android:id="@+id/dl_task_sentdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center|left"
@@ -107,7 +107,7 @@
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/dl_gender"
+                    android:text="@string/task_create_deadline"
                     android:fontFamily="sans-serif-light"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
@@ -115,8 +115,8 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:text="Nguyen Ho Quynh Thu"
-                    android:id="@+id/dl_employee_gender"
+                    android:text="Không có thông tin"
+                    android:id="@+id/dl_task_deadline"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center|left"
@@ -135,7 +135,7 @@
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/dl_contactmail"
+                    android:text="@string/detail_task_descripton"
                     android:fontFamily="sans-serif-light"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
@@ -143,8 +143,8 @@
                     android:textStyle="bold"/>
 
                 <EditText
-                    android:text="Nguyen Ho Quynh Thu"
-                    android:id="@+id/dl_employee_contactemail"
+                    android:text="Không có thông tin"
+                    android:id="@+id/dl_task_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center|left"
@@ -152,7 +152,7 @@
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:layout_marginStart="30dp"
-                    android:singleLine="true"
+                    android:maxLines="2"
                     android:enabled="false"
                     android:imeOptions="actionDone"/>
             </LinearLayout>
@@ -163,7 +163,7 @@
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/dl_phone"
+                    android:text="@string/detail_task_sender"
                     android:fontFamily="sans-serif-light"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
@@ -171,8 +171,8 @@
                     android:textStyle="bold"/>
 
                 <EditText
-                    android:text="Nguyen Ho Quynh Thu"
-                    android:id="@+id/dl_employee_phone"
+                    android:text="Không có thông tin"
+                    android:id="@+id/dl_task_sender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center|left"
@@ -191,25 +191,20 @@
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/dl_idcard_number"
+                    android:text="@string/detail_task_status"
                     android:fontFamily="sans-serif-light"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
-                <EditText
-                    android:text="Nguyen Ho Quynh Thu"
-                    android:id="@+id/dl_employee_idcard"
-                    android:layout_width="match_parent"
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/dl_task_status"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center|left"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
                     android:layout_marginStart="30dp"
-                    android:singleLine="true"
-                    android:enabled="false"
-                    android:imeOptions="actionDone"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:clickable="false"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -218,35 +213,7 @@
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/dl_idcard_cd"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
-
-                <EditText
-                    android:text="Nguyen Ho Quynh Thu"
-                    android:id="@+id/dl_employee_idcardcd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|left"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:layout_marginStart="30dp"
-                    android:singleLine="true"
-                    android:enabled="false"
-                    android:imeOptions="actionDone"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dl_idcard_loc"
+                    android:text="@string/detail_task_receiver"
                     android:fontFamily="sans-serif-light"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
@@ -254,8 +221,8 @@
                     android:textStyle="bold"/>
 
                 <EditText
-                    android:text="Nguyen Ho Quynh Thu"
-                    android:id="@+id/dl_employee_idcardloc"
+                    android:text="Không có thông tin"
+                    android:id="@+id/dl_task_receiver"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center|left"
@@ -267,90 +234,8 @@
                     android:enabled="false"
                     android:imeOptions="actionDone"/>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dl_position"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
-                <EditText
-                    android:text="Nguyen Ho Quynh Thu"
-                    android:id="@+id/dl_employee_pos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|left"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:layout_marginStart="30dp"
-                    android:singleLine="true"
-                    android:enabled="false"
-                    android:imeOptions="actionDone"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dl_createtime"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
 
-                <EditText
-                    android:text="Nguyen Ho Quynh Thu"
-                    android:id="@+id/dl_employee_createdate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|left"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:layout_marginStart="30dp"
-                    android:singleLine="true"
-                    android:enabled="false"
-                    android:imeOptions="actionDone"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dl_updatetime"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
-
-                <EditText
-                    android:text="Nguyen Ho Quynh Thu"
-                    android:id="@+id/dl_employee_updatetime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|left"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:layout_marginStart="30dp"
-                    android:singleLine="true"
-                    android:enabled="false"
-                    android:imeOptions="actionDone"/>
-            </LinearLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>
 

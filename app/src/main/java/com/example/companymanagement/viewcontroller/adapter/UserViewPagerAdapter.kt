@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.companymanagement.viewcontroller.fragment.user.UserInfo
 import com.example.companymanagement.viewcontroller.fragment.userstatictis.UserStatictis
-import com.example.companymanagement.viewcontroller.fragment.user.task.UserTask
+import com.example.companymanagement.viewcontroller.fragment.usertask.UserTask
 
 
 class UserViewPagerAdapter(frag: Fragment) :
