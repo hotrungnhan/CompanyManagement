@@ -29,6 +29,8 @@ import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import com.kizitonwose.calendarview.ui.ViewContainer
 import com.kizitonwose.calendarview.utils.next
 import com.kizitonwose.calendarview.utils.previous
+import com.example.companymanagement.viewcontroller.fragment.user.PerformanceViewModel
+import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -83,7 +85,8 @@ class UserStatictis : Fragment() {
             .toString()
 
         performancemodel.per.observe(viewLifecycleOwner) {
-            work.text = (dayofwork - (it.Late + it.AbsenceA + it.AbsenceNA)).toString() + "/" + dayofwork.toString()
+            work.text =
+                (dayofwork - (it.Late + it.AbsenceA + it.AbsenceNA)).toString() + "/" + dayofwork.toString()
             absent.text = (it.AbsenceA + it.AbsenceNA).toString()
             late.text = it.Late.toString()
             dateviolate.text = ((it.AbsenceA + it.AbsenceNA + it.Late)).toString()
@@ -204,10 +207,9 @@ class UserStatictis : Fragment() {
                 calendarView.smoothScrollToMonth(it.yearMonth.previous)
             }
         }
+        var widget: MaterialCalendarView = view.findViewById(R.id.calendarView) as MaterialCalendarView
+
+        val mydate = CalendarDay.from(2021, 6, 29) // year, month, date
+        widget.addDecorators(CurrentDayDecorator(activity, mydate))
     }
 }
-
-
-
-
-

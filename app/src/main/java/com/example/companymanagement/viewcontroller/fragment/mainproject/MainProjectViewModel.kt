@@ -4,19 +4,26 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.companymanagement.model.task.UserTaskModel
-import com.example.companymanagement.model.task.UserTaskRepository
-import com.google.firebase.auth.FirebaseAuth
+import com.example.companymanagement.model.UserTaskModel
+import com.example.companymanagement.model.UserTaskRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
 class MainProjectViewModel : ViewModel() {
-    val id = FirebaseAuth.getInstance().currentUser?.uid!!
-    var TaskList: MutableLiveData<MutableList<UserTaskModel>> = MutableLiveData();
+    //implement a mutable list data
+    //var taskList: MutableLiveData<MutableList<UserTaskModel>> = MutableLiveData()
+    var taskList: MutableLiveData<MutableList<UserTaskModel>> = MutableLiveData()
 
-    private var repo = UserTaskRepository(FirebaseFirestore.getInstance().collection("task"))
+    //implement the repository of the task
+    //var repository = UserTaskRepository(FirebaseFirestore.getInstance().collection("task"))
+    var repository = UserTaskRepository(FirebaseFirestore.getInstance().collection("task"))
 
-    init {
+    //update data with the function
+    //call this function in main project.kt to load data
+    fun retrieveUserTask(
+        uuid: String,
+        year: Int, month: Int, dayOfMonth: Int
+    ){
         viewModelScope.launch {
             TaskList.value = repo.getTask(id)
             Log.d("Data", TaskList.value.toString())
