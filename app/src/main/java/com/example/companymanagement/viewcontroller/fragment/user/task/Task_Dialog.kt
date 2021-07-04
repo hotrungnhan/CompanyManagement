@@ -1,4 +1,4 @@
-package com.example.companymanagement.viewcontroller.fragment.usertask
+package com.example.companymanagement.viewcontroller.fragment.user.task
 
 import android.app.AlertDialog
 import android.app.Dialog
