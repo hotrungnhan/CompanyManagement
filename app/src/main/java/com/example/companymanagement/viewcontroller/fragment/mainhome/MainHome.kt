@@ -46,7 +46,6 @@ class MainHome : Fragment() {
             HomeGridViewViewModel(R.drawable.bg_launcher_background,
                 R.id.user_salary,
                 "My Salary"),
-
             HomeGridViewViewModel(R.drawable.bg_launcher_background,
                 R.id.leaderboard,
                 "Leaderboard"),
@@ -55,7 +54,14 @@ class MainHome : Fragment() {
                 "Manager Salary"),
             HomeGridViewViewModel(R.drawable.bg_launcher_background,
                 R.id.task_manager,
-                "Task Manager")
+                "Task Manager"),
+            HomeGridViewViewModel(R.drawable.bg_launcher_background,
+                R.id.leave_manager,
+                "xet duyet"),
+            HomeGridViewViewModel(R.drawable.bg_launcher_background,
+                R.id.leave_sign,
+                "nghi phep")
         )
+
     }
 }

@@ -6,7 +6,6 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.companymanagement.model.UserInfoRepository
 import com.example.companymanagement.model.salary.SalaryModel
 import com.example.companymanagement.model.salary.SalaryRepository
 import com.google.firebase.firestore.FirebaseFirestore

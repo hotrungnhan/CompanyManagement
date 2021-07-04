@@ -29,5 +29,6 @@ class UserInfoViewModel : ViewModel() {
         viewModelScope.launch {
             info.postValue(repo.findDoc(uuid))
         }
+
     }
 }
