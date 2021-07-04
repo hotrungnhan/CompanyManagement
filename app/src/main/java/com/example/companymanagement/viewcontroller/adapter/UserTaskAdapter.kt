@@ -7,43 +7,43 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
 import com.example.companymanagement.model.task.UserTaskModel
+import com.example.companymanagement.utils.DateParser.Companion.toHumanReadDate
 
 class UserTaskAdapter
-    : RecyclerView.Adapter<TaskHoler>() {
+    : RecyclerView.Adapter<TaskHolder>() {
 
     var list: MutableList<UserTaskModel> = mutableListOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskHoler {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskHolder {
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false)
 
-        return TaskHoler(itemView)
+        return TaskHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: TaskHoler, position: Int) {
+    fun setData(list: MutableList<UserTaskModel>) {
+        this.list = list
+        this.notifyDataSetChanged()
+    }
 
-        holder.Content.text = list[position].Content
-        holder.Deadline.text = list[position].Deadline.toString()
-        holder.Title.text = list[position].Title
-        holder.Sender.text = list[position].Sender
-        holder.SentDate.text = list[position].SentDate.toString()
-        holder.Status.text = list[position].Status
+    override fun onBindViewHolder(holder: TaskHolder, position: Int) {
+        val task: UserTaskModel = list!![position]
+        holder.Content.text = task.Content
+        holder.Deadline.text = task.Deadline?.toHumanReadDate().toString()
+        holder.Title.text = task.Title
+        holder.SenderName.text = task.SenderName
+        holder.SentDate.text = task.SentDate?.toHumanReadDate().toString()
+        holder.Status.text = task.Status
     }
 
     override fun getItemCount(): Int = list.size
 
-
-    fun setData(data: MutableList<UserTaskModel>) {
-        this.list = data;
-        this.notifyDataSetChanged()
-    }
-
 }
 
-class TaskHoler(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class TaskHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val Content: TextView = itemView.findViewById(R.id.task_content)
     val Deadline: TextView = itemView.findViewById(R.id.task_deadline)
-    val Sender: TextView = itemView.findViewById(R.id.task_sender)
+    val SenderName: TextView = itemView.findViewById(R.id.task_sender)
     val SentDate: TextView = itemView.findViewById(R.id.task_sentDate)
     val Status: TextView = itemView.findViewById(R.id.task_status)
     val Title: TextView = itemView.findViewById(R.id.task_title)

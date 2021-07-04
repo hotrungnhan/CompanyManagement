@@ -25,25 +25,9 @@ class UserInfoViewModel : ViewModel() {
         }
     }
 
-    fun getName() : MutableLiveData<ArrayList<String>>{
-        var result = MutableLiveData<ArrayList<String>>()
+    fun getInfobyId(uuid: String) {
         viewModelScope.launch {
-            result.value =  repo.getNameList()
+            info.postValue(repo.findDoc(uuid))
         }
-        return result
-    }
-    fun findNameById(uuid: String) : MutableLiveData<String>{
-        var result = MutableLiveData<String>()
-        viewModelScope.launch {
-            result.value = repo.getNameById(uuid)
-        }
-        return result
-    }
-    fun findIdByName(name : String) : MutableLiveData<MutableList<String>>{
-        var result = MutableLiveData<MutableList<String>>()
-        viewModelScope.launch {
-            result.value = repo.getIdByName(name)
-        }
-        return result
     }
 }

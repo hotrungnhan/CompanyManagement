@@ -1,11 +1,9 @@
 package com.example.companymanagement.viewcontroller.activity.main
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.companymanagement.R
 import com.example.companymanagement.viewcontroller.activity.login.LoginActivity
@@ -23,9 +21,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        infomodel = ViewModelProvider(this).get(UserInfoViewModel::class.java)
-        rolemodel = ViewModelProvider(this).get(UserRoleViewModel::class.java)
-
         if (auth.currentUser == null) {
             goBackLogin()
         }
@@ -38,5 +33,13 @@ class MainActivity : AppCompatActivity() {
                 rolemodel.getRole(it.currentUser!!.uid)
             }
         }
+        supportActionBar?.hide();
+        setContentView(R.layout.activity_main)
+    }
+
+    fun goBackLogin() {
+        val usernull = Intent(this, LoginActivity::class.java)
+        startActivity(usernull)
+        this.finish()
     }
 }
