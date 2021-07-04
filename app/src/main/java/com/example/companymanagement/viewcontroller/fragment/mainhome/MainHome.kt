@@ -49,23 +49,28 @@ class MainHome : Fragment() {
     }
 
     fun createdata() {
-        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
+        adminlist = mutableListOf(HomeGridViewViewModel(R.drawable.ic_user_manager,
             R.id.employee_manager,
-            "Employee ManagerContainer"))
-        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
-            R.id.user_salary,
-            "Salary"))
-        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
-            R.id.checkin_qrscanner,
-            "Check in"))
-        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
-            R.id.leave_sign,
-            "nghi phep"))
-        listview.add(HomeGridViewViewModel(R.drawable.bg_launcher_background,
-            R.id.leave_manager,
-            "xet duyet"))
+            "Quản lý nhân viên", Color.valueOf(Color.CYAN)),
+            HomeGridViewViewModel(
+                R.drawable.ic_clipboard,
+                R.id.task_manager,
+                "Quản lý task", Color.valueOf(Color.RED)),
+            HomeGridViewViewModel(R.drawable.ic_stamp,
+                R.id.leave_manager,
+                "Xét duyệt đơn nghỉ phép", Color.valueOf(Color.GREEN)),
+            HomeGridViewViewModel(R.drawable.ic_salary,
+                R.id.manager_salary,
+                "Quản lý lương"))
 
-            HomeGridViewViewModel(R.drawable.bg_launcher_background,
+        userlist = mutableListOf(
+            HomeGridViewViewModel(R.drawable.ic_qr_code,
+                R.id.checkin_qrscanner,
+                "Checking", Color.valueOf(Color.BLUE)),
+            HomeGridViewViewModel(R.drawable.ic_salary_manager,
+                R.id.user_salary,
+                "Lương của tôi", Color.valueOf(Color.YELLOW), Color.valueOf(Color.DKGRAY)),
+            HomeGridViewViewModel(R.drawable.ic_statistics,
                 R.id.leaderboard,
                 "Leaderboard"),
             HomeGridViewViewModel(R.drawable.bg_launcher_background,
