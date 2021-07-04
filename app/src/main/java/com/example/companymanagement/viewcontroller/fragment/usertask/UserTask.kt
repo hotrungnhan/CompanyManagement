@@ -1,6 +1,6 @@
-package com.example.companymanagement.viewcontroller.fragment.user.task
-
+package com.example.companymanagement.viewcontroller.fragment.usertask
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +13,13 @@ import com.example.companymanagement.viewcontroller.adapter.UserTaskAdapter
 import com.example.companymanagement.viewcontroller.fragment.user.UserTaskViewModel
 
 
-class UserTask : Fragment() {
+class UserTask : Fragment(){
 
     private var taskModel: UserTaskViewModel = UserTaskViewModel()
+    private var userTaskAdapter: UserTaskAdapter = UserTaskAdapter()
+    private val taskLayoutManager = LinearLayoutManager(context)
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,12 +32,14 @@ class UserTask : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var userTaskAdapter = UserTaskAdapter()
-        val layoutmanager = LinearLayoutManager(context)
+
         val taskRecyclerView: RecyclerView = view.findViewById(R.id.user_task_container)
-        taskRecyclerView.layoutManager = layoutmanager
-        layoutmanager.orientation = RecyclerView.VERTICAL
+        taskRecyclerView.layoutManager = taskLayoutManager
+        taskRecyclerView.setHasFixedSize(true)
+
         taskRecyclerView.adapter = userTaskAdapter
+
+        this.taskLayoutManager.orientation = RecyclerView.VERTICAL
 
         taskModel.TaskList.observe(this.viewLifecycleOwner) {
             userTaskAdapter.setData(it)
