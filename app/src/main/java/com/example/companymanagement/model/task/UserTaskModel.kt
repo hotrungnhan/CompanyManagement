@@ -20,6 +20,10 @@ data class UserTaskModel(
     @set: PropertyName("sentDate")
     var sentDate: Date? = null,
 
+    @get: PropertyName("sender")
+    @set: PropertyName("sender")
+    var Sender: String? = null,
+
     @get: PropertyName("senderName")
     @set: PropertyName("senderName")
     var senderName: String? = null,
@@ -36,24 +40,27 @@ data class UserTaskModel(
     @set: PropertyName("IDReceiver")
     var IDReceiver: List<String>? = null,
 
+    @get: PropertyName("NameReceiver")
+    @set: PropertyName("NameReceiver")
+    var NameReceiver: List<String>? = null
     ) {
     @DocumentId
     val taskid: String? = null
 
     //document id shall auto parse from doc by to object function . it should be unsetable
 
-    @ServerTimestamp
-    @get: PropertyName("create_time")
-    @set: PropertyName("create_time")
-    var CreateTime: Date? = null
+//    @ServerTimestamp
+//    @get: PropertyName("create_time")
+//    @set: PropertyName("create_time")
+//    var CreateTime: Date? = null
 
-    @ServerTimestamp
-    @get: PropertyName("update_time")
-    @set: PropertyName("update_time")
-    var UpdateTime: Date? = null
+//    @ServerTimestamp
+//    @get: PropertyName("update_time")
+//    @set: PropertyName("update_time")
+//    var UpdateTime: Date? = null
 
-    init {
-        CreateTime = Date();
-        UpdateTime = Date();
-    }
+//    init {
+//        CreateTime = Date();
+//        UpdateTime = Date();
+//    }
 }
