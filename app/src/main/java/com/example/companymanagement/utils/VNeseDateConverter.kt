@@ -11,8 +11,9 @@ import java.util.*
 class VNeseDateConverter {
     companion object {
         var input = LocalDate.now()
-        var formatter = DateTimeFormatter.ofPattern("MMMM", Locale("vi", "VN"))
-        fun convertMonthFloatToString(input : Float) : String {
+        var formatterVN = DateTimeFormatter.ofPattern("MMMM", Locale("vi", "VN"))
+
+        fun convertMonthFloatToString(input: Float): String {
             var output = ""
             when (input) {
                 1f -> output = "JANUARY"
@@ -30,7 +31,8 @@ class VNeseDateConverter {
             }
             return output
         }
-        fun convertStringToYearMonth(year : String, MONTH: String) : YearMonth {
+
+        fun convertStringToYearMonth(year: String, MONTH: String): YearMonth {
             var x: String = ""
             when (MONTH) {
                 "JANUARY" -> x = "01"
@@ -52,6 +54,7 @@ class VNeseDateConverter {
             }
             return YearMonth.parse(year + "-" + x)
         }
+
         fun vnConvertMonth(month: String): String {
             var x: Int = 1
             when (month) {
@@ -73,29 +76,31 @@ class VNeseDateConverter {
                 }
             }
             input = LocalDate.of(1, x, 1)
-            return input.format(formatter)
-        }
-        fun getDayDiff(before: Calendar, after: Calendar): Long {
-            val millisBefore = before.timeInMillis
-            val millisAfter = after.timeInMillis
-
-            val millisDiff = millisAfter - millisBefore
-
-            return millisDiff / (24 * 60 * 60 * 1000)
-        }
-        fun getDayDiff(before: Date, after: Date): Long {
-            val millisBefore = before.time
-            val millisAfter = after.time
-
-            val millisDiff = millisAfter - millisBefore
-
-            return millisDiff / (24 * 60 * 60 * 1000)
+            return input.format(formatterVN)
         }
 
-        fun fromDateToYearMonth(date : Date) : YearMonth{
+        fun vnConvertMonth(month: Date): String {
+            input = LocalDate.of(1, fromDateToMonth(month), 1)
+            return input.format(formatterVN)
+        }
+
+
+        fun fromDateToYearMonth(date: Date): YearMonth {
             val cal = Calendar.getInstance()
             cal.time = date
-            return YearMonth.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH))
+            return YearMonth.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1)
+        }
+
+        fun fromDateToMonth(date: Date): Int {
+            val cal = Calendar.getInstance()
+            cal.time = date
+            return cal.get(Calendar.MONTH) + 1
+        }
+
+        fun fromDateToYear(date: Date): Int {
+            val cal = Calendar.getInstance()
+            cal.time = date
+            return cal.get(Calendar.YEAR)
         }
     }
 }

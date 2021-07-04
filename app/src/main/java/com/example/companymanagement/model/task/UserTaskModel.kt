@@ -20,9 +20,9 @@ data class UserTaskModel(
     @set: PropertyName("sentDate")
     var SentDate: Date? = null,
 
-    @get: PropertyName("sender")
-    @set: PropertyName("sender")
-    var Sender: String? = null,
+    @get: PropertyName("senderName")
+    @set: PropertyName("senderName")
+    var SenderName: String? = null,
 
     @get: PropertyName("status")
     @set: PropertyName("status")
@@ -36,7 +36,7 @@ data class UserTaskModel(
     @set: PropertyName("IDReceiver")
     var IDReceiver: List<String>? = null,
 
-){
+    ) {
     @DocumentId
     val taskid: String? = null
 

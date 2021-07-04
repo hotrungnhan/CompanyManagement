@@ -31,7 +31,7 @@ class MainHome : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val calculator = RecycleViewCalculate(requireContext(),
             R.layout.item_cardview_button)
-        val adminlayout = view.findViewById<CardView>(R.id.admin_container)
+        val adminlayout = view.findViewById<CardVi  ew>(R.id.admin_container)
         rolemodel.isAdmin.observe(this.viewLifecycleOwner) {
             if (it == true) adminlayout.visibility = View.VISIBLE else adminlayout.visibility =
                 View.GONE
@@ -56,7 +56,10 @@ class MainHome : Fragment() {
             "Employee Manager"),
             HomeGridViewViewModel(R.drawable.bg_launcher_background,
                 R.id.task_manager,
-                "Task Manager"))
+                "Task Manager"),
+            HomeGridViewViewModel(R.drawable.bg_launcher_background,
+                R.id.leave_manager,
+                "xet duyet"))
         userlist = mutableListOf(
             HomeGridViewViewModel(R.drawable.bg_launcher_background,
                 R.id.checkin_qrscanner,
@@ -64,7 +67,15 @@ class MainHome : Fragment() {
             HomeGridViewViewModel(R.drawable.bg_launcher_background,
                 R.id.user_salary,
                 "Salary"),
-
+            HomeGridViewViewModel(R.drawable.bg_launcher_background,
+                R.id.user_salary,
+                "My Salary"),
+            HomeGridViewViewModel(R.drawable.bg_launcher_background,
+                R.id.leaderboard,
+                "Leaderboard"),
+            HomeGridViewViewModel(R.drawable.bg_launcher_background,
+                R.id.leave_sign,
+                "nghi phep")
         )
     }
 }

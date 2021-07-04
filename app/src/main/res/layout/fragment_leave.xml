@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".viewcontroller.fragment.signleave.leave"
-
+    android:orientation="vertical"
     >
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_leave"
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/leaveTab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        app:menu="@menu/menu_leave"
-        app:itemTextColor="@color/black"
-        app:itemBackground="@drawable/shape_conner_round"
-        />
+        android:layout_gravity="center"
+        app:tabGravity="center"
+        app:tabMode="scrollable" />
 
-    <FrameLayout
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/leavepage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/nav_leave"
-        android:layout_marginTop="-2dp"/>
-</RelativeLayout>
+        android:layout_height="match_parent" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

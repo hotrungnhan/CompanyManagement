@@ -1,6 +1,5 @@
 package com.example.companymanagement.viewcontroller.activity.main
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.AttributeSet
@@ -35,11 +34,10 @@ class MainActivity : AppCompatActivity() {
                 infomodel.retriveUseInfo(it.currentUser!!.uid)
                 rolemodel.getRole(it.currentUser!!.uid)
             }
-        };
+        }
         supportActionBar?.hide();
         setContentView(R.layout.activity_main)
     }
-
 
     fun goBackLogin() {
         val usernull = Intent(this, LoginActivity::class.java)

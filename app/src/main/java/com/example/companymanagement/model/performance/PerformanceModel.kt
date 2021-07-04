@@ -47,7 +47,7 @@ class PerformanceModel (
         EndTime = Date()
         val temp = VNeseDateConverter.fromDateToYearMonth(CreateTime!!)
         val cal = Calendar.getInstance()
-        cal.set(temp.year, temp.month.value, temp.lengthOfMonth(), 0 ,0,0)
+        cal.set(temp.year, temp.month.value + 1, 1, 0 ,0,0)
         EndTime!!.time = cal.timeInMillis
         //Log.e("EndTime", EndTime.toString())
     }
@@ -67,7 +67,7 @@ class PerformanceModel (
     fun computeTaskBonus() = 50000 * TaskDone
     fun computeLateCharge() : Long {
         return if (Late > 1)
-            (Late - 1) * 50000
+             (Late - 1) * 50000
         else
             0
     }

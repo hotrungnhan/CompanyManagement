@@ -40,11 +40,31 @@
     <fragment
         android:id="@+id/checkin_qrscanner"
         android:name="com.example.companymanagement.viewcontroller.fragment.qrscanner.QRScanner"
-        android:label="fragment_user_salary"
-        tools:layout="@layout/fragment_checkin_qrscanner" />
+        android:label="fragment_user_salary" />
+    <fragment
+        android:id="@+id/leaderboard"
+        android:name="com.example.companymanagement.viewcontroller.fragment.leaderboard.LeaderboardFragment"
+        android:label="fragment_leaderboard"
+        tools:layout="@layout/fragment_leaderboard" />
+    <fragment
+        android:id="@+id/manager_salary"
+        android:name="com.example.companymanagement.viewcontroller.fragment.manager.salary.SalaryManager"
+        android:label="fragment_mn_salary"
+        tools:layout="@layout/fragment_manager_salary" />
     <fragment
         android:id="@+id/task_manager"
         android:name="com.example.companymanagement.viewcontroller.fragment.task.TaskManager"
         android:label="fragment_task_manager"
         tools:layout="@layout/fragment_tablayout_taskview" />
+
+    <fragment
+        android:id="@+id/leave_sign"
+        android:name="com.example.companymanagement.viewcontroller.fragment.signleave.employeLeave.LeaveContainer"
+        android:label="fragment_leave"
+        tools:layout="@layout/fragment_leave" />
+    <fragment
+        android:id="@+id/leave_manager"
+        android:name="com.example.companymanagement.viewcontroller.fragment.signleave.employeLeave.ManagerContainer"
+        android:label="Manager" />
+
 </navigation>

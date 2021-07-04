@@ -38,5 +38,8 @@ class UserTask : Fragment() {
         taskModel.TaskList.observe(this.viewLifecycleOwner) {
             userTaskAdapter.setData(it)
         }
+        taskModel.TaskList.observe(this.viewLifecycleOwner) {
+            userTaskAdapter.setData(it)
+        }
     }
 }
