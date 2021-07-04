@@ -14,9 +14,9 @@ data class UserTaskModel(
     @set: PropertyName("deadline")
     var Deadline: Date? = null,
 
-    @get: PropertyName("sender")
-    @set: PropertyName("sender")
-    var Sender: String? = null,
+    @get: PropertyName("senderName")
+    @set: PropertyName("senderName")
+    var SenderName: String? = null,
 
     @get: PropertyName("sentDate")
     @set: PropertyName("sentDate")

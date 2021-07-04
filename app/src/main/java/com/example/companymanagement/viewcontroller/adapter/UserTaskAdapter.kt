@@ -39,7 +39,7 @@ class UserTaskAdapter
         holder.Content.text = task.Content
         holder.Deadline.text = task.Deadline?.toHumanReadDate().toString()
         holder.Title.text = task.Title
-        holder.Sender.text = task.Sender
+        holder.SenderName.text = task.SenderName
         holder.SentDate.text = task.SentDate?.toHumanReadDate().toString()
         holder.Status.text = task.Status
     }

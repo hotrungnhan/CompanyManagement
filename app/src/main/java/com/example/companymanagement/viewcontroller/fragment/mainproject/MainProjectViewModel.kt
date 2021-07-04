@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.companymanagement.model.UserInfoRepository
 import com.example.companymanagement.model.UserTaskModel
 import com.example.companymanagement.model.UserTaskRepository
 import com.google.firebase.firestore.FirebaseFirestore
@@ -17,6 +18,9 @@ class MainProjectViewModel : ViewModel() {
     //implement the repository of the task
     //var repository = UserTaskRepository(FirebaseFirestore.getInstance().collection("task"))
     var repository = UserTaskRepository(FirebaseFirestore.getInstance().collection("task"))
+
+    //edit from here
+    //var userRepo = UserInfoRepository(FirebaseFirestore.getInstance().collection())
 
     //update data with the function
     //call this function in main project.kt to load data

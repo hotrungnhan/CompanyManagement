@@ -23,6 +23,8 @@ class UserTaskRepository(var col: CollectionReference) {
         endDate.set(year, month, dayOfMonth, 23,59, 59)
         val endDateTime = endDate.time
 
+        val col1:CollectionReference
+
         //if you want use both order by and where equal to in some files these field index need to be opposite
         // for example: Deadline ascending so the sentdate must be descending
         val snapshot = col
