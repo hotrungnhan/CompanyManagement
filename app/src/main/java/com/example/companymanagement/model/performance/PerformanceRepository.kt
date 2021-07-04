@@ -74,9 +74,11 @@ class PerformanceRepository(var col: CollectionReference) {
         Log.d("Performance", end.toString())
         Log.d("Performance", uuid)
 
-        val ref = col.whereEqualTo("owner_uuid", uuid)
+        val ref = col
+            .whereEqualTo("owner_uuid", uuid)
             .whereGreaterThanOrEqualTo("create_time", start)
             .whereLessThan("create_time", end)
+            .limit(1)
             .orderBy("create_time", Query.Direction.DESCENDING).get().await()
 
         Log.d("Performance", ref.size().toString())

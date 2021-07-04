@@ -11,6 +11,7 @@ import com.example.companymanagement.model.checkin.CheckinRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
+import java.util.*
 
 class CheckinViewModel : ViewModel() {
 
@@ -21,11 +22,12 @@ class CheckinViewModel : ViewModel() {
 
     var repo = CheckinRepository(FirebaseFirestore.getInstance().collection("checkin"))
 
-    init{
+    init {
         viewModelScope.launch {
             listLate.value = repo.getLate(id)
             listWork.value = repo.getOntime(id)
             Log.d("ontime",listWork.value.toString())
+            Log.d("late",listLate.value.toString())
         }
     }
 }

@@ -10,7 +10,6 @@ import com.google.firebase.firestore.ServerTimestamp
 import java.time.YearMonth
 import java.util.*
 
-@RequiresApi(Build.VERSION_CODES.O)
 class PerformanceModel (
     @get: PropertyName("owner_uuid")
     @set: PropertyName("owner_uuid")

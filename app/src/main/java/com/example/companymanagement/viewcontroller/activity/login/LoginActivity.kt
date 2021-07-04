@@ -38,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
                             toastUserSucess(user!!)
                             val loginintent = Intent(this, MainActivity::class.java)
                             startActivity(loginintent)
+                            this.supportFragmentManager.popBackStack()
 
                         } else {
                             // If sign in fails, display a message to the user.

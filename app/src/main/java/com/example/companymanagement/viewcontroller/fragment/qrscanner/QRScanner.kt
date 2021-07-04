@@ -20,6 +20,8 @@ import io.github.g00fy2.quickie.ScanCustomCode
 import io.github.g00fy2.quickie.config.BarcodeFormat
 import io.github.g00fy2.quickie.config.ScannerConfig
 import io.github.g00fy2.quickie.content.QRContent
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class QRScanner : Fragment() {
@@ -60,26 +62,38 @@ class QRScanner : Fragment() {
                         var doc = String(result).split("|")[1];
                         store.collection("checkin").document(doc).get()
                             .addOnCompleteListener { doc ->
-                                val check = CheckinModel()
-                                if (doc.isSuccessful && doc.result?.exists() == true) {
-                                    doc.result!!.reference.collection("/checked_user")
-                                        .document(currentuser?.uid!!).get().addOnSuccessListener {
-                                            if (it.exists()) {
-                                                toast("Bạn đã checkin hôm nay rồi vào lúc ${
-                                                    it.toObject(CheckinModel::class.java)?.checked_date?.toHumanReadTime()
-                                                }")
-                                                goback.postValue(true)
-                                            } else {
-                                                it.reference.set(check).addOnSuccessListener {
-                                                    toast("Checking thành công ${check.checked_date?.toHumanDateAndTime()}")
-                                                    goback.postValue(true)
-                                                }
+                                doc.result!!.reference.collection("/checked_user").whereEqualTo("owneruuid",currentuser?.uid!!).get().addOnSuccessListener{
+                                    if(it.isEmpty){
+                                        var day = Calendar.getInstance()
+                                        var c = Calendar.getInstance().time
+                                        val month = SimpleDateFormat("MM", Locale.getDefault())
+                                        val year = SimpleDateFormat("yyyy", Locale.getDefault())
+                                        val date = SimpleDateFormat("dd", Locale.getDefault())
+                                        day.set(year.format(c).toInt(),month.format(c).toInt() - 1,date.format(c).toInt(),8,0,0)
+                                        val check = CheckinModel()
+                                        check.apply {
+                                            this.owneruuid = currentuser?.uid!!
+                                            if(checked_date?.before(day.time) == true){
+                                                this.status = "ontime"
+                                                Log.d("status",checked_date.toString())
+                                                Log.d("status",day.time.toString())
+                                                Log.d("status",checked_date?.before(day.time).toString())
+                                            }
+                                            else{
+                                                this.status = "late"
                                             }
                                         }
-
-                                } else {
-                                    toast("không checkin được bởi một số lý do gì đó")
-                                    launchScaner()
+                                        doc.result!!.reference.collection("/checked_user").add(check).addOnSuccessListener {
+                                            toast("Checking thành công ${check.checked_date?.toHumanDateAndTime()}")
+                                            goback.postValue(true)
+                                        }
+                                    }
+                                    else{
+                                        toast("Bạn đã checkin hôm nay rồi vào lúc ${
+                                            it.documents[0].toObject(com.example.companymanagement.model.checkin.CheckinModel::class.java)?.checked_date?.toHumanReadTime()
+                                        }")
+                                        goback.postValue(true)
+                                    }
                                 }
                             }
                     } else {
