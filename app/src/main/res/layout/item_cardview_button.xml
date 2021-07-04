@@ -8,13 +8,23 @@
     android:orientation="vertical"
     android:padding="5dp">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/cardview_img"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/layout_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:adjustViewBounds="true"
-        app:srcCompat="@drawable/bg_launcher_background" />
+        app:cardCornerRadius="10dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/button_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:foreground="@drawable/bg_launcher_background"
+            android:foregroundTint="@color/white" />
+    </androidx.cardview.widget.CardView>
+
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/cardview_text"

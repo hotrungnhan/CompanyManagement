@@ -1,9 +1,12 @@
 package com.example.companymanagement.viewcontroller.fragment.mainhome
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +16,7 @@ import com.example.companymanagement.R
 import com.example.companymanagement.utils.RecycleViewCalculate
 import com.example.companymanagement.viewcontroller.adapter.HomeGridViewApdapter
 import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserRoleViewModel
+
 
 class MainHome : Fragment() {
     lateinit var adminlist: MutableList<HomeGridViewViewModel>
@@ -50,32 +54,35 @@ class MainHome : Fragment() {
         }
     }
 
+
     fun createdata() {
-        adminlist = mutableListOf(HomeGridViewViewModel(R.drawable.bg_launcher_background,
+        adminlist = mutableListOf(HomeGridViewViewModel(R.drawable.ic_manager_user,
             R.id.employee_manager,
-            "Employee Manager"),
-            HomeGridViewViewModel(R.drawable.bg_launcher_background,
+            "Quản lý nhân viên", Color.valueOf(Color.CYAN)),
+            HomeGridViewViewModel(
+                R.drawable.ic_task,
                 R.id.task_manager,
-                "Task Manager"),
-            HomeGridViewViewModel(R.drawable.bg_launcher_background,
+                "Quản lý task", Color.valueOf(Color.RED)),
+            HomeGridViewViewModel(R.drawable.ic_stamp,
                 R.id.leave_manager,
-                "xet duyet"))
+                "Xét duyệt đơn nghỉ phép", Color.valueOf(Color.GREEN)),
+            HomeGridViewViewModel(R.drawable.ic_salary,
+                R.id.manager_salary,
+                "Quản lý lương"))
+
         userlist = mutableListOf(
-            HomeGridViewViewModel(R.drawable.bg_launcher_background,
+            HomeGridViewViewModel(R.drawable.ic_checking,
                 R.id.checkin_qrscanner,
-                "Check in"),
-            HomeGridViewViewModel(R.drawable.bg_launcher_background,
+                "Checking", Color.valueOf(Color.BLUE)),
+            HomeGridViewViewModel(R.drawable.ic_salary_manager,
                 R.id.user_salary,
-                "Salary"),
-            HomeGridViewViewModel(R.drawable.bg_launcher_background,
-                R.id.user_salary,
-                "My Salary"),
-            HomeGridViewViewModel(R.drawable.bg_launcher_background,
+                "Lương của tôi", Color.valueOf(Color.YELLOW), Color.valueOf(Color.DKGRAY)),
+            HomeGridViewViewModel(R.drawable.ic_ranking,
                 R.id.leaderboard,
-                "Leaderboard"),
-            HomeGridViewViewModel(R.drawable.bg_launcher_background,
+                "Bảng xếp hạng", Color.valueOf(Color.DKGRAY)),
+            HomeGridViewViewModel(R.drawable.ic_absent,
                 R.id.leave_sign,
-                "nghi phep")
+                "Xin nghỉ phếp", Color.valueOf(Color.MAGENTA))
         )
     }
 }
