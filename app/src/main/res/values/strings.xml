@@ -70,6 +70,7 @@
     <string name="detail_task_timeline">Thời gian</string>
     <string name="task_creat_datestart">Ngày gửi</string>
     <string name="task_create_deadline">Hạn deadline</string>
+    <string name="detail_task_status">Tình trạng</string>
     <string name="detail_task_descripton">Mô tả</string>
     <string name="hint_task_description">Mô tả nội dung</string>
     <string name="detail_task_sender">Người gửi</string>
