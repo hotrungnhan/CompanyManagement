@@ -38,6 +38,7 @@ class TaskInfoRepository(var col: CollectionReference) {
         val end = Cal.time
         val ref = col.whereEqualTo("status",text).whereGreaterThanOrEqualTo("deadline",start)
             .whereLessThan("deadline",end)
+
             .get().await().documents.map {
                 it.toObject(UserTaskModel::class.java)
             }
