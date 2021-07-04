@@ -14,7 +14,8 @@ class TaskInfoRepository(var col: CollectionReference) {
         return col.document(uid).get().await().toObject(UserTaskModel::class.java)
     }
     suspend fun getTask(): MutableList<UserTaskModel>?  {
-        return col.get().await().toObjects(UserTaskModel::class.java)
+        return col.get()
+            .await().toObjects(UserTaskModel::class.java)
     }
     suspend fun updateTask(task : UserTaskModel) {
         col.document(task.taskid!!).set(task).await()
