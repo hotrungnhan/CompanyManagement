@@ -53,8 +53,6 @@ class MainProject : Fragment() {
             now.monthValue - 1,
             now.dayOfMonth)
 
-        Log.d("currentDay",
-            now.year.toString() + " " + now.monthValue.toString() + " " + now.dayOfMonth.toString())
 
         viewModelMainProject.taskList.value?.clear()
         viewModelMainProject.taskList.observe(viewLifecycleOwner) {

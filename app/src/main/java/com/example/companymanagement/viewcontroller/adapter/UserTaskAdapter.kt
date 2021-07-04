@@ -28,12 +28,12 @@ class UserTaskAdapter
 
     override fun onBindViewHolder(holder: TaskHolder, position: Int) {
         val task: UserTaskModel = list!![position]
-        holder.Content.text = task.Content
-        holder.Deadline.text = task.Deadline?.toHumanReadDate().toString()
-        holder.Title.text = task.Title
-        holder.SenderName.text = task.SenderName
-        holder.SentDate.text = task.SentDate?.toHumanReadDate().toString()
-        holder.Status.text = task.Status
+        holder.Content.text = task.content
+        holder.Deadline.text = task.deadline?.toHumanReadDate().toString()
+        holder.Title.text = task.title
+        holder.SenderName.text = task.senderName
+        holder.SentDate.text = task.sentDate?.toHumanReadDate().toString()
+        holder.Status.text = task.status
     }
 
     override fun getItemCount(): Int = list.size

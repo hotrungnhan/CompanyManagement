@@ -10,27 +10,27 @@ import java.util.*
 data class UserTaskModel(
     @get: PropertyName("content")
     @set: PropertyName("content")
-    var Content: String? = null,
+    var content: String? = null,
 
     @get: PropertyName("deadline")
     @set: PropertyName("deadline")
-    var Deadline: Date? = null,
+    var deadline: Date? = null,
 
     @get: PropertyName("sentDate")
     @set: PropertyName("sentDate")
-    var SentDate: Date? = null,
+    var sentDate: Date? = null,
 
     @get: PropertyName("senderName")
     @set: PropertyName("senderName")
-    var SenderName: String? = null,
+    var senderName: String? = null,
 
     @get: PropertyName("status")
     @set: PropertyName("status")
-    var Status: String? = null,
+    var status: String? = null,
 
     @get: PropertyName("title")
     @set: PropertyName("title")
-    var Title: String? = null,
+    var title: String? = null,
 
     @get: PropertyName("IDReceiver")
     @set: PropertyName("IDReceiver")

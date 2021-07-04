@@ -30,7 +30,6 @@ class MainProjectViewModel : ViewModel() {
     ) {
         viewModelScope.launch {
             taskList.postValue(repository.getTask(uuid, year, month, dayOfMonth))
-            Log.d("Task List", taskList.value.toString())
         }
     }
 
