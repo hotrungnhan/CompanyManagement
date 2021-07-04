@@ -57,7 +57,7 @@
                 android:id="@+id/task_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="Content is here"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -85,7 +85,7 @@
                 android:id="@+id/task_sentDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="sentDate is here"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -109,7 +109,7 @@
                 android:id="@+id/task_deadline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="Deadline is here"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="15sp" />
@@ -133,7 +133,7 @@
                 android:id="@+id/task_sender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="sender is here"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -158,7 +158,7 @@
                 android:id="@+id/task_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="status is here"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="14sp" />
