@@ -81,14 +81,7 @@
                     android:padding="10dp" />
 
             </LinearLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_task_create_receiver"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                app:layoutManager="LinearLayoutManager"
-                tools:listitem="@layout/item_cardview_taskreceiver"
-                android:padding="15dp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
