@@ -114,6 +114,10 @@
     <string name="top1">NHẤT</string>
     <string name="top2">NHÌ</string>
     <string name="top3">BA</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="position">Position</string>
+    <string name="password">Password</string>
     <string-array name="employee_manager_tab_name">
         <item>Thêm Nhân Viên</item>
         <item>Danh Sách Nhân Viên</item>

@@ -16,7 +16,8 @@ import com.example.companymanagement.R
 import com.example.companymanagement.model.info.UserInfoModel
 import com.example.companymanagement.utils.DateParser
 import com.example.companymanagement.utils.UtilsFuntion
-import com.example.companymanagement.viewcontroller.fragment.employe.Employee_ItemShow
+import com.example.companymanagement.viewcontroller.fragment.employe.Employe_ItemShow
+
 import com.google.android.material.imageview.ShapeableImageView
 
 class EmployeeRecyclerViewAdapter() :
@@ -58,7 +59,7 @@ class EmployeeRecyclerViewAdapter() :
         holder.bind(list!![position])
         holder.itemView.setOnClickListener {
 
-            val dlg = Employee_ItemShow(list!![position])
+            val dlg = Employe_ItemShow(list!![position])
             dlg.show((holder.itemView.context as FragmentActivity).supportFragmentManager.beginTransaction(),
                 "itemshow")
 
