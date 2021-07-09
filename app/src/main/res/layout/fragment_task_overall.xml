@@ -9,10 +9,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".viewcontroller.fragment.task.TaskOverall">
 
         <TextView
-            android:id="@+id/textview_title"
+            android:id="@+id/tv_task_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -20,7 +21,7 @@
             android:layout_marginTop="28dp"
             android:fontFamily="sans-serif-light"
             android:gravity="center"
-            android:text="Thống kê phân công công việc tháng"
+            android:text="Thống kê công việc tháng mm/yyyy"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -40,7 +41,7 @@
             app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_title">
+            app:layout_constraintTop_toBottomOf="@+id/tv_task_title">
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -116,5 +117,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardview_item_taskoverall" />
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="99dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:srcCompat="@drawable/todolist" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
