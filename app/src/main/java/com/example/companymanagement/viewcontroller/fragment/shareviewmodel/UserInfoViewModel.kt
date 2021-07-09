@@ -32,5 +32,9 @@ class UserInfoViewModel : ViewModel() {
              }
         }
     }
-
+    fun updateInfo(userInfoModel: UserInfoModel){
+        viewModelScope.launch {
+            repo.updateDoc(userInfoModel);
+        }
+    }
 }
