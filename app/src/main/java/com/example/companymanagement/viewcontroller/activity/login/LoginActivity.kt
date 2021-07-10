@@ -17,6 +17,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //debug
+
         setContentView(R.layout.activity_login)
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
@@ -37,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
                             toastUserSucess(user!!)
                             val loginintent = Intent(this, MainActivity::class.java)
                             startActivity(loginintent)
+                            this.supportFragmentManager.popBackStack()
 
                         } else {
                             // If sign in fails, display a message to the user.

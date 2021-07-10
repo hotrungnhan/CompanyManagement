@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.companymanagement.R
 import com.example.companymanagement.viewcontroller.activity.login.LoginActivity
 import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
@@ -12,15 +14,15 @@ import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.User
 import com.google.firebase.auth.FirebaseAuth
 
 
-@RequiresApi(Build.VERSION_CODES.O)
-class MainActivity : AppCompatActivity() {
-
 class MainActivity : AppCompatActivity() {
     var auth: FirebaseAuth = FirebaseAuth.getInstance()
-
-
+    lateinit var infomodel: UserInfoViewModel;
+    lateinit var rolemodel: UserRoleViewModel;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        infomodel = ViewModelProvider(this).get(UserInfoViewModel::class.java)
+        rolemodel = ViewModelProvider(this).get(UserRoleViewModel::class.java)
+
         if (auth.currentUser == null) {
             goBackLogin()
         }

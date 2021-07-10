@@ -88,7 +88,6 @@ class VNeseDateConverter {
         fun fromDateToYearMonth(date: Date): YearMonth {
             val cal = Calendar.getInstance()
             cal.time = date
-            //Log.e(date.toString(), cal.get(Calendar.MONTH).toString())
             return YearMonth.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1)
         }
 

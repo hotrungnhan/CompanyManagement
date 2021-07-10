@@ -15,15 +15,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
-import com.example.companymanagement.model.UserTaskModel
 import com.example.companymanagement.viewcontroller.adapter.UserTaskAdapter
-import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.*
-import com.google.firebase.firestore.EventListener
-import java.time.Month
-import java.util.*
-import kotlin.collections.ArrayList
+import java.time.LocalDate
 
 class MainProject : Fragment() {
 
@@ -43,6 +37,9 @@ class MainProject : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.task_recyclerView)
+        val userTaskAdapter = UserTaskAdapter()
+        val taskLayoutManager = LinearLayoutManager(context)
 
         val calendarView = view.findViewById<CalendarView>(R.id.task_calendar)
         val notask = view.findViewById<CardView>(R.id.notask_cardview)
@@ -80,6 +77,9 @@ class MainProject : Fragment() {
 
         }
 
-            })
+        taskLayoutManager.orientation = RecyclerView.VERTICAL
+        recyclerView.adapter = userTaskAdapter
+        recyclerView.layoutManager = taskLayoutManager
     }
+
 }

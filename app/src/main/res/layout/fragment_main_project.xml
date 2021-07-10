@@ -34,8 +34,10 @@
                 app:cardCornerRadius="10dp">
 
                 <CalendarView
+                    android:id="@+id/task_calendar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusedMonthDateColor="@color/purple_500"
                     android:selectedWeekBackgroundColor="@color/page_title"
                     android:weekSeparatorLineColor="@color/purple_500" />
 
@@ -73,7 +75,8 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/task_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"

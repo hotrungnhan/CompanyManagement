@@ -13,6 +13,7 @@ import kotlinx.coroutines.tasks.await
 import java.time.Year
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 class PerformanceRepository(var col: CollectionReference) {
@@ -73,9 +74,11 @@ class PerformanceRepository(var col: CollectionReference) {
         Log.d("Performance", end.toString())
         Log.d("Performance", uuid)
 
-        val ref = col.whereEqualTo("owner_uuid", uuid)
+        val ref = col
+            .whereEqualTo("owner_uuid", uuid)
             .whereGreaterThanOrEqualTo("create_time", start)
             .whereLessThan("create_time", end)
+            .limit(1)
             .orderBy("create_time", Query.Direction.DESCENDING).get().await()
 
         Log.d("Performance", ref.size().toString())

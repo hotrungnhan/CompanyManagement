@@ -62,9 +62,9 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_gravity="center|end"
-        android:background="@drawable/ic_bell" />
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:layout_width="32dp"-->
+<!--        android:layout_height="32dp"-->
+<!--        android:layout_gravity="center|end"-->
+<!--        android:background="@drawable/ic_bell" />-->
 </androidx.cardview.widget.CardView>

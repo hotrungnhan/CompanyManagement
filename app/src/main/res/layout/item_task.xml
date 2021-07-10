@@ -77,8 +77,6 @@
 
                 android:textColor="@color/page_title"
                 android:textSize="15sp"
-                android:textColor="@color/page_title"
-                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
