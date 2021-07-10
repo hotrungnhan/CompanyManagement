@@ -4,6 +4,8 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.ContentValues
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +20,7 @@ import com.example.companymanagement.model.task.UserTaskModel
 import com.example.companymanagement.viewcontroller.adapter.EmployeeRecyclerViewAdapter
 import com.example.companymanagement.viewcontroller.adapter.TaskRecyclerViewAdapter
 import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
 import java.text.DateFormat
@@ -53,6 +56,37 @@ class TaskCreate : Fragment() {
         val dldate = root.findViewById<TextView>(R.id.tv_task_create_deadline)
         val dlhour = root.findViewById<TextView>(R.id.tv_task_create_timeline)
         val taskTitle = root.findViewById<EditText>(R.id.ed_task_create_name)
+        val checkName = root.findViewById<TextInputLayout>(R.id.tx_task_name)
+        val checkDes = root.findViewById<TextInputLayout>(R.id.tx_task_description)
+        //Check Input
+        taskTitle.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                checkName.error = null
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (taskTitle.text.length > 20)
+                    checkName.error = "No more!"
+                else checkName.error = null
+            }
+        })
+        taskContent.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                checkDes.error = null
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (taskContent.text.length > 60)
+                    checkDes.error = "No more!"
+                else checkDes.error = null
+            }
+        })
 
         //datepick dialog change view
         val dateListener = object : DatePickerDialog.OnDateSetListener {
@@ -98,61 +132,83 @@ class TaskCreate : Fragment() {
             }
 
         })
-
+        val sender = taskviewmodel.info.value?.uid.toString()
+        val senderName = taskviewmodel.info.value?.Name.toString()
+        taskSender.setText(senderName)
+        Log.d("ccc", sender.toString())
         taskCreateButton.setOnClickListener {
             if (taskTitle.text.isNullOrEmpty() == false && taskReceiver.text.isNullOrEmpty() == false &&
                 dldate.text.isNullOrEmpty() == false && dlhour.text.isNullOrEmpty() == false
+                && checkDes.error == null && checkName.error == null
             ) {
-                val receiver = taskReceiver.text.toString().split(",")
-                val sender = userinfoviewmodel.info.value?.uid
-                val senderName = userinfoviewmodel.info.value?.Name
+                //Kiem tra Han Deadline
                 val deadline = dldate.text.toString() + " " + dlhour.text.toString()
+                val parseDate = getDateFromString(deadline)
+                val todayTime = Calendar.getInstance().time
+                if (parseDate?.after(todayTime) == true) {
+                    dldate.error = null
+                    dlhour.error = null
+                    //Kiem tra valid Email
+                    val receiver = taskReceiver.text.toString().split(",")
+                    val receiver_checked: MutableList<String> = mutableListOf()
+                    val name_checked: MutableList<String> = mutableListOf()
 
-                val receiver_checked: MutableList<String> = mutableListOf()
-                val name_checked: MutableList<String> = mutableListOf()
-                for (tag in receiver) {
-                    taskviewmodel.checkTask(tag)
-                }
+                    for (tag in receiver) {
 
-                taskviewmodel.CheckList.observe(viewLifecycleOwner) {
-                    Log.d("1111", it.uid.toString())
-                    val test = it.uid
-                    val temp = it.Name
-                    if (test != null && temp != null) {
-                        receiver_checked.add(test)
-                        name_checked.add(temp)
-                    }
-                    Log.d("222", receiver_checked.toString())
-                    if (receiver_checked.size == receiver.size) {
-                        try {
-                            if (taskContent.text.isNullOrEmpty() == true)
-                                taskContent.setText("")
-                            taskviewmodel.addTask(UserTaskModel(taskContent.text.toString(),
-                                getDateFromString(deadline),
-                                Calendar.getInstance().time,
-                                sender,
-                                senderName,
-                                "Undone",
-                                taskTitle.text.toString(),
-                                receiver_checked,
-                                name_checked))
-                            Toast.makeText(context,
-                                "Tạo task mới thành công",
-                                Toast.LENGTH_SHORT)
-                                .show()
-                            taskTitle.text.clear()
-                            taskContent.text.clear()
-                            taskReceiver.text.clear()
-                            dldate.text = ""
-                            dlhour.text = ""
-                        } catch (err: Exception) {
-                            Toast.makeText(context,
-                                err.message.toString(),
-                                Toast.LENGTH_SHORT)
-                                .show()
+                        taskviewmodel.checkTask(tag).observe(viewLifecycleOwner) {
+                            if (it == null) {
+                                Toast.makeText(context,
+                                    tag + " không tìm thấy dữ liệu",
+                                    Toast.LENGTH_SHORT)
+                                    .show()
+                            } else {
+                                val test = it.uid
+                                val temp = it.Name
+                                if (test != null && temp != null) {
+                                    receiver_checked.add(test)
+                                    name_checked.add(temp)
+                                }
+                                if (receiver_checked.size == receiver.size) {
+                                    try {
+                                        if (taskContent.text.isNullOrEmpty() == true)
+                                            taskContent.setText("")
+
+                                        taskviewmodel.addTask(UserTaskModel(taskContent.text.toString(),
+                                            parseDate,
+                                            todayTime,
+                                            sender,
+                                            senderName,
+                                            "Undone",
+                                            taskTitle.text.toString(),
+                                            receiver_checked,
+                                            name_checked))
+                                        Toast.makeText(context,
+                                            "Tạo task mới thành công",
+                                            Toast.LENGTH_SHORT)
+                                            .show()
+                                        taskTitle.text.clear()
+                                        taskContent.text.clear()
+                                        taskReceiver.text.clear()
+                                        dldate.text = ""
+                                        dlhour.text = ""
+                                    } catch (err: Exception) {
+                                        Toast.makeText(context,
+                                            err.message.toString(),
+                                            Toast.LENGTH_SHORT)
+                                            .show()
+                                    }
+                                }
+                            }
                         }
                     }
+                } else {
+                    dldate.error = "Không hợp lệ!"
+                    dlhour.error = "Không hợp lệ!"
+                    Toast.makeText(root.context,
+                        "Hạn Deadline không hợp lệ, xin vui lòng kiểm tra lại!",
+                        Toast.LENGTH_SHORT).show()
                 }
+
             } else {
                 Toast.makeText(root.context,
                     "Vui lòng nhập đầy đủ thông tin",
@@ -169,5 +225,4 @@ class TaskCreate : Fragment() {
             null
         }
     }
-
 }
