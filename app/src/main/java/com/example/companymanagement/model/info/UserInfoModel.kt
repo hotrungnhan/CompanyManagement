@@ -1,4 +1,4 @@
-package com.example.companymanagement.model
+package com.example.companymanagement.model.info
 
 import androidx.annotation.Keep
 import com.google.firebase.firestore.DocumentId
@@ -33,6 +33,7 @@ data class UserInfoModel(
     @get: PropertyName("gender")
     @set: PropertyName("gender")
     var Gender: String? = null,
+
 
     @get: PropertyName("id_card_number")
     @set: PropertyName("id_card_number")

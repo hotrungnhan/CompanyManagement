@@ -2,17 +2,17 @@ package com.example.companymanagement.viewcontroller.fragment.signleave.employeL
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.example.companymanagement.R
-import com.example.companymanagement.model.UserInfoModel
+import com.example.companymanagement.model.info.UserInfoModel
 import com.example.companymanagement.utils.UtilsFuntion
 import com.example.companymanagement.utils.customize.EndlessScrollRecyclListener
 import com.example.companymanagement.viewcontroller.adapter.LeaveHolder
@@ -28,7 +28,7 @@ import com.google.firebase.auth.FirebaseAuth
 class History : Fragment() {
 
     private var leaveviewmodel: LeaveViewModel = LeaveViewModel()
-    private lateinit var userlistppviewmodel: ListUserParticipantViewModel;
+    private lateinit var    userlistppviewmodel: ListUserParticipantViewModel;
     private lateinit var userinfoviewmodel: UserInfoViewModel;
     private var user = FirebaseAuth.getInstance().currentUser
 

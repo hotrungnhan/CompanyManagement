@@ -2,17 +2,17 @@ package com.example.companymanagement.viewcontroller.fragment.signleave.managerl
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.example.companymanagement.R
-import com.example.companymanagement.model.UserInfoModel
+import com.example.companymanagement.model.info.UserInfoModel
 import com.example.companymanagement.utils.UtilsFuntion
 import com.example.companymanagement.utils.customize.EndlessScrollRecyclListener
 import com.example.companymanagement.viewcontroller.adapter.LeaveHolder

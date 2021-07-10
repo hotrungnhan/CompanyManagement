@@ -15,7 +15,7 @@ class UserViewPagerAdapter(frag: Fragment) :
     override fun createFragment(pos: Int): Fragment {
         return when (pos) {
             0 -> UserStatictis()
-            1 -> UserProject()
+            1 -> UserTask()
             else -> UserInfo()
         }
     }

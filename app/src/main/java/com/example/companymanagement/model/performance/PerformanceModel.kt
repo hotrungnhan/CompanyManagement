@@ -10,7 +10,6 @@ import com.google.firebase.firestore.ServerTimestamp
 import java.time.YearMonth
 import java.util.*
 
-@RequiresApi(Build.VERSION_CODES.O)
 class PerformanceModel (
     @get: PropertyName("owner_uuid")
     @set: PropertyName("owner_uuid")
@@ -26,7 +25,7 @@ class PerformanceModel (
     var Late: Long = 0,
     @get: PropertyName("task_done")
     @set: PropertyName("task_done")
-    var TaskDone: Long = 0, ) {
+    var TaskDone: Long = 0 ) {
 
     @DocumentId
     var uid: String? = null
@@ -67,7 +66,7 @@ class PerformanceModel (
     fun computeTaskBonus() = 50000 * TaskDone
     fun computeLateCharge() : Long {
         return if (Late > 1)
-                (Late - 1) * 50000
+             (Late - 1) * 50000
         else
             0
     }

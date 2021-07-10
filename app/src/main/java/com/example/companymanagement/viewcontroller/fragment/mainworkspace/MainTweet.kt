@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.example.companymanagement.R
-import com.example.companymanagement.model.UserInfoModel
+import com.example.companymanagement.model.info.UserInfoModel
 import com.example.companymanagement.model.tweet.TweetModel
 import com.example.companymanagement.utils.UtilsFuntion
 import com.example.companymanagement.utils.customize.EndlessScrollRecyclListener

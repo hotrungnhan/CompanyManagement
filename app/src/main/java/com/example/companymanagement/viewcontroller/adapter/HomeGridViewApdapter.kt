@@ -1,10 +1,15 @@
 package com.example.companymanagement.viewcontroller.adapter
 
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +34,9 @@ class HomeGridViewApdapter(
 
     override fun onBindViewHolder(holder: HomeGridViewHolder, position: Int) {
         holder.setText(items[position].text)
-        holder.setImageDrawable(items[position].imageDrawable)
+        holder.setImageDrawable(ctx.resources.getDrawable(items[position].imageDrawable))
+        holder.setColorBackground(items[position].backgroundColor)
+        holder.setForegroundTint(items[position].foregroundTint)
         holder.setOnclickListener() { v ->
             ctx.findNavController(R.id.activity_container).navigate(items[position].linkID!!)
         }
@@ -41,7 +48,8 @@ class HomeGridViewApdapter(
 
 
 class HomeGridViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val img: ShapeableImageView = itemView.findViewById(R.id.cardview_img)
+    val img: ShapeableImageView = itemView.findViewById(R.id.button_image)
+    val background: CardView = itemView.findViewById(R.id.layout_image)
     val text: TextView = itemView.findViewById(R.id.cardview_text)
     val layout: LinearLayout = itemView.findViewById(R.id.cardview_layout)
 
@@ -49,8 +57,19 @@ class HomeGridViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         text.isSelected = true;
     }
 
-    fun setImageDrawable(imageid: Int) {
-        this.img.setImageResource(imageid)
+    fun setImageDrawable(imageid: Drawable) {
+        this.img.foreground = imageid
+
+    }
+
+    fun setForegroundTint(color: Color?) {
+        if (color != null) {
+            this.img.foregroundTintList =   ColorStateList.valueOf(color.toArgb())
+        }
+    }
+
+    fun setColorBackground(color: Color) {
+        this.background.setCardBackgroundColor(color.toArgb())
     }
 
     fun setOnclickListener(e: View.OnClickListener) {
