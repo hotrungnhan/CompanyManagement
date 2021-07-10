@@ -1,18 +1,14 @@
 package com.example.companymanagement.model.employeemanage
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.example.companymanagement.model.info.UserInfoModel
 import kotlinx.coroutines.tasks.await
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
-import java.lang.reflect.InvocationTargetException
 
 class EmployeeRepository(val col: CollectionReference)  {
-
-    suspend fun addNewEmployee(employee: UserInfoModel): UserInfoModel?{
-        return col.add(employee).await().get().await().toObject(UserInfoModel::class.java)
-    }
+//    suspend fun addNewEmployee(employee: UserRoleModel): UserRoleModel?{
+//        return col.add(employee).await().get().await().toObject(UserRoleModel::class.java)
+//    }
     suspend fun getNewEmployee(uid : String): UserInfoModel?{
         return col.document(uid).get().await().toObject(UserInfoModel::class.java)
     }

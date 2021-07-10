@@ -3,9 +3,7 @@ package com.example.companymanagement.viewcontroller.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
@@ -23,7 +21,6 @@ class TaskRecyclerViewAdapter: RecyclerView.Adapter<TaskRecyclerViewAdapter.Task
         val taskDl = itemView.findViewById<TextView>(R.id.item_task_deadline)
         val bdel = itemView.findViewById<ImageView>(R.id.item_task_del)
         val cb = itemView.findViewById<CheckBox>(R.id.item_task_cb)
-
         fun bind(task: UserTaskModel){
             if(task.Status == "Undone") taskStatus.isChecked = false
             else taskStatus.isChecked = true
@@ -36,6 +33,7 @@ class TaskRecyclerViewAdapter: RecyclerView.Adapter<TaskRecyclerViewAdapter.Task
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cardview_task,parent,false)
+
         return TaskHolder(view)
     }
     override fun onBindViewHolder(holder: TaskHolder, position: Int) {
@@ -43,11 +41,20 @@ class TaskRecyclerViewAdapter: RecyclerView.Adapter<TaskRecyclerViewAdapter.Task
 
         holder.itemView.setOnClickListener {
             val dlg = Task_ItemShow(list!![position])
-            dlg.show((holder.itemView.context as FragmentActivity).supportFragmentManager.beginTransaction(),"itemshow")
+            dlg.show((holder.itemView.context as FragmentActivity).supportFragmentManager.beginTransaction(),
+                "itemshow")
         }
-        holder.bdel.setOnClickListener{
-            val dlg = Task_ItemDel(list!![position],position)
-            dlg.show((holder.itemView.context as FragmentActivity).supportFragmentManager.beginTransaction(),"itemshow")
+        holder.bdel.setOnClickListener {
+            val dlg = Task_ItemDel(list!![position], position)
+            dlg.show((holder.itemView.context as FragmentActivity).supportFragmentManager.beginTransaction(),
+                "itemshow")
+        }
+        holder.cb.setOnClickListener {
+            var result = String()
+            if (holder.cb.isChecked == false)
+                result = "Undone"
+            else result = "Completed"
+            Task_ItemShow(list!![position]).update(result)
         }
 
     }

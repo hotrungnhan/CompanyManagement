@@ -12,6 +12,7 @@ import com.example.companymanagement.model.task.UserTaskModel
 import com.example.companymanagement.utils.DateParser
 import com.example.companymanagement.utils.DateParser.Companion.toHumanReadDate
 import com.example.companymanagement.viewcontroller.fragment.task.TaskViewModel
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 
 
@@ -19,6 +20,7 @@ class Task_ItemShow( var taskInfo: UserTaskModel) : DialogFragment() {
 
     val format: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy' 'HH:mm:ss")
     private  lateinit var taskviewmodel: TaskViewModel
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         taskviewmodel = ViewModelProvider(this.requireActivity()).get(TaskViewModel::class.java)
@@ -103,6 +105,10 @@ class Task_ItemShow( var taskInfo: UserTaskModel) : DialogFragment() {
         }
         return dlg
     }
-
+    fun update(result: String ) {
+        db.collection("task")
+            .document(taskInfo.taskid!!)
+            .update("status",result);
+    }
 
 }
