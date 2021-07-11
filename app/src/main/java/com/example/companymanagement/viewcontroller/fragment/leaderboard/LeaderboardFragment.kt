@@ -20,6 +20,7 @@ import com.example.companymanagement.databinding.FragmentLeaderboardBinding
 import com.example.companymanagement.model.ranking.RankerModel
 import com.example.companymanagement.viewcontroller.adapter.LeaderBoardAdapter
 import com.google.android.material.imageview.ShapeableImageView
+import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import java.time.YearMonth
 
@@ -149,6 +150,10 @@ class LeaderboardFragment : Fragment() {
         rankerViewModel.retrieveLeaderBoardIn(yearDisplay.text.toString().toInt(),
             monthDisplay.text.toString().toInt())
 
+        champ1.setImageDrawable(null)
+        champ2.setImageDrawable(null)
+        champ3.setImageDrawable(null)
+
         rankerViewModel.rankList.observe(viewLifecycleOwner, {
             leaderboardAdapter.addRankers(it as List<RankerModel>)
 
@@ -157,18 +162,40 @@ class LeaderboardFragment : Fragment() {
                 adapter = leaderboardAdapter
             }
 
-            if(it.size >= 3){
-                Picasso.get().load(it[0].OwnerAvatar).resize(100, 100).into(champ1)
-                Picasso.get().load(it[1].OwnerAvatar).resize(90, 90).into(champ2)
-                Picasso.get().load(it[2].OwnerAvatar).resize(80, 80).into(champ3)
-            }
-            else{
-                if(it.size == 2){
-                    Picasso.get().load(it[0].OwnerAvatar).resize(100, 100).into(champ1)
-                    Picasso.get().load(it[1].OwnerAvatar).resize(90, 90).into(champ2)
+
+            if (it.size >= 3) {
+                Picasso.get().load(it[0].OwnerAvatar)
+                    .resize(100, 100)
+                    .into(champ1)
+                Picasso.get().load(it[1].OwnerAvatar)
+                    .resize(90, 90)
+                    .into(champ2)
+                Picasso.get().load(it[2].OwnerAvatar)
+                    .resize(80, 80)
+                    .into(champ3)
+            } else {
+                if (it.size == 2) {
+                    Picasso.get().load(it[0].OwnerAvatar)
+                        .resize(100, 100)
+                        .into(champ1)
+                    Picasso.get().load(it[1].OwnerAvatar)
+                        .memoryPolicy(MemoryPolicy.NO_CACHE)
+                        .resize(90, 90)
+                        .into(champ2)
+                    champ3.setImageDrawable(null)
                 }
-                if(it.size == 1){
-                    Picasso.get().load(it[0].OwnerAvatar).resize(100, 100).into(champ1)
+                if (it.size == 1) {
+                    Picasso.get()
+                        .load(it[0].OwnerAvatar)
+                        .resize(100, 100)
+                        .into(champ1)
+                    champ2.setImageDrawable(null)
+                    champ3.setImageDrawable(null)
+                }
+                if (it.size == 0) {
+                    champ1.setImageDrawable(null)
+                    champ2.setImageDrawable(null)
+                    champ3.setImageDrawable(null)
                 }
             }
 
