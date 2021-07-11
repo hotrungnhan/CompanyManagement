@@ -15,10 +15,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.bumptech.glide.Glide
 import com.example.companymanagement.R
 import com.example.companymanagement.databinding.FragmentLeaderboardBinding
+import com.example.companymanagement.model.info.UserInfoModel
 import com.example.companymanagement.model.ranking.RankerModel
+import com.example.companymanagement.utils.UtilsFuntion
 import com.example.companymanagement.viewcontroller.adapter.LeaderBoardAdapter
+import com.example.companymanagement.viewcontroller.adapter.LeaderBoardAdapter.RankerViewHolder
+import com.example.companymanagement.viewcontroller.fragment.mainworkspace.ListUserParticipantViewModel
 import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
@@ -32,6 +38,7 @@ class LeaderboardFragment : Fragment() {
     private lateinit var leaderboardAdapter: LeaderBoardAdapter
 
     lateinit var rankerViewModel: RankerViewModel
+    private lateinit var userlistppviewmodel: ListUserParticipantViewModel
 
     private val binding get() = _binding!!
 
@@ -42,6 +49,8 @@ class LeaderboardFragment : Fragment() {
     ): View? {
 
         rankerViewModel = ViewModelProvider(requireActivity()).get(RankerViewModel::class.java)
+        userlistppviewmodel =
+            ViewModelProvider(this.requireActivity()).get(ListUserParticipantViewModel::class.java)
 
         _binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
 
@@ -147,58 +156,62 @@ class LeaderboardFragment : Fragment() {
             }
         })
 
+        fun showAvatar(url : String?, imageHolder : ShapeableImageView){
+            val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
+            Glide.with(this).load(url)
+                .placeholder(CircularProgressDrawable(requireContext()).apply { start() })
+                .override(dp, dp)
+                .centerCrop()
+                .error(R.drawable.ic_default_avatar)
+                .into(imageHolder)
+        }
+
         rankerViewModel.retrieveLeaderBoardIn(yearDisplay.text.toString().toInt(),
             monthDisplay.text.toString().toInt())
 
-        champ1.setImageDrawable(null)
-        champ2.setImageDrawable(null)
-        champ3.setImageDrawable(null)
+        leaderboardAdapter.setOnBindOwner { uuid, vh: RecyclerView.ViewHolder ->
+            if (vh is RankerViewHolder) {
+                fun bind(user: UserInfoModel?, vh: RankerViewHolder) {
+                    showAvatar(user?.AvatarURL, vh.avatar)
+                    vh.name.text = user?.Name
+                    vh.position.text = user?.Position
+                }
+                if (userlistppviewmodel.UserList.value?.containsKey(uuid) == true) {
+                    bind(userlistppviewmodel.UserList.value?.get(uuid), vh);
+                } else {
+                    userlistppviewmodel.appendUser(uuid).observe(viewLifecycleOwner) {
+                        bind(it, vh);
+                    }
+                }
+            }
+        }
 
-        rankerViewModel.rankList.observe(viewLifecycleOwner, {
-            leaderboardAdapter.addRankers(it as List<RankerModel>)
+        rankerViewModel.rankList.observe(viewLifecycleOwner, { list ->
+            leaderboardAdapter.addRankers(list as List<RankerModel>)
 
             usersList.apply {
                 layoutManager = leaderboardLayoutManager
                 adapter = leaderboardAdapter
             }
 
-
-            if (it.size >= 3) {
-                Picasso.get().load(it[0].OwnerAvatar)
-                    .resize(100, 100)
-                    .into(champ1)
-                Picasso.get().load(it[1].OwnerAvatar)
-                    .resize(90, 90)
-                    .into(champ2)
-                Picasso.get().load(it[2].OwnerAvatar)
-                    .resize(80, 80)
-                    .into(champ3)
-            } else {
-                if (it.size == 2) {
-                    Picasso.get().load(it[0].OwnerAvatar)
-                        .resize(100, 100)
-                        .into(champ1)
-                    Picasso.get().load(it[1].OwnerAvatar)
-                        .memoryPolicy(MemoryPolicy.NO_CACHE)
-                        .resize(90, 90)
-                        .into(champ2)
-                    champ3.setImageDrawable(null)
+            fun setChamps(top : Int, champ : ShapeableImageView){
+                if(top <= list.size){
+                    if (userlistppviewmodel.UserList.value?.containsKey(list[top - 1].OwnerUUID) == true) {
+                        showAvatar(userlistppviewmodel.UserList.value?.get(list[top - 1].OwnerUUID)?.AvatarURL, champ)
+                    } else {
+                        userlistppviewmodel.appendUser(list[top - 1].OwnerUUID).observe(viewLifecycleOwner) {
+                            if (it != null) {
+                                showAvatar(it.AvatarURL, champ)
+                            }
+                        }
+                    }
                 }
-                if (it.size == 1) {
-                    Picasso.get()
-                        .load(it[0].OwnerAvatar)
-                        .resize(100, 100)
-                        .into(champ1)
-                    champ2.setImageDrawable(null)
-                    champ3.setImageDrawable(null)
-                }
-                if (it.size == 0) {
-                    champ1.setImageDrawable(null)
-                    champ2.setImageDrawable(null)
-                    champ3.setImageDrawable(null)
-                }
+                champ.setImageResource(R.drawable.ic_default_avatar)
             }
 
+            setChamps(1, champ1)
+            setChamps(2, champ2)
+            setChamps(3, champ3)
 
         })
 
