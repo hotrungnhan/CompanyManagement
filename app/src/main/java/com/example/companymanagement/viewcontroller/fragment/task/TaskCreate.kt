@@ -33,6 +33,8 @@ class TaskCreate : Fragment() {
     var cal = Calendar.getInstance()
     var textview_date: TextView? = null
     val format: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy' 'HH:mm:ss")
+    private var userinfoviewmodel: UserInfoViewModel = UserInfoViewModel()
+    private var adapter: TaskRecyclerViewAdapter = TaskRecyclerViewAdapter()
     lateinit var list: MutableList<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
