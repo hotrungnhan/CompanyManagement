@@ -1,5 +1,6 @@
 package com.example.companymanagement.model.info
 
+import android.util.Log
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.tasks.await
 import java.util.*

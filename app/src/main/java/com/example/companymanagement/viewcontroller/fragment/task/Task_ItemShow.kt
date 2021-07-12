@@ -70,38 +70,46 @@ class Task_ItemShow( var taskInfo: UserTaskModel) : DialogFragment() {
                 edit.setImageResource(R.drawable.ic_check)
                 setEdit(true)
             } else if (edit.tag == "can_change") {
-                edit.tag = "cant_change"
-                edit.setImageResource(R.drawable.ic_edit)
-                setEdit(false)
-                try {
-                    var task = taskInfo.apply {
-                        Title = tTitle.text.toString()
-                        Content = tContent.text.toString()
-                        Deadline = format.parse(tDeadline.text.toString())
-                        if (tStatus.isChecked == false)
-                            Status = "Undone"
-                        else Status = "Completed"
-                    }
-                    taskviewmodel.updateTask(task)
+                val checked = format.parse(tDeadline.text.toString())
+                val creatTime = taskInfo.SentDate
+                if (checked?.after(creatTime) == true) {
+                    edit.tag = "cant_change"
+                    edit.setImageResource(R.drawable.ic_edit)
+                    setEdit(false)
+                    try {
+                        var task = taskInfo.apply {
+                            Title = tTitle.text.toString()
+                            Content = tContent.text.toString()
+                            Deadline = format.parse(tDeadline.text.toString())
+                            if (tStatus.isChecked == false)
+                                Status = "Undone"
+                            else Status = "Completed"
+                        }
+                        taskviewmodel.updateTask(task)
 
-                    var t = taskviewmodel.TaskList.value?.find {
-                        it.taskid == task.taskid
-                    }.apply {
-                        this?.Title = task.Title
-                        this?.Content = task.Content
-                        this?.Deadline = task.Deadline
-                        this?.Status = task.Status
+                        var t = taskviewmodel.TaskList.value?.find {
+                            it.taskid == task.taskid
+                        }.apply {
+                            this?.Title = task.Title
+                            this?.Content = task.Content
+                            this?.Deadline = task.Deadline
+                            this?.Status = task.Status
 
+                        }
+                        taskviewmodel.TaskList.postValue(
+                            taskviewmodel.TaskList.value
+                        )
+                        Toast.makeText(context, "Hoàn tất chỉnh sửa thông tin", Toast.LENGTH_LONG)
+                            .show()
+                    } catch (ex: Exception) {
+                        Toast.makeText(context, ex.message!!, Toast.LENGTH_SHORT)
+                            .show()
                     }
-                    taskviewmodel.TaskList.postValue(
-                        taskviewmodel.TaskList.value
-                    )
-                    Toast.makeText(context, "Hoàn tất chỉnh sửa thông tin", Toast.LENGTH_LONG)
-                        .show()
-                } catch (ex: Exception) {
-                    Toast.makeText(context, ex.message!!, Toast.LENGTH_SHORT)
+                } else {
+                    Toast.makeText(context, "Thời gian không hợp lệ, xin vui lòng kiểm tra lại!", Toast.LENGTH_LONG)
                         .show()
                 }
+
             }
         }
         return dlg
