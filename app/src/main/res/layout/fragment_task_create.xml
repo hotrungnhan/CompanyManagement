@@ -5,12 +5,9 @@
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        tools:context=".viewcontroller.fragment.task.TaskCreate">
+    tools:context=".viewcontroller.fragment.task.TaskCreate">
+
+
         <LinearLayout
             android:id="@+id/register_layout"
             android:layout_width="match_parent"
@@ -38,20 +35,31 @@
                 android:gravity="left"
                 android:text="@string/detail_task_name"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_task_create_name"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tx_task_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/shape_conner_round"
-                android:hint="@string/hint_task_name"
-                android:padding="10dp"
-                android:maxLines="1"/>
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+                app:hintAnimationEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_task_create_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_conner_round"
+                    android:hint="@string/hint_task_name"
+                    android:imeOptions="actionDone"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -62,25 +70,28 @@
                 android:gravity="left"
                 android:text="@string/detail_task_receiver"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tx_task_receiver"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                app:endIconMode="clear_text"
+                app:hintAnimationEnabled="false">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_task_create_receiver"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="20dp"
                     android:background="@drawable/shape_conner_round"
-                    android:hint="Contact Email"
-                    android:padding="10dp" />
+                    android:hint="Contact Email" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -91,12 +102,14 @@
                 android:gravity="left"
                 android:text="@string/detail_task_timeline"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -105,27 +118,30 @@
                     android:text="@string/task_creat_datestart"
                     android:textColor="@color/gray"
                     android:textSize="12sp" />
+
                 <TextView
                     android:id="@+id/tv_task_create_senddate"
                     android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:text="Tự động cập nhật"
                     android:background="@drawable/shape_conner_round"
-                    android:textSize="12sp"
                     android:focusable="true"
-                    android:focusableInTouchMode="true"/>
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:text="Tự động cập nhật"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
                 <ImageView
                     android:id="@+id/img_task_create_calendar1"
                     android:layout_width="20dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_calendar"/>
+                    android:src="@drawable/ic_calendar" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -136,45 +152,55 @@
                 android:text="@string/task_create_deadline"
                 android:textColor="@color/gray"
                 android:textSize="12sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/tv_task_create_deadline"
                     android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_conner_round"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:gravity="center"
                     android:textColor="@color/black"
-                    android:background="@drawable/shape_conner_round"
                     android:textSize="12sp" />
+
                 <ImageView
                     android:id="@+id/img_task_create_calendar2"
                     android:layout_width="20dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_calendar"/>
+                    android:src="@drawable/ic_calendar" />
+
                 <TextView
                     android:id="@+id/tv_task_create_timeline"
                     android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_conner_round"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:gravity="center"
                     android:textColor="@color/black"
-                    android:background="@drawable/shape_conner_round"
                     android:textSize="12sp" />
+
                 <ImageView
                     android:id="@+id/img_task_create_time"
                     android:layout_width="20dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_time"/>
+                    android:src="@drawable/ic_time" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -184,21 +210,30 @@
                 android:gravity="left"
                 android:text="@string/detail_task_descripton"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_task_create_description"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tx_task_description"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="145dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/shape_conner_round"
-                android:gravity="left"
-                android:hint="@string/hint_task_description"
-                android:maxLines="5"
-                android:padding="10dp" />
+                app:counterEnabled="true"
+                app:counterMaxLength="60"
+                app:endIconMode="clear_text"
+                app:hintAnimationEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_task_create_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="@drawable/shape_conner_round"
+                    android:gravity="left"
+                    android:hint="@string/hint_task_description" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -209,8 +244,8 @@
                 android:gravity="left"
                 android:text="@string/detail_task_sender"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_task_create_sender"
@@ -239,6 +274,4 @@
                 android:textSize="22sp"
                 android:textStyle="bold" />
         </LinearLayout>
-
-    </FrameLayout>
 </androidx.core.widget.NestedScrollView>

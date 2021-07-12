@@ -44,7 +44,7 @@ class LeaderboardFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         rankerViewModel = ViewModelProvider(requireActivity()).get(RankerViewModel::class.java)
@@ -83,27 +83,27 @@ class LeaderboardFragment : Fragment() {
 
         leaderboardAdapter = LeaderBoardAdapter()
 
-        monthBack.setOnClickListener{
-            if(monthDisplay.text.isNotBlank() && month > 1){
+        monthBack.setOnClickListener {
+            if (monthDisplay.text.isNotBlank() && month > 1) {
                 month -= 1
                 monthDisplay.setText(month.toString())
             }
         }
-        monthNext.setOnClickListener{
-            if(monthDisplay.text.isNotBlank() && month < 12){
+        monthNext.setOnClickListener {
+            if (monthDisplay.text.isNotBlank() && month < 12) {
                 month += 1
                 monthDisplay.setText(month.toString())
             }
         }
 
-        yearBack.setOnClickListener{
-            if(yearDisplay.text.isNotBlank() && year > 2000){
+        yearBack.setOnClickListener {
+            if (yearDisplay.text.isNotBlank() && year > 2000) {
                 year -= 1
                 yearDisplay.setText(year.toString())
             }
         }
-        yearNext.setOnClickListener{
-            if(yearDisplay.text.isNotBlank() && year < YearMonth.now().year){
+        yearNext.setOnClickListener {
+            if (yearDisplay.text.isNotBlank() && year < YearMonth.now().year) {
                 year += 1
                 yearDisplay.setText(year.toString())
             }
@@ -112,12 +112,15 @@ class LeaderboardFragment : Fragment() {
 
         yearDisplay.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if(yearDisplay.text.isNotBlank()) {
-                    if(yearDisplay.text.toString().toInt() > YearMonth.now().year || yearDisplay.text.toString().toInt() < 2000)
-                    {
-                        alertInvalidInput(yearDisplay, "Năm : 2000 - nay", YearMonth.now().year.toString())
-                    }
-                    else {
+                if (yearDisplay.text.isNotBlank()) {
+                    if (yearDisplay.text.toString()
+                            .toInt() > YearMonth.now().year || yearDisplay.text.toString()
+                            .toInt() < 2000
+                    ) {
+                        alertInvalidInput(yearDisplay,
+                            "Năm : 2000 - nay",
+                            YearMonth.now().year.toString())
+                    } else {
                         year = yearDisplay.text.toString().toInt()
                         rankerViewModel.retrieveLeaderBoardIn(yearDisplay.text.toString().toInt(),
                             monthDisplay.text.toString().toInt())
@@ -135,12 +138,14 @@ class LeaderboardFragment : Fragment() {
         })
         monthDisplay.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if(monthDisplay.text.isNotBlank()){
-                    if(monthDisplay.text.toString().toInt() < 1 || monthDisplay.text.toString().toInt() > 12)
-                    {
-                        alertInvalidInput(monthDisplay, "Tháng : 1 - 12", YearMonth.now().monthValue.toString())
-                    }
-                    else {
+                if (monthDisplay.text.isNotBlank()) {
+                    if (monthDisplay.text.toString().toInt() < 1 || monthDisplay.text.toString()
+                            .toInt() > 12
+                    ) {
+                        alertInvalidInput(monthDisplay,
+                            "Tháng : 1 - 12",
+                            YearMonth.now().monthValue.toString())
+                    } else {
                         month = monthDisplay.text.toString().toInt()
                         rankerViewModel.retrieveLeaderBoardIn(yearDisplay.text.toString().toInt(),
                             monthDisplay.text.toString().toInt())
@@ -155,8 +160,9 @@ class LeaderboardFragment : Fragment() {
             }
         })
 
-        fun showAvatar(url : String?, imageHolder : ShapeableImageView){
-            val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
+        fun showAvatar(url: String?, imageHolder: ShapeableImageView) {
+            val dp =
+                UtilsFuntion.convertDPToPX(32.0F, this.context).toInt()
             Glide.with(this).load(url)
                 .placeholder(CircularProgressDrawable(requireContext()).apply { start() })
                 .override(dp, dp)
@@ -193,16 +199,18 @@ class LeaderboardFragment : Fragment() {
                 adapter = leaderboardAdapter
             }
 
-            fun setChamps(top : Int, champ : ShapeableImageView){
-                if(top <= list.size){
+            fun setChamps(top: Int, champ: ShapeableImageView) {
+                if (top <= list.size) {
                     if (userlistppviewmodel.UserList.value?.containsKey(list[top - 1].OwnerUUID) == true) {
-                        showAvatar(userlistppviewmodel.UserList.value?.get(list[top - 1].OwnerUUID)?.AvatarURL, champ)
+                        showAvatar(userlistppviewmodel.UserList.value?.get(list[top - 1].OwnerUUID)?.AvatarURL,
+                            champ)
                     } else {
-                        userlistppviewmodel.appendUser(list[top - 1].OwnerUUID).observe(viewLifecycleOwner) {
-                            if (it != null) {
-                                showAvatar(it.AvatarURL, champ)
+                        userlistppviewmodel.appendUser(list[top - 1].OwnerUUID)
+                            .observe(viewLifecycleOwner) {
+                                if (it != null) {
+                                    showAvatar(it.AvatarURL, champ)
+                                }
                             }
-                        }
                     }
                 }
                 champ.setImageResource(R.drawable.ic_default_avatar)
@@ -216,7 +224,8 @@ class LeaderboardFragment : Fragment() {
 
 
     }
-    private fun alertInvalidInput(edit : EditText, message : String, resetInput : String){
+
+    private fun alertInvalidInput(edit: EditText, message: String, resetInput: String) {
         val builder = activity?.let { AlertDialog.Builder(it) }
         if (builder != null) {
             builder.setTitle("Invalid Input")

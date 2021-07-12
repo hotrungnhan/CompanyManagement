@@ -17,6 +17,8 @@ class TaskViewModel: ViewModel() {
     var repo = TaskInfoRepository(FirebaseFirestore.getInstance().collection("task"))
     var repo_employee = EmployeeRepository(FirebaseFirestore.getInstance().collection("userinfo"))
     var CheckList: MutableLiveData<UserInfoModel> = MutableLiveData()
+    var info: MutableLiveData<UserInfoModel> = MutableLiveData()
+
     init {
         viewModelScope.launch {
             TaskList.value = repo.getTask()
@@ -48,14 +50,16 @@ class TaskViewModel: ViewModel() {
             TaskList.postValue(TaskList.value)
         }
     }
-    fun checkTask(str : String) {
+    fun checkTask(str : String): MutableLiveData<UserInfoModel> {
+        var isvalid : MutableLiveData<UserInfoModel> = MutableLiveData()
         viewModelScope.launch{
             val result = repo_employee.checkEmail(str)
             Log.d("aaa", result.toString())
+            isvalid.value = result
             if(result != null)
                 CheckList.postValue(result)
-
         }
+        return isvalid
     }
     fun count(str :String, month: String, year: String) : MutableLiveData<Int> {
         var result : MutableLiveData<Int> = MutableLiveData()
