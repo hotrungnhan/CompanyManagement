@@ -28,7 +28,7 @@ import com.google.firebase.auth.FirebaseAuth
 class History : Fragment() {
 
     private var leaveviewmodel: LeaveViewModel = LeaveViewModel()
-    private lateinit var    userlistppviewmodel: ListUserParticipantViewModel;
+    private lateinit var userlistppviewmodel: ListUserParticipantViewModel;
     private lateinit var userinfoviewmodel: UserInfoViewModel;
     private var user = FirebaseAuth.getInstance().currentUser
 

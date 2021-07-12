@@ -16,6 +16,7 @@ import java.util.*
 
 class CheckinViewModel : ViewModel() {
     var repo = CheckinRepository(FirebaseFirestore.getInstance().collection("checkin"));
+
     fun retriveLate(uuid: String, from: Date, end: Date): LiveData<MutableList<CheckinModel>> {
         var live: MutableLiveData<MutableList<CheckinModel>> = MutableLiveData()
 
@@ -47,4 +48,5 @@ class CheckinViewModel : ViewModel() {
         }
         return live;
     }
+
 }

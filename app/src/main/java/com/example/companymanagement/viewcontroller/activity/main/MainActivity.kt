@@ -44,11 +44,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // gesture topbar
         var actionbar = supportFragmentManager.findFragmentById(R.id.action_bar) as ActionBar
-        var containerfragment =
-            findViewById<FrameLayout>(R.id.activity_container)
-        containerfragment.setOnClickListener {
-            Log.d("click", "end!!!")
-        }
+//        var containerfragment =
+//            findViewById<FrameLayout>(R.id.activity_container)
+//        containerfragment.setOnClickListener {
+//            Log.d("click", "end!!!")
+//        }
 
 //        containerfragment.setOnTouchListener(object :
 //            OnSwipeTouchListener(applicationContext,

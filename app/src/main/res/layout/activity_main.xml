@@ -16,20 +16,14 @@
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_action_bar" />
 
-    <com.example.companymanagement.utils.customize.gesture.TouchFrameLayout
-        android:id="@+id/activity_container"
+    <fragment
+        android:id="@+id/activity_container_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <fragment
-            android:id="@+id/activity_container_fragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_page" />
-    </com.example.companymanagement.utils.customize.gesture.TouchFrameLayout>
+        android:layout_weight="1"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_page" />
 
     <fragment
         android:id="@+id/navigation"
