@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import com.example.companymanagement.R
 import com.example.companymanagement.model.checkin.CheckinModel
-import com.example.companymanagement.utils.DateParser.Companion.toHumanDateAndTime
-import com.example.companymanagement.utils.DateParser.Companion.toHumanReadTime
+import com.example.companymanagement.utils.DateTimeExt.Companion.toHumanDateAndTime
+import com.example.companymanagement.utils.DateTimeExt.Companion.toHumanReadTime
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.g00fy2.quickie.QRResult
