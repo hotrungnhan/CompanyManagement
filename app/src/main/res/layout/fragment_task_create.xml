@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/register_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -263,10 +264,11 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="50dp"
+            android:layout_marginBottom="20dp"
             android:background="@color/purple_500"
             android:text="@string/done"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

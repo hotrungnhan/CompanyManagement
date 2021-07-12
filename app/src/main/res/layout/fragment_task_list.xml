@@ -24,6 +24,7 @@
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/item_cardview_task" />
 
-    <View android:layout_height="match_parent"
-        android:layout_width="match_parent"></View>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></View>
 </androidx.appcompat.widget.LinearLayoutCompat>
