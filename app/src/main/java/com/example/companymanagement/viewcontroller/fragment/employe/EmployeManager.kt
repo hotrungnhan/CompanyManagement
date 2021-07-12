@@ -18,9 +18,9 @@ class EmployeManager : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        val root = inflater.inflate(R.layout.fragment_tablayout_employeview, container, false)
-        val pager = root.findViewById<ViewPager2>(R.id.employee_manager_viewpager)
-        val tablayout = root.findViewById<TabLayout>(R.id.employee_manager_tab_layout)
+        val root = inflater.inflate(R.layout.container_pageviewer, container, false)
+        val pager = root.findViewById<ViewPager2>(R.id.container_viewpager)
+        val tablayout = root.findViewById<TabLayout>(R.id.container_tablayout)
         pager.adapter = EmployeViewPagerApdapter(this);
         var tabtext = resources.getStringArray(R.array.employee_manager_tab_name);
         TabLayoutMediator(tablayout, pager) { tab, pos -> tab.text = tabtext[pos] }.attach()

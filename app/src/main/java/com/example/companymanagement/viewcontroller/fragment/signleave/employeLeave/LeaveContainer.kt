@@ -20,9 +20,9 @@ class LeaveContainer : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        var root = inflater.inflate(R.layout.fragment_leave, container, false)
-        val pager = root.findViewById<ViewPager2>(R.id.leavepage)
-        val tablayout = root.findViewById<TabLayout>(R.id.leaveTab)
+        var root = inflater.inflate(R.layout.container_pageviewer, container, false)
+        val pager = root.findViewById<ViewPager2>(R.id.container_viewpager)
+        val tablayout = root.findViewById<TabLayout>(R.id.container_tablayout)
         pager.adapter = LeaveViewPagerAdapter(this);
         var tabtext = resources.getStringArray(R.array.leave_tab_name)
         TabLayoutMediator(tablayout, pager) { tab, pos -> tab.text = tabtext[pos] }.attach()

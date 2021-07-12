@@ -6,6 +6,7 @@ import com.example.companymanagement.viewcontroller.fragment.signleave.employeLe
 import com.example.companymanagement.viewcontroller.fragment.signleave.employeLeave.CreateLeave
 
 class LeaveViewPagerAdapter(frag: Fragment) : FragmentStateAdapter(frag) {
+
     override fun getItemCount(): Int = 2
     override fun createFragment(pos: Int): Fragment {
         if (pos == 0) {
