@@ -52,7 +52,7 @@ class MainTweet : Fragment() {
         //
         userinfoviewmodel.info.observe(viewLifecycleOwner) {
             if (it != null) {
-                val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
+                val dp = UtilsFuntion.convertDPToPX(32.0F, context).toInt()
                 Glide.with(this).load(it.AvatarURL)
                     .placeholder(CircularProgressDrawable(requireContext()).apply { start() })
                     .override(dp, dp)
@@ -71,7 +71,7 @@ class MainTweet : Fragment() {
         adapter.setOnBindOwner { uuid, vh: RecyclerView.ViewHolder ->
             if (vh is TweetHolder) {
                 fun bind(user: UserInfoModel?, vh: TweetHolder) {
-                    val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
+                    val dp = UtilsFuntion.convertDPToPX(32.0F, context).toInt()
                     Glide.with(this).load(user?.AvatarURL)
                         .placeholder(CircularProgressDrawable(requireContext()).apply { start() })
                         .override(dp, dp)

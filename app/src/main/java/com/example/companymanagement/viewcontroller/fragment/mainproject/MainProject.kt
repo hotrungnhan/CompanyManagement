@@ -1,14 +1,11 @@
 package com.example.companymanagement.viewcontroller.fragment.mainproject
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
-import android.widget.LinearLayout
-import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -62,6 +59,13 @@ class MainProject : Fragment() {
                 notask.visibility = View.GONE
                 userTaskAdapter.setData(it)
             }
+        }
+        userTaskAdapter.setOnClickDone { data, v ->
+            viewModelMainProject.updateStatus(data, "done")
+
+        }
+        userTaskAdapter.setOnClickUndone() { data, v ->
+            viewModelMainProject.updateStatus(data, "undone")
 
         }
 

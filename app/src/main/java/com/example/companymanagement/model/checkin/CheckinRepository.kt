@@ -6,25 +6,38 @@ import kotlinx.coroutines.tasks.await
 import java.time.LocalDate
 import java.util.*
 
+enum class CheckingState {
+    late,
+    ontime
+}
 
 class CheckinRepository(var col: CollectionReference) {
 
-    suspend fun getOntime(uuid: String): MutableList<CheckinModel> {
-        var db = FirebaseFirestore.getInstance()
-        return db.collectionGroup("checked_user")
-            .whereEqualTo("owneruuid", uuid)
-            .whereEqualTo("status","ontime").get().await().toObjects(CheckinModel::class.java)
-    }
-
-    suspend fun getLate(uuid: String): MutableList<CheckinModel> {
-
-//        val docid: String = db.collection("checkin").document().id
-//        Log.d("docid",docid)
+    suspend fun getChecking(
+        uuid: String,
+        state: CheckingState,
+        start: Date,
+        end: Date,
+    ): MutableList<CheckinModel> {
 
         var db = FirebaseFirestore.getInstance()
         return db.collectionGroup("checked_user")
+            .whereGreaterThan("checked_date", start)
+            .whereLessThan("checked_date", end)
             .whereEqualTo("owneruuid", uuid)
-            .whereEqualTo("status","late").get().await().toObjects(CheckinModel::class.java)
+            .whereEqualTo("status", state.name).get().await().toObjects(CheckinModel::class.java)
     }
 
+    suspend fun getCheckingAll(
+        uuid: String,
+        start: Date,
+        end: Date,
+    ): MutableList<CheckinModel> {
+        var db = FirebaseFirestore.getInstance()
+        return db.collectionGroup("checked_user")
+            .whereGreaterThan("checked_date", start)
+            .whereLessThan("checked_date", end)
+            .whereEqualTo("owneruuid", uuid)
+            .get().await().toObjects(CheckinModel::class.java)
+    }
 }

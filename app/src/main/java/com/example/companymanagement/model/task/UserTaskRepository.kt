@@ -19,6 +19,10 @@ class UserTaskRepository(var col: CollectionReference) {
             .toObjects(UserTaskModel::class.java)
     }
 
+    suspend fun updateTask(task: UserTaskModel) {
+        col.document(task.taskid).set(task).await();
+    }
+
     suspend fun getTask(
         uuid: String,
         year: Int, month: Int, dayOfMonth: Int,

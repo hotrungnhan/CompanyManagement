@@ -45,7 +45,7 @@ data class UserTaskModel(
     var NameReceiver: List<String>? = null
 ) {
     @DocumentId
-    val taskid: String? = null
+    val taskid: String = ""
 
     //document id shall auto parse from doc by to object function . it should be unsetable
 

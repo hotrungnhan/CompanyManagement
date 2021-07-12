@@ -83,7 +83,7 @@ class Comment : BottomSheetDialogFragment() {
         adapter.setOnBindOwner { uuid, vh: RecyclerView.ViewHolder ->
             if (vh is CommentHolder) {
                 fun bind(user: UserInfoModel?, vh: CommentHolder) {
-                    val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
+                    val dp = UtilsFuntion.convertDPToPX(32.0F, context).toInt()
                     Glide.with(this).load(user?.AvatarURL)
                         .placeholder(CircularProgressDrawable(requireContext()).apply { start() })
                         .override(dp, dp)

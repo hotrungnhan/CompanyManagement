@@ -1,20 +1,15 @@
 package com.example.companymanagement.viewcontroller.adapter
 
-import android.app.Dialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.example.companymanagement.R
 import com.example.companymanagement.model.info.UserInfoModel
-import com.example.companymanagement.utils.DateParser
 import com.example.companymanagement.utils.UtilsFuntion
 import com.example.companymanagement.viewcontroller.fragment.employe.Employe_ItemShow
 
@@ -37,7 +32,7 @@ class EmployeeRecyclerViewAdapter() :
             contactmail.text = employee.Email
             epos.text = employee.Position
             val dp =
-                UtilsFuntion.convertDPToPX(32.0F, itemView.context.resources.displayMetrics).toInt()
+                UtilsFuntion.convertDPToPX(32.0F, itemView.context).toInt()
             Glide.with(itemView)
                 .load(employee.AvatarURL)
                 .override(dp, dp)
