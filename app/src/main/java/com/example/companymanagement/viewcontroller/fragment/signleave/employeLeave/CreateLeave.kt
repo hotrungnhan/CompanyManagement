@@ -35,18 +35,12 @@ class CreateLeave : Fragment() {
         val editTime = root.findViewById<TextView>(R.id.txt_time)
         val cal = Calendar.getInstance()
         editTime!!.text = cal.getTime().toHumanReadDate()
-        //Check Thoi gian ap dung
-        val checkTodayTime = cal.time
         val dateSetListener =
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 cal.set(Calendar.YEAR, year)
                 cal.set(Calendar.MONTH, monthOfYear)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 editTime!!.text = cal.getTime().toHumanReadDate()
-                val checkPickedTime = cal.time
-                if (checkPickedTime.before(checkTodayTime) == true)
-                    editTime.error = "Không hợp lệ!"
-                else editTime.error = null
             }
         editTime.setOnClickListener {
             context?.let { it1 ->
@@ -70,23 +64,19 @@ class CreateLeave : Fragment() {
         val editTime = view.findViewById<TextView>(R.id.txt_time)
         val reason: EditText = view.findViewById(R.id.editLido)
         btn_nop.setOnClickListener {
-            if(editTime.error == null){
-                try {
-                    leaveviewmodel?.addleave(LeaveInfoModel(day_leave.text.toString().toInt(),
-                        editTime.text.toString(),
-                        reason.text.toString(),
-                        userinfoviewmodel.info.value?.uid!!,
-                        userinfoviewmodel.info.value?.Name.toString(),
-                        "undone"))
-                    day_leave.text.clear()
-                    reason.text.clear()
+            try {
+                leaveviewmodel?.addleave(LeaveInfoModel(day_leave.text.toString().toInt(),
+                    editTime.text.toString(),
+                    reason.text.toString(),
+                    userinfoviewmodel.info.value?.uid!!,
+                    userinfoviewmodel.info.value?.Name.toString(),
+                    "undone"))
+                day_leave.text.clear()
+                reason.text.clear()
 
-                    Toast.makeText(context, "Nộp đơn thành công!", Toast.LENGTH_SHORT).show()
-                } catch (err: Exception) {
-                    toastEditfaild(err.message.toString())
-                }
-            } else {
-                Toast.makeText(context, "Thời gian không hợp lệ, xin vui lòng kiểm tra lại!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "da them thanh cong", Toast.LENGTH_SHORT).show()
+            } catch (err: Exception) {
+                toastEditfaild(err.message.toString())
             }
         }
     }

@@ -9,28 +9,26 @@ import com.example.companymanagement.model.task.UserTaskRepository
 
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
+import java.util.*
 
 class MainProjectViewModel : ViewModel() {
-    //implement a mutable list data
-    //var taskList: MutableLiveData<MutableList<UserTaskModel>> = MutableLiveData()
     var taskList: MutableLiveData<MutableList<UserTaskModel>> = MutableLiveData()
-
-    //implement the repository of the task
-    //var repository = UserTaskRepository(FirebaseFirestore.getInstance().collection("task"))
     var repository = UserTaskRepository(FirebaseFirestore.getInstance().collection("task"))
 
-    //edit from here
-    //var userRepo = UserInfoRepository(FirebaseFirestore.getInstance().collection())
-
-    //update data with the function
-    //call this function in main project.kt to load data
     fun retrieveUserTask(
         uuid: String,
-        year: Int, month: Int, dayOfMonth: Int,
+        start: Date, end: Date,
     ) {
         viewModelScope.launch {
-            taskList.postValue(repository.getTask(uuid, year, month, dayOfMonth))
-            Log.d("Task List", taskList.value.toString())
+            taskList.postValue(repository.getTask(uuid, start, end))
+
+        }
+    }
+
+    fun updateStatus(task: UserTaskModel, status: String) {
+        viewModelScope.launch {
+            task.Status = status
+            repository.updateTask(task);
         }
     }
 

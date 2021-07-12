@@ -23,7 +23,6 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Picasso
 import java.time.YearMonth
 
-@RequiresApi(Build.VERSION_CODES.O)
 class LeaderboardFragment : Fragment() {
     private var _binding: FragmentLeaderboardBinding? = null
 

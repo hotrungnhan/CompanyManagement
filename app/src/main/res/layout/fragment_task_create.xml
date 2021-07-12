@@ -41,27 +41,17 @@
                 android:textStyle="bold"
                 android:textSize="18sp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tx_task_name"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_task_create_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
-                app:hintAnimationEnabled="false"
-                app:endIconMode="clear_text"
-                app:counterEnabled="true"
-                app:counterMaxLength="20">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_task_create_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_conner_round"
-                    android:hint="@string/hint_task_name"
-                    android:maxLines="1"
-                    android:imeOptions="actionDone"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                android:background="@drawable/shape_conner_round"
+                android:hint="@string/hint_task_name"
+                android:padding="10dp"
+                android:maxLines="1"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -75,24 +65,22 @@
                 android:textStyle="bold"
                 android:textSize="18sp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tx_task_receiver"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                app:hintAnimationEnabled="false"
-                app:endIconMode="clear_text">
+                android:orientation="horizontal">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_task_create_receiver"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/shape_conner_round"
-                    android:hint="Contact Email" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:hint="Contact Email"
+                    android:padding="10dp" />
 
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -152,10 +140,7 @@
                     android:gravity="center"
                     android:textColor="@color/black"
                     android:background="@drawable/shape_conner_round"
-                    android:textSize="12sp"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"/>
-
+                    android:textSize="12sp" />
                 <ImageView
                     android:id="@+id/img_task_create_calendar2"
                     android:layout_width="20dp"
@@ -172,9 +157,7 @@
                     android:gravity="center"
                     android:textColor="@color/black"
                     android:background="@drawable/shape_conner_round"
-                    android:textSize="12sp"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"/>
+                    android:textSize="12sp" />
                 <ImageView
                     android:id="@+id/img_task_create_time"
                     android:layout_width="20dp"
@@ -195,26 +178,19 @@
                 android:textStyle="bold"
                 android:textSize="18sp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tx_task_description"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_task_create_description"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_height="145dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
-                app:hintAnimationEnabled="false"
-                app:endIconMode="clear_text"
-                app:counterEnabled="true"
-                app:counterMaxLength="60">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_task_create_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:background="@drawable/shape_conner_round"
-                    android:gravity="left"
-                    android:hint="@string/hint_task_description"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                android:background="@drawable/shape_conner_round"
+                android:gravity="left"
+                android:hint="@string/hint_task_description"
+                android:maxLines="5"
+                android:padding="10dp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -19,35 +19,21 @@ class UserTaskRepository(var col: CollectionReference) {
             .toObjects(UserTaskModel::class.java)
     }
 
+    suspend fun updateTask(task: UserTaskModel) {
+        col.document(task.taskid).set(task).await();
+    }
+
     suspend fun getTask(
         uuid: String,
-        year: Int, month: Int, dayOfMonth: Int,
-    ): MutableList<UserTaskModel>? {
-
-        val startDate = Calendar.getInstance()
-        startDate.set(year, month, dayOfMonth - 1, 23, 59, 59)
-        val startDateTime = startDate.time
-
-        val endDate = Calendar.getInstance()
-        endDate.set(year, month, dayOfMonth, 23, 59, 59)
-        val endDateTime = endDate.time
-
-        val col1: CollectionReference
-
-        //if you want use both order by and where equal to in some files these field index need to be opposite
-        // for example: Deadline ascending so the sentdate must be descending
+        start: Date,
+        end: Date,
+    ): MutableList<UserTaskModel> {
         val snapshot = col
             .whereArrayContains("IDReceiver", uuid)
-            .whereGreaterThanOrEqualTo("deadline", startDateTime)
-            .whereLessThanOrEqualTo("deadline", endDateTime)
+            .whereGreaterThan("deadline", start)
+            .whereLessThan("deadline", end)
             .orderBy("deadline", Query.Direction.DESCENDING)
-            .get().await()
-
-        return if (snapshot.size() != 0) {
-            snapshot.toObjects(UserTaskModel::class.java)
-        } else {
-            null
-        }
-
+            .get().await().toObjects(UserTaskModel::class.java)
+        return snapshot
     }
 }

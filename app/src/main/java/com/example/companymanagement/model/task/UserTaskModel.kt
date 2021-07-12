@@ -14,7 +14,7 @@ data class UserTaskModel(
 
     @get: PropertyName("deadline")
     @set: PropertyName("deadline")
-    var Deadline: Date? = null,
+    var Deadline: Date? = Date(),
 
     @get: PropertyName("sentDate")
     @set: PropertyName("sentDate")
@@ -42,10 +42,10 @@ data class UserTaskModel(
 
     @get: PropertyName("NameReceiver")
     @set: PropertyName("NameReceiver")
-    var NameReceiver: List<String>? = null
+    var NameReceiver: List<String>? = null,
 ) {
     @DocumentId
-    val taskid: String? = null
+    val taskid: String = ""
 
     //document id shall auto parse from doc by to object function . it should be unsetable
 
