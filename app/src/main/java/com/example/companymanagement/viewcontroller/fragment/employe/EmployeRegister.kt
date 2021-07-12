@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.companymanagement.R
@@ -88,6 +87,7 @@ class EmployeRegister : Fragment() {
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                txPass.error = null
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -101,6 +101,7 @@ class EmployeRegister : Fragment() {
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                txEmail.error = null
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -115,7 +116,8 @@ class EmployeRegister : Fragment() {
             val email = edEmail.text.toString().trim()
             val pass = edPass.text.toString().trim()
 
-            if (isValidEmail(email) != false && pass.isEmpty() == false && edName.text != null && selectedpos != null) {
+            if (isValidEmail(email) != false && pass.isEmpty() == false && edName.text != null && selectedpos != null
+                && txEmail.error == null && txPass.error == null) {
                 mAuth2?.createUserWithEmailAndPassword(email, pass)?.addOnCompleteListener { Task ->
                     if (Task.isSuccessful()) {
                         Toast.makeText(activity, "Tạo tài khoản thành công", Toast.LENGTH_SHORT)
@@ -143,13 +145,19 @@ class EmployeRegister : Fragment() {
                             edEmail.text.clear()
                             edName.text.clear()
                             edPass.text.clear()
-                            spinnerPosition.setSelection(0)
-                            txEmail.error = null
                             txPass.error = null
+                            txEmail.error = null
+                            spinnerPosition.setSelection(0)
                         }
                             .addOnFailureListener(OnFailureListener { e ->
                                 Log.w(TAG, "Error adding document", e)
                             })
+                        if(selectedpos.toString() == "Quản lý"){
+                            val documentReference_role =db.collection("userroles").document(userID)
+                            val role: MutableMap<String, Any> = HashMap()
+                            role["role"] = "admin"
+                            documentReference_role.set(role)
+                        }
                         mAuth2?.signOut()
 
                     } else {

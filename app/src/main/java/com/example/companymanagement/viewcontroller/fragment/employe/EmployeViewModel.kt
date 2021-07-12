@@ -13,6 +13,7 @@ class EmployeViewModel : ViewModel() {
     var EmployeeList: MutableLiveData<MutableList<UserInfoModel>> = MutableLiveData()
     var repo = EmployeeRepository(FirebaseFirestore.getInstance().collection("userinfo"))
     val newEmployee: MutableLiveData<UserInfoModel> = MutableLiveData()
+    var repo_role = EmployeeRepository(FirebaseFirestore.getInstance().collection("userroles"))
 
     init {
         viewModelScope.launch {
@@ -26,13 +27,6 @@ class EmployeViewModel : ViewModel() {
         }
     }
 
-    //    fun addEmployee(employee: EmployeeModel) {
-//        viewModelScope.launch {
-//            val newdata = repo.addNewEmployee(employee)
-//            if (newdata != null)
-//                EmployeeList.value?.add(0,newdata)
-//        }
-//    }
     fun appendEmployee(uid: String) {
         viewModelScope.launch {
             val newdata = repo.getNewEmployee(uid)
