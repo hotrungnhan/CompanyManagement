@@ -1,24 +1,27 @@
 package com.example.companymanagement.viewcontroller.fragment.mainproject
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.R
+import com.example.companymanagement.utils.DateParser.Companion.toLocalDate
+import com.example.companymanagement.utils.customize.DotDateView.DateEvent
+import com.example.companymanagement.utils.customize.DotDateView.EventCalendarView
 import com.example.companymanagement.viewcontroller.adapter.UserTaskAdapter
 import com.google.firebase.auth.FirebaseAuth
 import java.time.LocalDate
+import java.util.*
 
 class MainProject : Fragment() {
 
-    private lateinit var viewModelMainProject: MainProjectViewModel
+    private var viewModelMainProject = MainProjectViewModel()
 
     val user = FirebaseAuth.getInstance().currentUser
 
@@ -26,10 +29,7 @@ class MainProject : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        viewModelMainProject = ViewModelProvider(this).get(MainProjectViewModel::class.java)
-        Log.d("User id", user?.uid.toString())
-        val root = inflater.inflate(R.layout.fragment_main_project, container, false)
-        return root
+        return inflater.inflate(R.layout.fragment_main_project, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,53 +37,74 @@ class MainProject : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.task_recyclerView)
         val userTaskAdapter = UserTaskAdapter()
         val taskLayoutManager = LinearLayoutManager(context)
-
-        val calendarView = view.findViewById<CalendarView>(R.id.task_calendar)
-        val notask = view.findViewById<CardView>(R.id.notask_cardview)
-        val now = LocalDate.now()
-
+        val calendarView = view.findViewById<EventCalendarView>(R.id.main_project_calendar)
+        //
+        val cal = Calendar.getInstance()
+        cal.set(Calendar.DATE, 1)
+        var start = cal.toInstant();
+        cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE))
+        var end = cal.toInstant();
+        taskLayoutManager.orientation = RecyclerView.VERTICAL
+        recyclerView.adapter = userTaskAdapter
+        recyclerView.layoutManager = taskLayoutManager
         //Load data at current date
-        viewModelMainProject.retrieveUserTask(user?.uid!!,
-            now.year,
-            now.monthValue - 1,
-            now.dayOfMonth)
+        viewModelMainProject.retrieveUserTask(
+            user?.uid!!, Date.from(start), Date.from(end))
 
-        Log.d("currentDay",
-            now.year.toString() + " " + now.monthValue.toString() + " " + now.dayOfMonth.toString())
+        calendarView.setOnMonthChangeListener { _, new, _ ->
+            calendarView.clearEvent()
+            cal.set(new.year, new.monthValue - 1, 1)
+            var start = cal.toInstant();
+            cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE))
+            var end = cal.toInstant();
+            Log.d("month", new.toString())
+            viewModelMainProject.retrieveUserTask(
+                user?.uid!!, Date.from(start), Date.from(end))
 
-        viewModelMainProject.taskList.value?.clear()
+        }
+
         viewModelMainProject.taskList.observe(viewLifecycleOwner) {
-            if (it == null || it.size == 0) {
-                notask.visibility = View.VISIBLE
-            } else {
-                notask.visibility = View.GONE
-                userTaskAdapter.setData(it)
+            var mapdoneandundone = it.groupBy { it.Status == "done" }
+            var donedatevent = mapdoneandundone.get(true)?.map {
+                DateEvent(
+                    it.Deadline!!.toLocalDate(), Color.valueOf(Color.GREEN))
             }
+            var undonedatevent = mapdoneandundone.get(false)?.map {
+                DateEvent(
+                    it.Deadline!!.toLocalDate(), Color.valueOf(Color.RED))
+            }
+            if (donedatevent != null)
+                calendarView.addAllEvent(donedatevent)
+            if (undonedatevent != null)
+                calendarView.addAllEvent(undonedatevent)
         }
         userTaskAdapter.setOnClickDone { data, v ->
             viewModelMainProject.updateStatus(data, "done")
+            calendarView.addEvent(DateEvent(data.Deadline!!.toLocalDate(),
+                Color.valueOf(Color.GREEN)))
+            v.hideButton()
 
         }
         userTaskAdapter.setOnClickUndone() { data, v ->
             viewModelMainProject.updateStatus(data, "undone")
-
+            calendarView.addEvent(DateEvent(data.Deadline!!.toLocalDate(),
+                Color.valueOf(Color.RED)))
+            v.hideButton()
         }
 
-        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+        calendarView.setDaySelectChangeListener { v, d ->
+
             //clear old data before loading a new one
-            viewModelMainProject.taskList.value?.clear()
+            userTaskAdapter.clear()
+            var daylist = viewModelMainProject.taskList.value?.groupBy {
+                it.Deadline!!.toLocalDate() == d
+            }
+            if (daylist?.get(true) != null) {
+                userTaskAdapter.setData(daylist?.get(true)!!.toMutableList())
+            }
 
-            //viewModelMainProject.retrieveUserTask(user?.uid!!, selectedDate)
-            viewModelMainProject.retrieveUserTask(user.uid, year, month, dayOfMonth)
-
-            Log.d("selectedDate",
-                year.toString() + " " + month.toString() + " " + dayOfMonth.toString())
 
         }
 
-        taskLayoutManager.orientation = RecyclerView.VERTICAL
-        recyclerView.adapter = userTaskAdapter
-        recyclerView.layoutManager = taskLayoutManager
     }
-
 }

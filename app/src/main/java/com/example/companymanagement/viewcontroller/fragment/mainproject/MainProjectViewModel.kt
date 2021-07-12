@@ -9,6 +9,7 @@ import com.example.companymanagement.model.task.UserTaskRepository
 
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
+import java.util.*
 
 class MainProjectViewModel : ViewModel() {
     var taskList: MutableLiveData<MutableList<UserTaskModel>> = MutableLiveData()
@@ -16,11 +17,11 @@ class MainProjectViewModel : ViewModel() {
 
     fun retrieveUserTask(
         uuid: String,
-        year: Int, month: Int, dayOfMonth: Int,
+        start: Date, end: Date,
     ) {
         viewModelScope.launch {
-            taskList.postValue(repository.getTask(uuid, year, month, dayOfMonth))
-            Log.d("Task List", taskList.value.toString())
+            taskList.postValue(repository.getTask(uuid, start, end))
+
         }
     }
 

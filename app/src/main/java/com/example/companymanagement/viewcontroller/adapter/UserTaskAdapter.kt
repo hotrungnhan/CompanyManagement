@@ -34,6 +34,12 @@ class UserTaskAdapter
         this.notifyDataSetChanged()
     }
 
+    fun clear() {
+        this.list = mutableListOf()
+        this.notifyDataSetChanged()
+    }
+
+
     override fun onBindViewHolder(holder: TaskHolder, position: Int) {
         val task: UserTaskModel = list[position]
         holder.Content.text = task.Content
@@ -66,7 +72,6 @@ class UserTaskAdapter
 }
 
 class TaskHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var expanded = false;
     val Content: TextView = itemView.findViewById(R.id.task_content)
     val Deadline: TextView = itemView.findViewById(R.id.task_deadline)
     val SenderName: TextView = itemView.findViewById(R.id.task_sender)
@@ -77,14 +82,22 @@ class TaskHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val DoneButton: Button = itemView.findViewById(R.id.task_done)
     val UndoneButton: Button = itemView.findViewById(R.id.task_undone)
 
-    init {
-        itemView.setOnClickListener {
-            if (expanded) {
-                ContainerButton.visibility = View.VISIBLE
-            } else
-                ContainerButton.visibility = View.GONE
-            expanded = !expanded
+    var expanded: Boolean
+        get() {
+            return ContainerButton.visibility == View.VISIBLE
+        }
+        set(value) {
+            if (value) ContainerButton.visibility = View.VISIBLE else ContainerButton.visibility =
+                View.GONE
         }
 
+    init {
+        itemView.setOnClickListener {
+            expanded = !expanded
+        }
+    }
+
+    fun hideButton() {
+        expanded = false;
     }
 }

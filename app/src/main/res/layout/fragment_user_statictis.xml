@@ -189,6 +189,7 @@
 
                 <com.example.companymanagement.utils.customize.DotDateView.EventCalendarView
                     android:layout_width="match_parent"
+                    android:id="@+id/statistics_calendar_view"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 

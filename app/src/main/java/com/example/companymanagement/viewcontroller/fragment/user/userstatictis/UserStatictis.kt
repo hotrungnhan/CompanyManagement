@@ -2,6 +2,7 @@ package com.example.companymanagement.viewcontroller.fragment.user.userstatictis
 
 import android.graphics.Color
 import android.graphics.Color.toArgb
+import android.graphics.Color.valueOf
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -15,6 +16,9 @@ import androidx.fragment.app.Fragment
 import com.example.companymanagement.R
 import com.example.companymanagement.databinding.CalendarDayBinding
 import com.example.companymanagement.databinding.CalendarHeaderBinding
+import com.example.companymanagement.utils.DateParser.Companion.toLocalDate
+import com.example.companymanagement.utils.customize.DotDateView.DateEvent
+import com.example.companymanagement.utils.customize.DotDateView.EventCalendarView
 import com.example.companymanagement.viewcontroller.fragment.user.CheckinViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.kizitonwose.calendarview.CalendarView
@@ -71,29 +75,37 @@ class UserStatictis : Fragment() {
 
         //-----------Calendar------------//
 
-        val calendarView = view.findViewById<CalendarView>(R.id.calendarView)
-        val currentMonth = YearMonth.now()
-        val daysOfWeek = WeekFields.of(Locale.getDefault())
-        calendarView.setup(currentMonth.minusMonths(50),
-            currentMonth.plusMonths(50),
-            daysOfWeek.firstDayOfWeek)
-        calendarView.scrollToMonth(currentMonth)
+        val calendarView =
+            view.findViewById<EventCalendarView>(R.id.statistics_calendar_view)
+
         var current = Date()
         var end = Date(current.year, current.month, 1)
-
         checkingModel.reTriveCheckinAll(this.user?.uid.toString(), end, current)
             .observe(viewLifecycleOwner) {
                 work.text = "${it.size}/$dayofwork"
+                var checklist = it.map {
+                    Log.d("localDate", it.checked_date.toLocalDate().toString())
+                    DateEvent(it.checked_date.toLocalDate(), valueOf(Color.GREEN))
+                }
+                calendarView.addAllEvent(checklist)
             }
-
         checkingModel.retriveOntime(this.user?.uid.toString(), end, current)
             .observe(viewLifecycleOwner) {
                 work.text = "${it.size}/$dayofwork"
+                var checklist = it.map {
+                    Log.d("localDate", it.checked_date.toLocalDate().toString())
+                    DateEvent(it.checked_date.toLocalDate(), valueOf(Color.YELLOW))
+                }
+                calendarView.addAllEvent(checklist)
             }
-
         checkingModel.retriveLate(this.user?.uid.toString(), end, current)
             .observe(viewLifecycleOwner) {
                 late.text = "${it.size}"
+                var checklist = it.map {
+
+                    DateEvent(it.checked_date.toLocalDate(), valueOf(Color.RED))
+                }
+                calendarView.addAllEvent(checklist)
             }
     }
 }

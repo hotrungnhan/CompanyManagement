@@ -37,25 +37,21 @@ class EventCalendarView @JvmOverloads constructor(
 
     internal var dayselectchange: OnDateChangeListener? = null;
 
-    private var onmonthchange: onMonthChangeListener? = null;
+    internal var onmonthchange: onMonthChangeListener? = null;
     private var oneventchange: onEventChangeListener? = null;
 
     private val monthTitleFormatter = DateTimeFormatter.ofPattern("MMMM")
 
-    val calendarview: CalendarView;
+    internal val calendarview: CalendarView;
 
     private var daybinder: com.example.companymanagement.utils.customize.DotDateView.DayBinder
     fun setDaySelectChangeListener(e: OnDateChangeListener) {
         dayselectchange = e;
     }
 
-    var selectedDate: LocalDate
-        set(value) {
-            daybinder.selectedDate = value
-        }
-        get() {
-            return daybinder.selectedDate
-        }
+    fun setOnMonthChangeListener(e: onMonthChangeListener) {
+        onmonthchange = e;
+    }
 
 
     init {
@@ -68,16 +64,25 @@ class EventCalendarView @JvmOverloads constructor(
         bind();
     }
 
-    fun setEvent(arr: Iterable<DateEvent>) {
+    fun addAllEvent(arr: Iterable<DateEvent>) {
         for (e in arr) {
-            daybinder.EventList.put(e.pair.first, e.pair.second)
+            daybinder.EventList[e.pair.first] = e.pair.second
+            calendarview.notifyDateChanged(e.pair.first)
         }
-        oneventchange?.onChange(arr, DateEventChangeState.CLEAR, this)
+
+        oneventchange?.onChange(arr, DateEventChangeState.ADD, this)
     }
 
     fun addEvent(e: DateEvent) {
-        daybinder.EventList.put(e.pair.first, e.pair.second)
+        daybinder.EventList[e.pair.first] = e.pair.second
+        calendarview.notifyDateChanged(e.pair.first)
         oneventchange?.onChange(listOf(e), DateEventChangeState.ADD, this);
+    }
+
+    fun removeEvent(e: LocalDate) {
+        daybinder.EventList.remove(e)
+        calendarview.notifyDateChanged(e)
+        oneventchange?.onChange(null, DateEventChangeState.REMOVE, this);
     }
 
     fun clearEvent() {
@@ -98,8 +103,6 @@ class EventCalendarView @JvmOverloads constructor(
             currentMonth.plusMonths(50),
             daysOfWeek.firstDayOfWeek)
         calendarview.scrollToMonth(currentMonth)
-        var current = Date()
-        var end = Date(current.year, current.month, 1)
     }
 
     fun initTitle() {
@@ -117,6 +120,7 @@ class EventCalendarView @JvmOverloads constructor(
         next.setOnClickListener {
             calendarview.findFirstVisibleMonth()?.let {
                 this.onmonthchange?.onChange(it.yearMonth, it.yearMonth.next, this)
+
                 calendarview.smoothScrollToMonth(it.yearMonth.next)
 
             }
@@ -135,8 +139,9 @@ class EventCalendarView @JvmOverloads constructor(
 
 class DayBinder(val cal: EventCalendarView) : DayBinder<DayViewContainer> {
 
-    internal var selectedDate: LocalDate = LocalDate.now();
+    internal var selectedDate: LocalDate = LocalDate.MIN;
     internal var EventList: MutableMap<LocalDate, Color> = mutableMapOf()
+
     override fun create(view: View) = DayViewContainer(view)
 
     override fun bind(container: DayViewContainer, day: CalendarDay) {
@@ -148,6 +153,8 @@ class DayBinder(val cal: EventCalendarView) : DayBinder<DayViewContainer> {
             if (value != null) {
                 container.setDotColor(value)
             }
+        } else {
+            container.clearDotColor()
         }
         if (day.owner == DayOwner.THIS_MONTH) {
             textView.visibility = View.VISIBLE
@@ -167,23 +174,31 @@ class DayBinder(val cal: EventCalendarView) : DayBinder<DayViewContainer> {
         }
         container.view.setOnClickListener {
 
-            if (day.owner == DayOwner.THIS_MONTH) {
-                if (selectedDate != day.date) {
-                    val oldDate = selectedDate
-                    selectedDate = day.date
-                    cal.dayselectchange?.onSelectedDayChange(cal.calendarview, selectedDate)
-                    Log.d("date", "change")
-                    cal.calendarview.notifyDateChanged(day.date)
-                    oldDate?.let {
-                        cal.calendarview.notifyDateChanged(it)
+            if (selectedDate == day.date) {
+                cal.calendarview.notifyDateChanged(selectedDate)
+                selectedDate = LocalDate.MIN
+                cal.dayselectchange?.onSelectedDayChange(cal.calendarview, selectedDate)
+            } else
+                if (day.owner == DayOwner.THIS_MONTH) {
+                    if (selectedDate != day.date) {
+                        val oldDate = selectedDate
+                        selectedDate = day.date
+                        cal.dayselectchange?.onSelectedDayChange(cal.calendarview, selectedDate)
+                        Log.d("date", "change")
+                        cal.calendarview.notifyDateChanged(day.date)
+                        oldDate?.let {
+                            cal.calendarview.notifyDateChanged(it)
+                        }
                     }
+                } else if (day.owner == DayOwner.PREVIOUS_MONTH || day.owner == DayOwner.NEXT_MONTH) {
+                    cal.calendarview.notifyDateChanged(day.date, DayOwner.THIS_MONTH)
+                    cal.calendarview.scrollToDate(day.date)
+                    cal.onmonthchange?.onChange(YearMonth.from(
+                        if (day.owner == DayOwner.PREVIOUS_MONTH) day.date.minusMonths(1)
+                        else day.date.plusMonths(1)),
+                        YearMonth.from(day.date), cal)
+                    selectedDate = day.date
                 }
-            } else if (day.owner == DayOwner.PREVIOUS_MONTH || day.owner == DayOwner.NEXT_MONTH) {
-                cal.calendarview.notifyDateChanged(day.date, DayOwner.THIS_MONTH)
-                cal.calendarview.scrollToDate(day.date)
-
-                selectedDate = day.date
-            }
         }
 
     }
@@ -208,7 +223,12 @@ fun interface onEventChangeListener {
     fun onChange(event: Iterable<DateEvent>?, state: DateEventChangeState, e: View)
 }
 
-data class DateEvent(var pair: Pair<LocalDate, Color>) {
+data class DateEvent(val d: LocalDate, val c: Color) {
+    val pair: Pair<LocalDate, Color>
+
+    init {
+        pair = Pair(d, c)
+    }
 }
 
 class MonthHeaderFooterBinder :
@@ -231,7 +251,6 @@ class MonthHeaderFooterBinder :
 
 class DayViewContainer(view: View) : ViewContainer(view) {
     lateinit var day: CalendarDay
-
 
     var binding = com.example.companymanagement.databinding.CalendarDayBinding.bind(view)
     var textview = binding.calendarDayText
