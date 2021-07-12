@@ -66,7 +66,7 @@ class HistoryAll : Fragment() {
         adapter.setOnBindOwner { uuid, vh: RecyclerView.ViewHolder ->
             if (vh is LeaveHolder) {
                 fun bind(user: UserInfoModel?, vh: LeaveHolder) {
-                    val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
+                    val dp = UtilsFuntion.convertDPToPX(32.0F, context).toInt()
                     Glide.with(this).load(user?.AvatarURL)
                         .placeholder(CircularProgressDrawable(requireContext()).apply { start() })
                         .override(dp, dp)

@@ -162,5 +162,46 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/task_button_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="gone"
+            android:weightSum="2">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/task_undone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:drawableStart="@drawable/ic_like"
+
+                android:drawableTint="@color/black"
+                android:text="Chưa xong"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textStyle="normal" />
+
+            <androidx.appcompat.widget.AppCompatButton
+
+                android:id="@+id/task_done"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:drawableStart="@drawable/ic_comment"
+                android:drawableTint="@color/black"
+                android:text="Xong"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textStyle="normal" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.cardview.widget.CardView>

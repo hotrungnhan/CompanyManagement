@@ -37,8 +37,9 @@ class HomeGridViewApdapter(
         holder.setImageDrawable(ctx.resources.getDrawable(items[position].imageDrawable))
         holder.setColorBackground(items[position].backgroundColor)
         holder.setForegroundTint(items[position].foregroundTint)
-        holder.setOnclickListener() { v ->
-            ctx.findNavController(R.id.activity_container).navigate(items[position].linkID!!)
+        holder.setOnclickListener{ v ->
+            ctx.findNavController(R.id.activity_container_fragment)
+                .navigate(items[position].linkID!!)
         }
     }
 
@@ -64,7 +65,7 @@ class HomeGridViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun setForegroundTint(color: Color?) {
         if (color != null) {
-            this.img.foregroundTintList =   ColorStateList.valueOf(color.toArgb())
+            this.img.foregroundTintList = ColorStateList.valueOf(color.toArgb())
         }
     }
 

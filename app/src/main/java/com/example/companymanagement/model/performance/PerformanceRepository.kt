@@ -70,9 +70,6 @@ class PerformanceRepository(var col: CollectionReference) {
         Cal.set(year.toInt(), month.toInt(), 1, 0, 0, 0)
         val end = Cal.time
 
-        Log.d("Performance", start.toString())
-        Log.d("Performance", end.toString())
-        Log.d("Performance", uuid)
 
         val ref = col
             .whereEqualTo("owner_uuid", uuid)

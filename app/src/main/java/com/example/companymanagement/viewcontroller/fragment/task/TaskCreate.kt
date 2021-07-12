@@ -4,8 +4,6 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.ContentValues
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +18,6 @@ import com.example.companymanagement.model.task.UserTaskModel
 import com.example.companymanagement.viewcontroller.adapter.EmployeeRecyclerViewAdapter
 import com.example.companymanagement.viewcontroller.adapter.TaskRecyclerViewAdapter
 import com.example.companymanagement.viewcontroller.fragment.shareviewmodel.UserInfoViewModel
-import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
 import java.text.DateFormat
@@ -56,6 +53,7 @@ class TaskCreate : Fragment() {
         val dldate = root.findViewById<TextView>(R.id.tv_task_create_deadline)
         val dlhour = root.findViewById<TextView>(R.id.tv_task_create_timeline)
         val taskTitle = root.findViewById<EditText>(R.id.ed_task_create_name)
+
         val checkName = root.findViewById<TextInputLayout>(R.id.tx_task_name)
         val checkDes = root.findViewById<TextInputLayout>(R.id.tx_task_description)
         val senddate = root.findViewById<TextView>(R.id.tv_task_create_senddate)
@@ -148,16 +146,14 @@ class TaskCreate : Fragment() {
             }
 
         })
-        val sender = taskviewmodel.info.value?.uid.toString()
-        val senderName = taskviewmodel.info.value?.Name.toString()
-        taskSender.setText(senderName)
-        Log.d("ccc", sender.toString())
+
         taskCreateButton.setOnClickListener {
             if (taskTitle.text.isNullOrEmpty() == false && taskReceiver.text.isNullOrEmpty() == false &&
                 dldate.text.isNullOrEmpty() == false && dlhour.text.isNullOrEmpty() == false
-                && checkDes.error == null && checkName.error == null
             ) {
-                //Kiem tra Han Deadline
+                val receiver = taskReceiver.text.toString().split(",")
+                val sender = userinfoviewmodel.info.value?.uid
+                val senderName = userinfoviewmodel.info.value?.Name
                 val deadline = dldate.text.toString() + " " + dlhour.text.toString()
                 val createdate = senddate.text.toString() + " "  + "23:59:00"
                 val parseDate = getDateFromString(deadline)
@@ -253,4 +249,5 @@ class TaskCreate : Fragment() {
             null
         }
     }
+
 }

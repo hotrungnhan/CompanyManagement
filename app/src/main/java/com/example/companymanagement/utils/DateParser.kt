@@ -1,6 +1,10 @@
 package com.example.companymanagement.utils
 
+import android.util.Log
+import com.example.companymanagement.utils.DateParser.Companion.toLocalDate
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 
 class DateParser {
@@ -10,6 +14,22 @@ class DateParser {
         val simpleDateAndTimeParser = SimpleDateFormat("dd/MM/yyyy | hh:mm:ss a")
         fun Date.toHumanReadDate(): String {
             return simpleDateParser.format(this) // this here is date
+        }
+
+        fun Date.toLocalDate(): LocalDate {
+            Log.d("dateTo localDate",
+                "$this ${LocalDate.of(this.year + 1900  , this.month + 1, this.date)}")
+            return LocalDate.of(this.year + 1900, this.month + 1, this.date)
+
+        }
+
+        fun Date.toLocalDateTime(): LocalDateTime {
+            return LocalDateTime.of(this.year + 1900,
+                this.month + 1,
+                this.date,
+                this.hours,
+                this.minutes,
+                this.seconds)
         }
 
         fun Date.toHumanReadTime(): String {

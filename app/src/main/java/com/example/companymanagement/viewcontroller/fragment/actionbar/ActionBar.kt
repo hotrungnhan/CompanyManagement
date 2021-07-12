@@ -19,7 +19,7 @@ import com.google.android.material.imageview.ShapeableImageView
 
 class ActionBar : Fragment() {
     lateinit var infomodel: UserInfoViewModel;
-        var bts = UserManagerBottomSheet.Instance();
+    var bts = UserManagerBottomSheet.Instance();
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         infomodel = ViewModelProvider(this.requireActivity()).get(UserInfoViewModel::class.java)
@@ -40,7 +40,7 @@ class ActionBar : Fragment() {
         var userlayout = view.findViewById<ConstraintLayout>(R.id.action_bar_user_layout)
         infomodel.info.observe(viewLifecycleOwner) {
             if (it != null) {
-                val dp = UtilsFuntion.convertDPToPX(32.0F, resources.displayMetrics).toInt()
+                val dp = UtilsFuntion.convertDPToPX(32.0F, context).toInt()
                 Glide.with(this)
                     .load(it.AvatarURL)
                     .override(dp, dp)
@@ -57,7 +57,13 @@ class ActionBar : Fragment() {
                 bts.show(this.childFragmentManager, "userInfo");
             }
         }
+    }
 
+    fun show() {
+        if (bts.isAdded == false) {
+
+            bts.showNow(this.childFragmentManager, "userInfo");
+        }
     }
 
 }

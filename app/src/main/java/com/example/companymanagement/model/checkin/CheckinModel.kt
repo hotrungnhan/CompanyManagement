@@ -8,7 +8,7 @@ import java.util.*
 data class CheckinModel (
     @get: PropertyName("checked_date")
     @set: PropertyName("checked_date")
-    var checked_date: Date? = Date(),
+    var checked_date: Date = Date(),
 
     @get: PropertyName("status")
     @set: PropertyName("status")

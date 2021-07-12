@@ -87,16 +87,16 @@ class UserInfo : Fragment() {
             name.isEnabled = isEdit
             cemail.isEnabled = isEdit
             phone.isEnabled = isEdit
-            pos.isEnabled = isEdit
+//            pos.isEnabled = isEdit
             birthday.isEnabled = isEdit
             gender.isEnabled = isEdit
-            cardid.isEnabled = isEdit
-            cardidprovidedate.isEnabled = isEdit
-            cardidprovideplace.isEnabled = isEdit
+//            cardid.isEnabled = isEdit
+//            cardidprovidedate.isEnabled = isEdit
+//            cardidprovideplace.isEnabled = isEdit
         }
         applyEdit(false)
         imagepicked.observe(this.viewLifecycleOwner) {
-            val dp = UtilsFuntion.convertDPToPX(150.0F, resources.displayMetrics).toInt()
+            val dp = UtilsFuntion.convertDPToPX(150.0F, context).toInt()
             Glide.with(this).load(imagepicked.value)
                 .override(dp, dp)
                 .centerCrop()

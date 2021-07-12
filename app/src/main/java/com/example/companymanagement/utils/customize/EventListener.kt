@@ -2,6 +2,7 @@ package com.example.companymanagement.utils.customize
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.companymanagement.model.leave.LeaveInfoModel
+import com.example.companymanagement.viewcontroller.adapter.LeaveHolder
 
 fun interface OnButtonClickListener {
     fun onClick(tweetid: String);
@@ -12,5 +13,5 @@ fun interface OnBindOwnerLisener {
 }
 
 fun interface OnBindLeaveLisener {
-    fun onBind(Leave: LeaveInfoModel, vh: RecyclerView.ViewHolder);
+    fun onBind(info: LeaveInfoModel, vh: LeaveHolder);
 }
