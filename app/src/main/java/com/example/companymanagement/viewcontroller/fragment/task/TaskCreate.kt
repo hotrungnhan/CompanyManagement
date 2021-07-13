@@ -134,10 +134,11 @@ class TaskCreate : Fragment() {
             override fun onTimeSet(p0: TimePicker?, p1: Int, p2: Int) {
                 cal.set(Calendar.HOUR_OF_DAY, p1)
                 cal.set(Calendar.MINUTE, p2)
-                textview_date!!.text = p1.toString() + ":" + p2.toString() + ":00"
+                textview_date!!.text = p1.toString() + ":" + p2.toString() + ":0"
             }
         }
         // deadline timepick dialog
+        val timeHour = cal.get(Calendar.HOUR_OF_DAY).toString() + ":" + (cal.get(Calendar.MINUTE) + 30).toString() + ":0"
         timePicker.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 textview_date = dlhour
@@ -159,7 +160,7 @@ class TaskCreate : Fragment() {
             ) {
                 //Kiem tra Han Deadline
                 val deadline = dldate.text.toString() + " " + dlhour.text.toString()
-                val createdate = senddate.text.toString() + " "  + "23:59:00"
+                val createdate = senddate.text.toString() + " "  + timeHour.toString()
                 val parseDate = getDateFromString(deadline)
                 val createTime = getDateFromString(createdate)
                 val todayTime = Calendar.getInstance().time
